@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public class Zombie {
     int id;
-    int idCriatura;
+    int idCriatura = 0;
     String nome;
 
     public int getId() {
