@@ -4,6 +4,4 @@ public class Humano {
     int id;
     int idCriatura = 1;
     String nome;
-
-
 }
