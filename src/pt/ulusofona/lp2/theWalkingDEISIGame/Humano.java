@@ -21,7 +21,7 @@ public class Humano {
         simplesmente retornar null. Isto fará com
         que o visualizador use uma imagem
         pré-definida por omissão.*/
-        return null;
+        return "superman.png";
     }
     public String toString(){
         /*Retorna uma String com a informação sobre a criatura.

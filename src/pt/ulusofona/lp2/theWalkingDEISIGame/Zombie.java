@@ -21,7 +21,7 @@ public class Zombie {
         simplesmente retornar null. Isto fará com
         que o visualizador use uma imagem
         pré-definida por omissão.*/
-        return null;
+        return "zombie.png";
     }
 
     public String toString() {
