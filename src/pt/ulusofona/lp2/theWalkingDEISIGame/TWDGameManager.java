@@ -78,30 +78,29 @@ public class TWDGameManager {
         }catch (FileNotFoundException e) {
             return false;
         }
-        return false; //TODO change to true
+        return true; //TODO change to true
     }
+
     public int[] getWorldSize(){
         /*Deve devolver o tamanho do bairro,
         conforme lido do ficheiro respectivo.
         Na posição 0 do array deve ser devolvido o
         número de linhas e na posição 1 deve ser
         devolvido o número de colunas.*/
-        return new int[]{};
+        return new int[]{gameInfo.getNrLines(),gameInfo.getNrColumns()};
     }
     public int getInitialTeam(){
-        /*Devolve o ID da equipa que vai jogar no
-        primeiro turno do jogo.*/
-        return 0;
+        return gameInfo.getFirstTeamID();
     }
     public List<Humano> getHumans(){
         /*Devolve uma lista com todos os objectos
         Humano que existem no jogo.*/
-        return new ArrayList<Humano>();
+        return gameInfo.getHumans();
     }
     public List<Zombie> getZombies(){
         /*Devolve uma lista com todos os objectos
         Zombie que existem no jogo.*/
-        return new ArrayList<Zombie>();
+        return gameInfo.getZombies();
     }
     public boolean move(int xO, int yO, int xD, int yD){
         /*Deve tentar executar uma jogada,
