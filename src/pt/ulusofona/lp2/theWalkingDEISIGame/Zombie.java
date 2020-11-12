@@ -47,6 +47,6 @@ public class Zombie {
             ● Se a criatura for um Humano: a quantidade de equipamentos apanhados pelo humano desde que o jogo começou;
         ● Se a criatura for um Zombie: a quantidade de equipamentos destruídos pelo zombie desde que o*/
         return idCriatura + " | Zombie | " + nomeEquipa + " | " + nome
-                + " " + equimentsDestroyed + " @ (" + posX + ", " + posY + ")"; //TODO NOT SURE
+                + " " + equimentsDestroyed + " @ (" + posX + ", " + posY + ")";
     }
 }
