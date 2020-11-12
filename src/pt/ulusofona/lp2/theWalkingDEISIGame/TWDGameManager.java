@@ -1,8 +1,9 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TWDGameManager {
     public TWDGameManager() {
@@ -14,6 +15,25 @@ public class TWDGameManager {
         Esta função deve devolver true caso a
         leitura do ficheiro decorra sem problemas,
         e false em caso contrário.*/
+
+        try{
+            Scanner scanner = new Scanner(ficheiroInicial);
+            ArrayList<String> lines= new ArrayList<>();
+
+            //Scans all lines to list
+            while(scanner.hasNextLine()){
+                lines.add(scanner.nextLine());
+            }
+
+
+
+
+
+            scanner.close();
+
+        }catch (FileNotFoundException e) {
+            return false;
+        }
         return false;
     }
     public int[] getWorldSize(){

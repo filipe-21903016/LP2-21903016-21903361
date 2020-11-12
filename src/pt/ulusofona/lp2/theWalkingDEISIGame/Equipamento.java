@@ -4,4 +4,6 @@ public class Equipamento {
     String titulo;
     int id;
     int idTipo;
+    int posX;
+    int posY;
 }
