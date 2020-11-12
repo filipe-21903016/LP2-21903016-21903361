@@ -73,7 +73,7 @@ public class TWDGameManager {
         } catch (FileNotFoundException e) {
             return false;
         }
-        return true; //TODO change to true
+        return true;
     }
 
     public int[] getWorldSize() {
@@ -127,15 +127,6 @@ public class TWDGameManager {
     }
 
     public int getElementId(int x, int y) {
-        /*Deve devolver o ID do objecto/elemento
-        que se encontra na posição indicada pelas
-        coordenadas (x,y) passadas por
-        argumento.
-        Por objecto/elemento entende-se: criatura ou tesouro.
-        Caso não exista nenhuma criatura ou
-        tesouro na posição indicada, o método
-        deve devolver o valor 0 (zero) que
-        representa o vazio.*/
 
         ArrayList<Humano> humans = gameInfo.getHumans();
         for(Humano humano:humans){
