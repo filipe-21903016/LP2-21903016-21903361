@@ -35,7 +35,7 @@ public class Zombie {
     }
 
     public String getImagePNG() {
-        return "/images/zombie.png";
+        return "zombie.png";
     }
 
     public String toString() {

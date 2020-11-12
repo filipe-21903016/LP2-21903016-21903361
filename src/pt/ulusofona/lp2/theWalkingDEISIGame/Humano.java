@@ -39,7 +39,7 @@ public class Humano {
     }
 
     public String getImagePNG() {
-        return "/images/superman.png";
+        return "superman.png";
     }
 
     public String toString() {
