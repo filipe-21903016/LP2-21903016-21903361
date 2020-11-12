@@ -18,6 +18,14 @@ public class Zombie {
         this.equimentsDestroyed = 0;
     }
 
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
     void destroyEquiment() {
         this.equimentsDestroyed++;
     }

@@ -68,6 +68,7 @@ public class TWDGameManager {
             }
 
             scanner.close();
+            getInitialTeam();
 
         } catch (FileNotFoundException e) {
             return false;
@@ -80,6 +81,7 @@ public class TWDGameManager {
     }
 
     public int getInitialTeam() {
+        System.out.println(gameInfo.getFirstTeamID());
         return gameInfo.getFirstTeamID();
     }
 
@@ -134,6 +136,26 @@ public class TWDGameManager {
         tesouro na posição indicada, o método
         deve devolver o valor 0 (zero) que
         representa o vazio.*/
+
+        ArrayList<Humano> humans = gameInfo.getHumans();
+        for(Humano humano:humans){
+            if(humano.getPosY() == y && humano.getPosX()==x){
+                return humano.getId();
+            }
+        }
+        ArrayList<Zombie> zombies = gameInfo.getZombies();
+        for(Zombie zombie:zombies){
+            if(zombie.getPosY() == y && zombie.getPosX()==x){
+                return zombie.getId();
+            }
+        }
+        ArrayList<Equipamento> equipments = gameInfo.getEquipments();
+        for(Equipamento equipamento:equipments){
+            if(equipamento.getPosY() == y && equipamento.getPosX()==x){
+                return equipamento.getId();
+            }
+        }
+
         return 0;
     }
 

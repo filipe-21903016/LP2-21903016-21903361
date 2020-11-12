@@ -7,6 +7,18 @@ public class Equipamento {
     int posX;
     int posY;
 
+    public int getId() {
+        return id;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
     public Equipamento(int id, int idTipo, int posX, int posY) {
         this.id = id;
         this.idTipo = idTipo;
