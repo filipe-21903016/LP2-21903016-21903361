@@ -27,18 +27,7 @@ public class Zombie {
     }
 
     public String getImagePNG() {
-        /*Deve devolver o nome do ficheiro de imagem
-        (formato PNG) que representa a criatura.
-        (As imagens a usar devem ser colocadas na pasta
-        src/images e devem ter tamanho 50x50. As imagens
-        devem ter fundo transparente para que se consiga
-        ver se estão num quadrado branco ou preto).
-        Caso os alunos não pretendam definir
-        nenhuma imagem, a função pode
-        simplesmente retornar null. Isto fará com
-        que o visualizador use uma imagem
-        pré-definida por omissão.*/
-        return "zombie.png";
+        return "/images/zombie.png";
     }
 
     public String toString() {

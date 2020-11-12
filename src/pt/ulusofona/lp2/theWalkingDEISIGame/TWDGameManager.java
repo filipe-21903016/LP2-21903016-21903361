@@ -8,16 +8,9 @@ import java.util.Scanner;
 public class TWDGameManager {
     public TWDGameManager() {
     }
-
     GameInfo gameInfo = new GameInfo();
 
     public boolean startGame(File ficheiroInicial){
-        /*Deve fazer a leitura do ficheiro de texto e
-        carregar para a memória a informação relevante.
-        Esta função deve devolver true caso a
-        leitura do ficheiro decorra sem problemas,
-        e false em caso contrário.*/
-
         try{
             Scanner scanner = new Scanner(ficheiroInicial);
             ArrayList<String> lines= new ArrayList<>();
@@ -82,24 +75,15 @@ public class TWDGameManager {
     }
 
     public int[] getWorldSize(){
-        /*Deve devolver o tamanho do bairro,
-        conforme lido do ficheiro respectivo.
-        Na posição 0 do array deve ser devolvido o
-        número de linhas e na posição 1 deve ser
-        devolvido o número de colunas.*/
         return new int[]{gameInfo.getNrLines(),gameInfo.getNrColumns()};
     }
     public int getInitialTeam(){
         return gameInfo.getFirstTeamID();
     }
     public List<Humano> getHumans(){
-        /*Devolve uma lista com todos os objectos
-        Humano que existem no jogo.*/
         return gameInfo.getHumans();
     }
     public List<Zombie> getZombies(){
-        /*Devolve uma lista com todos os objectos
-        Zombie que existem no jogo.*/
         return gameInfo.getZombies();
     }
     public boolean move(int xO, int yO, int xD, int yD){
