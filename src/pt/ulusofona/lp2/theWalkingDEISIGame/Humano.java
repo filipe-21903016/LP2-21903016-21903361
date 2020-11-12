@@ -17,23 +17,24 @@ public class Humano {
         this.nome = nome;
         this.posX = posX;
         this.posY = posY;
-        this.pickedEquiments=0;
-        this.equipments=new ArrayList<>();
+        this.pickedEquiments = 0;
+        this.equipments = new ArrayList<>();
     }
 
-    void pickEquipment(Equipamento equipamento){
+    void pickEquipment(Equipamento equipamento) {
         this.equipments.add(equipamento);
         pickedEquiments++;
     }
 
-    public int getId(){
+    public int getId() {
         return this.idCriatura;
     }
 
-    public String getImagePNG(){
+    public String getImagePNG() {
         return "/images/superman.png";
     }
-    public String toString(){
+
+    public String toString() {
         /*Retorna uma String com a informação sobre a criatura.
         Sintaxe:
             “<ID> | <Tipo> | <Nome Equipa> | <Nome> <Equipamentos> @ (<x>,<y>)”
@@ -41,7 +42,8 @@ public class Humano {
         Onde <Equipamentos> deve ser:
             ● Se a criatura for um Humano: a quantidade de equipamentos apanhados pelo humano desde que o jogo começou;
             ● Se a criatura for um Zombie: a quantidade de equipamentos destruídos pelo zombie desde que o jogo começou*/
-        return idCriatura + " | Humano | " + nomeEquipa + " | " + nome + " " + pickedEquiments; //TODO NOT SURE
+        return idCriatura + " | Humano | " + nomeEquipa + " | " + nome
+                + " " + pickedEquiments + " @ (" + posX + "," + posY + ")"; //TODO NOT SURE
     }
 
 }

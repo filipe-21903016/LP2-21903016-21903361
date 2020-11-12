@@ -8,15 +8,16 @@ import java.util.Scanner;
 public class TWDGameManager {
     public TWDGameManager() {
     }
+
     GameInfo gameInfo = new GameInfo();
 
-    public boolean startGame(File ficheiroInicial){
-        try{
+    public boolean startGame(File ficheiroInicial) {
+        try {
             Scanner scanner = new Scanner(ficheiroInicial);
-            ArrayList<String> lines= new ArrayList<>();
+            ArrayList<String> lines = new ArrayList<>();
 
             //Scans all lines to list
-            while(scanner.hasNextLine()){
+            while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
             }
             int currentLine = 0;
@@ -41,52 +42,56 @@ public class TWDGameManager {
             int nrCreatures = Integer.parseInt(data[0]);
             currentLine++;
 
-            int maxLine = currentLine+nrCreatures;
-            for(;currentLine<maxLine;currentLine++){
-                data=lines.get(currentLine).split(" : ");
+            int maxLine = currentLine + nrCreatures;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
                 int idCreature = Integer.parseInt(data[0]);
                 int idType = Integer.parseInt(data[1]);
                 String nomeCriatura = data[2].trim();
-                int posX= Integer.parseInt(data[3]);
+                int posX = Integer.parseInt(data[3]);
                 int posY = Integer.parseInt(data[4]);
-                gameInfo.addCreature(idCreature,idType,nomeCriatura,posX,posY);
+                gameInfo.addCreature(idCreature, idType, nomeCriatura, posX, posY);
             }
 
-            data= lines.get(currentLine).split("");
+            data = lines.get(currentLine).split("");
             int nrEquipment = Integer.parseInt(data[0]);
             currentLine++;
 
-            maxLine = currentLine+nrEquipment;
-            for(;currentLine<maxLine;currentLine++){
-                data=lines.get(currentLine).split(" : ");
+            maxLine = currentLine + nrEquipment;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
                 int idEquipment = Integer.parseInt(data[0]);
                 int idType = Integer.parseInt(data[1]);
                 int posX = Integer.parseInt(data[2]);
                 int posY = Integer.parseInt(data[3]);
-                gameInfo.addEquipment(idEquipment,idType,posX,posY);
+                gameInfo.addEquipment(idEquipment, idType, posX, posY);
             }
 
             scanner.close();
 
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             return false;
         }
         return true; //TODO change to true
     }
 
-    public int[] getWorldSize(){
-        return new int[]{gameInfo.getNrLines(),gameInfo.getNrColumns()};
+    public int[] getWorldSize() {
+        return new int[]{gameInfo.getNrLines(), gameInfo.getNrColumns()};
     }
-    public int getInitialTeam(){
+
+    public int getInitialTeam() {
         return gameInfo.getFirstTeamID();
     }
-    public List<Humano> getHumans(){
+
+    public List<Humano> getHumans() {
         return gameInfo.getHumans();
     }
-    public List<Zombie> getZombies(){
+
+    public List<Zombie> getZombies() {
         return gameInfo.getZombies();
     }
-    public boolean move(int xO, int yO, int xD, int yD){
+
+    public boolean move(int xO, int yO, int xD, int yD) {
         /*Deve tentar executar uma jogada,
         considerando que (xO, yO) representa a
         origem a jogada e (xD, yD) representa o
@@ -96,13 +101,15 @@ public class TWDGameManager {
         contrário, deve devolver false.*/
         return false;
     }
-    public boolean gameIsOver(){
+
+    public boolean gameIsOver() {
         /*Deve devolver true caso já tenha sido
         alcançada uma das condições de paragem
         do jogo e false em caso contrário.*/
         return false;
     }
-    public List<String> getAuthors(){
+
+    public List<String> getAuthors() {
         /*Devolve uma lista de Strings com os
         nomes dos autores do projecto.
         Esta informação será usada para mostrar o
@@ -110,12 +117,14 @@ public class TWDGameManager {
         carregar no botão de “Créditos”.*/
         return new ArrayList<String>();
     }
-    public int getCurrentTeamId(){
+
+    public int getCurrentTeamId() {
         /*Deve devolver o ID da equipa que está
         activa no turno actual.*/
         return 0;
     }
-    public int getElementId(int x, int y){
+
+    public int getElementId(int x, int y) {
         /*Deve devolver o ID do objecto/elemento
         que se encontra na posição indicada pelas
         coordenadas (x,y) passadas por
@@ -128,7 +137,7 @@ public class TWDGameManager {
         return 0;
     }
 
-    public List<String> getSurvivors(){
+    public List<String> getSurvivors() {
         /*Devolve uma lista de Strings que
         representam as criaturas sobreviventes do
         jogo, conforme descrito na secção dos
@@ -140,7 +149,7 @@ public class TWDGameManager {
         return new ArrayList<String>();
     }
 
-    public boolean isDay(){
+    public boolean isDay() {
         /*Dever retornar true caso o turno actual
         corresponda a um turno diurno e false
         caso o turno actual corresponda um turno
@@ -148,7 +157,7 @@ public class TWDGameManager {
         return false;
     }
 
-    public boolean hasEquipment(int creatureId, int equipmentTypeId){
+    public boolean hasEquipment(int creatureId, int equipmentTypeId) {
         /*Deve retornar true caso a criatura
         identificada pelo 1º argumento tenha em
         sua posse um equipamento do tipo cujo ID
@@ -156,8 +165,6 @@ public class TWDGameManager {
         Em caso contrário, deve retornar false.*/
         return false;
     }
-
-
 
 
 }

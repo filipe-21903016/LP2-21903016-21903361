@@ -15,10 +15,10 @@ public class Zombie {
         this.nome = nome;
         this.posX = posX;
         this.posY = posY;
-        this.equimentsDestroyed = 0 ;
+        this.equimentsDestroyed = 0;
     }
 
-    void destroyEquiment(){
+    void destroyEquiment() {
         this.equimentsDestroyed++;
     }
 
@@ -38,6 +38,7 @@ public class Zombie {
         Onde <Equipamentos> deve ser:
             ● Se a criatura for um Humano: a quantidade de equipamentos apanhados pelo humano desde que o jogo começou;
         ● Se a criatura for um Zombie: a quantidade de equipamentos destruídos pelo zombie desde que o*/
-        return idCriatura + " | Zombie | " + nomeEquipa + " | " + nome + " " + equimentsDestroyed; //TODO NOT SURE
+        return idCriatura + " | Zombie | " + nomeEquipa + " | " + nome
+                + " " + equimentsDestroyed + " @ (" + posX + "," + posY + ")"; //TODO NOT SURE
     }
 }
