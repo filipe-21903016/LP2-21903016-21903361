@@ -25,12 +25,17 @@ public class GameInfo {
         this.firstTeamID = firstTeamID;
     }
 
-    public void setZombies(ArrayList<Zombie> zombies) {
-        this.zombies = zombies;
+    public void addCreature(int idCriatura, int idType
+            , String name, int posX, int posY){
+        if(idType==0){
+            zombies.add(new Zombie(idCriatura,name,posX,posY));
+        }else{
+            humans.add(new Humano(idCriatura,name,posX,posY));
+        }
     }
 
-    public void setHumans(ArrayList<Humano> humans) {
-        this.humans = humans;
+    public void addEquipment(int id, int idTipo, int posX, int posY){
+        equipments.add(new Equipamento(id,idTipo,posX,posY));
     }
 
     public void setEquipments(ArrayList<Equipamento> equipments) {

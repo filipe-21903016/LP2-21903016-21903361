@@ -6,4 +6,11 @@ public class Equipamento {
     int idTipo;
     int posX;
     int posY;
+
+    public Equipamento(int id, int idTipo, int posX, int posY) {
+        this.id = id;
+        this.idTipo = idTipo;
+        this.posX = posX;
+        this.posY = posY;
+    }
 }

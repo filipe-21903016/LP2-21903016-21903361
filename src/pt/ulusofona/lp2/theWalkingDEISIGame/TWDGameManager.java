@@ -9,6 +9,8 @@ public class TWDGameManager {
     public TWDGameManager() {
     }
 
+    GameInfo gameInfo = new GameInfo();
+
     public boolean startGame(File ficheiroInicial){
         /*Deve fazer a leitura do ficheiro de texto e
         carregar para a memória a informação relevante.
@@ -24,17 +26,59 @@ public class TWDGameManager {
             while(scanner.hasNextLine()){
                 lines.add(scanner.nextLine());
             }
+            int currentLine = 0;
 
+            String[] data;
+            //Get nrColumns and nrLines
+            data = lines.get(currentLine).split(" ");
+            int nrLines = Integer.parseInt(data[0]);
+            int nrColumns = Integer.parseInt(data[1]);
+            gameInfo.setNrLines(nrLines);
+            gameInfo.setNrColumns(nrColumns);
+            currentLine++;
 
+            //Get Id of starting team
+            data = lines.get(currentLine).split("");
+            int id = Integer.parseInt(data[0]);
+            gameInfo.setFirstTeamID(id);
+            currentLine++;
 
+            //Get number of creatures and their properties
+            data = lines.get(currentLine).split("");
+            int nrCreatures = Integer.parseInt(data[0]);
+            currentLine++;
 
+            int maxLine = currentLine+nrCreatures;
+            for(;currentLine<maxLine;currentLine++){
+                data=lines.get(currentLine).split(" : ");
+                int idCreature = Integer.parseInt(data[0]);
+                int idType = Integer.parseInt(data[1]);
+                String nomeCriatura = data[2].trim();
+                int posX= Integer.parseInt(data[3]);
+                int posY = Integer.parseInt(data[4]);
+                gameInfo.addCreature(idCreature,idType,nomeCriatura,posX,posY);
+            }
+
+            data= lines.get(currentLine).split("");
+            int nrEquipment = Integer.parseInt(data[0]);
+            currentLine++;
+
+            maxLine = currentLine+nrEquipment;
+            for(;currentLine<maxLine;currentLine++){
+                data=lines.get(currentLine).split(" : ");
+                int idEquipment = Integer.parseInt(data[0]);
+                int idType = Integer.parseInt(data[1]);
+                int posX = Integer.parseInt(data[2]);
+                int posY = Integer.parseInt(data[3]);
+                gameInfo.addEquipment(idEquipment,idType,posX,posY);
+            }
 
             scanner.close();
 
         }catch (FileNotFoundException e) {
             return false;
         }
-        return false;
+        return false; //TODO change to true
     }
     public int[] getWorldSize(){
         /*Deve devolver o tamanho do bairro,

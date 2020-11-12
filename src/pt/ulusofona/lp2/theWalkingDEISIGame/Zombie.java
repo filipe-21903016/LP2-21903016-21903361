@@ -1,12 +1,29 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public class Zombie {
-    int id;
-    int idCriatura = 0;
     String nome;
+    String nomeEquipa = "OS MORTOS";
+    int idCriatura;
+    int posX;
+    int posY;
+    int equimentsDestroyed;
+    //int idTipo = 0;
+
+
+    public Zombie(int idCriatura, String nome, int posX, int posY) {
+        this.idCriatura = idCriatura;
+        this.nome = nome;
+        this.posX = posX;
+        this.posY = posY;
+        this.equimentsDestroyed = 0 ;
+    }
+
+    void destroyEquiment(){
+        this.equimentsDestroyed++;
+    }
 
     public int getId() {
-        return this.id;
+        return this.idCriatura;
     }
 
     public String getImagePNG() {
@@ -32,6 +49,6 @@ public class Zombie {
         Onde <Equipamentos> deve ser:
             ● Se a criatura for um Humano: a quantidade de equipamentos apanhados pelo humano desde que o jogo começou;
         ● Se a criatura for um Zombie: a quantidade de equipamentos destruídos pelo zombie desde que o*/
-        return null;
+        return idCriatura + " | Zombie | " + nomeEquipa + " | " + nome + " " + equimentsDestroyed; //TODO NOT SURE
     }
 }
