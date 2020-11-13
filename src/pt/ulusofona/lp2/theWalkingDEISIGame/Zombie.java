@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public class Zombie {
     String nome;
-    String nomeEquipa = "OS MORTOS";
+    String nomeEquipa = "Os Mortos";
     int idCriatura;
     int posX;
     int posY;

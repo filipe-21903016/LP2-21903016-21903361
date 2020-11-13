@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Humano {
     ArrayList<Equipamento> equipments;
     String nome;
-    String nomeEquipa = "OS VIVOS";
+    String nomeEquipa = "Os Vivos";
     int idCriatura;
     int posX;
     int posY;
