@@ -93,14 +93,24 @@ public class TWDGameManager {
         return gameInfo.getZombies();
     }
 
+
+
     public boolean move(int xO, int yO, int xD, int yD) {
-        /*Deve tentar executar uma jogada,
-        considerando que (xO, yO) representa a
-        origem a jogada e (xD, yD) representa o
-        destino da jogada.
-        Caso a jogada seja válida, deve executar a
-        mesma e devolver true. Em caso
-        contrário, deve devolver false.*/
+        Coordenada origem = new Coordenada(xO,yO);
+        if(!origem.isValidMove(xD,yD)){
+            return false;
+        }
+
+        int idCriatura = getElementId(xO,yO);
+        if(gameInfo.existsHuman(idCriatura)){
+            gameInfo.getHumanById(idCriatura).setCoordinates(xD,yD);
+            return true;
+        }
+        if(gameInfo.existsZombie(idCriatura)){
+            gameInfo.getZombieById(idCriatura).setCoordinates(xD,yD);
+            return true;
+        }
+
         return false;
     }
 

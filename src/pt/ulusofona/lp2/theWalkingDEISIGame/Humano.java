@@ -54,4 +54,8 @@ public class Humano {
                 + " " + pickedEquiments + " @ (" + posX + ", " + posY + ")";
     }
 
+    public void setCoordinates(int x, int y){
+        this.posX=x;
+        this.posY=y;
+    }
 }

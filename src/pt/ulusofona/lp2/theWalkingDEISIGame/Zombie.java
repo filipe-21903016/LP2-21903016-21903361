@@ -49,4 +49,8 @@ public class Zombie {
         return idCriatura + " | Zombie | " + nomeEquipa + " | " + nome
                 + " " + equimentsDestroyed + " @ (" + posX + ", " + posY + ")";
     }
+    public void setCoordinates(int x, int y){
+        this.posX=x;
+        this.posY=y;
+    }
 }
