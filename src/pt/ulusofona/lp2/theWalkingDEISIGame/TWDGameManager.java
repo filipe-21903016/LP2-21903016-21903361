@@ -112,12 +112,9 @@ public class TWDGameManager {
     }
 
     public List<String> getAuthors() {
-        /*Devolve uma lista de Strings com os
-        nomes dos autores do projecto.
-        Esta informação será usada para mostrar o
-        conteúdo da janela que aparece ao
-        carregar no botão de “Créditos”.*/
-        return new ArrayList<String>();
+        ArrayList<String> creditos= new ArrayList<>();
+        creditos.add("Filipe Coutinho 21903016\nTomás Neto 21903361");
+        return creditos;
     }
 
     public int getCurrentTeamId() {
