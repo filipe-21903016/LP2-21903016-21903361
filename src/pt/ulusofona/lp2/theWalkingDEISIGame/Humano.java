@@ -10,7 +10,6 @@ public class Humano {
     int posX;
     int posY;
     int pickedEquipments;
-    //int idTipo = 0;
 
     public Humano(int idCriatura, String nome, int posX, int posY) {
         this.idCriatura = idCriatura;
@@ -54,8 +53,8 @@ public class Humano {
                 + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
     }
 
-    public void setCoordinates(int x, int y){
-        this.posX=x;
-        this.posY=y;
+    public void setCoordinates(int x, int y) {
+        this.posX = x;
+        this.posY = y;
     }
 }

@@ -35,6 +35,7 @@ public class TWDGameManager {
             data = lines.get(currentLine).split("");
             int id = Integer.parseInt(data[0]);
             gameInfo.setFirstTeamID(id);
+            gameInfo.setCurrentTeamID(id);
             currentLine++;
 
             //Get number of creatures and their properties
@@ -94,19 +95,25 @@ public class TWDGameManager {
     }
 
     public boolean move(int xO, int yO, int xD, int yD) {
-        Coordenada origem = new Coordenada(xO,yO);
-        if(!origem.isValidMove(xD,yD)){
+        Coordenada origem = new Coordenada(xO, yO);
+        if (!origem.isValidMove(xD, yD)) {
             return false;
         }
 
-        int idCriatura = getElementId(xO,yO);
-        if(gameInfo.existsHuman(idCriatura)){
-            gameInfo.getHumanById(idCriatura).setCoordinates(xD,yD);
+        int idCriatura = getElementId(xO, yO);
+        if (gameInfo.existsHuman(idCriatura)) {
+            if(gameInfo.getCurrentTeamID() == 0){
+               return false;
+            }
+            gameInfo.getHumanById(idCriatura).setCoordinates(xD, yD);
             gameInfo.nextTurn();
             return true;
         }
-        if(gameInfo.existsZombie(idCriatura)){
-            gameInfo.getZombieById(idCriatura).setCoordinates(xD,yD);
+        if (gameInfo.existsZombie(idCriatura)) {
+            if(gameInfo.getCurrentTeamID() == 1){
+                return false;
+            }
+            gameInfo.getZombieById(idCriatura).setCoordinates(xD, yD);
             gameInfo.nextTurn();
             return true;
         }
@@ -119,20 +126,20 @@ public class TWDGameManager {
     }
 
     public List<String> getAuthors() {
-        ArrayList<String> creditos= new ArrayList<>();
+        ArrayList<String> creditos = new ArrayList<>();
         creditos.add("Filipe Coutinho 21903016");
         creditos.add("Tomás Neto 21903361");
         return creditos;
     }
 
     public int getCurrentTeamId() {
-        if (gameInfo.getNrTurno() % 2 == 0){
-            if (gameInfo.getFirstTeamID() == GameInfo.ID_HUMANO){
+        if (gameInfo.getNrTurno() % 2 == 0) {
+            if (gameInfo.getFirstTeamID() == GameInfo.ID_HUMANO) {
                 return GameInfo.ID_ZOMBIE;
             }
             return GameInfo.ID_HUMANO;
         }
-        if (gameInfo.getFirstTeamID() == GameInfo.ID_HUMANO){
+        if (gameInfo.getFirstTeamID() == GameInfo.ID_HUMANO) {
             return GameInfo.ID_HUMANO;
         }
         return GameInfo.ID_ZOMBIE;
@@ -141,20 +148,20 @@ public class TWDGameManager {
     public int getElementId(int x, int y) {
 
         ArrayList<Humano> humans = gameInfo.getHumans();
-        for(Humano humano:humans){
-            if(humano.getPosY() == y && humano.getPosX()==x){
+        for (Humano humano : humans) {
+            if (humano.getPosY() == y && humano.getPosX() == x) {
                 return humano.getId();
             }
         }
         ArrayList<Zombie> zombies = gameInfo.getZombies();
-        for(Zombie zombie:zombies){
-            if(zombie.getPosY() == y && zombie.getPosX()==x){
+        for (Zombie zombie : zombies) {
+            if (zombie.getPosY() == y && zombie.getPosX() == x) {
                 return zombie.getId();
             }
         }
         ArrayList<Equipamento> equipments = gameInfo.getEquipments();
-        for(Equipamento equipamento:equipments){
-            if(equipamento.getPosY() == y && equipamento.getPosX()==x){
+        for (Equipamento equipamento : equipments) {
+            if (equipamento.getPosY() == y && equipamento.getPosX() == x) {
                 return equipamento.getId();
             }
         }
@@ -164,17 +171,17 @@ public class TWDGameManager {
 
     public List<String> getSurvivors() {
         ArrayList<String> survivors = new ArrayList<>();
-        if (gameIsOver()){
+        if (gameIsOver()) {
             survivors.add("Nr. de turnos terminados:\n" + gameInfo.getNrTurno());
             survivors.add("\n\n" + "OS VIVOS\n");
 
-            for (Humano humano : gameInfo.humans){
+            for (Humano humano : gameInfo.humans) {
                 survivors.add(humano.idCriatura + " " + humano.nome);
             }
             survivors.add("\n\nOS OUTROS\n");
 
-            for (Zombie zombie : gameInfo.zombies){
-                survivors.add(zombie.idCriatura + " (antigamente conhecido como " +  zombie.nome
+            for (Zombie zombie : gameInfo.zombies) {
+                survivors.add(zombie.idCriatura + " (antigamente conhecido como " + zombie.nome
                         + ")");
             }
         }

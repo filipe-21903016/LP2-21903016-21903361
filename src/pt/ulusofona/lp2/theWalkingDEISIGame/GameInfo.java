@@ -2,8 +2,6 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicReferenceArray;
-import java.util.zip.ZipOutputStream;
 
 public class GameInfo {
     final static int NR_MAX_TURNOS = 12;
@@ -13,49 +11,51 @@ public class GameInfo {
     int nrLines;
     int nrColumns;
     int firstTeamID; // ID of first team playing
+    int currentTeamID;
     //int nrEquipments; // number of equipments
     //int nrCreatures; // Number of creatures in game (Humans/Zombies)
     ArrayList<Zombie> zombies = new ArrayList<>();
     ArrayList<Humano> humans = new ArrayList<>();
     ArrayList<Equipamento> equipments = new ArrayList<>();
-    HashMap<Integer,Zombie> zombieHashMap= new HashMap<>();
-    HashMap<Integer,Humano> humanoHashMap= new HashMap<>();
-    HashMap<Integer,Equipamento> equipamentoHashMap= new HashMap<>();
+    HashMap<Integer, Zombie> zombieHashMap = new HashMap<>();
+    HashMap<Integer, Humano> humanoHashMap = new HashMap<>();
+    HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
 
 
-    Humano getHumanById(int id){
+    Humano getHumanById(int id) {
         return humanoHashMap.get(id);
     }
-    Zombie getZombieById(int id){
+
+    Zombie getZombieById(int id) {
         return zombieHashMap.get(id);
     }
-    Equipamento getEquipmentById(int id){
+
+    Equipamento getEquipmentById(int id) {
         return equipamentoHashMap.get(id);
     }
 
 
-
-    boolean existsHuman(int id){
-        for (Humano humano: humans){
-            if(humano.getId()==id){
+    boolean existsHuman(int id) {
+        for (Humano humano : humans) {
+            if (humano.getId() == id) {
                 return true;
             }
         }
         return false;
     }
 
-    boolean existsZombie(int id){
-        for (Zombie zombie: zombies){
-            if(zombie.getId()==id){
+    boolean existsZombie(int id) {
+        for (Zombie zombie : zombies) {
+            if (zombie.getId() == id) {
                 return true;
             }
         }
         return false;
     }
 
-    boolean existsEquipment(int id){
-        for (Equipamento equipamento: equipments){
-            if(equipamento.getId()==id){
+    boolean existsEquipment(int id) {
+        for (Equipamento equipamento : equipments) {
+            if (equipamento.getId() == id) {
                 return true;
             }
         }
@@ -87,29 +87,29 @@ public class GameInfo {
     }
 
     public void addCreature(int idCriatura, int idType
-            , String name, int posX, int posY){
-        if(humanoHashMap.containsKey(idCriatura) || zombieHashMap.containsKey(idCriatura)){
+            , String name, int posX, int posY) {
+        if (humanoHashMap.containsKey(idCriatura) || zombieHashMap.containsKey(idCriatura)) {
             return;
         }
 
-        if(idType==0){
-            Zombie zombie = new Zombie(idCriatura,name,posX,posY);
+        if (idType == 0) {
+            Zombie zombie = new Zombie(idCriatura, name, posX, posY);
             zombies.add(zombie);
-            zombieHashMap.put(zombie.getId(),zombie);
-        }else{
-            Humano human =new Humano(idCriatura,name,posX,posY);
+            zombieHashMap.put(zombie.getId(), zombie);
+        } else {
+            Humano human = new Humano(idCriatura, name, posX, posY);
             humans.add(human);
-            humanoHashMap.put(human.getId(),human);
+            humanoHashMap.put(human.getId(), human);
         }
     }
 
-    public void addEquipment(int id, int idTipo, int posX, int posY){
-        if(equipamentoHashMap.containsKey(id)){
+    public void addEquipment(int id, int idTipo, int posX, int posY) {
+        if (equipamentoHashMap.containsKey(id)) {
             return;
         }
-        Equipamento equipamento = new Equipamento(id,idTipo,posX,posY);
+        Equipamento equipamento = new Equipamento(id, idTipo, posX, posY);
         equipments.add(equipamento);
-        equipamentoHashMap.put(equipamento.getId(),equipamento);
+        equipamentoHashMap.put(equipamento.getId(), equipamento);
     }
 
     public void setEquipments(ArrayList<Equipamento> equipments) {
@@ -144,7 +144,16 @@ public class GameInfo {
         return equipments;
     }
 
-    public int nextTurn(){
+    public int nextTurn() {
+        this.currentTeamID = (currentTeamID==0) ? 1 :0;
         return nrTurno++;
+    }
+
+    public void setCurrentTeamID(int id) {
+        currentTeamID = id;
+    }
+
+    public int getCurrentTeamID() {
+        return currentTeamID;
     }
 }

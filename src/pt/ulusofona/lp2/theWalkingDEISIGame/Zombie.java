@@ -7,7 +7,6 @@ public class Zombie {
     int posX;
     int posY;
     int equipmentsDestroyed;
-    //int idTipo = 0;
 
 
     public Zombie(int idCriatura, String nome, int posX, int posY) {
@@ -49,8 +48,9 @@ public class Zombie {
         return idCriatura + " | Zombie | " + nomeEquipa + " | " + nome
                 + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";
     }
-    public void setCoordinates(int x, int y){
-        this.posX=x;
-        this.posY=y;
+
+    public void setCoordinates(int x, int y) {
+        this.posX = x;
+        this.posY = y;
     }
 }
