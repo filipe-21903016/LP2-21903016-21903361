@@ -62,7 +62,7 @@ public class TWDGameManager {
             maxLine = currentLine + nrEquipment;
             for (; currentLine < maxLine; currentLine++) {
                 data = lines.get(currentLine).split(" : ");
-                int idEquipment = -(Integer.parseInt(data[0]));
+                int idEquipment = Integer.parseInt(data[0]);
                 int idType = Integer.parseInt(data[1]);
                 int posX = Integer.parseInt(data[2]);
                 int posY = Integer.parseInt(data[3]);
