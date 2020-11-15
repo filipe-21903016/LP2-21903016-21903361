@@ -174,7 +174,7 @@ public class TWDGameManager {
             survivors.add("\n\nOS OUTROS\n");
 
             for (Zombie zombie : gameInfo.zombies){
-                survivors.add(zombie.idCriatura + "(antigamente conhecido como " +  zombie.nome
+                survivors.add(zombie.idCriatura + " (antigamente conhecido como " +  zombie.nome
                         + ")");
             }
         }
