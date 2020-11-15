@@ -93,8 +93,6 @@ public class TWDGameManager {
         return gameInfo.getZombies();
     }
 
-
-
     public boolean move(int xO, int yO, int xD, int yD) {
         Coordenada origem = new Coordenada(xO,yO);
         if(!origem.isValidMove(xD,yD)){
@@ -104,10 +102,12 @@ public class TWDGameManager {
         int idCriatura = getElementId(xO,yO);
         if(gameInfo.existsHuman(idCriatura)){
             gameInfo.getHumanById(idCriatura).setCoordinates(xD,yD);
+            gameInfo.nrTurno++;
             return true;
         }
         if(gameInfo.existsZombie(idCriatura)){
             gameInfo.getZombieById(idCriatura).setCoordinates(xD,yD);
+            gameInfo.nrTurno++;
             return true;
         }
 
@@ -115,21 +115,26 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
-        /*Deve devolver true caso já tenha sido
-        alcançada uma das condições de paragem
-        do jogo e false em caso contrário.*/
-        return false;
+        return gameInfo.getNrTurno() == 12;
     }
 
     public List<String> getAuthors() {
         ArrayList<String> creditos= new ArrayList<>();
-        creditos.add("Filipe Coutinho 21903016\nTomás Neto 21903361");
+        creditos.add("Filipe Coutinho 21903016");
+        creditos.add("Tomás Neto 21903361");
         return creditos;
     }
 
     public int getCurrentTeamId() {
-        /*Deve devolver o ID da equipa que está
-        activa no turno actual.*/
+        if (gameInfo.getNrTurno() % 2 == 0){
+            if (gameInfo.getFirstTeamID() == 1){
+                return 0;
+            }
+            return 1;
+        }
+        if (gameInfo.getFirstTeamID() == 1){
+            return 1;
+        }
         return 0;
     }
 
@@ -170,11 +175,11 @@ public class TWDGameManager {
     }
 
     public boolean isDay() {
-        /*Dever retornar true caso o turno actual
-        corresponda a um turno diurno e false
-        caso o turno actual corresponda um turno
-        nocturno.*/
-        return false;
+        return gameInfo.getNrTurno() == 1 || gameInfo.getNrTurno() == 2 ||
+                gameInfo.getNrTurno() == 5
+                || gameInfo.getNrTurno() == 6 || gameInfo.getNrTurno() == 9 ||
+                gameInfo.getNrTurno() == 10;
+
     }
 
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {

@@ -9,7 +9,7 @@ public class Humano {
     int idCriatura;
     int posX;
     int posY;
-    int pickedEquiments;
+    int pickedEquipments;
     //int idTipo = 0;
 
     public Humano(int idCriatura, String nome, int posX, int posY) {
@@ -17,13 +17,13 @@ public class Humano {
         this.nome = nome;
         this.posX = posX;
         this.posY = posY;
-        this.pickedEquiments = 0;
+        this.pickedEquipments = 0;
         this.equipments = new ArrayList<>();
     }
 
     void pickEquipment(Equipamento equipamento) {
         this.equipments.add(equipamento);
-        pickedEquiments++;
+        pickedEquipments++;
     }
 
     public int getPosX() {
@@ -51,7 +51,7 @@ public class Humano {
             ● Se a criatura for um Humano: a quantidade de equipamentos apanhados pelo humano desde que o jogo começou;
             ● Se a criatura for um Zombie: a quantidade de equipamentos destruídos pelo zombie desde que o jogo começou*/
         return idCriatura + " | Humano | " + nomeEquipa + " | " + nome
-                + " " + pickedEquiments + " @ (" + posX + ", " + posY + ")";
+                + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
     }
 
     public void setCoordinates(int x, int y){

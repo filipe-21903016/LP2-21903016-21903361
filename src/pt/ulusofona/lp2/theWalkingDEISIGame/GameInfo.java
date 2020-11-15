@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.zip.ZipOutputStream;
 
 public class GameInfo {
+    int nrTurno;
     int nrLines;
     int nrColumns;
     int firstTeamID; // ID of first team playing
@@ -109,6 +110,10 @@ public class GameInfo {
 
     public void setEquipments(ArrayList<Equipamento> equipments) {
         this.equipments = equipments;
+    }
+
+    public int getNrTurno() {
+        return nrTurno;
     }
 
     public int getNrLines() {

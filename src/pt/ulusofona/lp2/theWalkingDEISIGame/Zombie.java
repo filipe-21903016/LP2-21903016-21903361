@@ -6,7 +6,7 @@ public class Zombie {
     int idCriatura;
     int posX;
     int posY;
-    int equimentsDestroyed;
+    int equipmentsDestroyed;
     //int idTipo = 0;
 
 
@@ -15,7 +15,7 @@ public class Zombie {
         this.nome = nome;
         this.posX = posX;
         this.posY = posY;
-        this.equimentsDestroyed = 0;
+        this.equipmentsDestroyed = 0;
     }
 
     public int getPosX() {
@@ -27,7 +27,7 @@ public class Zombie {
     }
 
     void destroyEquiment() {
-        this.equimentsDestroyed++;
+        this.equipmentsDestroyed++;
     }
 
     public int getId() {
@@ -47,7 +47,7 @@ public class Zombie {
             ● Se a criatura for um Humano: a quantidade de equipamentos apanhados pelo humano desde que o jogo começou;
         ● Se a criatura for um Zombie: a quantidade de equipamentos destruídos pelo zombie desde que o*/
         return idCriatura + " | Zombie | " + nomeEquipa + " | " + nome
-                + " " + equimentsDestroyed + " @ (" + posX + ", " + posY + ")";
+                + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";
     }
     public void setCoordinates(int x, int y){
         this.posX=x;
