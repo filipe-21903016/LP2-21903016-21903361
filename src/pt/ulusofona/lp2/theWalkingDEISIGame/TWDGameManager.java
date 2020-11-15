@@ -165,11 +165,18 @@ public class TWDGameManager {
     public List<String> getSurvivors() {
         ArrayList<String> survivors = new ArrayList<>();
         if (gameIsOver()){
-            String resultado = "Nr. de turnos terminados:\n" + gameInfo.getNrTurno() + "\n\n" + "OS VIVOS\n" +
-                    gameInfo.humanoHashMap.keySet() + " " + gameInfo.getHumanById(GameInfo.ID_HUMANO).nome + "\n\n" +
-                    "OS OUTROS\n" + gameInfo.zombieHashMap.keySet() + "(antigamente conhecido como " +
-                    gameInfo.getZombieById(GameInfo.ID_ZOMBIE).nome + ")";
-            survivors.add(resultado);
+            survivors.add("Nr. de turnos terminados:\n" + gameInfo.getNrTurno());
+            survivors.add("\n\n" + "OS VIVOS\n");
+
+            for (Humano humano : gameInfo.humans){
+                survivors.add(humano.idCriatura + " " + humano.nome);
+            }
+            survivors.add("\n\nOS OUTROS\n");
+
+            for (Zombie zombie : gameInfo.zombies){
+                survivors.add(zombie.idCriatura + "(antigamente conhecido como " +  zombie.nome
+                        + ")");
+            }
         }
         return survivors;
     }
