@@ -191,10 +191,10 @@ public class TWDGameManager {
     }
 
     public boolean isDay() {
-        return gameInfo.getNrTurno() == 1 || gameInfo.getNrTurno() == 2 ||
-                gameInfo.getNrTurno() == 5
-                || gameInfo.getNrTurno() == 6 || gameInfo.getNrTurno() == 9 ||
-                gameInfo.getNrTurno() == 10;
+        return gameInfo.getNrTurno() == 0 || gameInfo.getNrTurno() == 1 ||
+                gameInfo.getNrTurno() == 4
+                || gameInfo.getNrTurno() == 5 || gameInfo.getNrTurno() == 8 ||
+                gameInfo.getNrTurno() == 9;
 
     }
 
