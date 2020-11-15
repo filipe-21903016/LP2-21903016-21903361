@@ -6,6 +6,9 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.zip.ZipOutputStream;
 
 public class GameInfo {
+    final static int NR_MAX_TURNOS = 12;
+    final static int ID_ZOMBIE = 0;
+    final static int ID_HUMANO = 1;
     int nrTurno;
     int nrLines;
     int nrColumns;
@@ -18,6 +21,7 @@ public class GameInfo {
     HashMap<Integer,Zombie> zombieHashMap= new HashMap<>();
     HashMap<Integer,Humano> humanoHashMap= new HashMap<>();
     HashMap<Integer,Equipamento> equipamentoHashMap= new HashMap<>();
+
 
     Humano getHumanById(int id){
         return humanoHashMap.get(id);
@@ -138,5 +142,9 @@ public class GameInfo {
 
     public ArrayList<Equipamento> getEquipments() {
         return equipments;
+    }
+
+    public int nextTurn(){
+        return nrTurno++;
     }
 }
