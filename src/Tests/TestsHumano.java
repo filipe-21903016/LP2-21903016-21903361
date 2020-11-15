@@ -12,4 +12,11 @@ public class TestsHumano {
         String obtained = humano.toString();
         Assert.assertEquals(expected,obtained);
     }
+
+    @Test
+    public void testMoveHumano(){
+        TWDGameManager test = new TWDGameManager();
+        Boolean obtained = test.move(3,3,0,0);
+        Assert.assertEquals(false,obtained);
+    }
 }
