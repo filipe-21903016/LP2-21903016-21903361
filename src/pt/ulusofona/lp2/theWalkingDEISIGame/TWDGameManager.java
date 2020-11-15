@@ -197,7 +197,7 @@ public class TWDGameManager {
         return gameInfo.getNrTurno() == 0 || gameInfo.getNrTurno() == 1 ||
                 gameInfo.getNrTurno() == 4
                 || gameInfo.getNrTurno() == 5 || gameInfo.getNrTurno() == 8 ||
-                gameInfo.getNrTurno() == 9;
+                gameInfo.getNrTurno() == 9  || gameInfo.getNrTurno() == 12 ;
 
     }
 
