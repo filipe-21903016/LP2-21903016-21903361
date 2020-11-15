@@ -38,7 +38,7 @@ public class Humano {
     }
 
     public String getImagePNG() {
-        return "superman.png";
+        return "steve.png";
     }
 
     public String toString() {
