@@ -183,12 +183,9 @@ public class TWDGameManager {
     }
 
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {
-        /*Deve retornar true caso a criatura
-        identificada pelo 1º argumento tenha em
-        sua posse um equipamento do tipo cujo ID
-        for passado como 2º argumento.
-        Em caso contrário, deve retornar false.*/
-        return false;
+        Equipamento equipamento = gameInfo.getEquipmentById(equipmentTypeId);
+        Humano humano = gameInfo.getHumanById(creatureId);
+        return humano.equipments.contains(equipamento);
     }
 
 
