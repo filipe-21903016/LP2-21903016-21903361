@@ -163,15 +163,15 @@ public class TWDGameManager {
     }
 
     public List<String> getSurvivors() {
-        /*Devolve uma lista de Strings que
-        representam as criaturas sobreviventes do
-        jogo, conforme descrito na secção dos
-        “Resultados da execução …”.
-        Este método não pode devolver null.
-        Caso não calculem a informação
-        respectiva, devem devolver uma lista
-        vazia.*/
-        return new ArrayList<String>();
+        ArrayList<String> survivors = new ArrayList<>();
+        if (gameIsOver()){
+            String resultado = "Nr. de turnos terminados:\n" + gameInfo.getNrTurno() + "\n\n" + "OS VIVOS\n" +
+                    gameInfo.humanoHashMap.keySet() + " " + gameInfo.getHumanById(GameInfo.ID_HUMANO).nome + "\n\n" +
+                    "OS OUTROS\n" + gameInfo.zombieHashMap.keySet() + "(antigamente conhecido como " +
+                    gameInfo.getZombieById(GameInfo.ID_ZOMBIE).nome + ")";
+            survivors.add(resultado);
+        }
+        return survivors;
     }
 
     public boolean isDay() {
