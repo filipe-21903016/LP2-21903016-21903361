@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -102,15 +103,15 @@ public class TWDGameManager {
 
         int idCriatura = getElementId(xO, yO);
         if (gameInfo.existsHuman(idCriatura)) {
-            if(gameInfo.getCurrentTeamID() == 0){
-               return false;
+            if (gameInfo.getCurrentTeamID() == GameInfo.ID_TEAM_MORTOS) {
+                return false;
             }
             gameInfo.getHumanById(idCriatura).setCoordinates(xD, yD);
             gameInfo.nextTurn();
             return true;
         }
         if (gameInfo.existsZombie(idCriatura)) {
-            if(gameInfo.getCurrentTeamID() == 1){
+            if (gameInfo.getCurrentTeamID() == GameInfo.ID_TEAM_VIVOS) {
                 return false;
             }
             gameInfo.getZombieById(idCriatura).setCoordinates(xD, yD);
@@ -133,7 +134,7 @@ public class TWDGameManager {
     }
 
     public int getCurrentTeamId() {
-        if (gameInfo.getNrTurno() % 2 == 0) {
+        /*if (gameInfo.getNrTurno() % 2 == 0) {
             if (gameInfo.getFirstTeamID() == GameInfo.ID_HUMANO) {
                 return GameInfo.ID_ZOMBIE;
             }
@@ -142,7 +143,8 @@ public class TWDGameManager {
         if (gameInfo.getFirstTeamID() == GameInfo.ID_HUMANO) {
             return GameInfo.ID_HUMANO;
         }
-        return GameInfo.ID_ZOMBIE;
+        return GameInfo.ID_ZOMBIE;*/
+        return gameInfo.currentTeamID;
     }
 
     public int getElementId(int x, int y) {
