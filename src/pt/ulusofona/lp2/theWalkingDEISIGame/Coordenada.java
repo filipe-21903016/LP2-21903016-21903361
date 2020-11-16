@@ -20,6 +20,11 @@ public class Coordenada {
         validCoordenates.add(new Coordenada(x + 1, y));
         validCoordenates.add(new Coordenada(x - 1, y));
 
+        if(xD<0 || yD<0){
+            return false;
+        }
+
+
         //Check if someone is on a coordinate
         //TODO Check if is someone on a coordenate
         for (Coordenada coordenada : validCoordenates) {

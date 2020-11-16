@@ -71,6 +71,7 @@ public class TWDGameManager {
 
             scanner.close();
             getInitialTeam();
+            System.out.println(gameInfo.getHumans().get(0));
 
         } catch (FileNotFoundException e) {
             return false;
@@ -79,7 +80,7 @@ public class TWDGameManager {
     }
 
     public int[] getWorldSize() {
-        return new int[]{GameInfo.getNrLines(), GameInfo.getNrColumns()};
+        return new int[]{gameInfo.getNrLines(), gameInfo.getNrColumns()};
     }
 
     public int getInitialTeam() {
@@ -102,6 +103,7 @@ public class TWDGameManager {
         }
 
         int idCriatura = getElementId(xO, yO);
+        int idEquipment = getElementId(xD,yD);
 
         if (gameInfo.existsHuman(idCriatura)) {
             Humano humano = gameInfo.getHumanById(idCriatura);
@@ -109,15 +111,15 @@ public class TWDGameManager {
                 return false;
             }
 
-            if (gameInfo.existsEquipmentInSpace(xD, yD)) {
-                Equipamento equipamento = gameInfo.getEquipmentBySpace(xD, yD);
-
-                if (humano.getEquipment() != null) {
+            if (idEquipment!=0) {
+                Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
+                if (hasEquipment(humano.getId(), equipamento.getIdTipo())) {
                     humano.dropEquipment();
                 }
                 humano.pickEquipment(equipamento);
                 gameInfo.removeEquipment(equipamento);
             }
+
             humano.setCoordinates(xD, yD);
             gameInfo.nextTurn();
             return true;
@@ -127,8 +129,8 @@ public class TWDGameManager {
             if (gameInfo.getCurrentTeamID() == GameInfo.ID_TEAM_VIVOS) {
                 return false;
             }
-            if (gameInfo.existsEquipmentInSpace(xD, yD)) {
-                Equipamento equipamento = gameInfo.getEquipmentBySpace(xD, yD);
+            if (idEquipment!=0) {
+                Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
                 gameInfo.removeEquipment(equipamento);
                 zombie.destroyEquiment();
             }
@@ -187,13 +189,13 @@ public class TWDGameManager {
             survivors.add("");
             survivors.add("OS VIVOS\n");
 
-            for (Humano humano : gameInfo.humans) {
+            for (Humano humano : gameInfo.getHumans()) {
                 survivors.add(humano.idCriatura + " " + humano.nome);
             }
             survivors.add(" ");
             survivors.add("OS OUTROS\n");
 
-            for (Zombie zombie : gameInfo.zombies) {
+            for (Zombie zombie : gameInfo.getZombies()) {
                 survivors.add(zombie.idCriatura + " (antigamente conhecido como " + zombie.nome
                         + ")");
             }

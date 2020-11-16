@@ -10,8 +10,8 @@ public class GameInfo {
     final static int ID_TEAM_VIVOS = 0;
     final static int ID_TEAM_MORTOS = 1;
     int nrTurno;
-    static int nrLines;
-    static int nrColumns;
+    int nrLines;
+    int nrColumns;
     int firstTeamID; // ID of first team playing
     int currentTeamID;
     static ArrayList<Zombie> zombies = new ArrayList<>();
@@ -20,9 +20,6 @@ public class GameInfo {
     static HashMap<Integer, Zombie> zombieHashMap = new HashMap<>();
     static HashMap<Integer, Humano> humanoHashMap = new HashMap<>();
     static HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
-
-
-
 
     void removeEquipment(Equipamento equipamento){ //TODO Change
         int index=0;
@@ -146,11 +143,11 @@ public class GameInfo {
         return nrTurno;
     }
 
-    static public int getNrLines() {
+    public int getNrLines() {
         return nrLines;
     }
 
-    static public int getNrColumns() {
+    public int getNrColumns() {
         return nrColumns;
     }
 

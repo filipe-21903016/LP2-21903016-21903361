@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-import java.util.ArrayList;
+
 
 public class Humano {
     Equipamento equipment;
@@ -23,7 +23,6 @@ public class Humano {
     void pickEquipment(Equipamento equipamento) {
         this.equipment = equipamento;
         pickedEquipments++;
-
     }
 
     void dropEquipment(){
@@ -46,9 +45,6 @@ public class Humano {
         return this.idCriatura;
     }
 
-    /*public ArrayList<Equipamento> getEquipments() {
-        return equipments;
-    }*/
 
     public Equipamento getEquipment() {
         return equipment;
