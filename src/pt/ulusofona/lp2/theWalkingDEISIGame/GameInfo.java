@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameInfo {
-    final static int NR_MAX_TURNOS = 12;
+    final static int NR_MAX_TURNOS = 50; //TODO Change to 12
     final static int ID_ZOMBIE = 0;
     final static int ID_HUMANO = 1;
     final static int ID_TEAM_VIVOS = 0;
@@ -14,8 +14,6 @@ public class GameInfo {
     static int nrColumns;
     int firstTeamID; // ID of first team playing
     int currentTeamID;
-    //int nrEquipments; // number of equipments
-    //int nrCreatures; // Number of creatures in game (Humans/Zombies)
     static ArrayList<Zombie> zombies = new ArrayList<>();
     static ArrayList<Humano> humans = new ArrayList<>();
     static ArrayList<Equipamento> equipments = new ArrayList<>();

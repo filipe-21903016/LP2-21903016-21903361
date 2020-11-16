@@ -97,19 +97,20 @@ public class TWDGameManager {
 
     public boolean move(int xO, int yO, int xD, int yD) {
         Coordenada origem = new Coordenada(xO, yO);
-        if (!origem.isValidMove(xD, yD) || !gameInfo.isEmptySpace(xD,yD)){
+        if (!origem.isValidMove(xD, yD) || !gameInfo.isEmptySpace(xD, yD)) {
             return false;
         }
 
         int idCriatura = getElementId(xO, yO);
+
         if (gameInfo.existsHuman(idCriatura)) {
             Humano humano = gameInfo.getHumanById(idCriatura);
             if (gameInfo.getCurrentTeamID() == GameInfo.ID_TEAM_MORTOS) {
                 return false;
             }
 
-            if(gameInfo.existsEquipmentInSpace(xD,yD)){
-                Equipamento equipamento = gameInfo.getEquipmentBySpace(xD,yD);
+            if (gameInfo.existsEquipmentInSpace(xD, yD)) {
+                Equipamento equipamento = gameInfo.getEquipmentBySpace(xD, yD);
 
                 if (humano.getEquipment() != null) {
                     humano.dropEquipment();
@@ -126,9 +127,10 @@ public class TWDGameManager {
             if (gameInfo.getCurrentTeamID() == GameInfo.ID_TEAM_VIVOS) {
                 return false;
             }
-            if(gameInfo.existsEquipmentInSpace(xD,yD)){
-                Equipamento equipamento = gameInfo.getEquipmentBySpace(xD,yD);
+            if (gameInfo.existsEquipmentInSpace(xD, yD)) {
+                Equipamento equipamento = gameInfo.getEquipmentBySpace(xD, yD);
                 gameInfo.removeEquipment(equipamento);
+                zombie.destroyEquiment();
             }
             zombie.setCoordinates(xD, yD);
             gameInfo.nextTurn();
@@ -198,7 +200,6 @@ public class TWDGameManager {
         }
         return survivors;
     }
-
     public boolean isDay() {
         return gameInfo.getNrTurno() == 0 || gameInfo.getNrTurno() == 1 ||
                 gameInfo.getNrTurno() == 4
@@ -206,19 +207,9 @@ public class TWDGameManager {
                 gameInfo.getNrTurno() == 9 || gameInfo.getNrTurno() == 12;
 
     }
-
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {
-        /*Humano humano = gameInfo.getHumanById(creatureId);
-            if (humano != null) {
-                if (humano.getEquipment() != null) {
-                    return humano.getEquipment().getIdTipo() == equipmentTypeId;
-                } else {
-                    return false;
-                }
-            }
-        return false;*/
         Humano humano = gameInfo.getHumanById(creatureId);
-        if(humano.getEquipment()==null){
+        if (humano.getEquipment() == null) {
             return false;
         }
         return humano.getEquipment().getIdTipo() == equipmentTypeId;
