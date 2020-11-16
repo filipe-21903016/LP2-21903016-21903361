@@ -197,18 +197,16 @@ public class TWDGameManager {
         return gameInfo.getNrTurno() == 0 || gameInfo.getNrTurno() == 1 ||
                 gameInfo.getNrTurno() == 4
                 || gameInfo.getNrTurno() == 5 || gameInfo.getNrTurno() == 8 ||
-                gameInfo.getNrTurno() == 9  || gameInfo.getNrTurno() == 12 ;
+                gameInfo.getNrTurno() == 9 || gameInfo.getNrTurno() == 12;
 
     }
 
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {
         Equipamento equipamento = gameInfo.getEquipmentById(equipmentTypeId);
         Humano humano = gameInfo.getHumanById(creatureId);
-        if (equipamento == null && humano == null){
+        if (equipamento == null && humano == null) {
             return false;
         }
         return humano.equipments.contains(equipamento);
     }
-
-
 }
