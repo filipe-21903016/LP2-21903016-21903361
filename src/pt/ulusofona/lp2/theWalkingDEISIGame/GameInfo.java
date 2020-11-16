@@ -16,13 +16,26 @@ public class GameInfo {
     int currentTeamID;
     //int nrEquipments; // number of equipments
     //int nrCreatures; // Number of creatures in game (Humans/Zombies)
-    ArrayList<Zombie> zombies = new ArrayList<>();
-    ArrayList<Humano> humans = new ArrayList<>();
-    ArrayList<Equipamento> equipments = new ArrayList<>();
-    HashMap<Integer, Zombie> zombieHashMap = new HashMap<>();
-    HashMap<Integer, Humano> humanoHashMap = new HashMap<>();
-    HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
+    static ArrayList<Zombie> zombies = new ArrayList<>();
+    static ArrayList<Humano> humans = new ArrayList<>();
+    static ArrayList<Equipamento> equipments = new ArrayList<>();
+    static HashMap<Integer, Zombie> zombieHashMap = new HashMap<>();
+    static HashMap<Integer, Humano> humanoHashMap = new HashMap<>();
+    static HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
 
+
+
+
+    void removeEquipment(Equipamento equipamento){ //TODO Change
+        int index=0;
+        for(Equipamento equipamento1:equipments){
+            if(equipamento.getId() == equipamento1.getId()){
+                break;
+            }
+            index++;
+        }
+        equipments.remove(index);
+    }
 
     Humano getHumanById(int id) {
         return humanoHashMap.get(id);
@@ -36,6 +49,19 @@ public class GameInfo {
         return equipamentoHashMap.get(id);
     }
 
+    boolean isEmptySpace(int x, int y){
+        for(Humano humano:humans){
+            if(humano.getPosX()==x && humano.getPosY()==y){
+                return false;
+            }
+        }
+        for(Zombie zombie:zombies){
+            if(zombie.getPosX()==x && zombie.getPosY()==y){
+                return false;
+            }
+        }
+        return true;
+    }
 
     boolean existsHuman(int id) {
         for (Humano humano : humans) {
@@ -55,9 +81,9 @@ public class GameInfo {
         return false;
     }
 
-    boolean existsEquipment(int id) {
+    boolean existsEquipmentInSpace(int x, int y) {
         for (Equipamento equipamento : equipments) {
-            if (equipamento.getId() == id) {
+            if (equipamento.getPosX()==x && equipamento.getPosY()==y) {
                 return true;
             }
         }
@@ -144,6 +170,15 @@ public class GameInfo {
 
     public ArrayList<Equipamento> getEquipments() {
         return equipments;
+    }
+
+    Equipamento getEquipmentBySpace(int x, int y){
+        for(Equipamento equipamento:equipments){
+            if(equipamento.getPosX()==x && equipamento.getPosY()==y){
+                return equipamento;
+            }
+        }
+        return null;
     }
 
     public int nextTurn() {

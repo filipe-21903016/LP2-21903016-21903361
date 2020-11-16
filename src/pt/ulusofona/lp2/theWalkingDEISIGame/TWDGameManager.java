@@ -96,30 +96,39 @@ public class TWDGameManager {
     }
 
     public boolean move(int xO, int yO, int xD, int yD) {
-        /*TODO
-        *  Falta verifica o movimentos fora dos eixos
-        *  Falta apanhar equipamento caso humano nao tenha nenhum
-        *  Falta caso humano tenha equipamento largar na casa e apanhar o outro
-        *  Falta zombie destruir equipamentos
-        *  Falta verificar se a casa de destino esta vazia ou ocupada por equipamento
-        * */
         Coordenada origem = new Coordenada(xO, yO);
-        if (!origem.isValidMove(xD, yD)) {
+        if (!origem.isValidMove(xD, yD) || !gameInfo.isEmptySpace(xD,yD)){
             return false;
         }
 
         int idCriatura = getElementId(xO, yO);
         if (gameInfo.existsHuman(idCriatura)) {
+            Humano humano = gameInfo.getHumanById(idCriatura);
             if (gameInfo.getCurrentTeamID() == GameInfo.ID_TEAM_MORTOS) {
                 return false;
             }
-            gameInfo.getHumanById(idCriatura).setCoordinates(xD, yD);
+
+            if(gameInfo.existsEquipmentInSpace(xD,yD)){
+                Equipamento equipamento = gameInfo.getEquipmentBySpace(xD,yD);
+
+                if (humano.getEquipment() != null) {
+                    humano.dropEquipment();
+                }
+                humano.pickEquipment(equipamento);
+                gameInfo.removeEquipment(equipamento);
+            }
+            humano.setCoordinates(xD, yD);
             gameInfo.nextTurn();
             return true;
         }
         if (gameInfo.existsZombie(idCriatura)) {
+            Zombie zombie = gameInfo.getZombieById(idCriatura);
             if (gameInfo.getCurrentTeamID() == GameInfo.ID_TEAM_VIVOS) {
                 return false;
+            }
+            if(gameInfo.existsEquipmentInSpace(xD,yD)){
+                Equipamento equipamento = gameInfo.getEquipmentBySpace(xD,yD);
+                gameInfo.removeEquipment(equipamento);
             }
             gameInfo.getZombieById(idCriatura).setCoordinates(xD, yD);
             gameInfo.nextTurn();
@@ -199,14 +208,19 @@ public class TWDGameManager {
     }
 
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {
-        Humano humano = gameInfo.getHumanById(creatureId);
+        /*Humano humano = gameInfo.getHumanById(creatureId);
             if (humano != null) {
-                if (humano.getEquipments() != null) {
-                    return humano.getEquipments().getIdTipo() == equipmentTypeId;
+                if (humano.getEquipment() != null) {
+                    return humano.getEquipment().getIdTipo() == equipmentTypeId;
                 } else {
                     return false;
                 }
             }
-        return false;
+        return false;*/
+        Humano humano = gameInfo.getHumanById(creatureId);
+        if(humano.getEquipment()==null){
+            return false;
+        }
+        return humano.getEquipment().getIdTipo() == equipmentTypeId;
     }
 }

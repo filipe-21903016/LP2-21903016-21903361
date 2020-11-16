@@ -13,12 +13,6 @@ public class Coordenada {
     }
 
     public boolean isValidMove(int xD, int yD) {
-        /*if(xD > GameInfo.getNrColumns() || xD<0){
-            return false;
-        }
-        if(yD>GameInfo.getNrLines() || yD<0){
-            return false;
-        }*/
         ArrayList<Coordenada> validCoordenates = new ArrayList<>();
         validCoordenates.add(new Coordenada(x, y));
         validCoordenates.add(new Coordenada(x, y + 1));
@@ -27,10 +21,6 @@ public class Coordenada {
         validCoordenates.add(new Coordenada(x - 1, y));
 
         //Check if someone is on a coordinate
-
-
-
-
         //TODO Check if is someone on a coordenate
         for (Coordenada coordenada : validCoordenates) {
             if (coordenada.x == xD && coordenada.y == yD) {

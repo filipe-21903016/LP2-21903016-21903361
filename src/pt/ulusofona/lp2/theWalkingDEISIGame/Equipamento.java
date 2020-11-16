@@ -11,6 +11,14 @@ public class Equipamento {
         return id;
     }
 
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
     public int getPosX() {
         return posX;
     }
