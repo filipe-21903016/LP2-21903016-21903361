@@ -10,8 +10,8 @@ public class GameInfo {
     final static int ID_TEAM_VIVOS = 0;
     final static int ID_TEAM_MORTOS = 1;
     int nrTurno;
-    int nrLines;
-    int nrColumns;
+    static int nrLines;
+    static int nrColumns;
     int firstTeamID; // ID of first team playing
     int currentTeamID;
     //int nrEquipments; // number of equipments
@@ -122,11 +122,11 @@ public class GameInfo {
         return nrTurno;
     }
 
-    public int getNrLines() {
+    static public int getNrLines() {
         return nrLines;
     }
 
-    public int getNrColumns() {
+    static public int getNrColumns() {
         return nrColumns;
     }
 

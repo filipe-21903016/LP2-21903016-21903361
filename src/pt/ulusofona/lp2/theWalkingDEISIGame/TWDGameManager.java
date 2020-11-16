@@ -101,6 +101,7 @@ public class TWDGameManager {
         *  Falta apanhar equipamento caso humano nao tenha nenhum
         *  Falta caso humano tenha equipamento largar na casa e apanhar o outro
         *  Falta zombie destruir equipamentos
+        *  Falta verificar se a casa de destino esta vazia ou ocupada por equipamento
         * */
         Coordenada origem = new Coordenada(xO, yO);
         if (!origem.isValidMove(xD, yD)) {
