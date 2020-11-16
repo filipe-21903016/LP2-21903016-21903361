@@ -207,6 +207,11 @@ public class TWDGameManager {
         if (equipamento == null && humano == null) {
             return false;
         }
-        return humano.equipments.contains(equipamento);
+        for (Equipamento equipamento1 : humano.equipments) {
+            if (humano.equipments.contains(equipamento1)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
