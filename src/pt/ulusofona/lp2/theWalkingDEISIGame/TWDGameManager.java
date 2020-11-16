@@ -130,7 +130,7 @@ public class TWDGameManager {
                 Equipamento equipamento = gameInfo.getEquipmentBySpace(xD,yD);
                 gameInfo.removeEquipment(equipamento);
             }
-            gameInfo.getZombieById(idCriatura).setCoordinates(xD, yD);
+            zombie.setCoordinates(xD, yD);
             gameInfo.nextTurn();
             return true;
         }
