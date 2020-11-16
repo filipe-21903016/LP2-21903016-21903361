@@ -202,14 +202,12 @@ public class TWDGameManager {
     }
 
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {
-        Equipamento equipamento = gameInfo.getEquipmentById(equipmentTypeId);
         Humano humano = gameInfo.getHumanById(creatureId);
-        if (equipamento == null && humano == null) {
-            return false;
-        }
-        for (Equipamento equipamento1 : humano.equipments) {
-            if (humano.equipments.contains(equipamento1)) {
-                return true;
+        for (Equipamento equipamento : humano.equipments){
+            if (equipamento != null) {
+                if (equipamento.getIdTipo() == equipmentTypeId){
+                    return true;
+                }
             }
         }
         return false;

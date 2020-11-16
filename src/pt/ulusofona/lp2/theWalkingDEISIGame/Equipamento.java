@@ -19,6 +19,10 @@ public class Equipamento {
         return posY;
     }
 
+    public int getIdTipo() {
+        return idTipo;
+    }
+
     public String getImagePNG(){return "equipment.png";}
 
     public Equipamento(int id, int idTipo, int posX, int posY) {
