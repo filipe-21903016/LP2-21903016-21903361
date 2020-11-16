@@ -37,6 +37,10 @@ public class Humano {
         return this.idCriatura;
     }
 
+    public ArrayList<Equipamento> getEquipments() {
+        return equipments;
+    }
+
     public String getImagePNG() {
         return "steve.png";
     }
