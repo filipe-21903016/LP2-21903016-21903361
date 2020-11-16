@@ -3,7 +3,7 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 import java.util.ArrayList;
 
 public class Humano {
-    ArrayList<Equipamento> equipments;
+    Equipamento equipments;
     String nome;
     String nomeEquipa = "Os Vivos";
     int idCriatura;
@@ -17,13 +17,13 @@ public class Humano {
         this.posX = posX;
         this.posY = posY;
         this.pickedEquipments = 0;
-        this.equipments = new ArrayList<>();
+        this.equipments = null;
     }
 
-    void pickEquipment(Equipamento equipamento) {
+    /*void pickEquipment(Equipamento equipamento) {
         this.equipments.add(equipamento);
         pickedEquipments++;
-    }
+    }*/
 
     public int getPosX() {
         return posX;
@@ -37,7 +37,11 @@ public class Humano {
         return this.idCriatura;
     }
 
-    public ArrayList<Equipamento> getEquipments() {
+    /*public ArrayList<Equipamento> getEquipments() {
+        return equipments;
+    }*/
+
+    public Equipamento getEquipments() {
         return equipments;
     }
 

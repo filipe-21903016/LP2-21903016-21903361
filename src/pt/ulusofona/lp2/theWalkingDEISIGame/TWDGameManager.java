@@ -79,7 +79,7 @@ public class TWDGameManager {
     }
 
     public int[] getWorldSize() {
-        return new int[]{gameInfo.getNrLines(), gameInfo.getNrColumns()};
+        return new int[]{GameInfo.getNrLines(), GameInfo.getNrColumns()};
     }
 
     public int getInitialTeam() {
@@ -202,7 +202,7 @@ public class TWDGameManager {
         Humano humano = gameInfo.getHumanById(creatureId);
             if (humano != null) {
                 if (humano.getEquipments() != null) {
-                    return humano.getEquipments().get(0).getIdTipo() == equipmentTypeId;
+                    return humano.getEquipments().getIdTipo() == equipmentTypeId;
                 } else {
                     return false;
                 }
