@@ -96,6 +96,13 @@ public class TWDGameManager {
     }
 
     public boolean move(int xO, int yO, int xD, int yD) {
+        /*TODO
+        *  Falta verifica o movimentos fora dos eixos
+        *  Falta apanhar equipamento caso humano nao tenha nenhum
+        *  Falta caso humano tenha equipamento largar na casa e apanhar o outro
+        *  Falta zombie destruir equipamentos
+        *  Falta verificar se a casa de destino esta vazia ou ocupada por equipamento
+        * */
         Coordenada origem = new Coordenada(xO, yO);
         if (!origem.isValidMove(xD, yD)) {
             return false;
@@ -134,16 +141,6 @@ public class TWDGameManager {
     }
 
     public int getCurrentTeamId() {
-        /*if (gameInfo.getNrTurno() % 2 == 0) {
-            if (gameInfo.getFirstTeamID() == GameInfo.ID_HUMANO) {
-                return GameInfo.ID_ZOMBIE;
-            }
-            return GameInfo.ID_HUMANO;
-        }
-        if (gameInfo.getFirstTeamID() == GameInfo.ID_HUMANO) {
-            return GameInfo.ID_HUMANO;
-        }
-        return GameInfo.ID_ZOMBIE;*/
         return gameInfo.currentTeamID;
     }
 
