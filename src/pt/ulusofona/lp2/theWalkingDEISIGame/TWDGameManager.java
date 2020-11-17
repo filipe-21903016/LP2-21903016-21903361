@@ -71,7 +71,7 @@ public class TWDGameManager {
 
             scanner.close();
             getInitialTeam();
-            System.out.println(gameInfo.getHumans().get(0));
+            //System.out.println(gameInfo.getHumans().get(0));
 
             if (getInitialTeam() != getCurrentTeamId()){
                 return false; //alterei isto segundo piaza//
@@ -88,7 +88,7 @@ public class TWDGameManager {
     }
 
     public int getInitialTeam() {
-        System.out.println(gameInfo.getFirstTeamID());
+        //System.out.println(gameInfo.getFirstTeamID());
         return gameInfo.getFirstTeamID();
     }
 
