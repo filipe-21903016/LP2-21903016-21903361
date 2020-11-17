@@ -2,7 +2,6 @@ package Tests;
 
 import org.junit.Assert;
 import org.junit.Test;
-import pt.ulusofona.lp2.theWalkingDEISIGame.Humano;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 import pt.ulusofona.lp2.theWalkingDEISIGame.Zombie;
 
