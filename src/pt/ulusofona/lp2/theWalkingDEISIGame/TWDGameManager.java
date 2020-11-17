@@ -101,7 +101,7 @@ public class TWDGameManager {
         if (!origem.isValidMove(xD, yD) || !gameInfo.isEmptySpace(xD, yD)) {
             return false;
         }
-
+        
         int idCriatura = getElementId(xO, yO);
         int idEquipment = getElementId(xD,yD);
 
@@ -216,5 +216,4 @@ public class TWDGameManager {
         }
         return humano.getEquipment().getIdTipo() == equipmentTypeId;
     }
-    //tomcat//
 }
