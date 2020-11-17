@@ -132,7 +132,7 @@ public class TWDGameManager {
         if (gameInfo.existsHuman(idCriatura)) {
             Humano humano = gameInfo.getHumanById(idCriatura);
 
-            System.out.println(humano); //TODO
+            System.out.println(humano); //TODO remove
 
             if (gameInfo.getCurrentTeamID() == gameInfo.getIdTeamMortos()) {
                 return false;
