@@ -10,7 +10,7 @@ public class TWDGameManager {
     public TWDGameManager() {
     }
 
-    GameInfo gameInfo = new GameInfo();
+    public GameInfo gameInfo = new GameInfo(); //possibly need to remove public
 
     public boolean startGame(File ficheiroInicial) {
         try {
@@ -100,9 +100,29 @@ public class TWDGameManager {
         return gameInfo.getZombies();
     }
 
+    public boolean isValidMove(int xO, int yO, int xD, int yD){
+        if(xD<0 || yD<0 || yD>= gameInfo.getNrLines() || xD>=gameInfo.getNrColumns()){ //Checks if coordenate is outside bounds
+            return false;
+        }
+        for(Humano humano:gameInfo.getHumans()){ //Checks if theres is a human on the destination
+            if(humano.getPosX()==xD && humano.getPosY()==yD){
+                return false;
+            }
+        }
+        for(Zombie zombie:gameInfo.getZombies()){ //Checks if theres is a zombie on the destination
+            if(zombie.getPosX()==xD && zombie.getPosY()==yD){
+                return false;
+            }
+        }
+        if((xD==xO && yD==yO+1) || (xD==xO && yD==yO-1)
+            || (xD==xO+1 && yD==yO) || (xD==xO-1 && yD==yO)){
+            return true;
+        }
+        return false;
+    }
+
     public boolean move(int xO, int yO, int xD, int yD) {
-        Coordenada origem = new Coordenada(xO, yO);
-        if (!origem.isValidMove(xD, yD) || !gameInfo.isEmptySpace(xD, yD)) {
+        if(!isValidMove(xO, yO, xD, yD)){
             return false;
         }
 
@@ -111,7 +131,9 @@ public class TWDGameManager {
 
         if (gameInfo.existsHuman(idCriatura)) {
             Humano humano = gameInfo.getHumanById(idCriatura);
+
             System.out.println(humano); //TODO
+
             if (gameInfo.getCurrentTeamID() == gameInfo.getIdTeamMortos()) {
                 return false;
             }
@@ -128,13 +150,18 @@ public class TWDGameManager {
             }
 
             humano.setCoordinates(xD, yD);
+
             System.out.println(humano); //ToDo
+
             gameInfo.nextTurn();
             return true;
         }
         if (gameInfo.existsZombie(idCriatura)) {
+
             Zombie zombie = gameInfo.getZombieById(idCriatura);
+
             System.out.println(zombie); //todo
+
             if (gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos()) {
                 return false;
             }
@@ -145,8 +172,11 @@ public class TWDGameManager {
                 gameInfo.removeEquipment(equipamento);
             }
             zombie.setCoordinates(xD, yD);
+
             gameInfo.nextTurn();
+
             System.out.println(zombie); //todo
+
             return true;
         }
 

@@ -25,7 +25,6 @@ public class GameInfo {
         return nrMaxTurnos;
     }
 
-
     Humano getHumanById(int id) {
         return humanoHashMap.get(id);
     }
