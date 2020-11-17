@@ -14,12 +14,12 @@ public class GameInfo {
     int nrColumns;
     int firstTeamID; // ID of first team playing
     int currentTeamID;
-    static ArrayList<Zombie> zombies = new ArrayList<>();
-    static ArrayList<Humano> humans = new ArrayList<>();
+    ArrayList<Zombie> zombies = new ArrayList<>();
+    ArrayList<Humano> humans = new ArrayList<>();
     static ArrayList<Equipamento> equipments = new ArrayList<>();
-    static HashMap<Integer, Zombie> zombieHashMap = new HashMap<>();
-    static HashMap<Integer, Humano> humanoHashMap = new HashMap<>();
-    static HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
+    HashMap<Integer, Zombie> zombieHashMap = new HashMap<>();
+    HashMap<Integer, Humano> humanoHashMap = new HashMap<>();
+    HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
 
     void removeEquipment(Equipamento equipamento){
         int index=0;
