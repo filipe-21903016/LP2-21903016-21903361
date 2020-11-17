@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameInfo {
-    final int NR_MAX_TURNOS = 12;
-    final int ID_ZOMBIE = 0;
-    final int ID_HUMANO = 1;
-    final int ID_TEAM_VIVOS = 0;
-    final int ID_TEAM_MORTOS = 1;
+    final int nrMaxTurnos = 12;
+    final int idZombie = 0;
+    final int idHumano = 1;
+    final int idTeamVivos = 0;
+    final int idTeamMortos = 1;
     int nrTurno;
     int nrLines;
     int nrColumns;
@@ -21,6 +21,9 @@ public class GameInfo {
     HashMap<Integer, Humano> humanoHashMap = new HashMap<>();
     HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
 
+    public int getNrMaxTurnos() {
+        return nrMaxTurnos;
+    }
 
 
     Humano getHumanById(int id) {
@@ -93,7 +96,7 @@ public class GameInfo {
             return;
         }
 
-        if (idType == ID_ZOMBIE) {
+        if (idType == idZombie) {
             Zombie zombie = new Zombie(idCriatura, name, posX, posY);
             zombies.add(zombie);
             zombieHashMap.put(zombie.getId(), zombie);
@@ -142,7 +145,7 @@ public class GameInfo {
     }
 
     public int nextTurn() {
-        this.currentTeamID = (currentTeamID==ID_TEAM_VIVOS) ? ID_TEAM_MORTOS :ID_TEAM_VIVOS;
+        this.currentTeamID = (currentTeamID==idTeamVivos) ? idTeamMortos : idTeamVivos;
         return nrTurno++;
     }
 
@@ -171,5 +174,11 @@ public class GameInfo {
         equipamentoHashMap.remove(equipamento.getId());
     }
 
+    public int getIdTeamVivos() {
+        return idTeamVivos;
+    }
 
+    public int getIdTeamMortos() {
+        return idTeamMortos;
+    }
 }

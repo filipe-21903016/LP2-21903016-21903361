@@ -112,7 +112,7 @@ public class TWDGameManager {
         if (gameInfo.existsHuman(idCriatura)) {
             Humano humano = gameInfo.getHumanById(idCriatura);
             System.out.println(humano); //TODO
-            if (gameInfo.getCurrentTeamID() == gameInfo.ID_TEAM_MORTOS) {
+            if (gameInfo.getCurrentTeamID() == gameInfo.getIdTeamMortos()) {
                 return false;
             }
 
@@ -135,7 +135,7 @@ public class TWDGameManager {
         if (gameInfo.existsZombie(idCriatura)) {
             Zombie zombie = gameInfo.getZombieById(idCriatura);
             System.out.println(zombie); //todo
-            if (gameInfo.getCurrentTeamID() == gameInfo.ID_TEAM_VIVOS) {
+            if (gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos()) {
                 return false;
             }
             if (idEquipment != 0) {
@@ -154,7 +154,7 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
-        return gameInfo.getNrTurno() == gameInfo.NR_MAX_TURNOS;
+        return gameInfo.getNrTurno() == gameInfo.getNrMaxTurnos();
     }
 
     public List<String> getAuthors() {
@@ -165,7 +165,7 @@ public class TWDGameManager {
     }
 
     public int getCurrentTeamId() {
-        return gameInfo.currentTeamID;
+        return gameInfo.getCurrentTeamID();
     }
 
     public int getElementId(int x, int y) {
