@@ -13,11 +13,4 @@ public class TestsZombie {
         String obtained = zombie.toString();
         Assert.assertEquals(expected,obtained);
     }
-
-    @Test
-    public void testMoveZombie(){
-        TWDGameManager test = new TWDGameManager();
-        Boolean obtained = test.move(3,3,0,0);
-        Assert.assertEquals(false,obtained);
-    }
 }
