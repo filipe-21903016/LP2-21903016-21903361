@@ -111,6 +111,7 @@ public class TWDGameManager {
 
         if (gameInfo.existsHuman(idCriatura)) {
             Humano humano = gameInfo.getHumanById(idCriatura);
+            System.out.println(humano); //TODO
             if (gameInfo.getCurrentTeamID() == gameInfo.ID_TEAM_MORTOS) {
                 return false;
             }
@@ -127,11 +128,13 @@ public class TWDGameManager {
             }
 
             humano.setCoordinates(xD, yD);
+            System.out.println(humano); //ToDo
             gameInfo.nextTurn();
             return true;
         }
         if (gameInfo.existsZombie(idCriatura)) {
             Zombie zombie = gameInfo.getZombieById(idCriatura);
+            System.out.println(zombie); //todo
             if (gameInfo.getCurrentTeamID() == gameInfo.ID_TEAM_VIVOS) {
                 return false;
             }
@@ -143,6 +146,7 @@ public class TWDGameManager {
             }
             zombie.setCoordinates(xD, yD);
             gameInfo.nextTurn();
+            System.out.println(zombie); //todo
             return true;
         }
 
@@ -220,12 +224,10 @@ public class TWDGameManager {
 
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {
         Humano humano = gameInfo.getHumanById(creatureId);
-        if (humano != null) {
-            if (humano.getEquipment() != null) {
-                return humano.getEquipment().getIdTipo() == equipmentTypeId;
-            } //alterei isto pk nullpointer//
-            return false;
+        if(humano!= null && humano.getEquipment()!=null){
+            return humano.getEquipment().getIdTipo() == equipmentTypeId;
         }
         return false;
+        //alterei pq tava feio, mas assim ta igual
     }
 }
