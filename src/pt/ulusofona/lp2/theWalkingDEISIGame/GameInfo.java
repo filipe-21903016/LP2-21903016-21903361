@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameInfo {
-    final static int NR_MAX_TURNOS = 12;
-    final static int ID_ZOMBIE = 0;
-    final static int ID_HUMANO = 1;
-    final static int ID_TEAM_VIVOS = 0;
-    final static int ID_TEAM_MORTOS = 1;
+    final int NR_MAX_TURNOS = 12;
+    final int ID_ZOMBIE = 0;
+    final int ID_HUMANO = 1;
+    final int ID_TEAM_VIVOS = 0;
+    final int ID_TEAM_MORTOS = 1;
     int nrTurno;
     int nrLines;
     int nrColumns;
@@ -142,7 +142,7 @@ public class GameInfo {
     }
 
     public int nextTurn() {
-        this.currentTeamID = (currentTeamID==0) ? 1 :0;
+        this.currentTeamID = (currentTeamID==ID_TEAM_VIVOS) ? ID_TEAM_MORTOS :ID_TEAM_VIVOS;
         return nrTurno++;
     }
 

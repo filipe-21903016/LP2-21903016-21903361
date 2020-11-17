@@ -73,7 +73,7 @@ public class TWDGameManager {
             getInitialTeam();
             //System.out.println(gameInfo.getHumans().get(0));
 
-            if (getInitialTeam() != getCurrentTeamId()){
+            if (getInitialTeam() != getCurrentTeamId()) {
                 return false; //alterei isto segundo piaza//
             }
 
@@ -105,21 +105,22 @@ public class TWDGameManager {
         if (!origem.isValidMove(xD, yD) || !gameInfo.isEmptySpace(xD, yD)) {
             return false;
         }
-        
+
         int idCriatura = getElementId(xO, yO);
-        int idEquipment = getElementId(xD,yD);
+        int idEquipment = getElementId(xD, yD);
 
         if (gameInfo.existsHuman(idCriatura)) {
             Humano humano = gameInfo.getHumanById(idCriatura);
-            if (gameInfo.getCurrentTeamID() == GameInfo.ID_TEAM_MORTOS) {
+            if (gameInfo.getCurrentTeamID() == gameInfo.ID_TEAM_MORTOS) {
                 return false;
             }
 
-            if (idEquipment!=0) {
+            if (idEquipment != 0) {
                 Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
+
                 if (hasEquipment(humano.getId(), equipamento.getIdTipo())) {
                     Equipamento equipamentDroped = humano.dropEquipment();
-                    gameInfo.getEquipments().add(equipamentDroped); //adds the dropped equipment to structures
+                    gameInfo.addEquipment(equipamentDroped); //adds the dropped equipment to structures
                 }
                 humano.pickEquipment(equipamento);
                 gameInfo.removeEquipment(equipamento); //removes picked item from structures
@@ -131,13 +132,14 @@ public class TWDGameManager {
         }
         if (gameInfo.existsZombie(idCriatura)) {
             Zombie zombie = gameInfo.getZombieById(idCriatura);
-            if (gameInfo.getCurrentTeamID() == GameInfo.ID_TEAM_VIVOS) {
+            if (gameInfo.getCurrentTeamID() == gameInfo.ID_TEAM_VIVOS) {
                 return false;
             }
-            if (idEquipment!=0) {
+            if (idEquipment != 0) {
                 Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
-                gameInfo.removeEquipment(equipamento);
+
                 zombie.destroyEquiment();
+                gameInfo.removeEquipment(equipamento);
             }
             zombie.setCoordinates(xD, yD);
             gameInfo.nextTurn();
@@ -148,7 +150,7 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
-        return gameInfo.getNrTurno() == GameInfo.NR_MAX_TURNOS;
+        return gameInfo.getNrTurno() == gameInfo.NR_MAX_TURNOS;
     }
 
     public List<String> getAuthors() {
@@ -207,6 +209,7 @@ public class TWDGameManager {
         }
         return survivors;
     }
+
     public boolean isDay() {
         return gameInfo.getNrTurno() == 0 || gameInfo.getNrTurno() == 1 ||
                 gameInfo.getNrTurno() == 4
@@ -214,6 +217,7 @@ public class TWDGameManager {
                 gameInfo.getNrTurno() == 9 || gameInfo.getNrTurno() == 12;
 
     }
+
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {
         Humano humano = gameInfo.getHumanById(creatureId);
         if (humano != null) {
