@@ -216,4 +216,5 @@ public class TWDGameManager {
         }
         return humano.getEquipment().getIdTipo() == equipmentTypeId;
     }
+    //tomcat//
 }
