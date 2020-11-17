@@ -16,21 +16,12 @@ public class GameInfo {
     int currentTeamID;
     ArrayList<Zombie> zombies = new ArrayList<>();
     ArrayList<Humano> humans = new ArrayList<>();
-    static ArrayList<Equipamento> equipments = new ArrayList<>();
+    ArrayList<Equipamento> equipments = new ArrayList<>();
     HashMap<Integer, Zombie> zombieHashMap = new HashMap<>();
     HashMap<Integer, Humano> humanoHashMap = new HashMap<>();
     HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
 
-    void removeEquipment(Equipamento equipamento){
-        int index=0;
-        for(Equipamento equipamento1:equipments){
-            if(equipamento.getId() == equipamento1.getId()){
-                break;
-            }
-            index++;
-        }
-        equipments.remove(index);
-    }
+
 
     Humano getHumanById(int id) {
         return humanoHashMap.get(id);
@@ -162,4 +153,23 @@ public class GameInfo {
     public int getCurrentTeamID() {
         return currentTeamID;
     }
+
+    public void addEquipment(Equipamento equipamento){
+        equipments.add(equipamento);
+        equipamentoHashMap.put(equipamento.getId(), equipamento);
+    }
+
+    void removeEquipment(Equipamento equipamento){
+        int index=0;
+        for(Equipamento equipamento1:equipments){
+            if(equipamento.getId() == equipamento1.getId()){
+                break;
+            }
+            index++;
+        }
+        equipments.remove(index);
+        equipamentoHashMap.remove(equipamento.getId());
+    }
+
+
 }

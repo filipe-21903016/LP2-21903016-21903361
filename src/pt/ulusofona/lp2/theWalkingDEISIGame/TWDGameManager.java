@@ -118,10 +118,11 @@ public class TWDGameManager {
             if (idEquipment!=0) {
                 Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
                 if (hasEquipment(humano.getId(), equipamento.getIdTipo())) {
-                    humano.dropEquipment();
+                    Equipamento equipamentDroped = humano.dropEquipment();
+                    gameInfo.getEquipments().add(equipamentDroped); //adds the dropped equipment to structures
                 }
                 humano.pickEquipment(equipamento);
-                gameInfo.removeEquipment(equipamento);
+                gameInfo.removeEquipment(equipamento); //removes picked item from structures
             }
 
             humano.setCoordinates(xD, yD);

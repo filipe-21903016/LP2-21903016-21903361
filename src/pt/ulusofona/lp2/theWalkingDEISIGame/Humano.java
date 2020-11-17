@@ -17,7 +17,6 @@ public class Humano {
         this.nome = nome;
         this.posX = posX;
         this.posY = posY;
-        this.pickedEquipments = 0;
     }
 
     void pickEquipment(Equipamento equipamento) {
@@ -25,12 +24,12 @@ public class Humano {
         pickedEquipments++;
     }
 
-    void dropEquipment(){
+    Equipamento dropEquipment(){
         Equipamento currentEquipment = this.equipment;
         this.equipment = null;
         currentEquipment.setPosX(this.posX);
         currentEquipment.setPosY(this.posY);
-        GameInfo.equipments.add(currentEquipment);
+        return currentEquipment;
     }
 
     public int getPosX() {

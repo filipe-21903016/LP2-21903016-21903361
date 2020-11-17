@@ -14,7 +14,6 @@ public class Zombie {
         this.nome = nome;
         this.posX = posX;
         this.posY = posY;
-        this.equipmentsDestroyed = 0;
     }
 
     public int getPosX() {
