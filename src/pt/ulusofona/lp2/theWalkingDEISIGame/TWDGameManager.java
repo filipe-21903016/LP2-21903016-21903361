@@ -126,57 +126,40 @@ public class TWDGameManager {
         int idCriatura = getElementId(xO, yO);
         int idEquipment = getElementId(xD, yD);
 
-        if (gameInfo.getHumanoHashMap().containsKey(idCriatura)) {
+        if (gameInfo.getHumanoHashMap().containsKey(idCriatura)
+                && gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos()) {
+
             Humano humano = gameInfo.getHumanById(idCriatura);
-
             System.out.println(humano);
-
-            if (gameInfo.getCurrentTeamID() == gameInfo.getIdTeamMortos()) {
-                return false;
-            }
-
             if (idEquipment != 0) {
                 Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
-
-                if (hasEquipment(humano.getId(), equipamento.getIdTipo())) {
+                if (humano.getEquipment()!=null) {
                     Equipamento equipamentDroped = humano.dropEquipment();
                     gameInfo.addEquipment(equipamentDroped); //adds the dropped equipment to structures
                 }
                 humano.pickEquipment(equipamento);
                 gameInfo.removeEquipment(equipamento); //removes picked item from structures
             }
-
             humano.setCoordinates(xD, yD);
-
             System.out.println(humano);
-
             gameInfo.nextTurn();
             return true;
         }
-        if (gameInfo.getZombieHashMap().containsKey(idCriatura)) {
+        if (gameInfo.getZombieHashMap().containsKey(idCriatura)
+                && gameInfo.getCurrentTeamID()==gameInfo.getIdTeamMortos()) {
 
             Zombie zombie = gameInfo.getZombieById(idCriatura);
-
             System.out.println(zombie);
-
-            if (gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos()) {
-                return false;
-            }
             if (idEquipment != 0) {
                 Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
-
                 zombie.destroyEquiment();
                 gameInfo.removeEquipment(equipamento);
             }
             zombie.setCoordinates(xD, yD);
-
             gameInfo.nextTurn();
-
             System.out.println(zombie);
-
             return true;
         }
-
         return false;
     }
 
