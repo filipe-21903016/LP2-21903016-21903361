@@ -238,6 +238,5 @@ public class TWDGameManager {
             return humano.getEquipment().getIdTipo() == equipmentTypeId;
         }
         return false;
-        //alterei pq tava feio, mas assim ta igual
     }
 }
