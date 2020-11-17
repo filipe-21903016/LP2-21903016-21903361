@@ -10,7 +10,7 @@ public class TWDGameManager {
     public TWDGameManager() {
     }
 
-    GameInfo gameInfo = new GameInfo();
+    public GameInfo gameInfo = new GameInfo();
 
     public boolean startGame(File ficheiroInicial) {
         try {
@@ -101,9 +101,9 @@ public class TWDGameManager {
         if (!origem.isValidMove(xD, yD) || !gameInfo.isEmptySpace(xD, yD)) {
             return false;
         }
-        
+
         int idCriatura = getElementId(xO, yO);
-        int idEquipment = getElementId(xD,yD);
+        int idEquipment = getElementId(xD, yD);
 
         if (gameInfo.existsHuman(idCriatura)) {
             Humano humano = gameInfo.getHumanById(idCriatura);
@@ -111,7 +111,7 @@ public class TWDGameManager {
                 return false;
             }
 
-            if (idEquipment!=0) {
+            if (idEquipment != 0) {
                 Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
                 if (hasEquipment(humano.getId(), equipamento.getIdTipo())) {
                     humano.dropEquipment();
@@ -129,7 +129,7 @@ public class TWDGameManager {
             if (gameInfo.getCurrentTeamID() == GameInfo.ID_TEAM_VIVOS) {
                 return false;
             }
-            if (idEquipment!=0) {
+            if (idEquipment != 0) {
                 Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
                 gameInfo.removeEquipment(equipamento);
                 zombie.destroyEquiment();
@@ -202,6 +202,7 @@ public class TWDGameManager {
         }
         return survivors;
     }
+
     public boolean isDay() {
         return gameInfo.getNrTurno() == 0 || gameInfo.getNrTurno() == 1 ||
                 gameInfo.getNrTurno() == 4
@@ -209,6 +210,7 @@ public class TWDGameManager {
                 gameInfo.getNrTurno() == 9 || gameInfo.getNrTurno() == 12;
 
     }
+
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {
         Humano humano = gameInfo.getHumanById(creatureId);
         if (humano.getEquipment() == null) {
