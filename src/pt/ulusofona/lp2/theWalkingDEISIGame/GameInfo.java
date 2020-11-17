@@ -12,7 +12,7 @@ public class GameInfo {
     int nrTurno;
     int nrLines;
     int nrColumns;
-    int firstTeamID; // ID of first team playing
+    int firstTeamID;
     int currentTeamID;
     ArrayList<Zombie> zombies = new ArrayList<>();
     ArrayList<Humano> humans = new ArrayList<>();
@@ -21,48 +21,11 @@ public class GameInfo {
     HashMap<Integer, Humano> humanoHashMap = new HashMap<>();
     HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
 
+
+    //Getters
+
     public int getNrMaxTurnos() {
         return nrMaxTurnos;
-    }
-
-    Humano getHumanById(int id) {
-        return humanoHashMap.get(id);
-    }
-
-    Zombie getZombieById(int id) {
-        return zombieHashMap.get(id);
-    }
-
-    boolean isEmptySpace(int x, int y){
-        for(Humano humano:humans){
-            if(humano.getPosX()==x && humano.getPosY()==y){
-                return false;
-            }
-        }
-        for(Zombie zombie:zombies){
-            if(zombie.getPosX()==x && zombie.getPosY()==y){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    boolean existsHuman(int id) {
-        for (Humano humano : humans) {
-            if (humano.getId() == id) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    boolean existsZombie(int id) {
-        for (Zombie zombie : zombies) {
-            if (zombie.getId() == id) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public HashMap<Integer, Zombie> getZombieHashMap() {
@@ -77,42 +40,12 @@ public class GameInfo {
         return equipamentoHashMap;
     }
 
-    public void setNrLines(int nrLines) {
-        this.nrLines = nrLines;
+    Humano getHumanById(int id) {
+        return humanoHashMap.get(id);
     }
 
-    public void setNrColumns(int nrColumns) {
-        this.nrColumns = nrColumns;
-    }
-
-    public void setFirstTeamID(int firstTeamID) {
-        this.firstTeamID = firstTeamID;
-    }
-
-    public void addCreature(int idCriatura, int idType
-            , String name, int posX, int posY) {
-        if (humanoHashMap.containsKey(idCriatura) || zombieHashMap.containsKey(idCriatura)) {
-            return;
-        }
-
-        if (idType == idZombie) {
-            Zombie zombie = new Zombie(idCriatura, name, posX, posY);
-            zombies.add(zombie);
-            zombieHashMap.put(zombie.getId(), zombie);
-        } else {
-            Humano human = new Humano(idCriatura, name, posX, posY);
-            humans.add(human);
-            humanoHashMap.put(human.getId(), human);
-        }
-    }
-
-    public void addEquipment(int id, int idTipo, int posX, int posY) {
-        if (equipamentoHashMap.containsKey(id)) {
-            return;
-        }
-        Equipamento equipamento = new Equipamento(id, idTipo, posX, posY);
-        equipments.add(equipamento);
-        equipamentoHashMap.put(equipamento.getId(), equipamento);
+    Zombie getZombieById(int id) {
+        return zombieHashMap.get(id);
     }
 
     public int getNrTurno() {
@@ -143,34 +76,8 @@ public class GameInfo {
         return equipments;
     }
 
-    public int nextTurn() {
-        this.currentTeamID = (currentTeamID==idTeamVivos) ? idTeamMortos : idTeamVivos;
-        return nrTurno++;
-    }
-
-    public void setCurrentTeamID(int id) {
-        currentTeamID = id;
-    }
-
     public int getCurrentTeamID() {
         return currentTeamID;
-    }
-
-    public void addEquipment(Equipamento equipamento){
-        equipments.add(equipamento);
-        equipamentoHashMap.put(equipamento.getId(), equipamento);
-    }
-
-    void removeEquipment(Equipamento equipamento){
-        int index=0;
-        for(Equipamento equipamento1:equipments){
-            if(equipamento.getId() == equipamento1.getId()){
-                break;
-            }
-            index++;
-        }
-        equipments.remove(index);
-        equipamentoHashMap.remove(equipamento.getId());
     }
 
     public int getIdTeamVivos() {
@@ -180,4 +87,74 @@ public class GameInfo {
     public int getIdTeamMortos() {
         return idTeamMortos;
     }
+
+    //Setters
+
+    public void setNrLines(int nrLines) {
+        this.nrLines = nrLines;
+    }
+
+    public void setNrColumns(int nrColumns) {
+        this.nrColumns = nrColumns;
+    }
+
+    public void setFirstTeamID(int firstTeamID) {
+        this.firstTeamID = firstTeamID;
+    }
+
+    public void setCurrentTeamID(int id) {
+        currentTeamID = id;
+    }
+
+    //Others
+
+    public void addCreature(int idCriatura, int idType
+            , String name, int posX, int posY) {
+        if (humanoHashMap.containsKey(idCriatura) || zombieHashMap.containsKey(idCriatura)) {
+            return;
+        }
+
+        if (idType == idZombie) {
+            Zombie zombie = new Zombie(idCriatura, name, posX, posY);
+            zombies.add(zombie);
+            zombieHashMap.put(zombie.getId(), zombie);
+        } else {
+            Humano human = new Humano(idCriatura, name, posX, posY);
+            humans.add(human);
+            humanoHashMap.put(human.getId(), human);
+        }
+    }
+
+    public void addEquipment(int id, int idTipo, int posX, int posY) {
+        if (equipamentoHashMap.containsKey(id)) {
+            return;
+        }
+        Equipamento equipamento = new Equipamento(id, idTipo, posX, posY);
+        equipments.add(equipamento);
+        equipamentoHashMap.put(equipamento.getId(), equipamento);
+    }
+
+    public int nextTurn() {
+        this.currentTeamID = (currentTeamID == idTeamVivos) ? idTeamMortos : idTeamVivos;
+        return nrTurno++;
+    }
+
+    public void addEquipment(Equipamento equipamento) {
+        equipments.add(equipamento);
+        equipamentoHashMap.put(equipamento.getId(), equipamento);
+    }
+
+    void removeEquipment(Equipamento equipamento) {
+        int index = 0;
+        for (Equipamento equipamento1 : equipments) {
+            if (equipamento.getId() == equipamento1.getId()) {
+                break;
+            }
+            index++;
+        }
+        equipments.remove(index);
+        equipamentoHashMap.remove(equipamento.getId());
+    }
+
+
 }

@@ -114,11 +114,8 @@ public class TWDGameManager {
                 return false;
             }
         }
-        if((xD==xO && yD==yO+1) || (xD==xO && yD==yO-1)
-            || (xD==xO+1 && yD==yO) || (xD==xO-1 && yD==yO)){
-            return true;
-        }
-        return false;
+        return (xD == xO && yD == yO + 1) || (xD == xO && yD == yO - 1)
+                || (xD == xO + 1 && yD == yO) || (xD == xO - 1 && yD == yO);
     }
 
     public boolean move(int xO, int yO, int xD, int yD) {
@@ -129,10 +126,10 @@ public class TWDGameManager {
         int idCriatura = getElementId(xO, yO);
         int idEquipment = getElementId(xD, yD);
 
-        if (gameInfo.existsHuman(idCriatura)) {
+        if (gameInfo.getHumanoHashMap().containsKey(idCriatura)) {
             Humano humano = gameInfo.getHumanById(idCriatura);
 
-            System.out.println(humano); //TODO remove
+            System.out.println(humano);
 
             if (gameInfo.getCurrentTeamID() == gameInfo.getIdTeamMortos()) {
                 return false;
@@ -151,16 +148,16 @@ public class TWDGameManager {
 
             humano.setCoordinates(xD, yD);
 
-            System.out.println(humano); //ToDo
+            System.out.println(humano);
 
             gameInfo.nextTurn();
             return true;
         }
-        if (gameInfo.existsZombie(idCriatura)) {
+        if (gameInfo.getZombieHashMap().containsKey(idCriatura)) {
 
             Zombie zombie = gameInfo.getZombieById(idCriatura);
 
-            System.out.println(zombie); //todo
+            System.out.println(zombie);
 
             if (gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos()) {
                 return false;
@@ -175,7 +172,7 @@ public class TWDGameManager {
 
             gameInfo.nextTurn();
 
-            System.out.println(zombie); //todo
+            System.out.println(zombie);
 
             return true;
         }
