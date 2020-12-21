@@ -29,5 +29,4 @@ public class Creature {
         this.posX = x;
         this.posY = y;
     }
-
 }

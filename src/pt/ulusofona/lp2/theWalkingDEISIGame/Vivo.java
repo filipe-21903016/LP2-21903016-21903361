@@ -1,11 +1,11 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-public class Humano extends Creature{
+public class Vivo extends Creature{
     private Equipamento equipment;
     private String nomeEquipa = "Os Vivos";
     private int pickedEquipments;
 
-    public Humano(int idCriatura, String nome, int posX, int posY) {
+    public Vivo(int idCriatura, String nome, int posX, int posY) {
         super(idCriatura,nome, posX, posY);
     }
 

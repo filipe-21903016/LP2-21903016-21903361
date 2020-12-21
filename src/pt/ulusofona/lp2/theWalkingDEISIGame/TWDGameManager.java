@@ -52,7 +52,9 @@ public class TWDGameManager {
                 String nomeCriatura = data[2].trim();
                 int posX = Integer.parseInt(data[3]);
                 int posY = Integer.parseInt(data[4]);
-                gameInfo.addCreature(idCreature, idType, nomeCriatura, posX, posY);
+                Creature creature = CreatureFactory.makeCreature(idCreature,nomeCriatura, posX, posY);
+                gameInfo.addCreature(creature);
+                // TODO gameInfo.addCreature();
             }
 
             data = lines.get(currentLine).split("");
@@ -78,9 +80,9 @@ public class TWDGameManager {
                 data = lines.get(currentLine).split(" : ");
                 int posX = Integer.parseInt(data[0]);
                 int posY = Integer.parseInt(data[1]);
-                //TODO dar add aos havens na classe gameInfo
+                //TODO possivel fonte de erro
+                gameInfo.addSafeHaven(new SafeHaven(posX,posY));
             }
-
 
             scanner.close();
             getInitialTeam();
@@ -105,28 +107,26 @@ public class TWDGameManager {
         return gameInfo.getFirstTeamID();
     }
 
-    public List<Humano> getHumans() {
+
+    /*
+    public List<Vivo> getHumans() {
         return gameInfo.getHumans();
     }
 
     public List<Zombie> getZombies() {
         return gameInfo.getZombies();
-    }
+    } */
 
     public boolean isValidMove(int xO, int yO, int xD, int yD){
         if(xD<0 || yD<0 || yD>= gameInfo.getNrLines() || xD>=gameInfo.getNrColumns()){ //Checks if coordenate is outside bounds
             return false;
         }
-        for(Humano humano:gameInfo.getHumans()){ //Checks if theres is a human on the destination
-            if(humano.getPosX()==xD && humano.getPosY()==yD){
+        for(Creature c:gameInfo.getCreatures()){
+            if(c.getPosX()==xD && c.getPosY()==yD){
                 return false;
             }
         }
-        for(Zombie zombie:gameInfo.getZombies()){ //Checks if theres is a zombie on the destination
-            if(zombie.getPosX()==xD && zombie.getPosY()==yD){
-                return false;
-            }
-        }
+
         return (xD == xO && yD == yO + 1) || (xD == xO && yD == yO - 1)
                 || (xD == xO + 1 && yD == yO) || (xD == xO - 1 && yD == yO);
     }
@@ -142,19 +142,19 @@ public class TWDGameManager {
         if (gameInfo.getHumanoHashMap().containsKey(idCriatura)
                 && gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos()) {
 
-            Humano humano = gameInfo.getHumanById(idCriatura);
-            System.out.println(humano);
+            Vivo vivo = gameInfo.getVivoById(idCriatura);
+            System.out.println(vivo);
             if (idEquipment != 0) {
                 Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
-                if (humano.getEquipment()!=null) {
-                    Equipamento equipamentDroped = humano.dropEquipment();
+                if (vivo.getEquipment()!=null) {
+                    Equipamento equipamentDroped = vivo.dropEquipment();
                     gameInfo.addEquipment(equipamentDroped); //adds the dropped equipment to structures
                 }
-                humano.pickEquipment(equipamento);
+                vivo.pickEquipment(equipamento);
                 gameInfo.removeEquipment(equipamento); //removes picked item from structures
             }
-            humano.setCoordinates(xD, yD);
-            System.out.println(humano);
+            vivo.setCoordinates(xD, yD);
+            System.out.println(vivo);
             gameInfo.nextTurn();
             return true;
         }
@@ -192,19 +192,14 @@ public class TWDGameManager {
     }
 
     public int getElementId(int x, int y) {
+        //TODO verificar se a posicao corresponde a safe haven
 
-        ArrayList<Humano> humans = gameInfo.getHumans();
-        for (Humano humano : humans) {
-            if (humano.getPosY() == y && humano.getPosX() == x) {
-                return humano.getId();
+        for(Creature c:gameInfo.getCreatures()){
+            if(c.getPosY() == y && c.getPosX() == x){
+                return c.getId();
             }
         }
-        ArrayList<Zombie> zombies = gameInfo.getZombies();
-        for (Zombie zombie : zombies) {
-            if (zombie.getPosY() == y && zombie.getPosX() == x) {
-                return zombie.getId();
-            }
-        }
+
         ArrayList<Equipamento> equipments = gameInfo.getEquipments();
         for (Equipamento equipamento : equipments) {
             if (equipamento.getPosY() == y && equipamento.getPosX() == x) {
@@ -215,7 +210,7 @@ public class TWDGameManager {
         return 0;
     }
 
-    public List<String> getSurvivors() {
+    /*public List<String> getSurvivors() {
         ArrayList<String> survivors = new ArrayList<>();
         if (gameIsOver()) {
             survivors.add("Nr. de turnos terminados:");
@@ -223,8 +218,8 @@ public class TWDGameManager {
             survivors.add("");
             survivors.add("OS VIVOS\n");
 
-            for (Humano humano : gameInfo.getHumans()) {
-                survivors.add(humano.idCriatura + " " + humano.nome);
+            for (Vivo vivo : gameInfo.getHumans()) {
+                survivors.add(vivo.idCriatura + " " + vivo.nome);
             }
             survivors.add(" ");
             survivors.add("OS OUTROS\n");
@@ -235,6 +230,11 @@ public class TWDGameManager {
             }
         }
         return survivors;
+    }*/
+
+    public List<String> getGameResults(){
+        //TODO implement function
+        return new ArrayList<>();
     }
 
     public boolean isDay() {
@@ -246,9 +246,9 @@ public class TWDGameManager {
     }
 
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {
-        Humano humano = gameInfo.getHumanById(creatureId);
-        if(humano!= null && humano.getEquipment()!=null){
-            return humano.getEquipment().getIdTipo() == equipmentTypeId;
+        Vivo vivo = gameInfo.getVivoById(creatureId);
+        if(vivo != null && vivo.getEquipment()!=null){
+            return vivo.getEquipment().getIdTipo() == equipmentTypeId;
         }
         return false;
     }

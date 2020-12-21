@@ -14,11 +14,15 @@ public class GameInfo {
     int nrColumns;
     int firstTeamID;
     int currentTeamID;
-    ArrayList<Zombie> zombies = new ArrayList<>();
-    ArrayList<Humano> humans = new ArrayList<>();
+    //ArrayList<Zombie> zombies = new ArrayList<>();
+    //ArrayList<Vivo> humans = new ArrayList<>();
+    ArrayList<Creature> creatures = new ArrayList<>();
     ArrayList<Equipamento> equipments = new ArrayList<>();
+    ArrayList<SafeHaven> safeHavens = new ArrayList<>();
+
+
     HashMap<Integer, Zombie> zombieHashMap = new HashMap<>();
-    HashMap<Integer, Humano> humanoHashMap = new HashMap<>();
+    HashMap<Integer, Vivo> humanoHashMap = new HashMap<>();
     HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
 
 
@@ -32,7 +36,7 @@ public class GameInfo {
         return zombieHashMap;
     }
 
-    public HashMap<Integer, Humano> getHumanoHashMap() {
+    public HashMap<Integer, Vivo> getHumanoHashMap() {
         return humanoHashMap;
     }
 
@@ -40,7 +44,7 @@ public class GameInfo {
         return equipamentoHashMap;
     }
 
-    Humano getHumanById(int id) {
+    Vivo getVivoById(int id) {
         return humanoHashMap.get(id);
     }
 
@@ -64,13 +68,13 @@ public class GameInfo {
         return firstTeamID;
     }
 
-    public ArrayList<Zombie> getZombies() {
+    /*public ArrayList<Zombie> getZombies() {
         return zombies;
-    }
+    }*/
 
-    public ArrayList<Humano> getHumans() {
+    /*public ArrayList<Vivo> getHumans() {
         return humans;
-    }
+    }*/
 
     public ArrayList<Equipamento> getEquipments() {
         return equipments;
@@ -86,6 +90,10 @@ public class GameInfo {
 
     public int getIdTeamMortos() {
         return idTeamMortos;
+    }
+
+    public ArrayList<Creature> getCreatures() {
+        return creatures;
     }
 
     //Setters
@@ -107,8 +115,8 @@ public class GameInfo {
     }
 
     //Others
-
-    public void addCreature(int idCriatura, int idType
+    
+    /*public void addCreature(int idCriatura, int idType
             , String name, int posX, int posY) {
         if (humanoHashMap.containsKey(idCriatura) || zombieHashMap.containsKey(idCriatura)) {
             return;
@@ -123,7 +131,16 @@ public class GameInfo {
             humans.add(human);
             humanoHashMap.put(human.getId(), human);
         }
+    }*/
+
+    public void addCreature(Creature creature){
+        creatures.add(creature);
     }
+
+    public void addSafeHaven(SafeHaven sf){
+        this.safeHavens.add(sf);
+    }
+
 
     public void addEquipment(int id, int idTipo, int posX, int posY) {
         if (equipamentoHashMap.containsKey(id)) {
