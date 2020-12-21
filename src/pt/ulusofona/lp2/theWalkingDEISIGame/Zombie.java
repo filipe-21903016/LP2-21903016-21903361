@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-public class Zombie {
+public class Zombie extends Creature{
     String nome;
     String nomeEquipa = "Os Outros";
     int idCriatura;
@@ -8,28 +8,12 @@ public class Zombie {
     int posY;
     int equipmentsDestroyed;
 
-
     public Zombie(int idCriatura, String nome, int posX, int posY) {
-        this.idCriatura = idCriatura;
-        this.nome = nome;
-        this.posX = posX;
-        this.posY = posY;
-    }
-
-    public int getPosX() {
-        return posX;
-    }
-
-    public int getPosY() {
-        return posY;
+        super(nome, idCriatura, posX, posY);
     }
 
     void destroyEquiment() {
         this.equipmentsDestroyed++;
-    }
-
-    public int getId() {
-        return this.idCriatura;
     }
 
     public String getImagePNG() {
@@ -41,8 +25,4 @@ public class Zombie {
                 + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";
     }
 
-    public void setCoordinates(int x, int y) {
-        this.posX = x;
-        this.posY = y;
-    }
 }

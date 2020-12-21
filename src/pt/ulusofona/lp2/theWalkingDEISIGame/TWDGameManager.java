@@ -69,19 +69,8 @@ public class TWDGameManager {
                 gameInfo.addEquipment(idEquipment, idType, posX, posY);
             }
 
-            data = lines.get(currentLine).split("");
-            int nrHavens = Integer.parseInt(data[0]);
-            currentLine++;
-
-            maxLine = currentLine + nrHavens;
-            for (; currentLine < maxLine; currentLine++){
-                data = lines.get(currentLine).split(" : ");
-                int posX = Integer.parseInt(data[0]);
-                int posY = Integer.parseInt(data[1]);
-                //TODO dar add aos havens na classe gameInfo
-            }
-
             scanner.close();
+            getInitialTeam();
             //System.out.println(gameInfo.getHumans().get(0));
 
             if (getInitialTeam() != getCurrentTeamId()) {
