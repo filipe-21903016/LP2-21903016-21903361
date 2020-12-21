@@ -6,7 +6,11 @@ public class VampiroZombie extends Zombie{
     }
     @Override
     public boolean isValidMove(int xO, int yO, int xD, int yD) {
-        return false;
+        if(xO==xD && yO==yD || TWDGameManager.isDay()){
+            return false;
+        }
+        return (xD==xO && yD>=yO-2 && yD<=yO+2) || (yD==yO && xD>=xO-2 && xD<=xO+2) ||
+                (xD==yD && xD<=xO+2 && xD>= xO-2) || (xD==-1*yD && xD<=xO+2 && xD>= xO-2) ;
     }
 
     @Override

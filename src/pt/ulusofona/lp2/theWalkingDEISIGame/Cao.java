@@ -7,7 +7,10 @@ public class Cao extends Vivo {
 
     @Override
     public boolean isValidMove(int xO, int yO, int xD, int yD) {
-        return false;
+        if(xO==xD && yO==yD){
+            return false;
+        }
+        return (xD==yD && xD<=xO+2 && xD>= xO-2) || (xD==-1*yD && xD<=xO+2 && xD>= xO-2);
     }
 
     @Override
