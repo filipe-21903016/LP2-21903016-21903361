@@ -55,7 +55,6 @@ public class TWDGameManager {
                 int posY = Integer.parseInt(data[4]);
                 Creature creature = CreatureFactory.makeCreature(idCreature,nomeCriatura, posX, posY);
                 gameInfo.addCreature(creature);
-                // TODO gameInfo.addCreature();
             }
 
             data = lines.get(currentLine).split("");
@@ -69,7 +68,8 @@ public class TWDGameManager {
                 int idType = Integer.parseInt(data[1]);
                 int posX = Integer.parseInt(data[2]);
                 int posY = Integer.parseInt(data[3]);
-                gameInfo.addEquipment(idEquipment, idType, posX, posY);
+                Equipamento equipamento = EquipmentFactory.makeEquipment(idEquipment,posX,posY);
+                gameInfo.addEquipment(equipamento);
             }
 
             data = lines.get(currentLine).split("");

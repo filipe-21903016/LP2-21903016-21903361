@@ -166,7 +166,7 @@ public class GameInfo {
         this.safeHavens.add(sf);
     }
 
-
+    /*
     public void addEquipment(int id, int idTipo, int posX, int posY) {
         if (equipamentoHashMap.containsKey(id)) {
             return;
@@ -175,6 +175,7 @@ public class GameInfo {
         equipments.add(equipamento);
         equipamentoHashMap.put(equipamento.getId(), equipamento);
     }
+    */
 
     public int nextTurn() {
         this.currentTeamID = (currentTeamID == idTeamVivos) ? idTeamMortos : idTeamVivos;
@@ -183,7 +184,9 @@ public class GameInfo {
 
     public void addEquipment(Equipamento equipamento) {
         equipments.add(equipamento);
-        equipamentoHashMap.put(equipamento.getId(), equipamento);
+        if(!equipamentoHashMap.containsKey(equipamento.getId())){
+            equipamentoHashMap.put(equipamento.getId(), equipamento);
+        }
     }
 
     void removeEquipment(Equipamento equipamento) {
