@@ -197,7 +197,11 @@ public class TWDGameManager {
     }
 
     public int getElementId(int x, int y) {
-        //TODO verificar se a posicao corresponde a safe haven
+        for(SafeHaven sf: gameInfo.getSafeHavens()){
+            if(sf.getPosY() == y && sf.getPosX() == x){
+                return 0;
+            }
+        }
 
         for(Creature c:gameInfo.getCreatures()){
             if(c.getPosY() == y && c.getPosX() == x){
@@ -251,7 +255,7 @@ public class TWDGameManager {
     }
 
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {
-        Vivo vivo = gameInfo.getVivoById(creatureId);
+        Vivo vivo =(Vivo) gameInfo.getCreatureById(creatureId);
         if(vivo != null && vivo.getEquipment()!=null){
             return vivo.getEquipment().getIdTipo() == equipmentTypeId;
         }
@@ -263,9 +267,7 @@ public class TWDGameManager {
     }
 
     public int getEquipmentTypeId(int equipmentId){
-        HashMap<Integer,Equipamento> equipMap = gameInfo.getEquipamentoHashMap();
-        Equipamento e = equipMap.get(equipmentId);
-        return e.getIdTipo();
+        return gameInfo.getEquipmentById(equipmentId).getIdTipo();
     }
 
     public String getEquipmentInfo(int equipmentId){

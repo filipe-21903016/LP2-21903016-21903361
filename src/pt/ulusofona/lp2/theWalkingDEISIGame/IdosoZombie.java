@@ -4,4 +4,9 @@ public class IdosoZombie extends Zombie{
     public IdosoZombie(String nome, int posX, int posY) {
         super(3, nome, posX, posY);
     }
+
+    @Override
+    boolean move() {
+        return false;
+    }
 }

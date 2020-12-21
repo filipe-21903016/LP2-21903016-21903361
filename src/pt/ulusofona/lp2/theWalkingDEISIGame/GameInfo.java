@@ -21,8 +21,9 @@ public class GameInfo {
     ArrayList<SafeHaven> safeHavens = new ArrayList<>();
 
 
-    HashMap<Integer, Zombie> zombieHashMap = new HashMap<>();
-    HashMap<Integer, Vivo> humanoHashMap = new HashMap<>();
+    //HashMap<Integer, Zombie> zombieHashMap = new HashMap<>();
+    //HashMap<Integer, Vivo> humanoHashMap = new HashMap<>();
+    HashMap<Integer, Creature> creatureHashMap = new HashMap<>();
     HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
 
 
@@ -32,25 +33,41 @@ public class GameInfo {
         return nrMaxTurnos;
     }
 
+    /*
     public HashMap<Integer, Zombie> getZombieHashMap() {
         return zombieHashMap;
     }
-
+    */
+    /*
     public HashMap<Integer, Vivo> getHumanoHashMap() {
         return humanoHashMap;
     }
+    */
 
     public HashMap<Integer, Equipamento> getEquipamentoHashMap() {
         return equipamentoHashMap;
     }
 
+    Equipamento getEquipmentById(int id){
+        return equipamentoHashMap.get(id);
+    }
+
+    Creature getCreatureById(int id){
+        return creatureHashMap.get(id);
+    }
+
+
+    /*
     Vivo getVivoById(int id) {
         return humanoHashMap.get(id);
     }
-
+    */
+    /*
     Zombie getZombieById(int id) {
         return zombieHashMap.get(id);
     }
+     */
+
 
     public int getNrTurno() {
         return nrTurno;
@@ -78,6 +95,10 @@ public class GameInfo {
 
     public ArrayList<Equipamento> getEquipments() {
         return equipments;
+    }
+
+    public ArrayList<SafeHaven> getSafeHavens() {
+        return safeHavens;
     }
 
     public int getCurrentTeamID() {
@@ -135,6 +156,10 @@ public class GameInfo {
 
     public void addCreature(Creature creature){
         creatures.add(creature);
+        if(!creatureHashMap.containsKey(creature.getId())){
+            creatureHashMap.put(creature.getId(),creature);
+        }
+
     }
 
     public void addSafeHaven(SafeHaven sf){

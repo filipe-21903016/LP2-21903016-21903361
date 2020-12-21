@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-public class Vivo extends Creature{
+abstract class Vivo extends Creature{
     private Equipamento equipment;
     private String nomeEquipa = "Os Vivos";
     private int pickedEquipments;
@@ -29,6 +29,8 @@ public class Vivo extends Creature{
     public String getImagePNG() {
         return "steve.png";
     }
+
+    abstract boolean move();
 
     public String toString() {
         return idCriatura + " | Humano | " + nomeEquipa + " | " + nome

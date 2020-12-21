@@ -4,4 +4,9 @@ public class Cao extends Vivo {
     public Cao(int idCriatura, String nome, int posX, int posY) {
         super(idCriatura, nome, posX, posY);
     }
+
+    @Override
+    boolean move() {
+        return false;
+    }
 }

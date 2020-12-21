@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-public class Zombie extends Creature{
+abstract class Zombie extends Creature{
     private String nomeEquipa = "Os Outros";
     private int equipmentsDestroyed;
 
@@ -20,5 +20,7 @@ public class Zombie extends Creature{
         return idCriatura + " | Zombie | " + nomeEquipa + " | " + nome
                 + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";
     }
+
+    abstract boolean move();
 
 }

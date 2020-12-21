@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
+//TODO make equipamento abstract and function getimagepng
+
 public class Equipamento {
     String titulo;
     int id;
