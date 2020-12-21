@@ -7,8 +7,8 @@ public class GameInfo {
     final int nrMaxTurnos = 12;
     final int idZombie = 0;
     final int idHumano = 1;
-    final int idTeamVivos = 0;
-    final int idTeamMortos = 1;
+    final int idTeamVivos = 10;
+    final int idTeamMortos = 20;
     int nrTurno;
     int nrLines;
     int nrColumns;
