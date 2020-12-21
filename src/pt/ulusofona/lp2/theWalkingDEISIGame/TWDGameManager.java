@@ -137,13 +137,21 @@ public class TWDGameManager {
     }
 
     public boolean move(int xO, int yO, int xD, int yD) {
+        //change valid moves, changes for diferent creatures
         if(!isValidMove(xO, yO, xD, yD)){
             return false;
         }
 
         int idCriatura = getElementId(xO, yO);
         int idEquipment = getElementId(xD, yD);
+        if(gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos() &&
+                gameInfo.creatureHashMap.containsKey(idCriatura)){
+            Creature creature = gameInfo.getCreatureById(idCriatura);
+            creature.move(); //NOT FINISHED
+        }
 
+
+        /*
         if (gameInfo.getHumanoHashMap().containsKey(idCriatura)
                 && gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos()) {
 
@@ -178,7 +186,7 @@ public class TWDGameManager {
             System.out.println(zombie);
             return true;
         }
-        return false;
+        return false;*/
     }
 
     public boolean gameIsOver() {
