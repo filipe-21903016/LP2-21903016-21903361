@@ -39,11 +39,11 @@ public class Equipamento {
         return titulo;
     }
 
-    String getInfo(){
+    String getInfo() {
         return titulo;
     }
 
-    public String getImagePNG(){
+    public String getImagePNG() {
         return "equipment_1.png";
     }
 

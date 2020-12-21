@@ -1,4 +1,5 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class TWDGameManager {
 
     public GameInfo gameInfo = GameInfo.getInstance();
 
-    public boolean loadGame(File fich){
+    public boolean loadGame(File fich) {
         try {
             Scanner scanner = new Scanner(fich);
             ArrayList<String> lines = new ArrayList<>();
@@ -51,7 +52,7 @@ public class TWDGameManager {
                 String nomeCriatura = data[2].trim();
                 int posX = Integer.parseInt(data[3]);
                 int posY = Integer.parseInt(data[4]);
-                Creature creature = CreatureFactory.makeCreature(idCreature,nomeCriatura, posX, posY);
+                Creature creature = CreatureFactory.makeCreature(idCreature, nomeCriatura, posX, posY);
                 gameInfo.addCreature(creature);
             }
 
@@ -62,11 +63,11 @@ public class TWDGameManager {
             maxLine = currentLine + nrEquipment;
             for (; currentLine < maxLine; currentLine++) {
                 data = lines.get(currentLine).split(" : ");
-                int idEquipment =Integer.parseInt(data[0]);
+                int idEquipment = Integer.parseInt(data[0]);
                 //int idType = Integer.parseInt(data[1]);
                 int posX = Integer.parseInt(data[2]);
                 int posY = Integer.parseInt(data[3]);
-                Equipamento equipamento = EquipmentFactory.makeEquipment(idEquipment,posX,posY);
+                Equipamento equipamento = EquipmentFactory.makeEquipment(idEquipment, posX, posY);
                 gameInfo.addEquipment(equipamento);
             }
 
@@ -75,12 +76,12 @@ public class TWDGameManager {
             currentLine++;
 
             maxLine = currentLine + nrHavens;
-            for (; currentLine < maxLine; currentLine++){
+            for (; currentLine < maxLine; currentLine++) {
                 data = lines.get(currentLine).split(" : ");
                 int posX = Integer.parseInt(data[0]);
                 int posY = Integer.parseInt(data[1]);
                 //TODO possivel fonte de erro
-                gameInfo.addSafeHaven(new SafeHaven(posX,posY));
+                gameInfo.addSafeHaven(new SafeHaven(posX, posY));
             }
 
             scanner.close();
@@ -110,8 +111,8 @@ public class TWDGameManager {
         return gameInfo.getFirstTeamID();
     }
 
-    public boolean isInsideBounds(int x,int y){
-        if(x<0 || y<0 || y>= gameInfo.getNrLines() || x>=gameInfo.getNrColumns()){
+    public boolean isInsideBounds(int x, int y) {
+        if (x < 0 || y < 0 || y >= gameInfo.getNrLines() || x >= gameInfo.getNrColumns()) {
             return false;
         }
         return true;
@@ -125,16 +126,16 @@ public class TWDGameManager {
 
     public boolean move(int xO, int yO, int xD, int yD) {
         //change valid moves, changes for diferent creatures
-        if(!isInsideBounds(xD,yD)){
+        if (!isInsideBounds(xD, yD)) {
             return false;
         }
         int idCriatura = getElementId(xO, yO);
         int idEquipment = getElementId(xD, yD);
-        if(gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos() &&
-                gameInfo.getCreatureHashMap().containsKey(idCriatura)){
+        if (gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos() &&
+                gameInfo.getCreatureHashMap().containsKey(idCriatura)) {
             Creature creature = gameInfo.getCreatureById(idCriatura);
-            if(creature.isValidMove(xO, yO, xD, yD)){
-                creature.move(xD,yD); //NOT FINISHED
+            if (creature.isValidMove(xO, yO, xD, yD)) {
+                creature.move(xD, yD); //NOT FINISHED
             }
 
         }
@@ -194,14 +195,14 @@ public class TWDGameManager {
     }
 
     public int getElementId(int x, int y) {
-        for(SafeHaven sf: gameInfo.getSafeHavens()){
-            if(sf.getPosY() == y && sf.getPosX() == x){
+        for (SafeHaven sf : gameInfo.getSafeHavens()) {
+            if (sf.getPosY() == y && sf.getPosX() == x) {
                 return 0;
             }
         }
 
-        for(Creature c:gameInfo.getCreatures()){
-            if(c.getPosY() == y && c.getPosX() == x){
+        for (Creature c : gameInfo.getCreatures()) {
+            if (c.getPosY() == y && c.getPosX() == x) {
                 return c.getId();
             }
         }
@@ -238,7 +239,7 @@ public class TWDGameManager {
         return survivors;
     }*/
 
-    public List<String> getGameResults(){ //TODO make function
+    public List<String> getGameResults() { //TODO make function
         ArrayList<String> results = new ArrayList<>();
         return results;
     }
@@ -253,40 +254,40 @@ public class TWDGameManager {
     }
 
     public boolean hasEquipment(int creatureId, int equipmentTypeId) {
-        Vivo vivo =(Vivo) gameInfo.getCreatureById(creatureId);
-        if(vivo != null && vivo.getEquipment()!=null){
+        Vivo vivo = (Vivo) gameInfo.getCreatureById(creatureId);
+        if (vivo != null && vivo.getEquipment() != null) {
             return vivo.getEquipment().getIdTipo() == equipmentTypeId;
         }
         return false;
     }
 
-    public List<Creature> getCreatures(){
+    public List<Creature> getCreatures() {
         return gameInfo.getCreatures();
     }
 
-    public int getEquipmentTypeId(int equipmentId){
+    public int getEquipmentTypeId(int equipmentId) {
         return gameInfo.getEquipmentById(equipmentId).getIdTipo();
     }
 
-    public String getEquipmentInfo(int equipmentId){ //TODO change to OOP
+    public String getEquipmentInfo(int equipmentId) { //TODO change to OOP
         Equipamento equipamento = gameInfo.getEquipmentById(equipmentId);
         return equipamento.getInfo();
     }
 
-    public boolean isDoorToSafeHaven(int x, int y){
-        for(SafeHaven sf: gameInfo.getSafeHavens()){
-            if (sf.equals(new SafeHaven(x,y))){
+    public boolean isDoorToSafeHaven(int x, int y) {
+        for (SafeHaven sf : gameInfo.getSafeHavens()) {
+            if (sf.equals(new SafeHaven(x, y))) {
                 return true;
             }
         }
         return false;
     }
 
-    public int getEquipmentId(int creatureId){
-        try{
-            Vivo creature =(Vivo) gameInfo.getCreatureById(creatureId);
+    public int getEquipmentId(int creatureId) {
+        try {
+            Vivo creature = (Vivo) gameInfo.getCreatureById(creatureId);
             return creature.getEquipment().getId();
-        }catch (NullPointerException | ClassCastException exception){
+        } catch (NullPointerException | ClassCastException exception) {
             return 0;
         }
     }

@@ -1,13 +1,13 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-abstract class Vivo extends Creature{
+abstract class Vivo extends Creature {
     protected Equipamento equipment;
     protected String nomeEquipa = "Os Vivos";
     protected int pickedEquipments;
     protected int teamId = 10;
 
     public Vivo(int idCriatura, String nome, int posX, int posY) {
-        super(idCriatura,nome, posX, posY);
+        super(idCriatura, nome, posX, posY);
     }
 
     void pickEquipment(Equipamento equipamento) {
@@ -15,7 +15,7 @@ abstract class Vivo extends Creature{
         pickedEquipments++;
     }
 
-    Equipamento dropEquipment(){
+    Equipamento dropEquipment() {
         Equipamento currentEquipment = this.equipment;
         this.equipment = null;
         currentEquipment.setPosX(this.posX);

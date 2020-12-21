@@ -6,7 +6,7 @@ public class CriancaZombie extends Zombie {
     }
     @Override
     public boolean isValidMove(int xO, int yO, int xD, int yD) {
-        if(xO==xD && yO==yD){
+        if (xO == xD && yO == yD) {
             return false;
         }
         return (xD!=yD && xD>xO-1 && xD<xO+1 && yD>yO-1 && yD<yO+1);

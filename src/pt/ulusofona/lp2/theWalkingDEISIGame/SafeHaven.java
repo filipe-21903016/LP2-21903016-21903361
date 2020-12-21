@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-import java.util.Objects;
-
 public class SafeHaven {
     int posX;
     int posY;
