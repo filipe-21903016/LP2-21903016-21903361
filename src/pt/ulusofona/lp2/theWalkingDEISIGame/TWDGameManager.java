@@ -185,8 +185,8 @@ public class TWDGameManager {
             gameInfo.nextTurn();
             System.out.println(zombie);
             return true;
-        }
-        return false;*/
+        }*/
+        return false;
     }
 
     public boolean gameIsOver() {
