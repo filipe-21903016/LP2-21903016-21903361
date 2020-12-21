@@ -5,7 +5,7 @@ public class Zombie extends Creature{
     private int equipmentsDestroyed;
 
     public Zombie(int idCriatura, String nome, int posX, int posY) {
-        super(nome, idCriatura, posX, posY);
+        super(idCriatura,nome, posX, posY);
     }
 
     void destroyEquiment() {
