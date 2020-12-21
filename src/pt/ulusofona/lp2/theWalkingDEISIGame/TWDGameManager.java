@@ -70,11 +70,10 @@ public class TWDGameManager {
             }
 
             scanner.close();
-            getInitialTeam();
-            //System.out.println(gameInfo.getHumans().get(0));
+
 
             if (getInitialTeam() != getCurrentTeamId()) {
-                return false; //alterei isto segundo piaza//
+                return false;
             }
 
         } catch (FileNotFoundException e) {
