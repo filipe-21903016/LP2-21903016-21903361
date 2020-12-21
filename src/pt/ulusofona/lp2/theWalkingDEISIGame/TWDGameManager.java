@@ -268,5 +268,10 @@ public class TWDGameManager {
         return e.getIdTipo();
     }
 
+    public String getEquipmentInfo(int equipmentId){
+        return ""; //TODO change
+    }
+
+
 
 }

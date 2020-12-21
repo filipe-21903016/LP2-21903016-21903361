@@ -41,4 +41,17 @@ public class Equipamento {
         this.posX = posX;
         this.posY = posY;
     }
+
+    public Equipamento(String titulo, int id, int idTipo, int posX, int posY) {
+        this.titulo = titulo;
+        this.id = id;
+        this.idTipo = idTipo;
+        this.posX = posX;
+        this.posY = posY;
+    }
+
+    @Override
+    public String toString() {
+        return titulo;
+    }
 }
