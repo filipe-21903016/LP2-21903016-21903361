@@ -8,6 +8,7 @@ public class Equipamento {
     int idTipo;
     int posX;
     int posY;
+    int info;  //TODO fazer o numero de usos restantes
 
     public int getId() {
         return id;
@@ -32,6 +33,15 @@ public class Equipamento {
     public int getIdTipo() {
         return idTipo;
     }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public int getInfo() {
+        return info;
+    }
+
 
     public String getImagePNG(){
         return "equipment.png";

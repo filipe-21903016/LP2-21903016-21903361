@@ -48,10 +48,6 @@ public class GameInfo {
         return equipamentoHashMap;
     }
 
-    Equipamento getEquipmentById(int id){
-        return equipamentoHashMap.get(id);
-    }
-
     Creature getCreatureById(int id){
         return creatureHashMap.get(id);
     }
@@ -68,6 +64,10 @@ public class GameInfo {
     }
      */
 
+
+    Equipamento getEquipmentById(int id) {
+        return equipamentoHashMap.get(id);
+    }
 
     public int getNrTurno() {
         return nrTurno;

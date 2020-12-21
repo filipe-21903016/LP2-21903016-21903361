@@ -278,8 +278,18 @@ public class TWDGameManager {
         return gameInfo.getEquipmentById(equipmentId).getIdTipo();
     }
 
-    public String getEquipmentInfo(int equipmentId){
-        return ""; //TODO change
+    public String getEquipmentInfo(int equipmentId){ //TODO nrm de usos
+         switch (equipmentId) {
+             case 0, 2, 7 :
+                 return "" + gameInfo.getEquipmentById(equipmentId).getTitulo() +
+                         " | " + gameInfo.getEquipmentById(equipmentId).info;
+
+             case 1, 3, 4, 5, 6, 8, 9, 10 :
+                 return "" + gameInfo.getEquipmentById(equipmentId).getTitulo();
+
+             default:
+                 throw new IllegalArgumentException("Unknown Equipment Id: " + equipmentId);
+         }
     }
 
 
