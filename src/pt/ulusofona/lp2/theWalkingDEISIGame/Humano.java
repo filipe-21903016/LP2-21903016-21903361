@@ -1,14 +1,12 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-
-
 public class Humano extends Creature{
-    Equipamento equipment;
-    String nomeEquipa = "Os Vivos";
-    int pickedEquipments;
+    private Equipamento equipment;
+    private String nomeEquipa = "Os Vivos";
+    private int pickedEquipments;
 
     public Humano(int idCriatura, String nome, int posX, int posY) {
-        super(nome, idCriatura, posX, posY);
+        super(idCriatura,nome, posX, posY);
     }
 
     void pickEquipment(Equipamento equipamento) {
@@ -24,8 +22,6 @@ public class Humano extends Creature{
         return currentEquipment;
     }
 
-
-
     public Equipamento getEquipment() {
         return equipment;
     }
@@ -38,6 +34,5 @@ public class Humano extends Creature{
         return idCriatura + " | Humano | " + nomeEquipa + " | " + nome
                 + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
     }
-
-
 }
+

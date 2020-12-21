@@ -1,12 +1,8 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public class Zombie extends Creature{
-    String nome;
-    String nomeEquipa = "Os Outros";
-    int idCriatura;
-    int posX;
-    int posY;
-    int equipmentsDestroyed;
+    private String nomeEquipa = "Os Outros";
+    private int equipmentsDestroyed;
 
     public Zombie(int idCriatura, String nome, int posX, int posY) {
         super(nome, idCriatura, posX, posY);

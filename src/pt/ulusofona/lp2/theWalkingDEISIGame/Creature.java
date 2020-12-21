@@ -1,14 +1,14 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public class Creature {
-    String nome;
-    int idCriatura;
-    int posX;
-    int posY;
+    protected int idCriatura;
+    protected String nome;
+    protected int posX;
+    protected int posY;
 
-    public Creature(String nome, int idCriatura, int posX, int posY) {
-        this.nome = nome;
+    public Creature(int idCriatura, String nome, int posX, int posY) {
         this.idCriatura = idCriatura;
+        this.nome = nome;
         this.posX = posX;
         this.posY = posY;
     }
