@@ -7,6 +7,6 @@ public class RevistaMaria extends Equipamento {
     }
 
     public String getImagePNG(){
-        return "revista.png";
+        return "rolled_magazine.png";
     }
 }

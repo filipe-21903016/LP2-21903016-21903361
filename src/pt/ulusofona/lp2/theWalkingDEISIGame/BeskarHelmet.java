@@ -7,7 +7,7 @@ public class BeskarHelmet extends Equipamento {
     }
 
     public String getImagePNG(){
-        return "beskarHelmet.png";
+        return "beskar_helmet.png";
     }
 }
 

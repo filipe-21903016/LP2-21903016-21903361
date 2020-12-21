@@ -27,6 +27,6 @@ public class SafeHaven {
     }
 
     public String getImagePNG(){
-        return "safeHaven.png";
+        return "door.png";
     }
 }

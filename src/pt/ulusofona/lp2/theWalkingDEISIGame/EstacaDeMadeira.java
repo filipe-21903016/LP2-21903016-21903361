@@ -7,6 +7,6 @@ public class EstacaDeMadeira extends Equipamento {
     }
 
     public String getImagePNG(){
-        return "stick.png";
+        return "steak.png";
     }
 }
