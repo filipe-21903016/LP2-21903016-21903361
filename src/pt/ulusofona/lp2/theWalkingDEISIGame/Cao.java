@@ -6,7 +6,12 @@ public class Cao extends Vivo {
     }
 
     @Override
-    boolean move() {
+    public boolean isValidMove(int xO, int yO, int xD, int yD) {
+        return false;
+    }
+
+    @Override
+    public boolean move(int xD, int yD) {
         return false;
     }
 }

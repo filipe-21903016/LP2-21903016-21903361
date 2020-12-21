@@ -1,9 +1,10 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 abstract class Vivo extends Creature{
-    private Equipamento equipment;
-    private String nomeEquipa = "Os Vivos";
-    private int pickedEquipments;
+    protected Equipamento equipment;
+    protected String nomeEquipa = "Os Vivos";
+    protected int pickedEquipments;
+    protected int teamId = 10;
 
     public Vivo(int idCriatura, String nome, int posX, int posY) {
         super(idCriatura,nome, posX, posY);
@@ -30,11 +31,17 @@ abstract class Vivo extends Creature{
         return "steve.png";
     }
 
-    abstract boolean move();
+    public abstract boolean move(int xD, int yD);
 
     public String toString() {
         return idCriatura + " | Humano | " + nomeEquipa + " | " + nome
                 + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
     }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public abstract boolean isValidMove(int xO, int yO, int xD, int yD);
 }
 

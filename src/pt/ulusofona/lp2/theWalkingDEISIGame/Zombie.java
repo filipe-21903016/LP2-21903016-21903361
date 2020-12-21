@@ -1,8 +1,9 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 abstract class Zombie extends Creature{
-    private String nomeEquipa = "Os Outros";
-    private int equipmentsDestroyed;
+    protected String nomeEquipa = "Os Outros";
+    protected int equipmentsDestroyed;
+    protected int teamId = 20;
 
     public Zombie(int idCriatura, String nome, int posX, int posY) {
         super(idCriatura,nome, posX, posY);
@@ -21,6 +22,9 @@ abstract class Zombie extends Creature{
                 + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";
     }
 
-    abstract boolean move();
+    public abstract boolean move(int xD, int yD);
 
+    public int getTeamId() {
+        return teamId;
+    }
 }

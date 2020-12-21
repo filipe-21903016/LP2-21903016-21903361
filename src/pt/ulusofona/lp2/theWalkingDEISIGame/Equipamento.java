@@ -8,7 +8,8 @@ public class Equipamento {
     int idTipo;
     int posX;
     int posY;
-    int info;  //TODO fazer o numero de usos restantes
+    int uses;
+    //int info;  //TODO fazer o numero de usos restantes
 
     public int getId() {
         return id;
@@ -38,13 +39,12 @@ public class Equipamento {
         return titulo;
     }
 
-    public int getInfo() {
-        return info;
+    String getInfo(){
+        return titulo;
     }
 
-
     public String getImagePNG(){
-        return "equipment.png";
+        return "equipment_1.png";
     }
 
     public Equipamento(int id, int idTipo, int posX, int posY) {
@@ -66,4 +66,6 @@ public class Equipamento {
     public String toString() {
         return titulo;
     }
+
+
 }

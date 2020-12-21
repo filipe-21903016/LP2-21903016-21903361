@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-abstract class Creature {
+public abstract class Creature {
     protected int idCriatura;
     protected String nome;
     protected int posX;
@@ -12,6 +12,8 @@ abstract class Creature {
         this.posX = posX;
         this.posY = posY;
     }
+
+    public abstract boolean isValidMove(int xO, int yO, int xD, int yD);
 
     public int getPosX() {
         return posX;
@@ -30,5 +32,7 @@ abstract class Creature {
         this.posY = y;
     }
 
-    abstract boolean move();
+    public abstract boolean move(int xD, int yD);
+
+    public abstract String getImagePNG();
 }

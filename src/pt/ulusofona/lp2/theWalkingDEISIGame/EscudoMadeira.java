@@ -5,4 +5,9 @@ public class EscudoMadeira extends Equipamento {
         super(id,0, posX, posY);
         super.titulo="Escudo de Madeira";
     }
+
+    @Override
+    String getInfo() {
+        return titulo + " | " + uses;
+    }
 }

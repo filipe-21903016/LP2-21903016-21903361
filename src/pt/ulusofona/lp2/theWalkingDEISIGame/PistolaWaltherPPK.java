@@ -6,4 +6,10 @@ public class PistolaWaltherPPK extends Equipamento {
         super(id,2, posX, posY);
         super.titulo="Pistola Walther PPK";
     }
+
+
+    @Override
+    String getInfo() {
+        return titulo + " | " + bullets;
+    }
 }

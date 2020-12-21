@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
+import java.util.Objects;
+
 public class SafeHaven {
     int posX;
     int posY;
@@ -15,5 +17,14 @@ public class SafeHaven {
 
     public int getPosY() {
         return posY;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SafeHaven safeHaven = (SafeHaven) o;
+        return posX == safeHaven.posX &&
+                posY == safeHaven.posY;
     }
 }

@@ -8,5 +8,8 @@ public class GarrafaDeLixivia extends Equipamento {
         super.titulo="Garrafa de Lixívia";
         this.litros=1.0;
     }
-
+    @Override
+    String getInfo() {
+        return titulo + " | " + litros;
+    }
 }

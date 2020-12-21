@@ -1,9 +1,7 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,7 +9,7 @@ public class TWDGameManager {
     public TWDGameManager() {
     }
 
-    public GameInfo gameInfo = new GameInfo(); //possibly need to remove public
+    public GameInfo gameInfo = GameInfo.getInstance();
 
     public boolean loadGame(File fich){
         try {
@@ -64,8 +62,8 @@ public class TWDGameManager {
             maxLine = currentLine + nrEquipment;
             for (; currentLine < maxLine; currentLine++) {
                 data = lines.get(currentLine).split(" : ");
-                int idEquipment = Integer.parseInt(data[0]);
-                int idType = Integer.parseInt(data[1]);
+                int idEquipment =Integer.parseInt(data[0]);
+                //int idType = Integer.parseInt(data[1]);
                 int posX = Integer.parseInt(data[2]);
                 int posY = Integer.parseInt(data[3]);
                 Equipamento equipamento = EquipmentFactory.makeEquipment(idEquipment,posX,posY);
@@ -112,42 +110,33 @@ public class TWDGameManager {
         return gameInfo.getFirstTeamID();
     }
 
-
-    /*
-    public List<Vivo> getHumans() {
-        return gameInfo.getHumans();
-    }
-
-    public List<Zombie> getZombies() {
-        return gameInfo.getZombies();
-    } */
-
-    public boolean isValidMove(int xO, int yO, int xD, int yD){
-        if(xD<0 || yD<0 || yD>= gameInfo.getNrLines() || xD>=gameInfo.getNrColumns()){ //Checks if coordenate is outside bounds
+    public boolean isInsideBounds(int x,int y){
+        if(x<0 || y<0 || y>= gameInfo.getNrLines() || x>=gameInfo.getNrColumns()){
             return false;
         }
-        for(Creature c:gameInfo.getCreatures()){
-            if(c.getPosX()==xD && c.getPosY()==yD){
-                return false;
-            }
-        }
-
-        return (xD == xO && yD == yO + 1) || (xD == xO && yD == yO - 1)
-                || (xD == xO + 1 && yD == yO) || (xD == xO - 1 && yD == yO);
+        return true;
     }
+
+
+    /*
+    public boolean isValidMove(int xO, int yO, int xD, int yD){
+
+    }*/
 
     public boolean move(int xO, int yO, int xD, int yD) {
         //change valid moves, changes for diferent creatures
-        if(!isValidMove(xO, yO, xD, yD)){
+        if(!isInsideBounds(xD,yD)){
             return false;
         }
-
         int idCriatura = getElementId(xO, yO);
         int idEquipment = getElementId(xD, yD);
         if(gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos() &&
-                gameInfo.creatureHashMap.containsKey(idCriatura)){
+                gameInfo.getCreatureHashMap().containsKey(idCriatura)){
             Creature creature = gameInfo.getCreatureById(idCriatura);
-            creature.move(); //NOT FINISHED
+            if(creature.isValidMove(xO, yO, xD, yD)){
+                creature.move(xD,yD); //NOT FINISHED
+            }
+
         }
 
 
@@ -249,12 +238,13 @@ public class TWDGameManager {
         return survivors;
     }*/
 
-    public List<String> getGameResults(){
-        //TODO implement function
-        return new ArrayList<>();
+    public List<String> getGameResults(){ //TODO make function
+        ArrayList<String> results = new ArrayList<>();
+        return results;
     }
 
-    public boolean isDay() {
+    public static boolean isDay() {
+        GameInfo gameInfo = GameInfo.getInstance();
         return gameInfo.getNrTurno() == 0 || gameInfo.getNrTurno() == 1 ||
                 gameInfo.getNrTurno() == 4
                 || gameInfo.getNrTurno() == 5 || gameInfo.getNrTurno() == 8 ||
@@ -278,20 +268,27 @@ public class TWDGameManager {
         return gameInfo.getEquipmentById(equipmentId).getIdTipo();
     }
 
-    public String getEquipmentInfo(int equipmentId){ //TODO nrm de usos
-         switch (equipmentId) {
-             case 0, 2, 7 :
-                 return "" + gameInfo.getEquipmentById(equipmentId).getTitulo() +
-                         " | " + gameInfo.getEquipmentById(equipmentId).info;
-
-             case 1, 3, 4, 5, 6, 8, 9, 10 :
-                 return "" + gameInfo.getEquipmentById(equipmentId).getTitulo();
-
-             default:
-                 throw new IllegalArgumentException("Unknown Equipment Id: " + equipmentId);
-         }
+    public String getEquipmentInfo(int equipmentId){ //TODO change to OOP
+        Equipamento equipamento = gameInfo.getEquipmentById(equipmentId);
+        return equipamento.getInfo();
     }
 
+    public boolean isDoorToSafeHaven(int x, int y){
+        for(SafeHaven sf: gameInfo.getSafeHavens()){
+            if (sf.equals(new SafeHaven(x,y))){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public int getEquipmentId(int creatureId){
+        try{
+            Vivo creature =(Vivo) gameInfo.getCreatureById(creatureId);
+            return creature.getEquipment().getId();
+        }catch (NullPointerException | ClassCastException exception){
+            return 0;
+        }
+    }
 
 }

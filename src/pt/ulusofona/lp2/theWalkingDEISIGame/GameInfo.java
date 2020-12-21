@@ -4,65 +4,42 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameInfo {
-    final int nrMaxTurnos = 12;
-    final int idZombie = 0;
-    final int idHumano = 1;
-    final int idTeamVivos = 10;
-    final int idTeamMortos = 20;
-    int nrTurno;
-    int nrLines;
-    int nrColumns;
-    int firstTeamID;
-    int currentTeamID;
-    //ArrayList<Zombie> zombies = new ArrayList<>();
-    //ArrayList<Vivo> humans = new ArrayList<>();
-    ArrayList<Creature> creatures = new ArrayList<>();
-    ArrayList<Equipamento> equipments = new ArrayList<>();
-    ArrayList<SafeHaven> safeHavens = new ArrayList<>();
+    private final int nrMaxTurnos = 12;
+    private final int idTeamVivos = 10;
+    private final int idTeamMortos = 20;
+    private int nrTurno;
+    private int nrLines;
+    private int nrColumns;
+    private int firstTeamID;
+    private int currentTeamID;
+    private ArrayList<Creature> creatures = new ArrayList<>();
+    private ArrayList<Equipamento> equipments = new ArrayList<>();
+    private ArrayList<SafeHaven> safeHavens = new ArrayList<>();
+    private HashMap<Integer, Creature> creatureHashMap = new HashMap<>();
+    private HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
 
 
-    //HashMap<Integer, Zombie> zombieHashMap = new HashMap<>();
-    //HashMap<Integer, Vivo> humanoHashMap = new HashMap<>();
-    HashMap<Integer, Creature> creatureHashMap = new HashMap<>();
-    HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
+    private GameInfo() {
+    }
 
+    public static GameInfo instance = new GameInfo();
 
+    public static GameInfo getInstance() {
+        return instance;
+    }
     //Getters
 
     public int getNrMaxTurnos() {
         return nrMaxTurnos;
     }
 
-    /*
-    public HashMap<Integer, Zombie> getZombieHashMap() {
-        return zombieHashMap;
-    }
-    */
-    /*
-    public HashMap<Integer, Vivo> getHumanoHashMap() {
-        return humanoHashMap;
-    }
-    */
-
     public HashMap<Integer, Equipamento> getEquipamentoHashMap() {
         return equipamentoHashMap;
     }
 
-    Creature getCreatureById(int id){
+    public Creature getCreatureById(int id) {
         return creatureHashMap.get(id);
     }
-
-
-    /*
-    Vivo getVivoById(int id) {
-        return humanoHashMap.get(id);
-    }
-    */
-    /*
-    Zombie getZombieById(int id) {
-        return zombieHashMap.get(id);
-    }
-     */
 
 
     Equipamento getEquipmentById(int id) {
@@ -83,6 +60,10 @@ public class GameInfo {
 
     public int getFirstTeamID() {
         return firstTeamID;
+    }
+
+    public HashMap<Integer, Creature> getCreatureHashMap() {
+        return creatureHashMap;
     }
 
     /*public ArrayList<Zombie> getZombies() {
@@ -154,15 +135,15 @@ public class GameInfo {
         }
     }*/
 
-    public void addCreature(Creature creature){
+    public void addCreature(Creature creature) {
         creatures.add(creature);
-        if(!creatureHashMap.containsKey(creature.getId())){
-            creatureHashMap.put(creature.getId(),creature);
+        if (!creatureHashMap.containsKey(creature.getId())) {
+            creatureHashMap.put(creature.getId(), creature);
         }
 
     }
 
-    public void addSafeHaven(SafeHaven sf){
+    public void addSafeHaven(SafeHaven sf) {
         this.safeHavens.add(sf);
     }
 
@@ -184,12 +165,12 @@ public class GameInfo {
 
     public void addEquipment(Equipamento equipamento) {
         equipments.add(equipamento);
-        if(!equipamentoHashMap.containsKey(equipamento.getId())){
+        if (!equipamentoHashMap.containsKey(equipamento.getId())) {
             equipamentoHashMap.put(equipamento.getId(), equipamento);
         }
     }
 
-    void removeEquipment(Equipamento equipamento) {
+    public void removeEquipment(Equipamento equipamento) {
         int index = 0;
         for (Equipamento equipamento1 : equipments) {
             if (equipamento.getId() == equipamento1.getId()) {
