@@ -5,4 +5,8 @@ public class EstacaDeMadeira extends Equipamento {
         super(id, 6, posX, posY);
         super.titulo = "Estaca de Madeira";
     }
+
+    public String getImagePNG(){
+        return "stick.png";
+    }
 }

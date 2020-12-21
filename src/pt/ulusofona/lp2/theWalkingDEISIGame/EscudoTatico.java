@@ -5,4 +5,8 @@ public class EscudoTatico extends Equipamento {
         super(id, 3, posX, posY);
         super.titulo = "Escudo Táctico";
     }
+
+    public String getImagePNG(){
+        return "diamondShield.png";
+    }
 }

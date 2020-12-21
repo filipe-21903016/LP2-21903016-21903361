@@ -17,4 +17,8 @@ public class IdosoZombie extends Zombie {
     public boolean move(int xD, int yD) {
         return false;
     }
+
+    public String getImagePNG(){
+        return "oldZombie.png";
+    }
 }

@@ -19,4 +19,8 @@ public class MilitarZombie extends Zombie {
     public boolean move(int xD, int yD) {
         return false;
     }
+
+    public String getImagePNG(){
+        return "zombieSoldier.png";
+    }
 }

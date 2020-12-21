@@ -5,5 +5,9 @@ public class BeskarHelmet extends Equipamento {
         super(id, 10, posX, posY);
         super.titulo = "Beskar Helmet";
     }
+
+    public String getImagePNG(){
+        return "beskarHelmet.png";
+    }
 }
 

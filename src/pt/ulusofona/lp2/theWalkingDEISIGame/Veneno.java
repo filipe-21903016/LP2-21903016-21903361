@@ -5,4 +5,8 @@ public class Veneno extends Equipamento {
         super(id, 8, posX, posY);
         super.titulo = "Veneno";
     }
+
+    public String getImagePNG(){
+        return "poison.png";
+    }
 }

@@ -13,4 +13,8 @@ public class PistolaWaltherPPK extends Equipamento {
     String getInfo() {
         return titulo + " | " + bullets;
     }
+
+    public String getImagePNG(){
+        return "pistol.png";
+    }
 }

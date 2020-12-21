@@ -10,4 +10,8 @@ public class EscudoMadeira extends Equipamento {
     String getInfo() {
         return titulo + " | " + uses;
     }
+
+    public String getImagePNG(){
+        return "shield.png";
+    }
 }

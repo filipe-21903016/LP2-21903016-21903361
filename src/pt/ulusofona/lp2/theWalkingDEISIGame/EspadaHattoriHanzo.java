@@ -5,4 +5,8 @@ public class EspadaHattoriHanzo extends Equipamento {
         super(id, 1, posX, posY);
         super.titulo = "Espada Hattori Hanzo";
     }
+
+    public String getImagePNG(){
+        return "ninjaSwrod.png";
+    }
 }

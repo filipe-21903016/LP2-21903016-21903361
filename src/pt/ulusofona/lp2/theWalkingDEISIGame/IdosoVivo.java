@@ -17,4 +17,8 @@ public class IdosoVivo extends Vivo {
         }
         return (xD != yD && xD > xO - 1 && xD < xO + 1 && yD > yO - 1 && yD < yO + 1);
     }
+
+    public String getImagePNG(){
+        return "oldMan.png";
+    }
 }

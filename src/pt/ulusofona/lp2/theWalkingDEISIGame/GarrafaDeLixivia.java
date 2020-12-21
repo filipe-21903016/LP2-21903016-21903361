@@ -13,4 +13,8 @@ public class GarrafaDeLixivia extends Equipamento {
     String getInfo() {
         return titulo + " | " + litros;
     }
+
+    public String getImagePNG(){
+        return "bleach.png";
+    }
 }

@@ -5,4 +5,8 @@ public class RevistaMaria extends Equipamento {
         super(id, 4, posX, posY);
         super.titulo = "Revista Maria";
     }
+
+    public String getImagePNG(){
+        return "revista.png";
+    }
 }

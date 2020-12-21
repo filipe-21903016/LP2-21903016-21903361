@@ -5,4 +5,8 @@ public class CabecaDeAlho extends Equipamento {
         super(id, 5, posX, posY);
         super.titulo = "Cabeça de Alho";
     }
+
+    public String getImagePNG(){
+        return "garlic.png";
+    }
 }

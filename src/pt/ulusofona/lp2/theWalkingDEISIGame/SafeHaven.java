@@ -25,4 +25,8 @@ public class SafeHaven {
         return posX == safeHaven.posX &&
                 posY == safeHaven.posY;
     }
+
+    public String getImagePNG(){
+        return "safeHaven.png";
+    }
 }
