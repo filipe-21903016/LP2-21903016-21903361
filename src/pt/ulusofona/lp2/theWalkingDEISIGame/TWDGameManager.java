@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,9 +13,9 @@ public class TWDGameManager {
 
     public GameInfo gameInfo = new GameInfo(); //possibly need to remove public
 
-    public boolean startGame(File ficheiroInicial) {
+    public boolean loadGame(File fich){
         try {
-            Scanner scanner = new Scanner(ficheiroInicial);
+            Scanner scanner = new Scanner(fich);
             ArrayList<String> lines = new ArrayList<>();
 
             //Scans all lines to list
@@ -96,6 +97,10 @@ public class TWDGameManager {
             return false;
         }
         return true;
+    }
+
+    public boolean startGame(File ficheiroInicial) {
+        return loadGame(ficheiroInicial);
     }
 
     public int[] getWorldSize() {
@@ -252,4 +257,16 @@ public class TWDGameManager {
         }
         return false;
     }
+
+    public List<Creature> getCreatures(){
+        return gameInfo.getCreatures();
+    }
+
+    public int getEquipmentTypeId(int equipmentId){
+        HashMap<Integer,Equipamento> equipMap = gameInfo.getEquipamentoHashMap();
+        Equipamento e = equipMap.get(equipmentId);
+        return e.getIdTipo();
+    }
+
+
 }
