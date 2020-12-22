@@ -180,7 +180,14 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
-        return gameInfo.getNrTurno() == gameInfo.getNrMaxTurnos();
+        for (Creature creature : getCreatures()) {
+            if ((!(creature.getId() == 5 && creature.getId() == 6 && creature.getId() == 7
+                && creature.getId() == 8 && creature.getId() == 9)) ||
+                gameInfo.getNrTurno() == gameInfo.getNrMaxTurnos()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<String> getAuthors() {
@@ -253,13 +260,13 @@ public class TWDGameManager {
 
     }
 
-    public boolean hasEquipment(int creatureId, int equipmentTypeId) {
+    /*public boolean hasEquipment(int creatureId, int equipmentTypeId) {
         Vivo vivo = (Vivo) gameInfo.getCreatureById(creatureId);
         if (vivo != null && vivo.getEquipment() != null) {
             return vivo.getEquipment().getIdTipo() == equipmentTypeId;
         }
         return false;
-    }
+    }*/
 
     public List<Creature> getCreatures() {
         return gameInfo.getCreatures();
