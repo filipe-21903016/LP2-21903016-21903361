@@ -2,12 +2,14 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public abstract class Creature {
     protected int idCriatura;
+    protected int idType;
     protected String nome;
     protected int posX;
     protected int posY;
 
-    public Creature(int idCriatura, String nome, int posX, int posY) {
+    public Creature(int idCriatura,int idType, String nome, int posX, int posY) {
         this.idCriatura = idCriatura;
+        this.idType = idType;
         this.nome = nome;
         this.posX = posX;
         this.posY = posY;
@@ -25,6 +27,14 @@ public abstract class Creature {
 
     public int getId() {
         return this.idCriatura;
+    }
+
+    public int getIdType() {
+        return idType;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public void setCoordinates(int x, int y) {

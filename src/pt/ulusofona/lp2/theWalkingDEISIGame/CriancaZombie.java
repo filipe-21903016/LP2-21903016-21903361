@@ -1,8 +1,8 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public class CriancaZombie extends Zombie {
-    public CriancaZombie(String nome, int posX, int posY) {
-        super(0, nome, posX, posY);
+    public CriancaZombie(int idCriatura, String nome, int posX, int posY) {
+        super(idCriatura,0, nome, posX, posY);
     }
     @Override
     public boolean isValidMove(int xO, int yO, int xD, int yD) {

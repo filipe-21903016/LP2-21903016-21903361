@@ -6,8 +6,8 @@ abstract class Vivo extends Creature {
     protected int pickedEquipments;
     protected int teamId = 10;
 
-    public Vivo(int idCriatura, String nome, int posX, int posY) {
-        super(idCriatura, nome, posX, posY);
+    public Vivo(int idCriatura, int idType, String nome, int posX, int posY) {
+        super(idCriatura, idType, nome, posX, posY);
     }
 
     void pickEquipment(Equipamento equipamento) {

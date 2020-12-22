@@ -1,8 +1,8 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public class IdosoZombie extends Zombie {
-    public IdosoZombie(String nome, int posX, int posY) {
-        super(3, nome, posX, posY);
+    public IdosoZombie(int idCriatura, String nome, int posX, int posY) {
+        super(idCriatura,3, nome, posX, posY);
     }
 
     @Override

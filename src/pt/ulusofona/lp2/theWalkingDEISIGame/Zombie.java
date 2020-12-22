@@ -5,8 +5,8 @@ abstract class Zombie extends Creature {
     protected int equipmentsDestroyed;
     protected int teamId = 20;
 
-    public Zombie(int idCriatura, String nome, int posX, int posY) {
-        super(idCriatura, nome, posX, posY);
+    public Zombie(int idCriatura, int idType,String nome, int posX, int posY) {
+        super(idCriatura,idType, nome, posX, posY);
     }
 
     void destroyEquiment() {

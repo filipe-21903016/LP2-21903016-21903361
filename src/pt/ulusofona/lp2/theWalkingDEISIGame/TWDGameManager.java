@@ -52,7 +52,7 @@ public class TWDGameManager {
                 String nomeCriatura = data[2].trim();
                 int posX = Integer.parseInt(data[3]);
                 int posY = Integer.parseInt(data[4]);
-                Creature creature = CreatureFactory.makeCreature(idCreature, nomeCriatura, posX, posY);
+                Creature creature = CreatureFactory.makeCreature(idCreature, idType, nomeCriatura, posX, posY);
                 gameInfo.addCreature(creature);
             }
 
@@ -181,8 +181,8 @@ public class TWDGameManager {
 
     public boolean gameIsOver() {
         for (Creature creature : getCreatures()) {
-            if ((!(creature.getId() == 5 && creature.getId() == 6 && creature.getId() == 7
-                && creature.getId() == 8 && creature.getId() == 9)) ||
+            if ((!(creature.getIdType() == 5 && creature.getIdType() == 6 && creature.getIdType() == 7
+                && creature.getIdType() == 8 && creature.getIdType() == 9)) ||
                 gameInfo.getNrTurno() == gameInfo.getNrMaxTurnos()) {
                 return true;
             }
@@ -214,8 +214,7 @@ public class TWDGameManager {
             }
         }
 
-        ArrayList<Equipamento> equipments = gameInfo.getEquipments();
-        for (Equipamento equipamento : equipments) {
+        for (Equipamento equipamento : gameInfo.getEquipments()) {
             if (equipamento.getPosY() == y && equipamento.getPosX() == x) {
                 return equipamento.getId();
             }
@@ -248,6 +247,38 @@ public class TWDGameManager {
 
     public List<String> getGameResults() { //TODO make function
         ArrayList<String> results = new ArrayList<>();
+        if (gameIsOver()){
+            results.add("Nr. de turnos terminados:");
+            results.add(gameInfo.getNrTurno() + "");
+            results.add("");
+            results.add("Ainda pelo bairro:");
+            results.add("");
+            results.add("OS VIVOS");
+            results.add("");
+            for (Creature creature : gameInfo.getCreatures()){
+                if (creature.getIdType() > 4 && creature.getIdType() < 10){
+                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome()+ ")");
+                }
+            results.add("");
+            results.add("OS OUTROS");
+            results.add("");
+                if (creature.getIdType() >= 0 && creature.getIdType() < 5){
+                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome()+ ")");
+                }
+            results.add("");
+            results.add("Num Safe haven:");
+            results.add("");
+            results.add("OS VIVOS");
+            if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())){
+            results.add(creature.getIdType() + " " + creature.getNome());
+            }
+            results.add("");
+            results.add("Envenenados / Destruidos");
+            results.add("");
+            results.add("OS VIVOS");
+            //TODO adicionar os que ja nao estao em campo (não sei fazer ainda)
+            }
+        }
         return results;
     }
 
@@ -297,6 +328,16 @@ public class TWDGameManager {
         } catch (NullPointerException | ClassCastException exception) {
             return 0;
         }
+    }
+
+    public List<Integer> getIdsInSafeHaven(){
+        List<Integer> result = new ArrayList<>();
+        for (Creature creature : gameInfo.getCreatures()){
+            if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())){
+                result.add(creature.getId());
+            }
+        }
+        return result;
     }
 
 }
