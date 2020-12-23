@@ -358,8 +358,8 @@ public class TWDGameManager {
             doc.write(getCreatures().size());
 
             for (Creature creature : getCreatures()){
-                doc.write(creature.getId() + " : " + creature.getIdType() + " : " + creature.getPosX()
-                + " : " + creature.getPosY());
+                doc.write(creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() + " : " +
+                        creature.getPosX() + " : " + creature.getPosY());
             }
 
             doc.write(getEquipments().size());
@@ -379,5 +379,25 @@ public class TWDGameManager {
         } catch (IOException e) {
             return false;
         }
+    }
+
+    public String[] popCultureExtravaganza(){
+        String[] resultado = new String[14];
+        resultado[0] = "Resident Evil";
+        resultado[1] = "The Evil Dead";
+        resultado[2] = "Trick 'r Treat";
+        resultado[3] = "Dread";
+        resultado[4] = "Freaky Stories";
+        resultado[5] = "The Return of the Living Dead";
+        resultado[6] = "Mandalorians";
+        resultado[7] = "1996";
+        resultado[8] = "Kill Bill";
+        resultado[9] = "1978";
+        resultado[10] = "James Bond";
+        resultado[11] = "The Walking Dead";
+        resultado[12] = "Chocho";
+        resultado[13] = "Freddie Mercury";
+
+        return resultado;
     }
 }
