@@ -62,6 +62,7 @@ public class GameInfo {
         return firstTeamID;
     }
 
+
     public HashMap<Integer, Creature> getCreatureHashMap() {
         return creatureHashMap;
     }
