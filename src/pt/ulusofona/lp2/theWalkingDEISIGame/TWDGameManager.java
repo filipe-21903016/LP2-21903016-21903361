@@ -69,7 +69,7 @@ public class TWDGameManager {
                 //int idType = Integer.parseInt(data[1]);
                 int posX = Integer.parseInt(data[2]);
                 int posY = Integer.parseInt(data[3]);
-                Equipamento equipamento = EquipmentFactory.makeEquipment(idEquipment, posX, posY);
+                Equipamento equipamento = EquipmentFactory.makeEquipment(idEquipment ,posX, posY);
                 gameInfo.addEquipment(equipamento);
             }
 
