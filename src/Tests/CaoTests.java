@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class CaoTests {
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("src/Tests/CaoTestData.txt");
+    File fich = new File("test-files/CaoTestData.txt");
 
     @Test
     public void outOfBounds1() {

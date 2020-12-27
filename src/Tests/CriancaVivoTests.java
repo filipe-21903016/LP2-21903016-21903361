@@ -9,7 +9,7 @@ import java.io.File;
 
 public class CriancaVivoTests {
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("src/Tests/CriancaTestData.txt");
+    File fich = new File("test-files/CriancaTestData.txt");
 
     @Test
     public void outOfBounds1() {

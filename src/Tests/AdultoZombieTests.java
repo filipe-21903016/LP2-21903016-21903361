@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class AdultoZombieTests {
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("src/Tests/ZombieTestData.txt");
+    File fich = new File("test-files/ZombieTestData.txt");
 
     @Test
     public void outOfBounds1() {

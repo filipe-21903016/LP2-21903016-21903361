@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class AdultoVivoTests {
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("src/Tests/VivoTestData.txt");
+    File fich = new File("test-files/VivoTestData.txt");
 
     @Test
     public void outOfBounds1() {

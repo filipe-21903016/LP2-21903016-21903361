@@ -8,7 +8,7 @@ import java.io.File;
 
 public class IdosoVivoTests {
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("src/Tests/IdosoTestData.txt");
+    File fich = new File("test-files/IdosoTestData.txt");
 
     @Test
     public void outOfBounds1() {

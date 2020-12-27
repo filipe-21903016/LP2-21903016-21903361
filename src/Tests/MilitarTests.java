@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class MilitarTests {
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("src/Tests/MilitarTestData.txt");
+    File fich = new File("test-files/MilitarTestData.txt");
 
     @Test
     public void outOfBounds1() {
