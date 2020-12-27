@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class MilitarVivoTests {
+    /*problema*/
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/MilitarTestData.txt");
 
