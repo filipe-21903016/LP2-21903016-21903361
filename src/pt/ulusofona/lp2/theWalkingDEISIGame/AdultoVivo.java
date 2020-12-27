@@ -7,6 +7,7 @@ public class AdultoVivo extends Vivo {
 
     @Override
     public boolean isValidMove(int xO, int yO, int xD, int yD) {
+
         if (xO == xD && yO == yD) {
             return false;
         }
