@@ -11,8 +11,11 @@ public class VampiroZombie extends Zombie {
         if ((xO == xD && yO == yD) || gameInfo.isDay()) {
             return false;
         }
-        return (xD == xO && yD >= yO - 2 && yD <= yO + 2) || (yD == yO && xD >= xO - 2 && xD <= xO + 2) ||
-                (xD == yD && xD <= xO + 2 && xD >= xO - 2) || (xD == -1 * yD && xD <= xO + 2 && xD >= xO - 2);
+        int xOffset=xD-xO;
+        int yOffset=yD-yO;
+        return (xD==xO && yD <= yO +2 && yD >= yO -2) /*VERTICAL*/
+                || (yD == yO && xD<= xO +2 && xD >= xO-2) /*HORIZONTAL*/
+                || (Math.abs(xOffset) == Math.abs(yOffset) && Math.abs(xOffset)<3 && Math.abs(yOffset)<3); /*DIAGONAIS*/
     }
 
     @Override
