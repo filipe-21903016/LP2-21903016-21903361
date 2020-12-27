@@ -1,8 +1,8 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public class EquipmentFactory {
-    public static Equipamento makeEquipment(int id, int posX, int posY) {
-        switch (id) {
+    public static Equipamento makeEquipment(int id, int idType, int posX, int posY) {
+        switch (idType) {
             case 0:
                 return new EscudoMadeira(id, posX, posY);
             case 1:
