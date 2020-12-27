@@ -2,12 +2,13 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public class VampiroZombie extends Zombie {
     public VampiroZombie(int idCriatura, String nome, int posX, int posY) {
-        super(idCriatura,4, nome, posX, posY);
+        super(idCriatura, 4, nome, posX, posY);
     }
 
     @Override
     public boolean isValidMove(int xO, int yO, int xD, int yD) {
-        if (xO == xD && yO == yD) { //TODO if isDay -> return false
+        GameInfo gameInfo = GameInfo.getInstance();
+        if ((xO == xD && yO == yD) || gameInfo.isDay()) {
             return false;
         }
         return (xD == xO && yD >= yO - 2 && yD <= yO + 2) || (yD == yO && xD >= xO - 2 && xD <= xO + 2) ||
@@ -19,7 +20,7 @@ public class VampiroZombie extends Zombie {
         return false;
     }
 
-    public String getImagePNG(){
+    public String getImagePNG() {
         return null;
     }
 }

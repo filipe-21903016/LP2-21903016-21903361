@@ -3,10 +3,10 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 abstract class Zombie extends Creature {
     protected String nomeEquipa = "Os Outros";
     protected int equipmentsDestroyed;
-    protected int teamId = 20;
 
     public Zombie(int idCriatura, int idType,String nome, int posX, int posY) {
         super(idCriatura,idType, nome, posX, posY);
+        teamId=20;
     }
 
     void destroyEquiment() {

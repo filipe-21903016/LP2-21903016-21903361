@@ -36,7 +36,7 @@ public class TWDGameManager {
 
             //Get Id of starting team
             data = lines.get(currentLine).split("");
-            int id = Integer.parseInt(data[0]);
+            int id = Integer.parseInt(data[0] + data[1]);
             gameInfo.setFirstTeamID(id);
             gameInfo.setCurrentTeamID(id);
             currentLine++;
@@ -100,6 +100,7 @@ public class TWDGameManager {
         return true;
     }
 
+
     public boolean startGame(File ficheiroInicial) {
         return loadGame(ficheiroInicial);
     }
@@ -120,6 +121,7 @@ public class TWDGameManager {
         return true;
     }
 
+
     public boolean move(int xO, int yO, int xD, int yD) {
         //change valid moves, changes for diferent creatures
         if (!isInsideBounds(xD, yD)) {
@@ -128,12 +130,15 @@ public class TWDGameManager {
 
         int idCriatura = getElementId(xO, yO);
         int idEquipment = getElementId(xD, yD);
-        if (gameInfo.getCurrentTeamID() == gameInfo.getFirstTeamID() &&
-                gameInfo.getCreatureHashMap().containsKey(idCriatura)) {
+        if (gameInfo.getCreatureHashMap().containsKey(idCriatura)) {
             Creature creature = gameInfo.getCreatureById(idCriatura);
+            if (creature.getTeamId() != gameInfo.getCurrentTeamID()) {
+                return false;
+            }
             System.out.println(creature);
-            if (creature.isValidMove(xO, yO, xD, yD)) {
-                creature.move(xD, yD); //NOT FINISHED
+            if (creature.isValidMove(xO, yO, xD, yD)){ //TODO nao permite humano usarem a safe haven
+                creature.move(xD, yD);
+                gameInfo.nextTurn();
                 return true;
             }
 
@@ -186,8 +191,8 @@ public class TWDGameManager {
                 gameInfo.getNrTurno() == gameInfo.getNrMaxTurnos()) {
                 return true;
             }
-        } //TODO esta condição esta errada,para testar comentei o codigo ate podermos fazer a funcao definitiva
-         */
+        }        */
+        //TODO fazer codigo
         return false;
     }
 
@@ -203,6 +208,7 @@ public class TWDGameManager {
     }
 
     public int getElementId(int x, int y) {
+        GameInfo gameInfo = GameInfo.getInstance();
         for (SafeHaven sf : gameInfo.getSafeHavens()) {
             if (sf.getPosY() == y && sf.getPosX() == x) {
                 return 0;
@@ -248,7 +254,7 @@ public class TWDGameManager {
 
     public List<String> getGameResults() { //TODO make function
         ArrayList<String> results = new ArrayList<>();
-        if (gameIsOver()){
+        if (gameIsOver()) {
             results.add("Nr. de turnos terminados:");
             results.add(gameInfo.getNrTurno() + "");
             results.add("");
@@ -256,28 +262,28 @@ public class TWDGameManager {
             results.add("");
             results.add("OS VIVOS");
             results.add("");
-            for (Creature creature : gameInfo.getCreatures()){
-                if (creature.getIdType() > 4 && creature.getIdType() < 10){
-                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome()+ ")");
+            for (Creature creature : gameInfo.getCreatures()) {
+                if (creature.getIdType() > 4 && creature.getIdType() < 10) {
+                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
                 }
-            results.add("");
-            results.add("OS OUTROS");
-            results.add("");
-                if (creature.getIdType() >= 0 && creature.getIdType() < 5){
-                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome()+ ")");
+                results.add("");
+                results.add("OS OUTROS");
+                results.add("");
+                if (creature.getIdType() >= 0 && creature.getIdType() < 5) {
+                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
                 }
-            results.add("");
-            results.add("Num Safe haven:");
-            results.add("");
-            results.add("OS VIVOS");
-            if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())){
-            results.add(creature.getIdType() + " " + creature.getNome());
-            }
-            results.add("");
-            results.add("Envenenados / Destruidos");
-            results.add("");
-            results.add("OS VIVOS");
-            //TODO adicionar os que ja nao estao em campo (não sei fazer ainda)
+                results.add("");
+                results.add("Num Safe haven:");
+                results.add("");
+                results.add("OS VIVOS");
+                if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())) {
+                    results.add(creature.getIdType() + " " + creature.getNome());
+                }
+                results.add("");
+                results.add("Envenenados / Destruidos");
+                results.add("");
+                results.add("OS VIVOS");
+                //TODO adicionar os que ja nao estao em campo (não sei fazer ainda)
             }
         }
         return results;
@@ -285,11 +291,7 @@ public class TWDGameManager {
 
     public boolean isDay() {
         GameInfo gameInfo = GameInfo.getInstance();
-        return gameInfo.getNrTurno() == 0 || gameInfo.getNrTurno() == 1 ||
-                gameInfo.getNrTurno() == 4
-                || gameInfo.getNrTurno() == 5 || gameInfo.getNrTurno() == 8 ||
-                gameInfo.getNrTurno() == 9 || gameInfo.getNrTurno() == 12;
-
+        return gameInfo.isDay();
     }
 
     /*public boolean hasEquipment(int creatureId, int equipmentTypeId) {
@@ -309,7 +311,7 @@ public class TWDGameManager {
     }
 
     public List<Equipamento> getEquipments() {
-        return  gameInfo.getEquipments();
+        return gameInfo.getEquipments();
     }
 
     public int getEquipmentTypeId(int equipmentId) {
@@ -339,38 +341,38 @@ public class TWDGameManager {
         }
     }
 
-    public List<Integer> getIdsInSafeHaven(){
+    public List<Integer> getIdsInSafeHaven() {
         List<Integer> result = new ArrayList<>();
-        for (Creature creature : gameInfo.getCreatures()){
-            if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())){
+        for (Creature creature : gameInfo.getCreatures()) {
+            if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())) {
                 result.add(creature.getId());
             }
         }
         return result;
     }
 
-    public boolean saveGame(File fich){
-        try{
+    public boolean saveGame(File fich) {
+        try {
             FileWriter doc = new FileWriter(fich);
             doc.write(getWorldSize()[0] + " " + getWorldSize()[1]);
             doc.write(getCurrentTeamId());
             doc.write(getCreatures().size());
 
-            for (Creature creature : getCreatures()){
+            for (Creature creature : getCreatures()) {
                 doc.write(creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() + " : " +
                         creature.getPosX() + " : " + creature.getPosY());
             }
 
             doc.write(getEquipments().size());
 
-            for (Equipamento equip : getEquipments()){
+            for (Equipamento equip : getEquipments()) {
                 doc.write(equip.getId() + " : " + equip.getIdTipo() + " : " + equip.getPosX() +
                         " : " + equip.getPosY());
             }
 
             doc.write(getSafeHaven().size());
 
-            for (SafeHaven sf : getSafeHaven()){
+            for (SafeHaven sf : getSafeHaven()) {
                 doc.write(sf.getPosX() + " : " + sf.getPosY());
             }
             return true;
@@ -380,7 +382,7 @@ public class TWDGameManager {
         }
     }
 
-    public String[] popCultureExtravaganza(){
+    public String[] popCultureExtravaganza() {
         String[] resultado = new String[14];
         resultado[0] = "Resident Evil";
         resultado[1] = "The Evil Dead";

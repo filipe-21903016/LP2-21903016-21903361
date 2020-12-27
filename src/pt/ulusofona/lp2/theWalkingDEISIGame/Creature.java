@@ -6,6 +6,7 @@ public abstract class Creature {
     protected String nome;
     protected int posX;
     protected int posY;
+    protected int teamId;
 
     public Creature(int idCriatura,int idType, String nome, int posX, int posY) {
         this.idCriatura = idCriatura;
@@ -35,6 +36,10 @@ public abstract class Creature {
 
     public String getNome() {
         return nome;
+    }
+
+    public int getTeamId() {
+        return teamId;
     }
 
     public void setCoordinates(int x, int y) {

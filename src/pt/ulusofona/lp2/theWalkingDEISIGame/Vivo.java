@@ -4,10 +4,10 @@ abstract class Vivo extends Creature {
     protected Equipamento equipment;
     protected String nomeEquipa = "Os Vivos";
     protected int pickedEquipments;
-    protected int teamId = 10;
 
     public Vivo(int idCriatura, int idType, String nome, int posX, int posY) {
         super(idCriatura, idType, nome, posX, posY);
+        teamId = 10;
     }
 
     void pickEquipment(Equipamento equipamento) {

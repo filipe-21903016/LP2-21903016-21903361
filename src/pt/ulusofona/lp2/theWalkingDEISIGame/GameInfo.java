@@ -67,13 +67,19 @@ public class GameInfo {
         return creatureHashMap;
     }
 
-    /*public ArrayList<Zombie> getZombies() {
+    /* public ArrayList<Zombie> getZombies() {
         return zombies;
     }*/
 
-    /*public ArrayList<Vivo> getHumans() {
+    /* public ArrayList<Vivo> getHumans() {
         return humans;
     }*/
+    public boolean isDay(){
+        return nrTurno == 0 || nrTurno == 1 ||
+                nrTurno == 4
+                || nrTurno == 5 || nrTurno == 8 ||
+                nrTurno == 9 || nrTurno == 12;
+    }
 
     public ArrayList<Equipamento> getEquipments() {
         return equipments;
