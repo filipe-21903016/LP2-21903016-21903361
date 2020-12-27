@@ -226,7 +226,7 @@ public class TWDGameManager {
         try{
             return gameInfo.getEquipmentById(equipmentId).getIdTipo();
         }catch (NullPointerException nullPointerException){
-            System.out.printf("Null pointer exception:" + equipmentId);
+            System.out.print("Null pointer exception:" + equipmentId);
             return -1;
         }
 

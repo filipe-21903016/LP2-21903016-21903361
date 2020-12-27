@@ -12,7 +12,9 @@ public class AdultoVivo extends Vivo {
             return false;
         }
         return (xD == xO && yD >= yO - 2 && yD <= yO + 2) || (yD == yO && xD >= xO - 2 && xD <= xO + 2) ||
-                (xD == yD && xD <= xO + 2 && xD >= xO - 2) || (xD == -1 * yD && xD <= xO + 2 && xD >= xO - 2);
+                (xD == yD && xD <= xO + 2 && xD >= xO - 2) || (xD == -1 * yD && xD <= xO + 2 && xD >= xO - 2)
+                || (xD == xO - 1 && yD == yO + 1) || (xD == xO - 2 && yD == yO + 2) || (xD == xO + 1 && yD == yO - 1)
+                || (xD == xO + 2 && yD == yO - 2);
 
     }
 
