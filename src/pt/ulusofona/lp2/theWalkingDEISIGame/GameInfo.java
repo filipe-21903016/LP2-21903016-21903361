@@ -10,8 +10,8 @@ public class GameInfo {
     private int nrTurno;
     private int nrLines;
     private int nrColumns;
-    private int firstTeamID;
     private int currentTeamID;
+    private int firstTeamId;
     private ArrayList<Creature> creatures = new ArrayList<>();
     private ArrayList<Equipamento> equipments = new ArrayList<>();
     private ArrayList<SafeHaven> safeHavens = new ArrayList<>();
@@ -41,6 +41,35 @@ public class GameInfo {
         return creatureHashMap.get(id);
     }
 
+    public int getFirstTeamId() {
+        return firstTeamId;
+    }
+
+    public void setFirstTeamId(int firstTeamId) {
+        this.firstTeamId = firstTeamId;
+    }
+
+    public int getElementId(int x, int y) {
+        for (SafeHaven sf : safeHavens) {
+            if (sf.getPosY() == y && sf.getPosX() == x) {
+                return 0;
+            }
+        }
+
+        for (Creature c : creatures) {
+            if (c.getPosY() == y && c.getPosX() == x) {
+                return c.getId();
+            }
+        }
+
+        for (Equipamento equipamento : equipments) {
+            if (equipamento.getPosY() == y && equipamento.getPosX() == x) {
+                return equipamento.getId();
+            }
+        }
+
+        return 0;
+    }
 
     Equipamento getEquipmentById(int id) {
         return equipamentoHashMap.get(id);
@@ -57,11 +86,6 @@ public class GameInfo {
     public int getNrColumns() {
         return nrColumns;
     }
-
-    public int getFirstTeamID() {
-        return firstTeamID;
-    }
-
 
     public HashMap<Integer, Creature> getCreatureHashMap() {
         return creatureHashMap;
@@ -113,10 +137,6 @@ public class GameInfo {
 
     public void setNrColumns(int nrColumns) {
         this.nrColumns = nrColumns;
-    }
-
-    public void setFirstTeamID(int firstTeamID) {
-        this.firstTeamID = firstTeamID;
     }
 
     public void setCurrentTeamID(int id) {

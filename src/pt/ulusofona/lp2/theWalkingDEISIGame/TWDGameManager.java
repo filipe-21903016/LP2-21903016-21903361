@@ -37,8 +37,8 @@ public class TWDGameManager {
             //Get Id of starting team
             data = lines.get(currentLine).split("");
             int id = Integer.parseInt(data[0] + data[1]);
-            gameInfo.setFirstTeamID(id);
             gameInfo.setCurrentTeamID(id);
+            gameInfo.setFirstTeamId(id);
             currentLine++;
 
             //Get number of creatures and their properties
@@ -111,7 +111,7 @@ public class TWDGameManager {
 
     public int getInitialTeam() {
         //System.out.println(gameInfo.getFirstTeamID());
-        return gameInfo.getFirstTeamID();
+        return gameInfo.getFirstTeamId();
     }
 
     public boolean isInsideBounds(int x, int y) {
@@ -171,26 +171,7 @@ public class TWDGameManager {
     }
 
     public int getElementId(int x, int y) {
-        GameInfo gameInfo = GameInfo.getInstance();
-        for (SafeHaven sf : gameInfo.getSafeHavens()) {
-            if (sf.getPosY() == y && sf.getPosX() == x) {
-                return 0;
-            }
-        }
-
-        for (Creature c : gameInfo.getCreatures()) {
-            if (c.getPosY() == y && c.getPosX() == x) {
-                return c.getId();
-            }
-        }
-
-        for (Equipamento equipamento : gameInfo.getEquipments()) {
-            if (equipamento.getPosY() == y && equipamento.getPosX() == x) {
-                return equipamento.getId();
-            }
-        }
-
-        return 0;
+        return gameInfo.getElementId(x,y);
     }
 
     public List<String> getGameResults() {
