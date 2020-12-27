@@ -22,7 +22,7 @@ public class CriancaVivo extends Vivo {
         int id = gameInfo.getElementId(xD,yD);
         if(id<0){ //entao é id de equipamento
             if(equipment!=null){
-                dropEquipment();
+                gameInfo.addEquipment(dropEquipment());
             }
             Equipamento equipamento = gameInfo.getEquipmentById(id);
             pickEquipment(equipamento);

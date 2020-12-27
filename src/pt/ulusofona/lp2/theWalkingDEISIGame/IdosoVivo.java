@@ -20,10 +20,10 @@ public class IdosoVivo extends Vivo {
         GameInfo gameInfo = GameInfo.getInstance();
         int id = gameInfo.getElementId(xD,yD);
 
+        if(equipment!=null){
+            gameInfo.addEquipment(dropEquipment());
+        }
         if(id<0){ //entao é id de equipamento
-            if(equipment!=null){
-                gameInfo.addEquipment(dropEquipment());
-            }
             Equipamento equipamento = gameInfo.getEquipmentById(id);
             pickEquipment(equipamento);
             gameInfo.removeEquipment(equipamento);

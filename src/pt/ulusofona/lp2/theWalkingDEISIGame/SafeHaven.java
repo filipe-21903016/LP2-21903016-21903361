@@ -3,9 +3,9 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 import java.util.ArrayList;
 
 public class SafeHaven {
-    static ArrayList<Vivo> survivors = new ArrayList<>();
-    int posX;
-    int posY;
+    private static ArrayList<Vivo> survivors = new ArrayList<>();
+    private int posX;
+    private int posY;
 
 
     public SafeHaven(int posX, int posY) {
@@ -32,5 +32,9 @@ public class SafeHaven {
 
     public String getImagePNG(){
         return "door.png";
+    }
+
+    public static ArrayList<Vivo> getSurvivors() {
+        return survivors;
     }
 }

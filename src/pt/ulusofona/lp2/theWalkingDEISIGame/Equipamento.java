@@ -75,4 +75,8 @@ public class Equipamento {
     public void setDropped(){
         this.picked= false;
     }
+
+    public boolean isPicked() {
+        return picked;
+    }
 }

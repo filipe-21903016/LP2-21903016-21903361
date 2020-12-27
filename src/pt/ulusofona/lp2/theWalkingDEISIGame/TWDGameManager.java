@@ -252,13 +252,14 @@ public class TWDGameManager {
 
     public List<Integer> getIdsInSafeHaven() {
         List<Integer> survivors = new ArrayList<>();
-        for(Creature creature: SafeHaven.survivors){
+        for(Creature creature: SafeHaven.getSurvivors()){
             survivors.add(creature.idCriatura);
         }
         return survivors;
     }
 
     public boolean saveGame(File fich) {
+        /*
         try {
             FileWriter doc = new FileWriter(fich);
             doc.write(getWorldSize()[0] + " " + getWorldSize()[1]);
@@ -282,9 +283,37 @@ public class TWDGameManager {
             for (SafeHaven sf : getSafeHaven()) {
                 doc.write(sf.getPosX() + " : " + sf.getPosY());
             }
+            doc.close();
             return true;
 
         } catch (IOException e) {
+            return false;
+        }*/
+        String gameDetails = "";
+        try{
+            FileWriter fileWriter = new FileWriter(fich);
+            gameDetails += gameInfo.getNrLines() + " " + gameInfo.getNrColumns() + "\n";
+            gameDetails += gameInfo.getCurrentTeamID() + "\n";
+            gameDetails += gameInfo.getCreatures().size() + "\n";
+            for(Creature creature: gameInfo.getCreatures()){
+                gameDetails += creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() +
+                        " : " + creature.getPosX() + " : " + creature.getPosY() + "\n";
+            }
+            gameDetails+= gameInfo.getEquipments().size() + "\n";
+            for(Equipamento equipamento: gameInfo.getEquipments()){
+                gameDetails += equipamento.getId() + " : " + equipamento.getIdTipo() + " : " + equipamento.getPosX() + " : " + equipamento.getPosY() + "\n";
+            }
+            gameDetails += gameInfo.getSafeHavens().size() + "\n";
+            for (SafeHaven safeHaven : gameInfo.getSafeHavens()){
+                gameDetails += safeHaven.getPosX() + " : " + safeHaven.getPosY() + "\n";
+            }
+            System.out.println(gameDetails);
+            fileWriter.write(gameDetails);
+            fileWriter.close();
+            return true;
+
+        } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
