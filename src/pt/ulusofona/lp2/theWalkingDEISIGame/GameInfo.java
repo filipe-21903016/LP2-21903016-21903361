@@ -21,6 +21,21 @@ public class GameInfo {
     private ArrayList<Creature> graveyard = new ArrayList<>();
 
 
+    public void reset(){
+        nrTurno=0;
+        nrLines=0;
+        nrColumns=0;
+        currentTeamID=0;
+        firstTeamId =0;
+        creatures = new ArrayList<>();
+        equipments = new ArrayList<>();
+        safeHavenDoors = new ArrayList<>();
+        creatureHashMap = new HashMap<>();
+        equipamentoHashMap = new HashMap<>();
+        graveyard = new ArrayList<>();
+    }
+
+
     private GameInfo() {
     }
 

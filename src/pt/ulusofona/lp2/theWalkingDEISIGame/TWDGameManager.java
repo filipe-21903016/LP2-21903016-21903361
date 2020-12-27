@@ -15,6 +15,7 @@ public class TWDGameManager {
     public GameInfo gameInfo = GameInfo.getInstance();
 
     public boolean loadGame(File fich) {
+        gameInfo.reset();
         try {
             Scanner scanner = new Scanner(fich);
             ArrayList<String> lines = new ArrayList<>();
