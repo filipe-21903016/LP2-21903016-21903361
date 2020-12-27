@@ -7,7 +7,7 @@ import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 import java.io.File;
 
 
-public class CriancaVivoTests {
+public class TestCriancaVivo {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/CriancaTestData.txt");
 

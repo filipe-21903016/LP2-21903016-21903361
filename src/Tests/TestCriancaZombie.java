@@ -1,14 +1,15 @@
 package Tests;
-
 import org.junit.Assert;
 import org.junit.Test;
+import pt.ulusofona.lp2.theWalkingDEISIGame.GameInfo;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
 
-public class IdosoVivoTests {
+
+public class TestCriancaZombie {
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("test-files/IdosoTestData.txt");
+    File fich = new File("test-files/CriancaZombieTestData.txt");
 
     @Test
     public void outOfBounds1() {
@@ -107,13 +108,5 @@ public class IdosoVivoTests {
         gameManager.loadGame(fich);
         boolean obtained = gameManager.move(3,3,4,2);
         Assert.assertEquals(false,obtained);
-    }
-
-    @Test
-    public void moveNightDay() {
-        gameManager.loadGame(fich);
-        boolean expected = gameManager.isDay();
-        boolean obtained = gameManager.move(3,3,3,2);
-        Assert.assertEquals("Idoso vivo não se pode mover durante a noite",expected,obtained);
     }
 }

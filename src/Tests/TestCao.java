@@ -10,7 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-public class CaoTests {
+public class TestCao {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/CaoTestData.txt");
 

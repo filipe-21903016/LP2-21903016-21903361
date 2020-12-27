@@ -5,14 +5,13 @@ import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 
 import org.junit.Test;
-
 import java.io.File;
 import java.util.ArrayList;
 
-
-public class AdultoVivoTests {
+public class TestMilitarVivo {
+    /*problema*/
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("test-files/VivoTestData.txt");
+    File fich = new File("test-files/MilitarTestData.txt");
 
     @Test
     public void outOfBounds1() {
@@ -63,6 +62,14 @@ public class AdultoVivoTests {
         //3 spaces right
         gameManager.loadGame(fich);
         boolean obtained = gameManager.move(3,3,6,3);
+        Assert.assertEquals(true,obtained);
+    }
+
+    @Test
+    public void fourRight() {
+        //4 spaces right
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(0,0,4,0);
         Assert.assertEquals(false,obtained);
     }
 
@@ -87,6 +94,14 @@ public class AdultoVivoTests {
         //3  spaces left
         gameManager.loadGame(fich);
         boolean obtained = gameManager.move(3,3,0,3);
+        Assert.assertEquals(true,obtained);
+    }
+
+    @Test
+    public void fourLeft() {
+        //4 spaces left
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(6,6,2,6);
         Assert.assertEquals(false,obtained);
     }
 
@@ -112,6 +127,14 @@ public class AdultoVivoTests {
         //three spaces up
         gameManager.loadGame(fich);
         boolean obtained = gameManager.move(3,3,3,0);
+        Assert.assertEquals(true,obtained);
+    }
+
+    @Test
+    public void fourUp() {
+        //four spaces up
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(6,6,6,2);
         Assert.assertEquals(false,obtained);
     }
 
@@ -136,12 +159,19 @@ public class AdultoVivoTests {
         //three spaces down
         gameManager.loadGame(fich);
         boolean obtained = gameManager.move(3,3,3,6);
+        Assert.assertEquals(true,obtained);
+    }
+
+    @Test
+    public void fourDown() {
+        //four spaces down
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(0,0,0,4);
         Assert.assertEquals(false,obtained);
     }
 
     @Test
     public void oneUpRightDiagonal() {
-        //one space in right up diagonal
         gameManager.loadGame(fich);
         boolean obtained = gameManager.move(3,3,4,2);
         Assert.assertEquals(true,obtained);
@@ -158,6 +188,14 @@ public class AdultoVivoTests {
     public void threeRightUpDiagonal() {
         gameManager.loadGame(fich);
         boolean obtained = gameManager.move(3,3,6,0);
+        Assert.assertEquals(true,obtained);
+    }
+
+    @Test
+    public void fourRightUpDiagonal() {
+        //3 spaces right
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(2,4,6,0);
         Assert.assertEquals(false,obtained);
     }
 
@@ -179,6 +217,14 @@ public class AdultoVivoTests {
     public void threeLeftUpDiagonal() {
         gameManager.loadGame(fich);
         boolean obtained = gameManager.move(3,3,0,0);
+        Assert.assertEquals(true,obtained);
+    }
+
+    @Test
+    public void fourLeftUpDiagonal() {
+        //3 spaces right
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(6,6,2,2);
         Assert.assertEquals(false,obtained);
     }
 
@@ -201,6 +247,14 @@ public class AdultoVivoTests {
     public void threeRightDownDiagonal() {
         gameManager.loadGame(fich);
         boolean obtained = gameManager.move(3,3,6,6);
+        Assert.assertEquals(true,obtained);
+    }
+
+    @Test
+    public void fourRightDownDiagonal() {
+        //3 spaces right
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(0,0,4,4);
         Assert.assertEquals(false,obtained);
     }
 
@@ -222,6 +276,16 @@ public class AdultoVivoTests {
     public void threeLeftDownDiagonal() {
         gameManager.loadGame(fich);
         boolean obtained = gameManager.move(3,3,0,6);
+        Assert.assertEquals(true,obtained);
+    }
+
+    @Test
+    public void fourLeftDownDiagonal() {
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(6,0,2,4);
         Assert.assertEquals(false,obtained);
     }
 }
+
+
+

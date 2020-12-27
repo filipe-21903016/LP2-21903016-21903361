@@ -9,9 +9,10 @@ import org.junit.Test;
 import java.io.File;
 import java.util.ArrayList;
 
-public class AdultoZombieTests {
+
+public class TestAdultoVivo {
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("test-files/ZombieTestData.txt");
+    File fich = new File("test-files/VivoTestData.txt");
 
     @Test
     public void outOfBounds1() {
