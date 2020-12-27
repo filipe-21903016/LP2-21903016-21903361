@@ -1,0 +1,10 @@
+7 7
+20
+3
+1 : 1 : John Cena : 3 : 3
+2 : 1 : Jari Litmanen : 0 : 0
+2 : 1 : Michael Jordan : 6 : 6
+1
+-1 : 0 : 2 : 5
+1
+2 : 1
