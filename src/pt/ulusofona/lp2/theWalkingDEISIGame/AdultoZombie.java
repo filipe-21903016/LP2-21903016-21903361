@@ -34,4 +34,11 @@ public class AdultoZombie extends Zombie {
     public String getImagePNG(){
         return "zombie.png";
     }
+
+    @Override
+    public String toString() {
+        return idCriatura + " | Adulto (Zombie) | " + nomeEquipa + " | " + nome
+                + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";
+    }
+
 }

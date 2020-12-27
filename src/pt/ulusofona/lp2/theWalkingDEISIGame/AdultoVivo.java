@@ -39,4 +39,10 @@ public class AdultoVivo extends Vivo {
     public String getImagePNG(){
         return "steve.png";
     }
+
+    @Override
+    public String toString() {
+        return idCriatura + " | Adulto (Vivo) | " + nomeEquipa + " | " + nome
+                + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
+    }
 }

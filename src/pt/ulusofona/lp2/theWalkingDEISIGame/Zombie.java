@@ -17,6 +17,8 @@ abstract class Zombie extends Creature {
         return "zombie.png";
     }
 
+
+    @Override
     public String toString() {
         return idCriatura + " | Zombie | " + nomeEquipa + " | " + nome
                 + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";

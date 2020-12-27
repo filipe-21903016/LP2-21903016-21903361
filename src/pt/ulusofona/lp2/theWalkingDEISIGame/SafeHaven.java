@@ -30,7 +30,7 @@ public class SafeHaven {
                 posY == safeHaven.posY;
     }
 
-    public String getImagePNG(){
+    public String getImagePNG() {
         return "door.png";
     }
 

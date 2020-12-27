@@ -34,4 +34,10 @@ public class MilitarZombie extends Zombie {
     public String getImagePNG(){
         return "zombieSoldier.png";
     }
+
+    @Override
+    public String toString() {
+        return idCriatura + " | Militar (Zombie) | " + nomeEquipa + " | " + nome
+                + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";
+    }
 }

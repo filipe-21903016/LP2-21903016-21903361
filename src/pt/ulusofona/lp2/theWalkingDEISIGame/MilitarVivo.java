@@ -39,4 +39,10 @@ public class MilitarVivo extends Vivo {
     public String getImagePNG(){
         return "soldier.png";
     }
+
+    @Override
+    public String toString() {
+        return idCriatura + " | Militar (Vivo) | " + nomeEquipa + " | " + nome
+                + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
+    }
 }

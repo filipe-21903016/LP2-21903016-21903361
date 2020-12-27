@@ -30,4 +30,10 @@ public class CriancaZombie extends Zombie {
     public String getImagePNG(){
         return "babyZombie.png";
     }
+
+    @Override
+    public String toString() {
+        return idCriatura + " | Criança (Zombie) | " + nomeEquipa + " | " + nome
+                + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";
+    }
 }

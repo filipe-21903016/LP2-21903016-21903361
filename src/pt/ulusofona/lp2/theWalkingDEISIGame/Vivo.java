@@ -35,6 +35,7 @@ abstract class Vivo extends Creature {
 
     public abstract boolean move(int xD, int yD);
 
+    @Override
     public String toString() {
         return idCriatura + " | Humano | " + nomeEquipa + " | " + nome
                 + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";

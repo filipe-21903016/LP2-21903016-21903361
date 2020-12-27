@@ -38,4 +38,10 @@ public class Cao extends Vivo {
     public String getImagePNG(){
         return "dog.png";
     }
+
+    @Override
+    public String toString() {
+        return idCriatura + " | Cão | " + nomeEquipa + " | " + nome
+                + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
+    }
 }

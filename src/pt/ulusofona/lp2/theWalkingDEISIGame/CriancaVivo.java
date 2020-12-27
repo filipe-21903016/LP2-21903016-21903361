@@ -36,4 +36,10 @@ public class CriancaVivo extends Vivo {
     public String getImagePNG(){
         return "baby.png";
     }
+
+    @Override
+    public String toString() {
+        return idCriatura + " | Criança (Vivo) | " + nomeEquipa + " | " + nome
+                + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
+    }
 }
