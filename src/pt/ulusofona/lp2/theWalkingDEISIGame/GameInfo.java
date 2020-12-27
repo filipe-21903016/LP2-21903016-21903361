@@ -93,6 +93,15 @@ public class GameInfo {
         return nrColumns;
     }
 
+    public boolean isDoorToSafeHaven(int x, int y) {
+        for (SafeHaven sf :safeHavenDoors) {
+            if (sf.equals(new SafeHaven(x, y))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public HashMap<Integer, Creature> getCreatureHashMap() {
         return creatureHashMap;
     }

@@ -7,7 +7,7 @@ public class AdultoZombie extends Zombie {
 
     @Override
     public boolean isValidMove(int xO, int yO, int xD, int yD) {
-        if (xO == xD && yO == yD) {
+        if (xO == xD && yO == yD ) {
             return false;
         }
         return (xD == xO && yD >= yO - 2 && yD <= yO + 2) || (yD == yO && xD >= xO - 2 && xD <= xO + 2) ||

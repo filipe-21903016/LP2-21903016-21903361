@@ -115,10 +115,7 @@ public class TWDGameManager {
     }
 
     public boolean isInsideBounds(int x, int y) {
-        if (x < 0 || y < 0 || y >= gameInfo.getNrLines() || x >= gameInfo.getNrColumns()) {
-            return false;
-        }
-        return true;
+        return x >= 0 && y >= 0 && y < gameInfo.getNrLines() && x < gameInfo.getNrColumns();
     }
 
 
@@ -127,7 +124,6 @@ public class TWDGameManager {
         if (!isInsideBounds(xD, yD)) {
             return false;
         }
-
         int idCriatura = getElementId(xO, yO);
         int idEquipment = getElementId(xD, yD);
         if (gameInfo.getCreatureHashMap().containsKey(idCriatura)) {
@@ -141,8 +137,6 @@ public class TWDGameManager {
                 gameInfo.nextTurn();
                 return true;
             }
-
-
         }
         return false;
     }
@@ -212,7 +206,6 @@ public class TWDGameManager {
     }
 
     public boolean isDay() {
-        GameInfo gameInfo = GameInfo.getInstance();
         return gameInfo.isDay();
     }
 
@@ -244,12 +237,7 @@ public class TWDGameManager {
     }
 
     public boolean isDoorToSafeHaven(int x, int y) {
-        for (SafeHaven sf : gameInfo.getSafeHavens()) {
-            if (sf.equals(new SafeHaven(x, y))) {
-                return true;
-            }
-        }
-        return false;
+        return gameInfo.isDoorToSafeHaven(x,y);
     }
 
     public int getEquipmentId(int creatureId) {
@@ -262,13 +250,11 @@ public class TWDGameManager {
     }
 
     public List<Integer> getIdsInSafeHaven() {
-        List<Integer> result = new ArrayList<>();
-        for (Creature creature : gameInfo.getCreatures()) {
-            if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())) {
-                result.add(creature.getId());
-            }
+        List<Integer> survivors = new ArrayList<>();
+        for(Creature creature: SafeHaven.survivors){
+            survivors.add(creature.idCriatura);
         }
-        return result;
+        return survivors;
     }
 
     public boolean saveGame(File fich) {
