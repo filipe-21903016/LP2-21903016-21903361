@@ -8,9 +8,9 @@ import org.junit.Test;
 import java.io.File;
 import java.util.ArrayList;
 
-public class MilitarTests {
+public class MilitarVivoTests {
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("src/Tests/MilitarTestData.txt");
+    File fich = new File("src/Tests/MilitarVivoTestData.txt");
 
     @Test
     public void outOfBounds1() {
