@@ -10,9 +10,11 @@ public class MilitarVivo extends Vivo {
         if (xO == xD && yO == yD) {
             return false;
         }
-        return (xD == xO && yD >= yO - 3 && yD <= yO + 3) || (yD == yO && xD >= xO - 3 && xD <= xO + 3) ||
-                (xD == yD && xD <= xO + 3 && xD >= xO - 3) || (xD == -1 * yD && xD <= xO + 3 && xD >= xO - 3);
-
+        int xOffset=xD-xO;
+        int yOffset=yD-yO;
+        return (xD==xO && yD <= yO + 3 && yD >= yO - 3) /*VERTICAL*/
+                || (yD == yO && xD<= xO + 3 && xD >= xO - 3) /*HORIZONTAL*/
+                || (Math.abs(xOffset) == Math.abs(yOffset) && Math.abs(xOffset) < 4 && Math.abs(yOffset) < 4); /*DIAGONAIS*/
     }
 
     @Override

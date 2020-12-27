@@ -29,7 +29,8 @@ public class IdosoVivo extends Vivo {
         if ((xO == xD && yO == yD) || !gameInfo.isDay()) {
             return false;
         }
-        return (xD != yD && xD >= xO - 1 && xD <= xO + 1 && yD >= yO - 1 && yD <= yO + 1);
+        return (xD==xO && yD <= yO + 1 && yD >= yO - 1) /*VERTICAL*/
+                || (yD == yO && xD<= xO + 1 && xD >= xO - 1); /*HORIZONTAL*/
     }
 
     public String getImagePNG() {

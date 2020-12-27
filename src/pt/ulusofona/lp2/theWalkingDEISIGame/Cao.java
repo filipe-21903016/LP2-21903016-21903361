@@ -10,7 +10,10 @@ public class Cao extends Vivo {
         if (xO == xD && yO == yD) {
             return false;
         }
-        return (xD == yD && xD <= xO + 2 && xD >= xO - 2) || (xD == -1 * yD && xD <= xO + 2 && xD >= xO - 2);
+        int xOffset=xD-xO;
+        int yOffset=yD-yO;
+        return (Math.abs(xOffset) == Math.abs(yOffset) && Math.abs(xOffset) < 3 && Math.abs(yOffset) < 3);
+        /*DIAGONAIS*/
     }
 
     @Override
