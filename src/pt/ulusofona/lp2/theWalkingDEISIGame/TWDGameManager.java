@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/*trying to figure this out*/
+
 public class TWDGameManager {
     public TWDGameManager() {
     }
