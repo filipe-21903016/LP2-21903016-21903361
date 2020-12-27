@@ -124,23 +124,6 @@ public class GameInfo {
     }
 
     //Others
-    
-    /*public void addCreature(int idCriatura, int idType
-            , String name, int posX, int posY) {
-        if (humanoHashMap.containsKey(idCriatura) || zombieHashMap.containsKey(idCriatura)) {
-            return;
-        }
-
-        if (idType == idZombie) {
-            Zombie zombie = new Zombie(idCriatura, name, posX, posY);
-            zombies.add(zombie);
-            zombieHashMap.put(zombie.getId(), zombie);
-        } else {
-            Humano human = new Humano(idCriatura, name, posX, posY);
-            humans.add(human);
-            humanoHashMap.put(human.getId(), human);
-        }
-    }*/
 
     public void addCreature(Creature creature) {
         creatures.add(creature);
@@ -154,16 +137,6 @@ public class GameInfo {
         this.safeHavens.add(sf);
     }
 
-    /*
-    public void addEquipment(int id, int idTipo, int posX, int posY) {
-        if (equipamentoHashMap.containsKey(id)) {
-            return;
-        }
-        Equipamento equipamento = new Equipamento(id, idTipo, posX, posY);
-        equipments.add(equipamento);
-        equipamentoHashMap.put(equipamento.getId(), equipamento);
-    }
-    */
 
     public int nextTurn() {
         this.currentTeamID = (currentTeamID == idTeamVivos) ? idTeamMortos : idTeamVivos;

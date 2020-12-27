@@ -144,43 +144,6 @@ public class TWDGameManager {
 
 
         }
-
-
-        /*
-        if (gameInfo.getHumanoHashMap().containsKey(idCriatura)
-                && gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos()) {
-
-            Vivo vivo = gameInfo.getVivoById(idCriatura);
-            System.out.println(vivo);
-            if (idEquipment != 0) {
-                Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
-                if (vivo.getEquipment()!=null) {
-                    Equipamento equipamentDroped = vivo.dropEquipment();
-                    gameInfo.addEquipment(equipamentDroped); //adds the dropped equipment to structures
-                }
-                vivo.pickEquipment(equipamento);
-                gameInfo.removeEquipment(equipamento); //removes picked item from structures
-            }
-            vivo.setCoordinates(xD, yD);
-            System.out.println(vivo);
-            gameInfo.nextTurn();
-            return true;
-        }
-        if (gameInfo.getZombieHashMap().containsKey(idCriatura)
-                && gameInfo.getCurrentTeamID()==gameInfo.getIdTeamMortos()) {
-
-            Zombie zombie = gameInfo.getZombieById(idCriatura);
-            System.out.println(zombie);
-            if (idEquipment != 0) {
-                Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);
-                zombie.destroyEquiment();
-                gameInfo.removeEquipment(equipamento);
-            }
-            zombie.setCoordinates(xD, yD);
-            gameInfo.nextTurn();
-            System.out.println(zombie);
-            return true;
-        }*/
         return false;
     }
 
@@ -230,29 +193,7 @@ public class TWDGameManager {
         return 0;
     }
 
-    /*public List<String> getSurvivors() {
-        ArrayList<String> survivors = new ArrayList<>();
-        if (gameIsOver()) {
-            survivors.add("Nr. de turnos terminados:");
-            survivors.add(String.valueOf(gameInfo.getNrTurno()));
-            survivors.add("");
-            survivors.add("OS VIVOS\n");
-
-            for (Vivo vivo : gameInfo.getHumans()) {
-                survivors.add(vivo.idCriatura + " " + vivo.nome);
-            }
-            survivors.add(" ");
-            survivors.add("OS OUTROS\n");
-
-            for (Zombie zombie : gameInfo.getZombies()) {
-                survivors.add(zombie.idCriatura + " (antigamente conhecido como " + zombie.nome
-                        + ")");
-            }
-        }
-        return survivors;
-    }*/
-
-    public List<String> getGameResults() { //TODO make function
+    public List<String> getGameResults() {
         ArrayList<String> results = new ArrayList<>();
         if (gameIsOver()) {
             results.add("Nr. de turnos terminados:");
@@ -294,14 +235,6 @@ public class TWDGameManager {
         return gameInfo.isDay();
     }
 
-    /*public boolean hasEquipment(int creatureId, int equipmentTypeId) {
-        Vivo vivo = (Vivo) gameInfo.getCreatureById(creatureId);
-        if (vivo != null && vivo.getEquipment() != null) {
-            return vivo.getEquipment().getIdTipo() == equipmentTypeId;
-        }
-        return false;
-    }*/
-
     public List<Creature> getCreatures() {
         return gameInfo.getCreatures();
     }
@@ -318,7 +251,7 @@ public class TWDGameManager {
         return gameInfo.getEquipmentById(equipmentId).getIdTipo();
     }
 
-    public String getEquipmentInfo(int equipmentId) { //TODO change to OOP
+    public String getEquipmentInfo(int equipmentId) {
         Equipamento equipamento = gameInfo.getEquipmentById(equipmentId);
         return equipamento.getInfo();
     }
