@@ -2,7 +2,6 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 abstract class Zombie extends Creature {
     protected String nomeEquipa = "Os Outros";
-    protected int equipmentsDestroyed;
 
     public Zombie(int idCriatura, int idType,String nome, int posX, int posY) {
         super(idCriatura,idType, nome, posX, posY);
@@ -10,7 +9,7 @@ abstract class Zombie extends Creature {
     }
 
     void destroyEquiment(){
-        this.equipmentsDestroyed++;
+        this.equipamentos++;
     }
 
     public String getImagePNG() {
@@ -25,9 +24,9 @@ abstract class Zombie extends Creature {
     public String toString() {
         if(dead){
             return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
-                    + " " + equipmentsDestroyed + " @ RIP";
+                    + " " + equipamentos + " @ RIP";
         }
         return idCriatura + " | " + nomeTipo + " | " + nomeEquipa + " | " + nome
-                + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";
+                + " " + equipamentos + " @ (" + posX + ", " + posY + ")";
     }
 }

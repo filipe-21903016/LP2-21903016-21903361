@@ -5,7 +5,6 @@ import java.io.SyncFailedException;
 abstract class Vivo extends Creature {
     protected Equipamento equipment;
     protected String nomeEquipa = "Os Vivos";
-    protected int pickedEquipments;
     protected boolean safe;
 
     public Vivo(int idCriatura, int idType, String nome, int posX, int posY) {
@@ -16,7 +15,7 @@ abstract class Vivo extends Creature {
     void pickEquipment(Equipamento equipamento) {
         this.equipment = equipamento;
         equipamento.setPicked();
-        pickedEquipments++;
+        equipamentos++;
     }
 
     Equipamento dropEquipment() {
@@ -49,14 +48,14 @@ abstract class Vivo extends Creature {
     public String toString() {
         if(safe){
             return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
-                    + " " + pickedEquipments + " @ A salvo";
+                    + " " + equipamentos + " @ A salvo";
         }
         if(dead){
             return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
-                    + " " + pickedEquipments + " @ RIP";
+                    + " " + equipamentos + " @ RIP";
         }
         return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
-                + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
+                + " " + equipamentos + " @ (" + posX + ", " + posY + ")";
     }
 
 

@@ -9,6 +9,7 @@ public abstract class Creature {
     protected int teamId;
     protected String nomeTipo;
     protected boolean dead;
+    protected int equipamentos;
 
 
     public Creature(int idCriatura,int idType, String nome, int posX, int posY) {
@@ -52,4 +53,8 @@ public abstract class Creature {
 
     public abstract String getImagePNG();
 
+    @Override
+    public String toString() {
+        return "";
+    }
 }
