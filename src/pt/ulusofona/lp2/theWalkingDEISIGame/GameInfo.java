@@ -208,8 +208,28 @@ public class GameInfo {
             }
             index++;
         }
+        //remove from list
         equipments.remove(index);
+        //remove from hashmap
+        //equipamentoHashMap.remove(equipamento.getId());
     }
+
+    public void removeCreature(Creature creature) {
+        int index = 0;
+        for (Creature creature1 : creatures) {
+            if (creature.getId() == creature1.getId()) {
+                break;
+            }
+            index++;
+        }
+        //remove from list
+        creatures.remove(index);
+        //remove from hashmap
+        //creatureHashMap.remove(creature.getId());
+    }
+
+
+
 
 
 

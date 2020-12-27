@@ -135,12 +135,12 @@ public class TWDGameManager {
             if (creature.getTeamId() != gameInfo.getCurrentTeamID()) {
                 return false;
             }
-            System.out.println(creature);
-            if (creature.isValidMove(xO, yO, xD, yD)){ //TODO nao permite humano usarem a safe haven
-                creature.move(xD, yD);
+            //System.out.println(creature);
+            boolean obtained = creature.move(xO,yO,xD, yD);
+            if(obtained){
                 gameInfo.nextTurn();
-                return true;
             }
+            return obtained;
         }
         return false;
     }
@@ -253,14 +253,6 @@ public class TWDGameManager {
         }
     }
 
-    public List<Integer> getIdsInSafeHaven() {
-        List<Integer> survivors = new ArrayList<>();
-        for(Creature creature: SafeHaven.getSurvivors()){
-            survivors.add(creature.idCriatura);
-        }
-        return survivors;
-    }
-
     public boolean saveGame(File fich) {
         String gameDetails = "";
         try{
@@ -310,4 +302,13 @@ public class TWDGameManager {
 
         return resultado;
     }
+
+    public List<Integer> getIdsInSafeHaven(){
+        ArrayList<Integer> ids = new ArrayList<>();
+        for(Vivo survivor : SafeHaven.getSurvivors()){
+            ids.add(survivor.getId());
+        }
+        return ids;
+    }
+
 }

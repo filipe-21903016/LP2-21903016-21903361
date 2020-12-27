@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class TestAdultoVivo {
@@ -223,5 +224,15 @@ public class TestAdultoVivo {
         gameManager.loadGame(fich);
         boolean obtained = gameManager.move(3,3,0,6);
         Assert.assertEquals(false,obtained);
+    }
+
+    @Test
+    public void moveToSafeHaven(){
+        gameManager.loadGame(fich);
+        gameManager.move(3,3,4,4);
+        ArrayList<Integer> expected = new ArrayList<>();
+        expected.add(1);
+        ArrayList<Integer> obtained = (ArrayList<Integer>) gameManager.getIdsInSafeHaven();
+        Assert.assertEquals(expected,obtained);
     }
 }

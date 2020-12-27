@@ -37,4 +37,8 @@ public class SafeHaven {
     public static ArrayList<Vivo> getSurvivors() {
         return survivors;
     }
+
+    public static void addSurvivor(Vivo survivor){
+        survivors.add(survivor);
+    }
 }

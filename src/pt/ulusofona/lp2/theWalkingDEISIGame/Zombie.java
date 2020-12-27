@@ -17,14 +17,16 @@ abstract class Zombie extends Creature {
         return "zombie.png";
     }
 
-    public abstract boolean move(int xD, int yD);
-
     public int getTeamId() {
         return teamId;
     }
 
     @Override
     public String toString() {
+        if(dead){
+            return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
+                    + " " + equipmentsDestroyed + " @ RIP";
+        }
         return idCriatura + " | " + nomeTipo + " | " + nomeEquipa + " | " + nome
                 + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";
     }

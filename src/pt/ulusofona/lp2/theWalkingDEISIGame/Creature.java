@@ -8,6 +8,7 @@ public abstract class Creature {
     protected int posY;
     protected int teamId;
     protected String nomeTipo;
+    protected boolean dead;
 
 
     public Creature(int idCriatura,int idType, String nome, int posX, int posY) {
@@ -17,8 +18,6 @@ public abstract class Creature {
         this.posX = posX;
         this.posY = posY;
     }
-
-    public abstract boolean isValidMove(int xO, int yO, int xD, int yD);
 
     public int getPosX() {
         return posX;
@@ -49,7 +48,7 @@ public abstract class Creature {
         this.posY = y;
     }
 
-    public abstract boolean move(int xD, int yD);
+    public abstract boolean move(int xO,int yO,int xD, int yD);
 
     public abstract String getImagePNG();
 

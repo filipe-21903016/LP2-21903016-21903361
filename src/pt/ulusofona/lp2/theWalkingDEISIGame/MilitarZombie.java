@@ -6,8 +6,7 @@ public class MilitarZombie extends Zombie {
         nomeTipo="Militar (Zombie)";
     }
 
-    @Override
-    public boolean isValidMove(int xO, int yO, int xD, int yD) {
+    private boolean isValidMove(int xO, int yO, int xD, int yD) {
         if (xO == xD && yO == yD) {
             return false;
         }
@@ -19,8 +18,12 @@ public class MilitarZombie extends Zombie {
     }
 
     @Override
-    public boolean move(int xD, int yD) {
+    public boolean move(int xO,int yO,int xD, int yD){
         GameInfo gameInfo = GameInfo.getInstance();
+        if(!isValidMove(xO, yO, xD, yD) || gameInfo.isDoorToSafeHaven(xD,yD)){
+            return false;
+        }
+
         int id = gameInfo.getElementId(xD,yD);
         if(id<0){
             Equipamento equipamento = gameInfo.getEquipmentById(id);

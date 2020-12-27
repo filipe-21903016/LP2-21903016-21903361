@@ -6,8 +6,7 @@ public class AdultoVivo extends Vivo {
         nomeTipo="Adulto (Vivo)";
     }
 
-    @Override
-    public boolean isValidMove(int xO, int yO, int xD, int yD) {
+    private boolean isValidMove(int xO, int yO, int xD, int yD) {
         if (xO == xD && yO == yD) {
             return false;
         }
@@ -19,9 +18,11 @@ public class AdultoVivo extends Vivo {
     }
 
     @Override
-    public boolean move(int xD, int yD) {
-        //se xd,yd tem equipamento apanha
-        // caso tenhamos equipamento dropamos e apanhamos a nova
+    public boolean move(int xO,int yO,int xD, int yD){
+        if(!isValidMove(xO, yO, xD, yD)){
+            return false;
+        }
+
         GameInfo gameInfo = GameInfo.getInstance();
         int id = gameInfo.getElementId(xD,yD);
         if(id<0){ //entao é id de equipamento
@@ -32,6 +33,12 @@ public class AdultoVivo extends Vivo {
              pickEquipment(equipamento);
              gameInfo.removeEquipment(equipamento);
         }
+        if (id==0 && gameInfo.isDoorToSafeHaven(xD, yD)){
+            //add to safehaven
+            enterSafeHaven();
+            return true;
+        }
+
         posX = xD;
         posY = yD;
         return true;

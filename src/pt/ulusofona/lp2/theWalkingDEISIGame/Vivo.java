@@ -6,6 +6,7 @@ abstract class Vivo extends Creature {
     protected Equipamento equipment;
     protected String nomeEquipa = "Os Vivos";
     protected int pickedEquipments;
+    protected boolean safe;
 
     public Vivo(int idCriatura, int idType, String nome, int posX, int posY) {
         super(idCriatura, idType, nome, posX, posY);
@@ -27,6 +28,11 @@ abstract class Vivo extends Creature {
         return currentEquipment;
     }
 
+    public void enterSafeHaven(){
+        this.safe=true;
+        SafeHaven.addSurvivor(this);
+    }
+
     public Equipamento getEquipment() {
         return equipment;
     }
@@ -35,27 +41,24 @@ abstract class Vivo extends Creature {
         return "steve.png";
     }
 
-    public abstract boolean move(int xD, int yD);
-
     public int getTeamId() {
         return teamId;
     }
 
-    public abstract boolean isValidMove(int xO, int yO, int xD, int yD);
-
-    public boolean isInSafeHaven(){
-        for(Vivo survivor: SafeHaven.getSurvivors()){
-            if(survivor.getId() == idCriatura){
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public String toString() {
+        if(safe){
+            return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
+                    + " " + pickedEquipments + " @ A salvo";
+        }
+        if(dead){
+            return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
+                    + " " + pickedEquipments + " @ RIP";
+        }
         return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
                 + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
     }
+
+
 }
 
