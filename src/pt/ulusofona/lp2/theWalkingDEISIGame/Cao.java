@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 public class Cao extends Vivo {
     public Cao(int idCriatura, String nome, int posX, int posY) {
         super(idCriatura,9,nome, posX, posY);
+        nomeTipo="Cão";
     }
 
     @Override
@@ -39,9 +40,4 @@ public class Cao extends Vivo {
         return "dog.png";
     }
 
-    @Override
-    public String toString() {
-        return idCriatura + " | Cão | " + nomeEquipa + " | " + nome
-                + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
-    }
 }

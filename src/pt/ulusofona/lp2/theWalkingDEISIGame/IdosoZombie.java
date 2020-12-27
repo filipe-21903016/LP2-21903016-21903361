@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 public class IdosoZombie extends Zombie {
     public IdosoZombie(int idCriatura, String nome, int posX, int posY) {
         super(idCriatura,3, nome, posX, posY);
+        nomeTipo="Idoso (Zombie)";
     }
 
     @Override
@@ -32,11 +33,6 @@ public class IdosoZombie extends Zombie {
         return "oldZombie.png";
     }
 
-    @Override
-    public String toString() {
-        return idCriatura + " | Idoso (Zombie) | " + nomeEquipa + " | " + nome
-                + " " + equipmentsDestroyed + " @ (" + posX + ", " + posY + ")";
-    }
 
 
 }

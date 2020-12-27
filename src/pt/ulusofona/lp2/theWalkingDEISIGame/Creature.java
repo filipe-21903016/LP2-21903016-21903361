@@ -7,6 +7,7 @@ public abstract class Creature {
     protected int posX;
     protected int posY;
     protected int teamId;
+    protected String nomeTipo;
 
 
     public Creature(int idCriatura,int idType, String nome, int posX, int posY) {
@@ -52,14 +53,4 @@ public abstract class Creature {
 
     public abstract String getImagePNG();
 
-    @Override
-    public String toString() {
-        return "Creature{" +
-                "idCriatura=" + idCriatura +
-                ", idType=" + idType +
-                ", nome='" + nome + '\'' +
-                ", posX=" + posX +
-                ", posY=" + posY +
-                '}';
-    }
 }

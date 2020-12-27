@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
+import java.io.SyncFailedException;
+
 abstract class Vivo extends Creature {
     protected Equipamento equipment;
     protected String nomeEquipa = "Os Vivos";
@@ -35,16 +37,25 @@ abstract class Vivo extends Creature {
 
     public abstract boolean move(int xD, int yD);
 
-    @Override
-    public String toString() {
-        return idCriatura + " | Humano | " + nomeEquipa + " | " + nome
-                + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
-    }
-
     public int getTeamId() {
         return teamId;
     }
 
     public abstract boolean isValidMove(int xO, int yO, int xD, int yD);
+
+    public boolean isInSafeHaven(){
+        for(Vivo survivor: SafeHaven.getSurvivors()){
+            if(survivor.getId() == idCriatura){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
+                + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
+    }
 }
 

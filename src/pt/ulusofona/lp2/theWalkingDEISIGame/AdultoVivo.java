@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 public class AdultoVivo extends Vivo {
     public AdultoVivo(int idCriatura, String nome, int posX, int posY) {
         super(idCriatura,6, nome, posX, posY);
+        nomeTipo="Adulto (Vivo)";
     }
 
     @Override
@@ -40,9 +41,4 @@ public class AdultoVivo extends Vivo {
         return "steve.png";
     }
 
-    @Override
-    public String toString() {
-        return idCriatura + " | Adulto (Vivo) | " + nomeEquipa + " | " + nome
-                + " " + pickedEquipments + " @ (" + posX + ", " + posY + ")";
-    }
 }
