@@ -17,7 +17,16 @@ public class VampiroZombie extends Zombie {
 
     @Override
     public boolean move(int xD, int yD) {
-        return false;
+        GameInfo gameInfo = GameInfo.getInstance();
+        int id = gameInfo.getElementId(xD,yD);
+        if(id<0){
+            Equipamento equipamento = gameInfo.getEquipmentById(id);
+            destroyEquiment();
+            gameInfo.removeEquipment(equipamento);
+        }
+        posX = xD;
+        posY = yD;
+        return true;
     }
 
     public String getImagePNG() {

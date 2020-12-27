@@ -9,7 +9,7 @@ abstract class Zombie extends Creature {
         teamId=20;
     }
 
-    void destroyEquiment() {
+    void destroyEquiment(){
         this.equipmentsDestroyed++;
     }
 

@@ -7,14 +7,12 @@ public class IdosoVivo extends Vivo {
 
     @Override
     public boolean move(int xD, int yD) {
-        //se xd,yd tem equipamento apanha
-        // caso tenhamos equipamento dropamos e apanhamos a nova
         GameInfo gameInfo = GameInfo.getInstance();
         int id = gameInfo.getElementId(xD,yD);
+        if(equipment!=null){
+            gameInfo.addEquipment(dropEquipment());
+        }
         if(id<0){ //entao é id de equipamento
-            if(equipment!=null){
-                dropEquipment();
-            }
             Equipamento equipamento = gameInfo.getEquipmentById(id);
             pickEquipment(equipamento);
             gameInfo.removeEquipment(equipamento);
@@ -30,7 +28,7 @@ public class IdosoVivo extends Vivo {
         if ((xO == xD && yO == yD) || !gameInfo.isDay()) {
             return false;
         }
-        return (xD != yD && xD > xO - 1 && xD < xO + 1 && yD > yO - 1 && yD < yO + 1);
+        return (xD != yD && xD >= xO - 1 && xD <= xO + 1 && yD >= yO - 1 && yD <= yO + 1);
     }
 
     public String getImagePNG() {
