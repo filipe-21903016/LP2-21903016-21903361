@@ -1,9 +1,14 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public class EscudoMadeira extends Equipamento {
+    int uses = 1;
     public EscudoMadeira(int id, int posX, int posY) {
         super(id, 0, posX, posY);
         super.titulo = "Escudo de Madeira";
+    }
+
+    public void setUses(int uses) {
+        this.uses = uses;
     }
 
     @Override

@@ -3,13 +3,12 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 //TODO make equipamento abstract and function getimagepng
 
 public class Equipamento {
-    String titulo;
-    int id;
-    int idTipo;
-    int posX;
-    int posY;
-    int uses;
-    boolean picked = false; // true if equipment is picked
+    protected String titulo;
+    protected int id;
+    protected int idTipo;
+    protected int posX;
+    protected int posY;
+    protected boolean picked = false; // true if equipment is picked
     //int info;  //TODO fazer o numero de usos restantes
 
     public int getId() {
