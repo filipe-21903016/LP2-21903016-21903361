@@ -1,0 +1,286 @@
+Index: src/pt/ulusofona/lp2/theWalkingDEISIGame/Creature.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pt.ulusofona.lp2.theWalkingDEISIGame;\r\n\r\npublic abstract class Creature {\r\n    protected int idCriatura;\r\n    protected int idType;\r\n    protected String nome;\r\n    protected int posX;\r\n    protected int posY;\r\n\r\n    public Creature(int idCriatura,int idType, String nome, int posX, int posY) {\r\n        this.idCriatura = idCriatura;\r\n        this.idType = idType;\r\n        this.nome = nome;\r\n        this.posX = posX;\r\n        this.posY = posY;\r\n    }\r\n\r\n    public abstract boolean isValidMove(int xO, int yO, int xD, int yD);\r\n\r\n    public int getPosX() {\r\n        return posX;\r\n    }\r\n\r\n    public int getPosY() {\r\n        return posY;\r\n    }\r\n\r\n    public int getId() {\r\n        return this.idCriatura;\r\n    }\r\n\r\n    public int getIdType() {\r\n        return idType;\r\n    }\r\n\r\n    public String getNome() {\r\n        return nome;\r\n    }\r\n\r\n    public void setCoordinates(int x, int y) {\r\n        this.posX = x;\r\n        this.posY = y;\r\n    }\r\n\r\n    public abstract boolean move(int xD, int yD);\r\n\r\n    public abstract String getImagePNG();\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Creature{\" +\r\n                \"idCriatura=\" + idCriatura +\r\n                \", idType=\" + idType +\r\n                \", nome='\" + nome + '\\'' +\r\n                \", posX=\" + posX +\r\n                \", posY=\" + posY +\r\n                '}';\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pt/ulusofona/lp2/theWalkingDEISIGame/Creature.java b/src/pt/ulusofona/lp2/theWalkingDEISIGame/Creature.java
+--- a/src/pt/ulusofona/lp2/theWalkingDEISIGame/Creature.java	(revision 88f9d97a4df506b9a688f96aef96171371652126)
++++ b/src/pt/ulusofona/lp2/theWalkingDEISIGame/Creature.java	(date 1609031684499)
+@@ -6,6 +6,7 @@
+     protected String nome;
+     protected int posX;
+     protected int posY;
++    protected int teamId;
+ 
+     public Creature(int idCriatura,int idType, String nome, int posX, int posY) {
+         this.idCriatura = idCriatura;
+@@ -37,6 +38,10 @@
+         return nome;
+     }
+ 
++    public int getTeamId() {
++        return teamId;
++    }
++
+     public void setCoordinates(int x, int y) {
+         this.posX = x;
+         this.posY = y;
+Index: src/pt/ulusofona/lp2/theWalkingDEISIGame/TWDGameManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pt.ulusofona.lp2.theWalkingDEISIGame;\r\n\r\nimport java.io.File;\r\nimport java.io.FileNotFoundException;\r\nimport java.io.FileWriter;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Scanner;\r\n\r\npublic class TWDGameManager {\r\n    public TWDGameManager() {\r\n    }\r\n\r\n    public GameInfo gameInfo = GameInfo.getInstance();\r\n\r\n    public boolean loadGame(File fich) {\r\n        try {\r\n            Scanner scanner = new Scanner(fich);\r\n            ArrayList<String> lines = new ArrayList<>();\r\n\r\n            //Scans all lines to list\r\n            while (scanner.hasNextLine()) {\r\n                lines.add(scanner.nextLine());\r\n            }\r\n            int currentLine = 0;\r\n\r\n            String[] data;\r\n            //Get nrColumns and nrLines\r\n            data = lines.get(currentLine).split(\" \");\r\n            int nrLines = Integer.parseInt(data[0]);\r\n            int nrColumns = Integer.parseInt(data[1]);\r\n            gameInfo.setNrLines(nrLines);\r\n            gameInfo.setNrColumns(nrColumns);\r\n            currentLine++;\r\n\r\n            //Get Id of starting team\r\n            data = lines.get(currentLine).split(\"\");\r\n            int id = Integer.parseInt(data[0]);\r\n            gameInfo.setFirstTeamID(id);\r\n            gameInfo.setCurrentTeamID(id);\r\n            currentLine++;\r\n\r\n            //Get number of creatures and their properties\r\n            data = lines.get(currentLine).split(\"\");\r\n            int nrCreatures = Integer.parseInt(data[0]);\r\n            currentLine++;\r\n\r\n            int maxLine = currentLine + nrCreatures;\r\n            for (; currentLine < maxLine; currentLine++) {\r\n                data = lines.get(currentLine).split(\" : \");\r\n                int idCreature = Integer.parseInt(data[0]);\r\n                int idType = Integer.parseInt(data[1]);\r\n                String nomeCriatura = data[2].trim();\r\n                int posX = Integer.parseInt(data[3]);\r\n                int posY = Integer.parseInt(data[4]);\r\n                Creature creature = CreatureFactory.makeCreature(idCreature, idType, nomeCriatura, posX, posY);\r\n                gameInfo.addCreature(creature);\r\n            }\r\n\r\n            data = lines.get(currentLine).split(\"\");\r\n            int nrEquipment = Integer.parseInt(data[0]);\r\n            currentLine++;\r\n\r\n            maxLine = currentLine + nrEquipment;\r\n            for (; currentLine < maxLine; currentLine++) {\r\n                data = lines.get(currentLine).split(\" : \");\r\n                int idEquipment = Integer.parseInt(data[0]);\r\n                //int idType = Integer.parseInt(data[1]);\r\n                int posX = Integer.parseInt(data[2]);\r\n                int posY = Integer.parseInt(data[3]);\r\n                Equipamento equipamento = EquipmentFactory.makeEquipment(idEquipment, posX, posY);\r\n                gameInfo.addEquipment(equipamento);\r\n            }\r\n\r\n            data = lines.get(currentLine).split(\"\");\r\n            int nrHavens = Integer.parseInt(data[0]);\r\n            currentLine++;\r\n\r\n            maxLine = currentLine + nrHavens;\r\n            for (; currentLine < maxLine; currentLine++) {\r\n                data = lines.get(currentLine).split(\" : \");\r\n                int posX = Integer.parseInt(data[0]);\r\n                int posY = Integer.parseInt(data[1]);\r\n                //TODO possivel fonte de erro\r\n                gameInfo.addSafeHaven(new SafeHaven(posX, posY));\r\n            }\r\n\r\n            scanner.close();\r\n            getInitialTeam();\r\n            //System.out.println(gameInfo.getHumans().get(0));\r\n\r\n            if (getInitialTeam() != getCurrentTeamId()) {\r\n                return false; //alterei isto segundo piaza//\r\n            }\r\n\r\n        } catch (FileNotFoundException e) {\r\n            return false;\r\n        }\r\n        return true;\r\n    }\r\n\r\n    public boolean startGame(File ficheiroInicial) {\r\n        return loadGame(ficheiroInicial);\r\n    }\r\n\r\n    public int[] getWorldSize() {\r\n        return new int[]{gameInfo.getNrLines(), gameInfo.getNrColumns()};\r\n    }\r\n\r\n    public int getInitialTeam() {\r\n        //System.out.println(gameInfo.getFirstTeamID());\r\n        return gameInfo.getFirstTeamID();\r\n    }\r\n\r\n    public boolean isInsideBounds(int x, int y) {\r\n        if (x < 0 || y < 0 || y >= gameInfo.getNrLines() || x >= gameInfo.getNrColumns()) {\r\n            return false;\r\n        }\r\n        return true;\r\n    }\r\n\r\n    public boolean move(int xO, int yO, int xD, int yD) {\r\n        //change valid moves, changes for diferent creatures\r\n        if (!isInsideBounds(xD, yD)) {\r\n            return false;\r\n        }\r\n\r\n        int idCriatura = getElementId(xO, yO);\r\n        int idEquipment = getElementId(xD, yD);\r\n        if (gameInfo.getCurrentTeamID() == gameInfo.getFirstTeamID() &&\r\n                gameInfo.getCreatureHashMap().containsKey(idCriatura)) {\r\n            Creature creature = gameInfo.getCreatureById(idCriatura);\r\n            System.out.println(creature);\r\n            if (creature.isValidMove(xO, yO, xD, yD)) {\r\n                creature.move(xD, yD); //NOT FINISHED\r\n                return true;\r\n            }\r\n\r\n\r\n        }\r\n\r\n\r\n        /*\r\n        if (gameInfo.getHumanoHashMap().containsKey(idCriatura)\r\n                && gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos()) {\r\n\r\n            Vivo vivo = gameInfo.getVivoById(idCriatura);\r\n            System.out.println(vivo);\r\n            if (idEquipment != 0) {\r\n                Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);\r\n                if (vivo.getEquipment()!=null) {\r\n                    Equipamento equipamentDroped = vivo.dropEquipment();\r\n                    gameInfo.addEquipment(equipamentDroped); //adds the dropped equipment to structures\r\n                }\r\n                vivo.pickEquipment(equipamento);\r\n                gameInfo.removeEquipment(equipamento); //removes picked item from structures\r\n            }\r\n            vivo.setCoordinates(xD, yD);\r\n            System.out.println(vivo);\r\n            gameInfo.nextTurn();\r\n            return true;\r\n        }\r\n        if (gameInfo.getZombieHashMap().containsKey(idCriatura)\r\n                && gameInfo.getCurrentTeamID()==gameInfo.getIdTeamMortos()) {\r\n\r\n            Zombie zombie = gameInfo.getZombieById(idCriatura);\r\n            System.out.println(zombie);\r\n            if (idEquipment != 0) {\r\n                Equipamento equipamento = gameInfo.getEquipamentoHashMap().get(idEquipment);\r\n                zombie.destroyEquiment();\r\n                gameInfo.removeEquipment(equipamento);\r\n            }\r\n            zombie.setCoordinates(xD, yD);\r\n            gameInfo.nextTurn();\r\n            System.out.println(zombie);\r\n            return true;\r\n        }*/\r\n        return false;\r\n    }\r\n\r\n    public boolean gameIsOver() {\r\n        /*for (Creature creature : getCreatures()) {\r\n            if ((!(creature.getIdType() == 5 && creature.getIdType() == 6 && creature.getIdType() == 7\r\n                && creature.getIdType() == 8 && creature.getIdType() == 9)) ||\r\n                gameInfo.getNrTurno() == gameInfo.getNrMaxTurnos()) {\r\n                return true;\r\n            }\r\n        } //TODO esta condição esta errada,para testar comentei o codigo ate podermos fazer a funcao definitiva\r\n         */\r\n        return false;\r\n    }\r\n\r\n    public List<String> getAuthors() {\r\n        ArrayList<String> creditos = new ArrayList<>();\r\n        creditos.add(\"Filipe Coutinho 21903016\");\r\n        creditos.add(\"Tomás Neto 21903361\");\r\n        return creditos;\r\n    }\r\n\r\n    public int getCurrentTeamId() {\r\n        return gameInfo.getCurrentTeamID();\r\n    }\r\n\r\n    public int getElementId(int x, int y) {\r\n        for (SafeHaven sf : gameInfo.getSafeHavens()) {\r\n            if (sf.getPosY() == y && sf.getPosX() == x) {\r\n                return 0;\r\n            }\r\n        }\r\n\r\n        for (Creature c : gameInfo.getCreatures()) {\r\n            if (c.getPosY() == y && c.getPosX() == x) {\r\n                return c.getId();\r\n            }\r\n        }\r\n\r\n        for (Equipamento equipamento : gameInfo.getEquipments()) {\r\n            if (equipamento.getPosY() == y && equipamento.getPosX() == x) {\r\n                return equipamento.getId();\r\n            }\r\n        }\r\n\r\n        return 0;\r\n    }\r\n\r\n    /*public List<String> getSurvivors() {\r\n        ArrayList<String> survivors = new ArrayList<>();\r\n        if (gameIsOver()) {\r\n            survivors.add(\"Nr. de turnos terminados:\");\r\n            survivors.add(String.valueOf(gameInfo.getNrTurno()));\r\n            survivors.add(\"\");\r\n            survivors.add(\"OS VIVOS\\n\");\r\n\r\n            for (Vivo vivo : gameInfo.getHumans()) {\r\n                survivors.add(vivo.idCriatura + \" \" + vivo.nome);\r\n            }\r\n            survivors.add(\" \");\r\n            survivors.add(\"OS OUTROS\\n\");\r\n\r\n            for (Zombie zombie : gameInfo.getZombies()) {\r\n                survivors.add(zombie.idCriatura + \" (antigamente conhecido como \" + zombie.nome\r\n                        + \")\");\r\n            }\r\n        }\r\n        return survivors;\r\n    }*/\r\n\r\n    public List<String> getGameResults() { //TODO make function\r\n        ArrayList<String> results = new ArrayList<>();\r\n        if (gameIsOver()){\r\n            results.add(\"Nr. de turnos terminados:\");\r\n            results.add(gameInfo.getNrTurno() + \"\");\r\n            results.add(\"\");\r\n            results.add(\"Ainda pelo bairro:\");\r\n            results.add(\"\");\r\n            results.add(\"OS VIVOS\");\r\n            results.add(\"\");\r\n            for (Creature creature : gameInfo.getCreatures()){\r\n                if (creature.getIdType() > 4 && creature.getIdType() < 10){\r\n                    results.add(creature.getId() + \" (antigamente conhecido como \" + creature.getNome()+ \")\");\r\n                }\r\n            results.add(\"\");\r\n            results.add(\"OS OUTROS\");\r\n            results.add(\"\");\r\n                if (creature.getIdType() >= 0 && creature.getIdType() < 5){\r\n                    results.add(creature.getId() + \" (antigamente conhecido como \" + creature.getNome()+ \")\");\r\n                }\r\n            results.add(\"\");\r\n            results.add(\"Num Safe haven:\");\r\n            results.add(\"\");\r\n            results.add(\"OS VIVOS\");\r\n            if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())){\r\n            results.add(creature.getIdType() + \" \" + creature.getNome());\r\n            }\r\n            results.add(\"\");\r\n            results.add(\"Envenenados / Destruidos\");\r\n            results.add(\"\");\r\n            results.add(\"OS VIVOS\");\r\n            //TODO adicionar os que ja nao estao em campo (não sei fazer ainda)\r\n            }\r\n        }\r\n        return results;\r\n    }\r\n\r\n    public boolean isDay() {\r\n        GameInfo gameInfo = GameInfo.getInstance();\r\n        return gameInfo.getNrTurno() == 0 || gameInfo.getNrTurno() == 1 ||\r\n                gameInfo.getNrTurno() == 4\r\n                || gameInfo.getNrTurno() == 5 || gameInfo.getNrTurno() == 8 ||\r\n                gameInfo.getNrTurno() == 9 || gameInfo.getNrTurno() == 12;\r\n\r\n    }\r\n\r\n    /*public boolean hasEquipment(int creatureId, int equipmentTypeId) {\r\n        Vivo vivo = (Vivo) gameInfo.getCreatureById(creatureId);\r\n        if (vivo != null && vivo.getEquipment() != null) {\r\n            return vivo.getEquipment().getIdTipo() == equipmentTypeId;\r\n        }\r\n        return false;\r\n    }*/\r\n\r\n    public List<Creature> getCreatures() {\r\n        return gameInfo.getCreatures();\r\n    }\r\n\r\n    public List<SafeHaven> getSafeHaven() {\r\n        return gameInfo.getSafeHavens();\r\n    }\r\n\r\n    public List<Equipamento> getEquipments() {\r\n        return  gameInfo.getEquipments();\r\n    }\r\n\r\n    public int getEquipmentTypeId(int equipmentId) {\r\n        return gameInfo.getEquipmentById(equipmentId).getIdTipo();\r\n    }\r\n\r\n    public String getEquipmentInfo(int equipmentId) { //TODO change to OOP\r\n        Equipamento equipamento = gameInfo.getEquipmentById(equipmentId);\r\n        return equipamento.getInfo();\r\n    }\r\n\r\n    public boolean isDoorToSafeHaven(int x, int y) {\r\n        for (SafeHaven sf : gameInfo.getSafeHavens()) {\r\n            if (sf.equals(new SafeHaven(x, y))) {\r\n                return true;\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n\r\n    public int getEquipmentId(int creatureId) {\r\n        try {\r\n            Vivo creature = (Vivo) gameInfo.getCreatureById(creatureId);\r\n            return creature.getEquipment().getId();\r\n        } catch (NullPointerException | ClassCastException exception) {\r\n            return 0;\r\n        }\r\n    }\r\n\r\n    public List<Integer> getIdsInSafeHaven(){\r\n        List<Integer> result = new ArrayList<>();\r\n        for (Creature creature : gameInfo.getCreatures()){\r\n            if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())){\r\n                result.add(creature.getId());\r\n            }\r\n        }\r\n        return result;\r\n    }\r\n\r\n    public boolean saveGame(File fich){\r\n        try{\r\n            FileWriter doc = new FileWriter(fich);\r\n            doc.write(getWorldSize()[0] + \" \" + getWorldSize()[1]);\r\n            doc.write(getCurrentTeamId());\r\n            doc.write(getCreatures().size());\r\n\r\n            for (Creature creature : getCreatures()){\r\n                doc.write(creature.getId() + \" : \" + creature.getIdType() + \" : \" + creature.getNome() + \" : \" +\r\n                        creature.getPosX() + \" : \" + creature.getPosY());\r\n            }\r\n\r\n            doc.write(getEquipments().size());\r\n\r\n            for (Equipamento equip : getEquipments()){\r\n                doc.write(equip.getId() + \" : \" + equip.getIdTipo() + \" : \" + equip.getPosX() +\r\n                        \" : \" + equip.getPosY());\r\n            }\r\n\r\n            doc.write(getSafeHaven().size());\r\n\r\n            for (SafeHaven sf : getSafeHaven()){\r\n                doc.write(sf.getPosX() + \" : \" + sf.getPosY());\r\n            }\r\n            return true;\r\n\r\n        } catch (IOException e) {\r\n            return false;\r\n        }\r\n    }\r\n\r\n    public String[] popCultureExtravaganza(){\r\n        String[] resultado = new String[14];\r\n        resultado[0] = \"Resident Evil\";\r\n        resultado[1] = \"The Evil Dead\";\r\n        resultado[2] = \"Trick 'r Treat\";\r\n        resultado[3] = \"Dread\";\r\n        resultado[4] = \"Freaky Stories\";\r\n        resultado[5] = \"The Return of the Living Dead\";\r\n        resultado[6] = \"The Mandalorian\";\r\n        resultado[7] = \"1996\";\r\n        resultado[8] = \"Kill Bill\";\r\n        resultado[9] = \"1978\";\r\n        resultado[10] = \"James Bond\";\r\n        resultado[11] = \"The Walking Dead\";\r\n        resultado[12] = \"Chocho\";\r\n        resultado[13] = \"Freddie Mercury\";\r\n\r\n        return resultado;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pt/ulusofona/lp2/theWalkingDEISIGame/TWDGameManager.java b/src/pt/ulusofona/lp2/theWalkingDEISIGame/TWDGameManager.java
+--- a/src/pt/ulusofona/lp2/theWalkingDEISIGame/TWDGameManager.java	(revision 88f9d97a4df506b9a688f96aef96171371652126)
++++ b/src/pt/ulusofona/lp2/theWalkingDEISIGame/TWDGameManager.java	(date 1609031832394)
+@@ -36,7 +36,7 @@
+ 
+             //Get Id of starting team
+             data = lines.get(currentLine).split("");
+-            int id = Integer.parseInt(data[0]);
++            int id = Integer.parseInt(data[0] + data[1]);
+             gameInfo.setFirstTeamID(id);
+             gameInfo.setCurrentTeamID(id);
+             currentLine++;
+@@ -100,6 +100,7 @@
+         return true;
+     }
+ 
++
+     public boolean startGame(File ficheiroInicial) {
+         return loadGame(ficheiroInicial);
+     }
+@@ -120,6 +121,7 @@
+         return true;
+     }
+ 
++
+     public boolean move(int xO, int yO, int xD, int yD) {
+         //change valid moves, changes for diferent creatures
+         if (!isInsideBounds(xD, yD)) {
+@@ -128,12 +130,15 @@
+ 
+         int idCriatura = getElementId(xO, yO);
+         int idEquipment = getElementId(xD, yD);
+-        if (gameInfo.getCurrentTeamID() == gameInfo.getFirstTeamID() &&
+-                gameInfo.getCreatureHashMap().containsKey(idCriatura)) {
++        if (gameInfo.getCreatureHashMap().containsKey(idCriatura)) {
+             Creature creature = gameInfo.getCreatureById(idCriatura);
++            if (creature.getTeamId() != gameInfo.getCurrentTeamID()) {
++                return false;
++            }
+             System.out.println(creature);
+-            if (creature.isValidMove(xO, yO, xD, yD)) {
+-                creature.move(xD, yD); //NOT FINISHED
++            if (creature.isValidMove(xO, yO, xD, yD)) { //TODO nao permite humano usarem a safe haven
++                creature.move(xD, yD);
++                gameInfo.nextTurn();
+                 return true;
+             }
+ 
+@@ -186,8 +191,8 @@
+                 gameInfo.getNrTurno() == gameInfo.getNrMaxTurnos()) {
+                 return true;
+             }
+-        } //TODO esta condição esta errada,para testar comentei o codigo ate podermos fazer a funcao definitiva
+-         */
++        }        */
++        //TODO fazer codigo
+         return false;
+     }
+ 
+@@ -248,7 +253,7 @@
+ 
+     public List<String> getGameResults() { //TODO make function
+         ArrayList<String> results = new ArrayList<>();
+-        if (gameIsOver()){
++        if (gameIsOver()) {
+             results.add("Nr. de turnos terminados:");
+             results.add(gameInfo.getNrTurno() + "");
+             results.add("");
+@@ -256,28 +261,28 @@
+             results.add("");
+             results.add("OS VIVOS");
+             results.add("");
+-            for (Creature creature : gameInfo.getCreatures()){
+-                if (creature.getIdType() > 4 && creature.getIdType() < 10){
+-                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome()+ ")");
++            for (Creature creature : gameInfo.getCreatures()) {
++                if (creature.getIdType() > 4 && creature.getIdType() < 10) {
++                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
+                 }
+-            results.add("");
+-            results.add("OS OUTROS");
+-            results.add("");
+-                if (creature.getIdType() >= 0 && creature.getIdType() < 5){
+-                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome()+ ")");
++                results.add("");
++                results.add("OS OUTROS");
++                results.add("");
++                if (creature.getIdType() >= 0 && creature.getIdType() < 5) {
++                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
+                 }
+-            results.add("");
+-            results.add("Num Safe haven:");
+-            results.add("");
+-            results.add("OS VIVOS");
+-            if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())){
+-            results.add(creature.getIdType() + " " + creature.getNome());
+-            }
+-            results.add("");
+-            results.add("Envenenados / Destruidos");
+-            results.add("");
+-            results.add("OS VIVOS");
+-            //TODO adicionar os que ja nao estao em campo (não sei fazer ainda)
++                results.add("");
++                results.add("Num Safe haven:");
++                results.add("");
++                results.add("OS VIVOS");
++                if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())) {
++                    results.add(creature.getIdType() + " " + creature.getNome());
++                }
++                results.add("");
++                results.add("Envenenados / Destruidos");
++                results.add("");
++                results.add("OS VIVOS");
++                //TODO adicionar os que ja nao estao em campo (não sei fazer ainda)
+             }
+         }
+         return results;
+@@ -309,7 +314,7 @@
+     }
+ 
+     public List<Equipamento> getEquipments() {
+-        return  gameInfo.getEquipments();
++        return gameInfo.getEquipments();
+     }
+ 
+     public int getEquipmentTypeId(int equipmentId) {
+@@ -339,38 +344,38 @@
+         }
+     }
+ 
+-    public List<Integer> getIdsInSafeHaven(){
++    public List<Integer> getIdsInSafeHaven() {
+         List<Integer> result = new ArrayList<>();
+-        for (Creature creature : gameInfo.getCreatures()){
+-            if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())){
++        for (Creature creature : gameInfo.getCreatures()) {
++            if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())) {
+                 result.add(creature.getId());
+             }
+         }
+         return result;
+     }
+ 
+-    public boolean saveGame(File fich){
+-        try{
++    public boolean saveGame(File fich) {
++        try {
+             FileWriter doc = new FileWriter(fich);
+             doc.write(getWorldSize()[0] + " " + getWorldSize()[1]);
+             doc.write(getCurrentTeamId());
+             doc.write(getCreatures().size());
+ 
+-            for (Creature creature : getCreatures()){
++            for (Creature creature : getCreatures()) {
+                 doc.write(creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() + " : " +
+                         creature.getPosX() + " : " + creature.getPosY());
+             }
+ 
+             doc.write(getEquipments().size());
+ 
+-            for (Equipamento equip : getEquipments()){
++            for (Equipamento equip : getEquipments()) {
+                 doc.write(equip.getId() + " : " + equip.getIdTipo() + " : " + equip.getPosX() +
+                         " : " + equip.getPosY());
+             }
+ 
+             doc.write(getSafeHaven().size());
+ 
+-            for (SafeHaven sf : getSafeHaven()){
++            for (SafeHaven sf : getSafeHaven()) {
+                 doc.write(sf.getPosX() + " : " + sf.getPosY());
+             }
+             return true;
+@@ -380,7 +385,7 @@
+         }
+     }
+ 
+-    public String[] popCultureExtravaganza(){
++    public String[] popCultureExtravaganza() {
+         String[] resultado = new String[14];
+         resultado[0] = "Resident Evil";
+         resultado[1] = "The Evil Dead";
+Index: src/pt/ulusofona/lp2/theWalkingDEISIGame/GameInfo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pt.ulusofona.lp2.theWalkingDEISIGame;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\n\r\npublic class GameInfo {\r\n    private final int nrMaxTurnos = 12;\r\n    private final int idTeamVivos = 10;\r\n    private final int idTeamMortos = 20;\r\n    private int nrTurno;\r\n    private int nrLines;\r\n    private int nrColumns;\r\n    private int firstTeamID;\r\n    private int currentTeamID;\r\n    private ArrayList<Creature> creatures = new ArrayList<>();\r\n    private ArrayList<Equipamento> equipments = new ArrayList<>();\r\n    private ArrayList<SafeHaven> safeHavens = new ArrayList<>();\r\n    private HashMap<Integer, Creature> creatureHashMap = new HashMap<>();\r\n    private HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();\r\n\r\n\r\n    private GameInfo() {\r\n    }\r\n\r\n    public static GameInfo instance = new GameInfo();\r\n\r\n    public static GameInfo getInstance() {\r\n        return instance;\r\n    }\r\n    //Getters\r\n\r\n    public int getNrMaxTurnos() {\r\n        return nrMaxTurnos;\r\n    }\r\n\r\n    public HashMap<Integer, Equipamento> getEquipamentoHashMap() {\r\n        return equipamentoHashMap;\r\n    }\r\n\r\n    public Creature getCreatureById(int id) {\r\n        return creatureHashMap.get(id);\r\n    }\r\n\r\n\r\n    Equipamento getEquipmentById(int id) {\r\n        return equipamentoHashMap.get(id);\r\n    }\r\n\r\n    public int getNrTurno() {\r\n        return nrTurno;\r\n    }\r\n\r\n    public int getNrLines() {\r\n        return nrLines;\r\n    }\r\n\r\n    public int getNrColumns() {\r\n        return nrColumns;\r\n    }\r\n\r\n    public int getFirstTeamID() {\r\n        return firstTeamID;\r\n    }\r\n\r\n\r\n    public HashMap<Integer, Creature> getCreatureHashMap() {\r\n        return creatureHashMap;\r\n    }\r\n\r\n    /*public ArrayList<Zombie> getZombies() {\r\n        return zombies;\r\n    }*/\r\n\r\n    /*public ArrayList<Vivo> getHumans() {\r\n        return humans;\r\n    }*/\r\n\r\n    public ArrayList<Equipamento> getEquipments() {\r\n        return equipments;\r\n    }\r\n\r\n    public ArrayList<SafeHaven> getSafeHavens() {\r\n        return safeHavens;\r\n    }\r\n\r\n    public int getCurrentTeamID() {\r\n        return currentTeamID;\r\n    }\r\n\r\n    public int getIdTeamVivos() {\r\n        return idTeamVivos;\r\n    }\r\n\r\n    public int getIdTeamMortos() {\r\n        return idTeamMortos;\r\n    }\r\n\r\n    public ArrayList<Creature> getCreatures() {\r\n        return creatures;\r\n    }\r\n\r\n    //Setters\r\n\r\n    public void setNrLines(int nrLines) {\r\n        this.nrLines = nrLines;\r\n    }\r\n\r\n    public void setNrColumns(int nrColumns) {\r\n        this.nrColumns = nrColumns;\r\n    }\r\n\r\n    public void setFirstTeamID(int firstTeamID) {\r\n        this.firstTeamID = firstTeamID;\r\n    }\r\n\r\n    public void setCurrentTeamID(int id) {\r\n        currentTeamID = id;\r\n    }\r\n\r\n    //Others\r\n    \r\n    /*public void addCreature(int idCriatura, int idType\r\n            , String name, int posX, int posY) {\r\n        if (humanoHashMap.containsKey(idCriatura) || zombieHashMap.containsKey(idCriatura)) {\r\n            return;\r\n        }\r\n\r\n        if (idType == idZombie) {\r\n            Zombie zombie = new Zombie(idCriatura, name, posX, posY);\r\n            zombies.add(zombie);\r\n            zombieHashMap.put(zombie.getId(), zombie);\r\n        } else {\r\n            Humano human = new Humano(idCriatura, name, posX, posY);\r\n            humans.add(human);\r\n            humanoHashMap.put(human.getId(), human);\r\n        }\r\n    }*/\r\n\r\n    public void addCreature(Creature creature) {\r\n        creatures.add(creature);\r\n        if (!creatureHashMap.containsKey(creature.getId())) {\r\n            creatureHashMap.put(creature.getId(), creature);\r\n        }\r\n\r\n    }\r\n\r\n    public void addSafeHaven(SafeHaven sf) {\r\n        this.safeHavens.add(sf);\r\n    }\r\n\r\n    /*\r\n    public void addEquipment(int id, int idTipo, int posX, int posY) {\r\n        if (equipamentoHashMap.containsKey(id)) {\r\n            return;\r\n        }\r\n        Equipamento equipamento = new Equipamento(id, idTipo, posX, posY);\r\n        equipments.add(equipamento);\r\n        equipamentoHashMap.put(equipamento.getId(), equipamento);\r\n    }\r\n    */\r\n\r\n    public int nextTurn() {\r\n        this.currentTeamID = (currentTeamID == idTeamVivos) ? idTeamMortos : idTeamVivos;\r\n        return nrTurno++;\r\n    }\r\n\r\n    public void addEquipment(Equipamento equipamento) {\r\n        equipments.add(equipamento);\r\n        if (!equipamentoHashMap.containsKey(equipamento.getId())) {\r\n            equipamentoHashMap.put(equipamento.getId(), equipamento);\r\n        }\r\n    }\r\n\r\n    public void removeEquipment(Equipamento equipamento) {\r\n        int index = 0;\r\n        for (Equipamento equipamento1 : equipments) {\r\n            if (equipamento.getId() == equipamento1.getId()) {\r\n                break;\r\n            }\r\n            index++;\r\n        }\r\n        equipments.remove(index);\r\n        equipamentoHashMap.remove(equipamento.getId());\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pt/ulusofona/lp2/theWalkingDEISIGame/GameInfo.java b/src/pt/ulusofona/lp2/theWalkingDEISIGame/GameInfo.java
+--- a/src/pt/ulusofona/lp2/theWalkingDEISIGame/GameInfo.java	(revision 88f9d97a4df506b9a688f96aef96171371652126)
++++ b/src/pt/ulusofona/lp2/theWalkingDEISIGame/GameInfo.java	(date 1609029427751)
+@@ -67,11 +67,11 @@
+         return creatureHashMap;
+     }
+ 
+-    /*public ArrayList<Zombie> getZombies() {
++    /* public ArrayList<Zombie> getZombies() {
+         return zombies;
+     }*/
+ 
+-    /*public ArrayList<Vivo> getHumans() {
++    /* public ArrayList<Vivo> getHumans() {
+         return humans;
+     }*/
+ 
+Index: src/pt/ulusofona/lp2/theWalkingDEISIGame/Vivo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pt.ulusofona.lp2.theWalkingDEISIGame;\r\n\r\nabstract class Vivo extends Creature {\r\n    protected Equipamento equipment;\r\n    protected String nomeEquipa = \"Os Vivos\";\r\n    protected int pickedEquipments;\r\n    protected int teamId = 10;\r\n\r\n    public Vivo(int idCriatura, int idType, String nome, int posX, int posY) {\r\n        super(idCriatura, idType, nome, posX, posY);\r\n    }\r\n\r\n    void pickEquipment(Equipamento equipamento) {\r\n        this.equipment = equipamento;\r\n        pickedEquipments++;\r\n    }\r\n\r\n    Equipamento dropEquipment() {\r\n        Equipamento currentEquipment = this.equipment;\r\n        this.equipment = null;\r\n        currentEquipment.setPosX(this.posX);\r\n        currentEquipment.setPosY(this.posY);\r\n        return currentEquipment;\r\n    }\r\n\r\n    public Equipamento getEquipment() {\r\n        return equipment;\r\n    }\r\n\r\n    public String getImagePNG() {\r\n        return \"steve.png\";\r\n    }\r\n\r\n    public abstract boolean move(int xD, int yD);\r\n\r\n    public String toString() {\r\n        return idCriatura + \" | Humano | \" + nomeEquipa + \" | \" + nome\r\n                + \" \" + pickedEquipments + \" @ (\" + posX + \", \" + posY + \")\";\r\n    }\r\n\r\n    public int getTeamId() {\r\n        return teamId;\r\n    }\r\n\r\n    public abstract boolean isValidMove(int xO, int yO, int xD, int yD);\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pt/ulusofona/lp2/theWalkingDEISIGame/Vivo.java b/src/pt/ulusofona/lp2/theWalkingDEISIGame/Vivo.java
+--- a/src/pt/ulusofona/lp2/theWalkingDEISIGame/Vivo.java	(revision 88f9d97a4df506b9a688f96aef96171371652126)
++++ b/src/pt/ulusofona/lp2/theWalkingDEISIGame/Vivo.java	(date 1609029219950)
+@@ -4,10 +4,10 @@
+     protected Equipamento equipment;
+     protected String nomeEquipa = "Os Vivos";
+     protected int pickedEquipments;
+-    protected int teamId = 10;
+ 
+     public Vivo(int idCriatura, int idType, String nome, int posX, int posY) {
+         super(idCriatura, idType, nome, posX, posY);
++        teamId = 10;
+     }
+ 
+     void pickEquipment(Equipamento equipamento) {
+Index: src/pt/ulusofona/lp2/theWalkingDEISIGame/Zombie.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pt.ulusofona.lp2.theWalkingDEISIGame;\r\n\r\nabstract class Zombie extends Creature {\r\n    protected String nomeEquipa = \"Os Outros\";\r\n    protected int equipmentsDestroyed;\r\n    protected int teamId = 20;\r\n\r\n    public Zombie(int idCriatura, int idType,String nome, int posX, int posY) {\r\n        super(idCriatura,idType, nome, posX, posY);\r\n    }\r\n\r\n    void destroyEquiment() {\r\n        this.equipmentsDestroyed++;\r\n    }\r\n\r\n    public String getImagePNG() {\r\n        return \"zombie.png\";\r\n    }\r\n\r\n    public String toString() {\r\n        return idCriatura + \" | Zombie | \" + nomeEquipa + \" | \" + nome\r\n                + \" \" + equipmentsDestroyed + \" @ (\" + posX + \", \" + posY + \")\";\r\n    }\r\n\r\n    public abstract boolean move(int xD, int yD);\r\n\r\n    public int getTeamId() {\r\n        return teamId;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pt/ulusofona/lp2/theWalkingDEISIGame/Zombie.java b/src/pt/ulusofona/lp2/theWalkingDEISIGame/Zombie.java
+--- a/src/pt/ulusofona/lp2/theWalkingDEISIGame/Zombie.java	(revision 88f9d97a4df506b9a688f96aef96171371652126)
++++ b/src/pt/ulusofona/lp2/theWalkingDEISIGame/Zombie.java	(date 1609029219954)
+@@ -3,10 +3,10 @@
+ abstract class Zombie extends Creature {
+     protected String nomeEquipa = "Os Outros";
+     protected int equipmentsDestroyed;
+-    protected int teamId = 20;
+ 
+     public Zombie(int idCriatura, int idType,String nome, int posX, int posY) {
+         super(idCriatura,idType, nome, posX, posY);
++        teamId=20;
+     }
+ 
+     void destroyEquiment() {

@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.io.File;
 import java.util.ArrayList;
 
-public class MilitarTests {
+public class MilitarVivoTests {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/MilitarTestData.txt");
 
@@ -285,4 +285,6 @@ public class MilitarTests {
         Assert.assertEquals(false,obtained);
     }
 }
+
+
 
