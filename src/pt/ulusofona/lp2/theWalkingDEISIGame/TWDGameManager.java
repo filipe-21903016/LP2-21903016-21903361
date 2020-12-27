@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -261,36 +262,6 @@ public class TWDGameManager {
     }
 
     public boolean saveGame(File fich) {
-        /*
-        try {
-            FileWriter doc = new FileWriter(fich);
-            doc.write(getWorldSize()[0] + " " + getWorldSize()[1]);
-            doc.write(getCurrentTeamId());
-            doc.write(getCreatures().size());
-
-            for (Creature creature : getCreatures()) {
-                doc.write(creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() + " : " +
-                        creature.getPosX() + " : " + creature.getPosY());
-            }
-
-            doc.write(getEquipments().size());
-
-            for (Equipamento equip : getEquipments()) {
-                doc.write(equip.getId() + " : " + equip.getIdTipo() + " : " + equip.getPosX() +
-                        " : " + equip.getPosY());
-            }
-
-            doc.write(getSafeHaven().size());
-
-            for (SafeHaven sf : getSafeHaven()) {
-                doc.write(sf.getPosX() + " : " + sf.getPosY());
-            }
-            doc.close();
-            return true;
-
-        } catch (IOException e) {
-            return false;
-        }*/
         String gameDetails = "";
         try{
             FileWriter fileWriter = new FileWriter(fich);
