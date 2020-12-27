@@ -7,7 +7,7 @@ public class VampiroZombie extends Zombie {
 
     @Override
     public boolean isValidMove(int xO, int yO, int xD, int yD) {
-        if (xO == xD && yO == yD || TWDGameManager.isDay()) {
+        if (xO == xD && yO == yD) { //TODO if isDay -> return false
             return false;
         }
         return (xD == xO && yD >= yO - 2 && yD <= yO + 2) || (yD == yO && xD >= xO - 2 && xD <= xO + 2) ||
@@ -20,6 +20,6 @@ public class VampiroZombie extends Zombie {
     }
 
     public String getImagePNG(){
-        return "vampire.png";
+        return null;
     }
 }

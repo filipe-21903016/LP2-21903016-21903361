@@ -45,4 +45,15 @@ public abstract class Creature {
     public abstract boolean move(int xD, int yD);
 
     public abstract String getImagePNG();
+
+    @Override
+    public String toString() {
+        return "Creature{" +
+                "idCriatura=" + idCriatura +
+                ", idType=" + idType +
+                ", nome='" + nome + '\'' +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                '}';
+    }
 }

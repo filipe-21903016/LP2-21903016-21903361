@@ -13,8 +13,10 @@ public class CriancaZombie extends Zombie {
     }
 
     @Override
-    public boolean move(int xD, int yD){
-        return false;
+    public boolean move(int xD, int yD) {
+        posX = xD;
+        posY = yD;
+        return true;
     }
 
     public String getImagePNG(){

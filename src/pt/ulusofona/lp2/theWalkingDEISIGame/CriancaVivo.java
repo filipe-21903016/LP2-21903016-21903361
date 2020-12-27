@@ -13,8 +13,10 @@ public class CriancaVivo extends Vivo {
         return (xD != yD && xD > xO - 1 && xD < xO + 1 && yD > yO - 1 && yD < yO + 1);
     }
     @Override
-    public boolean move(int xD, int yD){
-        return false;
+    public boolean move(int xD, int yD) {
+        posX = xD;
+        posY = yD;
+        return true;
     }
 
     public String getImagePNG(){

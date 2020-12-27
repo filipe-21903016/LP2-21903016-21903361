@@ -120,25 +120,23 @@ public class TWDGameManager {
         return true;
     }
 
-
-    /*
-    public boolean isValidMove(int xO, int yO, int xD, int yD){
-
-    }*/
-
     public boolean move(int xO, int yO, int xD, int yD) {
         //change valid moves, changes for diferent creatures
         if (!isInsideBounds(xD, yD)) {
             return false;
         }
+
         int idCriatura = getElementId(xO, yO);
         int idEquipment = getElementId(xD, yD);
-        if (gameInfo.getCurrentTeamID() == gameInfo.getIdTeamVivos() &&
+        if (gameInfo.getCurrentTeamID() == gameInfo.getFirstTeamID() &&
                 gameInfo.getCreatureHashMap().containsKey(idCriatura)) {
             Creature creature = gameInfo.getCreatureById(idCriatura);
+            System.out.println(creature);
             if (creature.isValidMove(xO, yO, xD, yD)) {
                 creature.move(xD, yD); //NOT FINISHED
+                return true;
             }
+
 
         }
 
@@ -182,13 +180,14 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
-        for (Creature creature : getCreatures()) {
+        /*for (Creature creature : getCreatures()) {
             if ((!(creature.getIdType() == 5 && creature.getIdType() == 6 && creature.getIdType() == 7
                 && creature.getIdType() == 8 && creature.getIdType() == 9)) ||
                 gameInfo.getNrTurno() == gameInfo.getNrMaxTurnos()) {
                 return true;
             }
-        }
+        } //TODO esta condição esta errada,para testar comentei o codigo ate podermos fazer a funcao definitiva
+         */
         return false;
     }
 
@@ -284,7 +283,7 @@ public class TWDGameManager {
         return results;
     }
 
-    public static boolean isDay() {
+    public boolean isDay() {
         GameInfo gameInfo = GameInfo.getInstance();
         return gameInfo.getNrTurno() == 0 || gameInfo.getNrTurno() == 1 ||
                 gameInfo.getNrTurno() == 4
@@ -389,7 +388,7 @@ public class TWDGameManager {
         resultado[3] = "Dread";
         resultado[4] = "Freaky Stories";
         resultado[5] = "The Return of the Living Dead";
-        resultado[6] = "Mandalorians";
+        resultado[6] = "The Mandalorian";
         resultado[7] = "1996";
         resultado[8] = "Kill Bill";
         resultado[9] = "1978";

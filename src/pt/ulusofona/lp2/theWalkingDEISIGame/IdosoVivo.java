@@ -7,12 +7,14 @@ public class IdosoVivo extends Vivo {
 
     @Override
     public boolean move(int xD, int yD) {
-        return false;
+        posX = xD;
+        posY = yD;
+        return true;
     }
 
     @Override
     public boolean isValidMove(int xO, int yO, int xD, int yD) {
-        if (xO == xD && yO == yD || !TWDGameManager.isDay()) {
+        if (xO == xD && yO == yD) { //TODO !isDay -> return false
             return false;
         }
         return (xD != yD && xD > xO - 1 && xD < xO + 1 && yD > yO - 1 && yD < yO + 1);

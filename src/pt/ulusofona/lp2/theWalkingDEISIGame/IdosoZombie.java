@@ -15,7 +15,9 @@ public class IdosoZombie extends Zombie {
 
     @Override
     public boolean move(int xD, int yD) {
-        return false;
+        posX = xD;
+        posY = yD;
+        return true;
     }
 
     public String getImagePNG(){

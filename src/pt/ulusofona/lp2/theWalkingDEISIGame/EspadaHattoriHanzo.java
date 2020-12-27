@@ -7,6 +7,6 @@ public class EspadaHattoriHanzo extends Equipamento {
     }
 
     public String getImagePNG(){
-        return "equipment.png";
+        return "ninjaSwrod.png";
     }
 }
