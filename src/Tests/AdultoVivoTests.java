@@ -14,20 +14,6 @@ public class AdultoVivoTests {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("src/Tests/VivoTestData.txt");
 
-
-    /*
-      TRUE:
-    * Out of bounds
-    * Diagonal +
-    * Vertical +
-    * Horizontal +
-     FALSE:
-    * Knight
-    * More than 2 spaces +
-    * */
-
-
-
     @Test
     public void outOfBounds1() {
         gameManager.loadGame(fich);
