@@ -229,7 +229,13 @@ public class TWDGameManager {
     }
 
     public int getEquipmentTypeId(int equipmentId) {
-        return gameInfo.getEquipmentById(equipmentId).getIdTipo();
+        try{
+            return gameInfo.getEquipmentById(equipmentId).getIdTipo();
+        }catch (NullPointerException nullPointerException){
+            System.out.printf("Null pointer exception:" + equipmentId);
+            return -1;
+        }
+
     }
 
     public String getEquipmentInfo(int equipmentId) {

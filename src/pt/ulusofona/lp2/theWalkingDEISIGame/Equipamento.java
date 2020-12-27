@@ -9,6 +9,7 @@ public class Equipamento {
     int posX;
     int posY;
     int uses;
+    boolean picked = false; // true if equipment is picked
     //int info;  //TODO fazer o numero de usos restantes
 
     public int getId() {
@@ -68,4 +69,11 @@ public class Equipamento {
     }
 
 
+    public void setPicked() {
+        this.picked=true;
+    }
+
+    public void setDropped(){
+        this.picked= false;
+    }
 }

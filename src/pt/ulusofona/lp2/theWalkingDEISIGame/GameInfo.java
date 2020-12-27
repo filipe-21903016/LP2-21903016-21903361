@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,9 +15,10 @@ public class GameInfo {
     private int firstTeamId;
     private ArrayList<Creature> creatures = new ArrayList<>();
     private ArrayList<Equipamento> equipments = new ArrayList<>();
-    private ArrayList<SafeHaven> safeHavens = new ArrayList<>();
+    private ArrayList<SafeHaven> safeHavenDoors = new ArrayList<>();
     private HashMap<Integer, Creature> creatureHashMap = new HashMap<>();
     private HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
+    private ArrayList<Creature> graveyard = new ArrayList<>();
 
 
     private GameInfo() {
@@ -50,7 +52,7 @@ public class GameInfo {
     }
 
     public int getElementId(int x, int y) {
-        for (SafeHaven sf : safeHavens) {
+        for (SafeHaven sf : safeHavenDoors) {
             if (sf.getPosY() == y && sf.getPosX() == x) {
                 return 0;
             }
@@ -69,6 +71,10 @@ public class GameInfo {
         }
 
         return 0;
+    }
+
+    public void bury(Creature creature){
+        graveyard.add(creature);
     }
 
     Equipamento getEquipmentById(int id) {
@@ -110,7 +116,7 @@ public class GameInfo {
     }
 
     public ArrayList<SafeHaven> getSafeHavens() {
-        return safeHavens;
+        return safeHavenDoors;
     }
 
     public int getCurrentTeamID() {
@@ -154,7 +160,7 @@ public class GameInfo {
     }
 
     public void addSafeHaven(SafeHaven sf) {
-        this.safeHavens.add(sf);
+        this.safeHavenDoors.add(sf);
     }
 
 
@@ -179,7 +185,6 @@ public class GameInfo {
             index++;
         }
         equipments.remove(index);
-        equipamentoHashMap.remove(equipamento.getId());
     }
 
 

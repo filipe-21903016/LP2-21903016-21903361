@@ -8,6 +8,7 @@ public abstract class Creature {
     protected int posY;
     protected int teamId;
 
+
     public Creature(int idCriatura,int idType, String nome, int posX, int posY) {
         this.idCriatura = idCriatura;
         this.idType = idType;

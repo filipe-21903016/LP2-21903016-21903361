@@ -12,15 +12,16 @@ abstract class Vivo extends Creature {
 
     void pickEquipment(Equipamento equipamento) {
         this.equipment = equipamento;
+        equipamento.setPicked();
         pickedEquipments++;
     }
 
-    Equipamento dropEquipment() {
+    void dropEquipment() {
         Equipamento currentEquipment = this.equipment;
         this.equipment = null;
         currentEquipment.setPosX(this.posX);
         currentEquipment.setPosY(this.posY);
-        return currentEquipment;
+        currentEquipment.setDropped();
     }
 
     public Equipamento getEquipment() {

@@ -7,6 +7,18 @@ public class IdosoVivo extends Vivo {
 
     @Override
     public boolean move(int xD, int yD) {
+        //se xd,yd tem equipamento apanha
+        // caso tenhamos equipamento dropamos e apanhamos a nova
+        GameInfo gameInfo = GameInfo.getInstance();
+        int id = gameInfo.getElementId(xD,yD);
+        if(id<0){ //entao é id de equipamento
+            if(equipment!=null){
+                dropEquipment();
+            }
+            Equipamento equipamento = gameInfo.getEquipmentById(id);
+            pickEquipment(equipamento);
+            gameInfo.removeEquipment(equipamento);
+        }
         posX = xD;
         posY = yD;
         return true;

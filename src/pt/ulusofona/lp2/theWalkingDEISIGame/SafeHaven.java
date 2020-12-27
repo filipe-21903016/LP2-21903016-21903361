@@ -1,8 +1,12 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
+import java.util.ArrayList;
+
 public class SafeHaven {
+    static ArrayList<Vivo> survivors = new ArrayList<>();
     int posX;
     int posY;
+
 
     public SafeHaven(int posX, int posY) {
         this.posX = posX;
