@@ -287,7 +287,7 @@ public class TWDGameManager {
         String[] resultado = new String[14];
         resultado[0] = "Resident Evil";
         resultado[1] = "Evil Dead";
-        resultado[2] = "Trick r' Treat";
+        resultado[2] = "Twilight";
         resultado[3] = "Dread";
         resultado[4] = "Freaky Stories";
         resultado[5] = "The Return of the Living Dead";
