@@ -187,5 +187,18 @@ public class TestCao {
         Assert.assertEquals(false, obtained);
     }
 
+    @Test
+    public void moveWithBlockedPathEquipment() {
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(4, 1,6, 3);
+        Assert.assertEquals(false, obtained);
+    }
+
+    @Test
+    public void moveWithSafeHaven() {
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(1, 2, 3, 0);
+        Assert.assertEquals(false, obtained);
+    }
 }
 

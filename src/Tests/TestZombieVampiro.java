@@ -219,4 +219,22 @@ public class TestZombieVampiro {
             Assert.assertEquals(false, obtained);
         }
     }
+
+    @Test
+    public void moveWithBlockedPathEquipment() {
+        gameManager.loadGame(fich);
+        if (!gameManager.isDay()) {
+            boolean obtained = gameManager.move(2, 4, 2, 6);
+            Assert.assertEquals(false, obtained);
+        }
+    }
+
+    @Test
+    public void moveWithSafeHaven() {
+        gameManager.loadGame(fich);
+        if (!gameManager.isDay()) {
+            boolean obtained = gameManager.move(2, 0, 2, 2);
+            Assert.assertEquals(false, obtained);
+        }
+    }
 }
