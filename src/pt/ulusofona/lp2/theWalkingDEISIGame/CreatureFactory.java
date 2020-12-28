@@ -24,7 +24,7 @@ public class CreatureFactory {
             case 9:
                 return new Cao(idCriatura, nome, posX, posY);
             default:
-                throw new IllegalArgumentException("Unknown Creature Id: " + idType);
+                throw new IllegalArgumentException("Unknown Creature Type Id: " + idType);
         }
     }
 }

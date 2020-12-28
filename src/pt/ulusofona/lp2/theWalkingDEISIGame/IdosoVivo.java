@@ -6,14 +6,6 @@ public class IdosoVivo extends Vivo {
         nomeTipo="Idoso (Vivo)";
     }
 
-    private boolean isValidMove(int xO, int yO, int xD, int yD) {
-        GameInfo gameInfo = GameInfo.getInstance();
-        if ((xO == xD && yO == yD) || !gameInfo.isDay()) {
-            return false;
-        }
-        return (xD==xO && yD <= yO + 1 && yD >= yO - 1) /*VERTICAL*/
-                || (yD == yO && xD<= xO + 1 && xD >= xO - 1); /*HORIZONTAL*/
-    }
 
     @Override
     public boolean move(int xO,int yO,int xD, int yD){

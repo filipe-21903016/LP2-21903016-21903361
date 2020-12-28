@@ -6,14 +6,6 @@ public class CriancaVivo extends Vivo {
         nomeTipo="Criança (Vivo)";
     }
 
-    private boolean isValidMove(int xO, int yO, int xD, int yD) {
-        if (xO == xD && yO == yD) {
-            return false;
-        }
-        return (xD==xO && yD <= yO + 1 && yD >= yO - 1) /*VERTICAL*/
-                || (yD == yO && xD<= xO + 1 && xD >= xO - 1); /*HORIZONTAL*/
-    }
-
     @Override
     public boolean move(int xO,int yO,int xD, int yD){
         if(!isValidMove(xO, yO, xD, yD)){

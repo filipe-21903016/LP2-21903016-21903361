@@ -6,17 +6,6 @@ public class Cao extends Vivo {
         nomeTipo="Cão";
     }
 
-
-    private boolean isValidMove(int xO, int yO, int xD, int yD) {
-        if (xO == xD && yO == yD) {
-            return false;
-        }
-        int xOffset=xD-xO;
-        int yOffset=yD-yO;
-        return (Math.abs(xOffset) == Math.abs(yOffset) && Math.abs(xOffset) < 3 && Math.abs(yOffset) < 3);
-        /*DIAGONAIS*/
-    }
-
     @Override
     public boolean move(int xO,int yO,int xD, int yD){
         if(!isValidMove(xO, yO, xD, yD)){

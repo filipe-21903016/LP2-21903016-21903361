@@ -6,13 +6,6 @@ public class CriancaZombie extends Zombie {
         nomeTipo="Criança (Zombie)";
     }
 
-     private boolean isValidMove(int xO, int yO, int xD, int yD) {
-        if (xO == xD && yO == yD) {
-            return false;
-        }
-        return (xD==xO && yD <= yO +1 && yD >= yO -1) /*VERTICAL*/
-                || (yD == yO && xD<= xO +1 && xD >= xO-1); /*HORIZONTAL*/
-    }
 
     @Override
     public boolean move(int xO,int yO,int xD, int yD){
@@ -32,15 +25,19 @@ public class CriancaZombie extends Zombie {
                 return false;
             }
             if(creature.getTeamId() == gameInfo.getIdTeamVivos()){
-                //transformar vivo em zombie
-                Creature zombie = CreatureFactory.makeCreature(creature.getId(),
-                        creature.idType-5, creature.getNome(),
-                        creature.getPosX(), creature.getPosY());
-                gameInfo.removeCreature(creature);
-                gameInfo.addCreature(zombie);
-                return true;
+                Vivo vivo = (Vivo) creature;
+                if(!vivo.isEquiped()){
+                    //transformar vivo em zombie
+                    Creature zombie = CreatureFactory.makeCreature(vivo.getId(),
+                            vivo.idType-5, vivo.getNome(),
+                            vivo.getPosX(), vivo.getPosY());
+                    gameInfo.removeCreature(vivo);
+                    gameInfo.addCreature(zombie);
+                    return true;
+                }
+                //TODO code when human is equipped
+                return false;
             }
-
         }
         posX = xD;
         posY = yD;

@@ -6,19 +6,6 @@ public class VampiroZombie extends Zombie {
         nomeTipo="Zombie Vampiro";
     }
 
-    private boolean isValidMove(int xO, int yO, int xD, int yD) {
-        GameInfo gameInfo = GameInfo.getInstance();
-        if ((xO == xD && yO == yD) || gameInfo.isDay()) {
-            return false;
-        }
-        int xOffset=xD-xO;
-        int yOffset=yD-yO;
-        return (xD==xO && yD == yO +2 && yD == yO -2) /*VERTICAL*/
-                || (yD == yO && xD == xO +2 && xD == xO-2) /*HORIZONTAL*/
-                || (Math.abs(xOffset) == Math.abs(yOffset) && Math.abs(xOffset) == 2
-                && Math.abs(yOffset) == 2); /*DIAGONAIS*/
-    }
-
     @Override
     public boolean move(int xO,int yO,int xD, int yD){
         GameInfo gameInfo = GameInfo.getInstance();
@@ -37,15 +24,19 @@ public class VampiroZombie extends Zombie {
                 return false;
             }
             if(creature.getTeamId() == gameInfo.getIdTeamVivos()){
-                //transformar vivo em zombie
-                Creature zombie = CreatureFactory.makeCreature(creature.getId(),
-                        creature.idType-5, creature.getNome(),
-                        creature.getPosX(), creature.getPosY());
-                gameInfo.removeCreature(creature);
-                gameInfo.addCreature(zombie);
-                return true;
+                Vivo vivo = (Vivo) creature;
+                if(!vivo.isEquiped()){
+                    //transformar vivo em zombie
+                    Creature zombie = CreatureFactory.makeCreature(vivo.getId(),
+                            vivo.idType-5, vivo.getNome(),
+                            vivo.getPosX(), vivo.getPosY());
+                    gameInfo.removeCreature(vivo);
+                    gameInfo.addCreature(zombie);
+                    return true;
+                }
+                //TODO code when human is equipped
+                return false;
             }
-
         }
         posX = xD;
         posY = yD;

@@ -59,5 +59,13 @@ abstract class Vivo extends Creature {
     }
 
 
+    public boolean isEquiped() {
+        return equipment!=null;
+    }
+
+
+
+
+
 }
 
