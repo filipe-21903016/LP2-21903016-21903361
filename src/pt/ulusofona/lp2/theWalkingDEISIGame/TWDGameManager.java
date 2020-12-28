@@ -47,7 +47,11 @@ public class TWDGameManager {
 
             //Get number of creatures and their properties
             data = lines.get(currentLine).split("");
-            int nrCreatures = Integer.parseInt(data[0]);
+            StringBuffer allLine = new StringBuffer();
+            for(int i = 0;i< data.length; i++){
+                allLine.append(data[i]);
+            }
+            int nrCreatures = Integer.parseInt(allLine.toString());
             currentLine++;
 
             int maxLine = currentLine + nrCreatures;
@@ -86,7 +90,6 @@ public class TWDGameManager {
                 data = lines.get(currentLine).split(" : ");
                 int posX = Integer.parseInt(data[0]);
                 int posY = Integer.parseInt(data[1]);
-                //TODO possivel fonte de erro
                 gameInfo.addSafeHaven(new SafeHaven(posX, posY));
             }
 

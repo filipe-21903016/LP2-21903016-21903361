@@ -10,4 +10,5 @@ public class EstacaDeMadeira extends Equipamento {
     public String getImagePNG(){
         return "steak.png";
     }
+
 }

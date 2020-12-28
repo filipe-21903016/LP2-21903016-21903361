@@ -91,6 +91,7 @@ public class GameInfo {
 
     public void bury(Creature creature){
         graveyard.add(creature);
+        creature.setDead();
     }
 
     Equipamento getEquipmentById(int id) {

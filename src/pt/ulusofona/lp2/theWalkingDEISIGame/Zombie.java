@@ -22,7 +22,7 @@ abstract class Zombie extends Creature {
         }
         if(id>0){
             Creature creature = gameInfo.getCreatureById(id);
-            if(creature.getIdType()==9){ //cannot move into a dog
+            if(creature.getIdType()==9){ //Zombies are afraid of dogs
                 return false;
             }
             if(creature.getTeamId() == gameInfo.getIdTeamVivos()){
@@ -36,7 +36,9 @@ abstract class Zombie extends Creature {
                     gameInfo.addCreature(zombie);
                     return true;
                 }
-                //TODO code when human is equipped
+                /*TODO code when human is equipped
+                    possivel erro 05 do dp
+                 */
                 return false;
             }
         }

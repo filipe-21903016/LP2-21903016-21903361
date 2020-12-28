@@ -1,8 +1,7 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-//TODO make equipamento abstract and function getimagepng
 
-public class Equipamento {
+public abstract class Equipamento {
     protected String titulo;
     protected int id;
     protected int idTipo;
@@ -45,9 +44,7 @@ public class Equipamento {
         return titulo;
     }
 
-    public String getImagePNG() {
-        return "equipment_1.png";
-    }
+    abstract public String getImagePNG();
 
     public Equipamento(int id, int idTipo, int posX, int posY) {
         this.id = id;
@@ -65,12 +62,10 @@ public class Equipamento {
     }
 
 
-
     @Override
     public String toString() {
         return titulo;
     }
-
 
     public void setPicked() {
         this.picked=true;
@@ -90,5 +85,10 @@ public class Equipamento {
 
     public boolean isDefensive() {
         return defensive;
+    }
+
+    public boolean use(){
+        System.out.println(id+":"+titulo+" was used");
+        return true;
     }
 }

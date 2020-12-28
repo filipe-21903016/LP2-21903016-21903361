@@ -223,4 +223,8 @@ public abstract class Creature {
                 throw new IllegalArgumentException("Unknown Creature Type Id: " + idType);
         }
     }
+
+    public void setDead(){
+        dead=true;
+    }
 }

@@ -11,4 +11,8 @@ public class Antidoto extends Equipamento {
     public String getImagePNG(){
         return "antidote.png";
     }
+
+    public boolean isEmpty(){
+        return uses==0;
+    }
 }

@@ -40,7 +40,12 @@ abstract class Vivo extends Creature {
                 return false;
             }
             //caso humano tenha equipamento ofensivo pode se mover e matar o zombie
-
+            if(equipment.isOffensive()){
+                Creature target = gameInfo.getCreatureById(id);
+                if(!this.combat(target)){
+                    return false;
+                }
+            }
         }
         posX = xD;
         posY = yD;
@@ -48,6 +53,14 @@ abstract class Vivo extends Creature {
     }
 
     void pickEquipment(Equipamento equipamento) {
+        //escudo madeira apanhado por militar
+        if(this.idType==7 && equipamento.getIdTipo()==6){
+            EscudoMadeira escudoMadeira = (EscudoMadeira) equipamento;
+            if(!escudoMadeira.isBuffed()){
+                escudoMadeira.militaryBuff();
+            }
+        }
+
         this.equipment = equipamento;
         equipamento.setPicked();
         equipamentos++;
@@ -99,7 +112,18 @@ abstract class Vivo extends Creature {
     }
 
 
-
+    public boolean combat(Creature creature){
+        if(this.equipment.getIdTipo()!=6 && creature.getIdType()==4){ //Zombie only dies to wooden stake
+            return false;
+        }
+        if(this.equipment.use()){
+            GameInfo gameInfo = GameInfo.getInstance();
+            gameInfo.bury(creature);
+            gameInfo.removeCreature(creature);
+            return true;
+        }
+        return false;
+    }
 
 
 }
