@@ -229,4 +229,8 @@ public class GameInfo {
         creatureHashMap.remove(creature.getId());
     }
 
+    public int getTeamIdByCreatureId(int id){
+        return creatureHashMap.get(id).getTeamId();
+    }
+
 }

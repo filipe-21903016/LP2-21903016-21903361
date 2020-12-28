@@ -21,6 +21,7 @@ abstract class Vivo extends Creature {
         GameInfo gameInfo = GameInfo.getInstance();
         int id = gameInfo.getElementId(xD,yD);
 
+
         if(id<0){ //entao é id de equipamento
             if(equipment!=null){
                 gameInfo.addEquipment(dropEquipment());
@@ -30,13 +31,16 @@ abstract class Vivo extends Creature {
             gameInfo.removeEquipment(equipamento);
         }
         if (id==0 && gameInfo.isDoorToSafeHaven(xD, yD)){
-            //add to safehaven
             enterSafeHaven();
+
         }
         if(id>0){
-            if(equipment==null && gameInfo.getCreatureById(id).getTeamId() == gameInfo.getIdTeamMortos()){
+            //humano sem equipamento nao se pode mover para cima de zombie
+            if(equipment==null){
                 return false;
             }
+            //caso humano tenha equipamento ofensivo pode se mover e matar o zombie
+
         }
         posX = xD;
         posY = yD;

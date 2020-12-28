@@ -59,6 +59,14 @@ public abstract class Creature {
     }
 
     protected boolean isValidMove(int xO, int yO, int xD, int yD) {
+        GameInfo gameInfo = GameInfo.getInstance();
+        //Verificar se na casa de destino ja se encontra uma criatuta do mesmo tipo da casa de origem
+        //Pr exemplo um zombie nao se pode mover para uma casa que tenha um zombie
+        int elementId = gameInfo.getElementId(xD,yD);
+        if(elementId>0 && gameInfo.getTeamIdByCreatureId(elementId)==this.teamId){
+            return false;
+        }
+
         switch (idType) {
             //Adulto
             case 1:
@@ -96,7 +104,6 @@ public abstract class Creature {
             }
             //Zombie Vampiro
             case 4: {
-                GameInfo gameInfo = GameInfo.getInstance();
                 if ((xO == xD && yO == yD) || gameInfo.isDay()) {
                     return false;
                 }
@@ -119,7 +126,6 @@ public abstract class Creature {
             }
             //Idoso Vivo
             case 8: {
-                GameInfo gameInfo = GameInfo.getInstance();
                 if ((xO == xD && yO == yD) || !gameInfo.isDay()) {
                     return false;
                 }
