@@ -158,5 +158,34 @@ public class TestCao {
         boolean obtained = gameManager.move(3,3,0,6);
         Assert.assertEquals(false,obtained);
     }
+
+    @Test
+    public void moveDiagonalWithBlockedPath() {
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(2,2,4,4);
+        Assert.assertEquals(false,obtained);
+    }
+
+    @Test
+    public void moveDiagonalWithBlockedPath2() {
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(4, 4, 2, 2);
+        Assert.assertEquals(false, obtained);
+    }
+
+    @Test
+    public void moveDiagonalWithBlockedPath3() {
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(4, 2, 2, 4);
+        Assert.assertEquals(false, obtained);
+    }
+
+    @Test
+    public void moveDiagonalWithBlockedPath4() {
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(2, 4, 4, 2);
+        Assert.assertEquals(false, obtained);
+    }
+
 }
 

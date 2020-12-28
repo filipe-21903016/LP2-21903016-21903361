@@ -108,4 +108,39 @@ public class TestIdosoZombie {
         boolean obtained = gameManager.move(3,3,4,2);
         Assert.assertEquals(false,obtained);
     }
+
+    @Test
+    public void moveRightWithBlockedPath(){
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(2,3,4,3);
+        Assert.assertEquals(false,obtained);
+    }
+
+    @Test
+    public void moveLeftWithBlockedPath() {
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(4, 3, 2, 3);
+        Assert.assertEquals(false, obtained);
+    }
+
+    @Test
+    public void moveUpWithBlockedPath() {
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(3, 4, 3, 2);
+        Assert.assertEquals(false, obtained);
+    }
+
+    @Test
+    public void moveDownWithBlockedPath() {
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(3, 2, 3, 4);
+        Assert.assertEquals(false, obtained);
+    }
+
+    @Test
+    public void moveDiagonalWithBlockedPath() {
+        gameManager.loadGame(fich);
+        boolean obtained = gameManager.move(2, 2, 4, 4);
+        Assert.assertEquals(false, obtained);
+    }
 }
