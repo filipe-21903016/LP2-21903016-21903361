@@ -5,7 +5,7 @@ public class GarrafaDeLixivia extends Equipamento {
 
     public GarrafaDeLixivia(int id, int posX, int posY) {
         super(id, 7, posX, posY);
-        super.titulo = "Garrafa de Lixívia";
+        super.titulo = "Garrafa de Lixívia (1 litro)";
         this.litros = 1;
         super.defensive = true;
     }
@@ -13,7 +13,7 @@ public class GarrafaDeLixivia extends Equipamento {
     @Override
     String getInfo() {
         int uses = (int) (litros/0.3);
-        return titulo + " | (" + litros +" litro) | " + uses;
+        return titulo + " | " + uses;
     }
 
     public String getImagePNG(){
