@@ -11,7 +11,8 @@ public class GarrafaDeLixivia extends Equipamento {
 
     @Override
     String getInfo() {
-        return titulo + " | (" + litros +" litro) | " + litros/0.3;
+        int uses = (int) (litros/0.3);
+        return titulo + " | (" + litros +" litro) | " + uses;
     }
 
     public String getImagePNG(){

@@ -226,7 +226,7 @@ public class GameInfo {
         //remove from list
         creatures.remove(index);
         //remove from hashmap
-        //creatureHashMap.remove(creature.getId());
+        creatureHashMap.remove(creature.getId());
     }
 
 }

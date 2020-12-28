@@ -30,6 +30,22 @@ public class AdultoZombie extends Zombie {
             destroyEquiment();
             gameInfo.removeEquipment(equipamento);
         }
+        if(id>0){
+            Creature creature = gameInfo.getCreatureById(id);
+            if(creature.getIdType()==9){ //cannot move into a dog
+                return false;
+            }
+            if(creature.getTeamId() == gameInfo.getIdTeamVivos()){
+                //transformar vivo em zombie
+                Creature zombie = CreatureFactory.makeCreature(creature.getId(),
+                        creature.idType-5, creature.getNome(),
+                        creature.getPosX(), creature.getPosY());
+                gameInfo.removeCreature(creature);
+                gameInfo.addCreature(zombie);
+                return true;
+            }
+
+        }
         posX = xD;
         posY = yD;
         return true;

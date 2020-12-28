@@ -25,6 +25,7 @@ public class AdultoVivo extends Vivo {
 
         GameInfo gameInfo = GameInfo.getInstance();
         int id = gameInfo.getElementId(xD,yD);
+
         if(id<0){ //entao é id de equipamento
              if(equipment!=null){
                  gameInfo.addEquipment(dropEquipment());
@@ -36,9 +37,12 @@ public class AdultoVivo extends Vivo {
         if (id==0 && gameInfo.isDoorToSafeHaven(xD, yD)){
             //add to safehaven
             enterSafeHaven();
-            return true;
         }
-
+        if(id>0){
+            if(equipment==null && gameInfo.getCreatureById(id).getTeamId() == gameInfo.getIdTeamMortos()){
+                return false;
+            }
+        }
         posX = xD;
         posY = yD;
         return true;
