@@ -5,6 +5,7 @@ public class EscudoMadeira extends Equipamento {
     public EscudoMadeira(int id, int posX, int posY) {
         super(id, 0, posX, posY);
         super.titulo = "Escudo de Madeira";
+        super.defensive = true;
     }
 
     public void setUses(int uses) {

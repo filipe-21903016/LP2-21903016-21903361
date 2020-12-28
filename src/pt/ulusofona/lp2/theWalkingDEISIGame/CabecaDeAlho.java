@@ -4,6 +4,7 @@ public class CabecaDeAlho extends Equipamento {
     public CabecaDeAlho(int id, int posX, int posY) {
         super(id, 5, posX, posY);
         super.titulo = "Cabeça de Alho";
+        super.defensive = true;
     }
 
     public String getImagePNG(){

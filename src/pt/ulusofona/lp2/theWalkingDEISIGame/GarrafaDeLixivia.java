@@ -7,6 +7,7 @@ public class GarrafaDeLixivia extends Equipamento {
         super(id, 7, posX, posY);
         super.titulo = "Garrafa de Lixívia";
         this.litros = 1;
+        super.defensive = true;
     }
 
     @Override

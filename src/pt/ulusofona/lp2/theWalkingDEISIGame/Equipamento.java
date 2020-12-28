@@ -8,8 +8,10 @@ public class Equipamento {
     protected int idTipo;
     protected int posX;
     protected int posY;
-    protected boolean picked = false; // true if equipment is picked
-    //int info;  //TODO fazer o numero de usos restantes
+
+    protected boolean picked = false;
+    protected boolean offensive;
+    protected boolean defensive;
 
     public int getId() {
         return id;
@@ -62,6 +64,8 @@ public class Equipamento {
         this.posY = posY;
     }
 
+
+
     @Override
     public String toString() {
         return titulo;
@@ -78,5 +82,13 @@ public class Equipamento {
 
     public boolean isPicked() {
         return picked;
+    }
+
+    public boolean isOffensive() {
+        return offensive;
+    }
+
+    public boolean isDefensive() {
+        return defensive;
     }
 }

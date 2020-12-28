@@ -6,6 +6,7 @@ public class PistolaWaltherPPK extends Equipamento {
     public PistolaWaltherPPK(int id, int posX, int posY) {
         super(id, 2, posX, posY);
         super.titulo = "Pistola Walther PPK";
+        super.offensive = true;
     }
 
 
