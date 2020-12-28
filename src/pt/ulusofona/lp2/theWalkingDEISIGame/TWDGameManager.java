@@ -282,11 +282,11 @@ public class TWDGameManager {
             return false;
         }
     }
-
+//retirar "the"
     public String[] popCultureExtravaganza() {
         String[] resultado = new String[14];
         resultado[0] = "Resident Evil";
-        resultado[1] = "The Evil Dead";
+        resultado[1] = "Evil Dead";
         resultado[2] = "Trick 'r Treat";
         resultado[3] = "Dread";
         resultado[4] = "Freaky Stories";
