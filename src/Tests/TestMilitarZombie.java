@@ -8,9 +8,9 @@ import org.junit.Test;
 import java.io.File;
 import java.util.ArrayList;
 
-public class TestMilitarVivo {
+public class TestMilitarZombie {
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("test-files/MilitarTestData.txt");
+    File fich = new File("test-files/MilitarZombieTestData.txt");
 
     @Test
     public void outOfBounds1() {
@@ -285,6 +285,3 @@ public class TestMilitarVivo {
         Assert.assertEquals(false,obtained);
     }
 }
-
-
-
