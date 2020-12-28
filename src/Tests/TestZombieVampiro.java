@@ -123,47 +123,47 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void invalidMove1() {
+    public void validMove1() {
         gameManager.loadGame(fich);
         if (!(gameManager.isDay())) {
             boolean obtained = gameManager.move(3, 3, 5, 1);
-            Assert.assertEquals(false, obtained);
+            Assert.assertEquals(true, obtained);
         }
     }
 
     @Test
-    public void invalidMove2() {
+    public void validMove2() {
         gameManager.loadGame(fich);
         if (!(gameManager.isDay())) {
             boolean obtained = gameManager.move(3, 3, 2, 3);
-            Assert.assertEquals(false, obtained);
+            Assert.assertEquals(true, obtained);
         }
     }
 
     @Test
-    public void invalidMove3() {
+    public void validMove3() {
         gameManager.loadGame(fich);
         if (!(gameManager.isDay())) {
             boolean obtained = gameManager.move(3, 3, 4, 3);
-            Assert.assertEquals(false, obtained);
+            Assert.assertEquals(true, obtained);
         }
     }
 
     @Test
-    public void invalidMove4() {
+    public void validMove4() {
         gameManager.loadGame(fich);
         if (!(gameManager.isDay())) {
             boolean obtained = gameManager.move(3, 3, 3, 4);
-            Assert.assertEquals(false, obtained);
+            Assert.assertEquals(true, obtained);
         }
     }
 
     @Test
-    public void invalidMove5() {
+    public void validMove5() {
         gameManager.loadGame(fich);
         if (!(gameManager.isDay())) {
             boolean obtained = gameManager.move(3, 3, 4, 4);
-            Assert.assertEquals(false, obtained);
+            Assert.assertEquals(true, obtained);
         }
     }
 
