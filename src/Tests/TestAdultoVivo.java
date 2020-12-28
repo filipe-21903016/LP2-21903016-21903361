@@ -194,7 +194,7 @@ public class TestAdultoVivo {
     @Test
     public void twoRightDownDiagonal() {
         gameManager.loadGame(fich);
-        boolean obtained = gameManager.move(3,3,5,5);
+        boolean obtained = gameManager.move(0,0,2,2);
         Assert.assertEquals(true,obtained);
     }
 
@@ -235,4 +235,5 @@ public class TestAdultoVivo {
         ArrayList<Integer> obtained = (ArrayList<Integer>) gameManager.getIdsInSafeHaven();
         Assert.assertEquals(expected,obtained);
     }
+
 }
