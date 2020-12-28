@@ -30,6 +30,7 @@ public class GameInfo {
         creatures = new ArrayList<>();
         equipments = new ArrayList<>();
         safeHavenDoors = new ArrayList<>();
+        SafeHaven.resetSurvivors();
         creatureHashMap = new HashMap<>();
         equipamentoHashMap = new HashMap<>();
         graveyard = new ArrayList<>();
@@ -227,10 +228,5 @@ public class GameInfo {
         //remove from hashmap
         //creatureHashMap.remove(creature.getId());
     }
-
-
-
-
-
 
 }

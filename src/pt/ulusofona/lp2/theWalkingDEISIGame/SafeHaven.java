@@ -23,8 +23,12 @@ public class SafeHaven {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
         SafeHaven safeHaven = (SafeHaven) o;
         return posX == safeHaven.posX &&
                 posY == safeHaven.posY;
@@ -40,5 +44,9 @@ public class SafeHaven {
 
     public static void addSurvivor(Vivo survivor){
         survivors.add(survivor);
+    }
+
+    public static void resetSurvivors(){
+        survivors=new ArrayList<>();
     }
 }
