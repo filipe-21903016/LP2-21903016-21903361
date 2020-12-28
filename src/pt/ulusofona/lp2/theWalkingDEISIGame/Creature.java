@@ -58,12 +58,99 @@ public abstract class Creature {
         return "";
     }
 
+    private boolean isBlocked(int x, int y) {
+        GameInfo gameInfo = GameInfo.getInstance();
+        if (gameInfo.getElementId(x, y) != 0 || gameInfo.isDoorToSafeHaven(x, y)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isPathBlocked(int xO, int yO, int xD, int yD) {
+        GameInfo gameInfo = GameInfo.getInstance();
+        //Verticais
+        if (xO == xD) {
+            if (yO > yD) {
+                //destino esta em cima
+                for (int y = yO - 1; y > yD; y--) {
+                    if (isBlocked(xD, y)) {
+                        return true;
+                    }
+                }
+            } else {
+                //destino esta em baixo
+                for (int y = yO + 1; y < yD; y++) {
+                    if (isBlocked(xD, y)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        //Horizontais
+        if (yO == yD) {
+            if (xO > xD) {
+                //destino esta a esquerda
+                for (int x = xO - 1; x > xD; x--) {
+                    if (isBlocked(x, yD)) {
+                        return true;
+                    }
+                }
+            } else {
+                //destino esta a direita
+                for (int x = xO + 1; x < xD; x++) {
+                    if (isBlocked(x, yD)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        //Diagonais
+        int xOffset = xD - xO;
+        int yOffset = yD - yO;
+        if (xOffset > 0 && yOffset < 0) {
+            //diagonal cima direita
+            for (int x = xO + xOffset - 1, y = yO + yOffset + 1; x > xO && y < yO; x--, y++) {
+                if (isBlocked(x, y)) {
+                    return true;
+                }
+            }
+        }
+        if (xOffset < 0 && yOffset < 0) {
+            //diagonal cima esquerda
+            for (int x = xO + xOffset + 1, y = yO + yOffset + 1; x < xO && y < yO; x++, y++) {
+                if (isBlocked(x, y)) {
+                    return true;
+                }
+            }
+        }
+        if (xOffset < 0 && yOffset > 0) {
+            //diagonal baixo esquerda
+            for (int x = xO + xOffset + 1, y = yO + yOffset - 1; x < xO && y > yO; x++, y--) {
+                if (isBlocked(x, y)) {
+                    return true;
+                }
+            }
+        }
+        if (xOffset > 0 && yOffset > 0) {
+            //diagonal baixo direita
+            for (int x = xO + xOffset -1 , y = yO + yOffset -1 ; x > xO && y > yO; x--, y--) {
+                if (isBlocked(x, y)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     protected boolean isValidMove(int xO, int yO, int xD, int yD) {
         GameInfo gameInfo = GameInfo.getInstance();
         //Verificar se na casa de destino ja se encontra uma criatuta do mesmo tipo da casa de origem
         //Pr exemplo um zombie nao se pode mover para uma casa que tenha um zombie
-        int elementId = gameInfo.getElementId(xD,yD);
-        if(elementId>0 && gameInfo.getTeamIdByCreatureId(elementId)==this.teamId){
+        int elementId = gameInfo.getElementId(xD, yD);
+        if (elementId > 0 && gameInfo.getTeamIdByCreatureId(elementId) == this.teamId
+                || isPathBlocked(xO, yO, xD, yD)) {
             return false;
         }
 
