@@ -7,6 +7,6 @@ public class VampiroZombie extends Zombie {
     }
 
     public String getImagePNG() {
-        return null;
+        return "vampire.png";
     }
 }
