@@ -12,6 +12,37 @@ abstract class Vivo extends Creature {
         teamId = 10;
     }
 
+    @Override
+    public boolean move(int xO,int yO,int xD, int yD){
+        if(!isValidMove(xO, yO, xD, yD)){
+            return false;
+        }
+
+        GameInfo gameInfo = GameInfo.getInstance();
+        int id = gameInfo.getElementId(xD,yD);
+
+        if(id<0){ //entao é id de equipamento
+            if(equipment!=null){
+                gameInfo.addEquipment(dropEquipment());
+            }
+            Equipamento equipamento = gameInfo.getEquipmentById(id);
+            pickEquipment(equipamento);
+            gameInfo.removeEquipment(equipamento);
+        }
+        if (id==0 && gameInfo.isDoorToSafeHaven(xD, yD)){
+            //add to safehaven
+            enterSafeHaven();
+        }
+        if(id>0){
+            if(equipment==null && gameInfo.getCreatureById(id).getTeamId() == gameInfo.getIdTeamMortos()){
+                return false;
+            }
+        }
+        posX = xD;
+        posY = yD;
+        return true;
+    }
+
     void pickEquipment(Equipamento equipamento) {
         this.equipment = equipamento;
         equipamento.setPicked();
