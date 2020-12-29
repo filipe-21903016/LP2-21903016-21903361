@@ -15,4 +15,5 @@ public class Veneno extends Equipamento {
     public boolean isEmpty(){
         return uses==0;
     }
+
 }
