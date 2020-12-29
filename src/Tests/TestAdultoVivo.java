@@ -305,6 +305,5 @@ public class TestAdultoVivo {
         gameManager.move(3,3,4,3);
         Assert.assertEquals(0,gameManager.getElementId(3,3));
         Assert.assertEquals(1,gameManager.getElementId(4,3));
-
     }
 }
