@@ -196,6 +196,9 @@ public class GameInfo {
         this.safeHavenDoors.add(sf);
     }
 
+    public void addGraveyard(Creature creature){
+        this.graveyard.add(creature);
+    }
 
     public int nextTurn() {
         ArrayList<Vivo> removed = new ArrayList<>();

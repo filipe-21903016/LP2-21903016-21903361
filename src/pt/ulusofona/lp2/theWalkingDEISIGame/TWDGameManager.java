@@ -19,7 +19,152 @@ public class TWDGameManager {
 
     public boolean loadGame(File fich) {
         gameInfo.reset();
-        return true; //TODO implement this
+        try {
+            Scanner scanner = new Scanner(fich);
+            ArrayList<String> lines = new ArrayList<>();
+
+            //Scans all lines to list
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+            int currentLine = 0;
+
+            String[] data;
+            //Get nrColumns and nrLines
+            data = lines.get(currentLine).split(" ");
+            int nrLines = Integer.parseInt(data[0]);
+            int nrColumns = Integer.parseInt(data[1]);
+            gameInfo.setNrLines(nrLines);
+            gameInfo.setNrColumns(nrColumns);
+            currentLine++;
+
+            //Get Id of starting team
+            data = lines.get(currentLine).split("");
+            int id = Integer.parseInt(data[0] + data[1]);
+            gameInfo.setCurrentTeamID(id);
+            gameInfo.setFirstTeamId(id);
+            currentLine++;
+
+            //Get number of creatures and their properties
+            data = lines.get(currentLine).split("");
+            StringBuffer allLine = new StringBuffer();
+            for (int i = 0; i < data.length; i++) {
+                allLine.append(data[i]);
+            }
+            int nrCreatures = Integer.parseInt(allLine.toString());
+            currentLine++;
+
+            int maxLine = currentLine + nrCreatures;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
+                int idCreature = Integer.parseInt(data[0]);
+                int idType = Integer.parseInt(data[1]);
+                String nomeCriatura = data[2].trim();
+                int posX = Integer.parseInt(data[3]);
+                int posY = Integer.parseInt(data[4]);
+                Creature creature = CreatureFactory.makeCreature(idCreature, idType, nomeCriatura, posX, posY);
+                gameInfo.addCreature(creature);
+            }
+
+            data = lines.get(currentLine).split("");
+            allLine = new StringBuffer();
+            for (int i = 0; i < data.length; i++) {
+                allLine.append(data[i]);
+            }
+            int nrEquipment = Integer.parseInt(allLine.toString());
+            currentLine++;
+
+            maxLine = currentLine + nrEquipment;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
+                int idEquipment = Integer.parseInt(data[0]);
+                int idType = Integer.parseInt(data[1]);
+                int posX = Integer.parseInt(data[2]);
+                int posY = Integer.parseInt(data[3]);
+                Equipamento equipamento = EquipmentFactory.makeEquipment(idEquipment, idType, posX, posY);
+                gameInfo.addEquipment(equipamento);
+            }
+
+            data = lines.get(currentLine).split("");
+            int nrHavens = Integer.parseInt(data[0]);
+            currentLine++;
+
+            maxLine = currentLine + nrHavens;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
+                int posX = Integer.parseInt(data[0]);
+                int posY = Integer.parseInt(data[1]);
+                gameInfo.addSafeHaven(new SafeHaven(posX, posY));
+            }
+
+            data = lines.get(currentLine).split("");
+            allLine = new StringBuffer();
+            for (int i = 0; i < data.length; i++) {
+                allLine.append(data[i]);
+            }
+            int equiped = Integer.parseInt(allLine.toString());
+            currentLine++;
+
+            maxLine = currentLine + equiped;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
+                int idVivo = Integer.parseInt(data[0]);
+                int idEquipment = Integer.parseInt(data[1]);
+                Vivo vivo =(Vivo) gameInfo.getCreatureById(idVivo);
+                Equipamento equipamento = gameInfo.getEquipmentById(idEquipment);
+                gameInfo.removeEquipment(equipamento);
+                vivo.setEquipment(equipamento);
+            }
+
+            data = lines.get(currentLine).split("");
+            allLine = new StringBuffer();
+            for (int i = 0; i < data.length; i++) {
+                allLine.append(data[i]);
+            }
+            int dead = Integer.parseInt(allLine.toString());
+            currentLine++;
+
+            maxLine = currentLine + dead;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
+                int idCriatura =Integer.parseInt(data[0]);
+                int idType =Integer.parseInt(data[1]);
+                String name = data[2].trim();
+                int posX= Integer.parseInt(data[3]);
+                int posY= Integer.parseInt(data[4]);
+                Creature creature = CreatureFactory.makeCreature(idCriatura,idType,name,posX,posY);
+                gameInfo.addGraveyard(creature);
+                creature.setDead();
+            }
+
+            data = lines.get(currentLine).split("");
+            allLine = new StringBuffer();
+            for (int i = 0; i < data.length; i++) {
+                allLine.append(data[i]);
+            }
+            int safe = Integer.parseInt(allLine.toString());
+            currentLine++;
+
+            maxLine = currentLine + safe;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
+                int idCriatura =Integer.parseInt(data[0]);
+                Vivo vivo = (Vivo) gameInfo.getCreatureById(idCriatura);
+                vivo.enterSafeHaven();
+            }
+
+
+            scanner.close();
+            getInitialTeam();
+
+            if (getInitialTeam() != getCurrentTeamId()) {
+                return false;
+            }
+
+        } catch (FileNotFoundException e) {
+            return false;
+        }
+        return true;
     }
 
     public boolean saveGame(File fich) {
@@ -76,8 +221,7 @@ public class TWDGameManager {
             //save creatures in safehaven
             gameDetails+=SafeHaven.getSurvivors().size() + "\n";
             for (Vivo vivo : SafeHaven.getSurvivors()) {
-                gameDetails += vivo.getId() + " : " + vivo.getIdType() + " : " + vivo.getNome() +
-                        " : " + vivo.getPosX() + " : " + vivo.getPosY() + "\n";
+                gameDetails += vivo.getId() + "\n";
             }
 
 

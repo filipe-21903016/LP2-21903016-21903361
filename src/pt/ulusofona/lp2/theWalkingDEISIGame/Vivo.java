@@ -140,6 +140,9 @@ abstract class Vivo extends Creature {
                 + " " + equipamentos + " @ (" + posX + ", " + posY + ")";
     }
 
+    public void setEquipment(Equipamento equipment) {
+        this.equipment = equipment;
+    }
 
     public boolean isEquiped() {
         return equipment != null;
@@ -191,6 +194,5 @@ abstract class Vivo extends Creature {
             return false;
         }
     }*/
-
 }
 
