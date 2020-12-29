@@ -19,8 +19,70 @@ public class TWDGameManager {
 
     public boolean loadGame(File fich) {
         gameInfo.reset();
+        return true; //TODO implement this
+    }
+
+    public boolean saveGame(File fich) {
+        String gameDetails = "";
         try {
-            Scanner scanner = new Scanner(fich);
+            FileWriter fileWriter = new FileWriter(fich);
+            gameDetails += gameInfo.getNrLines() + " " + gameInfo.getNrColumns() + "\n";
+            gameDetails += gameInfo.getCurrentTeamID() + "\n";
+            gameDetails += gameInfo.getCreatures().size() + "\n";
+            for (Creature creature : gameInfo.getCreatures()) {
+                gameDetails += creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() +
+                        " : " + creature.getPosX() + " : " + creature.getPosY() + "\n";
+            }
+            //adicionar equipamentos dos vivos
+            ArrayList<Equipamento> equipados = new ArrayList<>();
+            for(Creature creature:gameInfo.getCreatures()){
+                if(creature.isVivo()){
+                    Vivo vivo = (Vivo) creature;
+                    if(vivo.isEquiped()){
+                        equipados.add(vivo.getEquipment());
+                    }
+                }
+            }
+            ArrayList<Equipamento> todosEquipamentos = new ArrayList<>();
+            todosEquipamentos.addAll(equipados);
+            todosEquipamentos.addAll(gameInfo.getEquipments());
+
+            gameDetails += todosEquipamentos.size() + "\n";
+            for (Equipamento equipamento : todosEquipamentos) {
+                gameDetails += equipamento.getId() + " : " + equipamento.getIdTipo() + " : " + equipamento.getPosX() + " : " + equipamento.getPosY() + "\n";
+            }
+            gameDetails += gameInfo.getSafeHavens().size() + "\n";
+            for (SafeHaven safeHaven : gameInfo.getSafeHavens()) {
+                gameDetails += safeHaven.getPosX() + " : " + safeHaven.getPosY() + "\n";
+            }
+
+            gameDetails += equipados.size() + "\n";
+            for(Creature creature: gameInfo.getCreatures()){
+                if(creature.isVivo()){
+                    Vivo vivo = (Vivo) creature;
+                    if(vivo.isEquiped()){
+                        gameDetails+= vivo.getId() + " : " + vivo.getEquipment().getId() + "\n";
+                    }
+                }
+            }
+
+
+            System.out.println(gameDetails);
+            fileWriter.write(gameDetails);
+            fileWriter.close();
+            return true;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public boolean startGame(File ficheiroInicial) {
+        gameInfo.reset();
+        try {
+            Scanner scanner = new Scanner(ficheiroInicial);
             ArrayList<String> lines = new ArrayList<>();
 
             //Scans all lines to list
@@ -108,11 +170,6 @@ public class TWDGameManager {
             return false;
         }
         return true;
-    }
-
-
-    public boolean startGame(File ficheiroInicial) {
-        return loadGame(ficheiroInicial);
     }
 
     public int[] getWorldSize() {
@@ -282,35 +339,7 @@ public class TWDGameManager {
         }
     }
 
-    public boolean saveGame(File fich) {
-        String gameDetails = "";
-        try {
-            FileWriter fileWriter = new FileWriter(fich);
-            gameDetails += gameInfo.getNrLines() + " " + gameInfo.getNrColumns() + "\n";
-            gameDetails += gameInfo.getCurrentTeamID() + "\n";
-            gameDetails += gameInfo.getCreatures().size() + "\n";
-            for (Creature creature : gameInfo.getCreatures()) {
-                gameDetails += creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() +
-                        " : " + creature.getPosX() + " : " + creature.getPosY() + "\n";
-            }
-            gameDetails += gameInfo.getEquipments().size() + "\n";
-            for (Equipamento equipamento : gameInfo.getEquipments()) {
-                gameDetails += equipamento.getId() + " : " + equipamento.getIdTipo() + " : " + equipamento.getPosX() + " : " + equipamento.getPosY() + "\n";
-            }
-            gameDetails += gameInfo.getSafeHavens().size() + "\n";
-            for (SafeHaven safeHaven : gameInfo.getSafeHavens()) {
-                gameDetails += safeHaven.getPosX() + " : " + safeHaven.getPosY() + "\n";
-            }
-            System.out.println(gameDetails);
-            fileWriter.write(gameDetails);
-            fileWriter.close();
-            return true;
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     public String[] popCultureExtravaganza() {
         String[] resultado = new String[14];
