@@ -240,4 +240,8 @@ public abstract class Creature {
         }
         return false;
     }
+
+    public boolean isVivo(){
+        return teamId==10;
+    }
 }

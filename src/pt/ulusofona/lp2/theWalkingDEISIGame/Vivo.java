@@ -67,7 +67,6 @@ abstract class Vivo extends Creature {
 
         if (this.equipment.use()) {
             GameInfo gameInfo = GameInfo.getInstance();
-            gameInfo.bury(creature);
             gameInfo.removeCreature(creature);
             return true;
         }
