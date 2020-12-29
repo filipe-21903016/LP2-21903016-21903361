@@ -73,7 +73,7 @@ abstract class Vivo extends Creature {
 
     void pickEquipment(Equipamento equipamento) {
         //escudo madeira apanhado por militar
-        if (this.idType == 7 && equipamento.getIdTipo() == 6) {
+        if (this.idType == 7 && equipamento.getIdTipo() == 0) {
             EscudoMadeira escudoMadeira = (EscudoMadeira) equipamento;
             if (!escudoMadeira.isBuffed()) {
                 escudoMadeira.militaryBuff();

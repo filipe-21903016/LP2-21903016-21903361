@@ -35,6 +35,7 @@ public class GameInfo {
         creatureHashMap = new HashMap<>();
         equipamentoHashMap = new HashMap<>();
         graveyard = new ArrayList<>();
+        poisonedVivos = new ArrayList<>();
     }
 
 
@@ -95,7 +96,7 @@ public class GameInfo {
         creature.setDead();
     }
 
-    Equipamento getEquipmentById(int id) {
+    public Equipamento getEquipmentById(int id) {
         return equipamentoHashMap.get(id);
     }
 
@@ -203,7 +204,6 @@ public class GameInfo {
             if (vivo.getTurnsPoisoned()>2){
                 removeCreature(vivo);
                 removed.add(vivo);
-                getGraveyard().add(vivo);
             }
         }
         //removed from poisoned list
@@ -238,6 +238,7 @@ public class GameInfo {
     }
 
     public void removeCreature(Creature creature) {
+        /*
         int index = 0;
         for (Creature creature1 : creatures) {
             if (creature.getId() == creature1.getId()) {
@@ -248,7 +249,12 @@ public class GameInfo {
         //remove from list
         creatures.remove(index);
         //remove from hashmap
+
+
+        */
+        creatures.remove(creature);
         creatureHashMap.remove(creature.getId());
+        graveyard.add(creature);
     }
 
     public int getTeamIdByCreatureId(int id){

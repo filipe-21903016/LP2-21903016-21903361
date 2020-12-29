@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
+import java.util.Objects;
+
 public abstract class Creature {
     protected int idCriatura;
     protected int idType;
@@ -229,5 +231,18 @@ public abstract class Creature {
     }
 
     abstract public boolean combat(Creature creature);
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        Creature creature = (Creature) o;
+        return idCriatura == creature.idCriatura;
+    }
 
 }
