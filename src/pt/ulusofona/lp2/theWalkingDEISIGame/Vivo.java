@@ -1,11 +1,12 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-import java.io.SyncFailedException;
+import java.util.Objects;
 
 abstract class Vivo extends Creature {
     protected Equipamento equipment;
     protected String nomeEquipa = "Os Vivos";
     protected boolean safe;
+    protected int turnsPoisoned = 0;
 
     public Vivo(int idCriatura, int idType, String nome, int posX, int posY) {
         super(idCriatura, idType, nome, posX, posY);
@@ -13,41 +14,41 @@ abstract class Vivo extends Creature {
     }
 
     @Override
-    public boolean move(int xO,int yO,int xD, int yD){
-        if(!isValidMove(xO, yO, xD, yD)){
+    public boolean move(int xO, int yO, int xD, int yD) {
+        if (!isValidMove(xO, yO, xD, yD)) {
             return false;
         }
 
         GameInfo gameInfo = GameInfo.getInstance();
-        int id = gameInfo.getElementId(xD,yD);
+        int id = gameInfo.getElementId(xD, yD);
 
 
-        if(id<0){ //entao é id de equipamento
-            if(equipment!=null){
+        if (id < 0) { //entao é id de equipamento
+            if (equipment != null) {
                 gameInfo.addEquipment(dropEquipment());
             }
             Equipamento equipamento = gameInfo.getEquipmentById(id);
             pickEquipment(equipamento);
             gameInfo.removeEquipment(equipamento);
         }
-        if (id==0 && gameInfo.isDoorToSafeHaven(xD, yD)){
+        if (id == 0 && gameInfo.isDoorToSafeHaven(xD, yD)) {
             enterSafeHaven();
 
         }
-        if(id>0){
+        if (id > 0) {
             //humano sem equipamento nao se pode mover para cima de zombie
-            if(equipment==null){
+            if (equipment == null) {
                 return false;
             }
 
             //caso humano tenha equipamento ofensivo pode se mover e matar o zombie
-            if(equipment.isOffensive()){
+            if (equipment.isOffensive()) {
                 Creature target = gameInfo.getCreatureById(id);
-                if(this.equipment.getIdTipo()!=6 && target.getIdType()==4){ //vampires only dies to wooden stake
+                if (this.equipment.getIdTipo() != 6 && target.getIdType() == 4) { //vampires only dies to wooden stake
                     gameInfo.removeCreature(this);
                     return true;
                 }
-                if(!this.combat(target)){
+                if (!this.combat(target)) {
                     return false;
                 }
             }
@@ -57,9 +58,9 @@ abstract class Vivo extends Creature {
         return true;
     }
 
-    public boolean combat(Creature creature){
+    public boolean combat(Creature creature) {
 
-        if(this.equipment.use()){
+        if (this.equipment.use()) {
             GameInfo gameInfo = GameInfo.getInstance();
             gameInfo.bury(creature);
             gameInfo.removeCreature(creature);
@@ -70,10 +71,17 @@ abstract class Vivo extends Creature {
 
     void pickEquipment(Equipamento equipamento) {
         //escudo madeira apanhado por militar
-        if(this.idType==7 && equipamento.getIdTipo()==6){
+        if (this.idType == 7 && equipamento.getIdTipo() == 6) {
             EscudoMadeira escudoMadeira = (EscudoMadeira) equipamento;
-            if(!escudoMadeira.isBuffed()){
+            if (!escudoMadeira.isBuffed()) {
                 escudoMadeira.militaryBuff();
+            }
+        }
+        if (equipamento.getIdTipo() == 8) {
+            Veneno veneno = (Veneno) equipamento;
+            if (!veneno.isEmpty()) {
+                veneno.use();
+                GameInfo.getInstance().addPoisoned(this);
             }
         }
 
@@ -91,8 +99,8 @@ abstract class Vivo extends Creature {
         return currentEquipment;
     }
 
-    public void enterSafeHaven(){
-        this.safe=true;
+    public void enterSafeHaven() {
+        this.safe = true;
         SafeHaven.addSurvivor(this);
     }
 
@@ -110,35 +118,59 @@ abstract class Vivo extends Creature {
 
     @Override
     public String toString() {
-        if(safe){
-            return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
+        if (safe) {
+            return idCriatura + " | " + nomeTipo + " | " + nomeEquipa + " | " + nome
                     + " " + equipamentos + " @ A salvo";
         }
-        if(dead){
-            return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
+        if (dead) {
+            return idCriatura + " | " + nomeTipo + " | " + nomeEquipa + " | " + nome
                     + " " + equipamentos + " @ RIP";
         }
-        return idCriatura + " | "+ nomeTipo +" | " + nomeEquipa + " | " + nome
+        return idCriatura + " | " + nomeTipo + " | " + nomeEquipa + " | " + nome
                 + " " + equipamentos + " @ (" + posX + ", " + posY + ")";
     }
 
 
     public boolean isEquiped() {
-        return equipment!=null;
+        return equipment != null;
     }
 
-    public void destroyEquipment(){
-        equipment=null;
+    public void destroyEquipment() {
+        equipment = null;
     }
 
-    public void turn(){
+    public void turn() {
         GameInfo gameInfo = GameInfo.getInstance();
-        Creature zombie = CreatureFactory.makeCreature(this.getId(), this.idType-5, this.getNome(),
+        Creature zombie = CreatureFactory.makeCreature(this.getId(), this.idType - 5, this.getNome(),
                 this.getPosX(), this.getPosY());
         gameInfo.removeCreature(this);
         gameInfo.addCreature(zombie);
     }
 
+    public void incrementPoisenedTurn(){
+        turnsPoisoned++;
+    }
+
+    public int getTurnsPoisoned() {
+        return turnsPoisoned;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        Vivo vivo = (Vivo) o;
+        return safe == vivo.safe && turnsPoisoned == vivo.turnsPoisoned && Objects.equals(equipment, vivo.equipment) && Objects.equals(nomeEquipa, vivo.nomeEquipa);
+    }
+
+    public boolean isPoisoned(){
+        return turnsPoisoned>0;
+    }
 
 }
 

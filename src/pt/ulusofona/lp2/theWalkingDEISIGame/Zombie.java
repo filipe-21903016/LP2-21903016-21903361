@@ -24,6 +24,10 @@ abstract class Zombie extends Creature {
             Creature creature = gameInfo.getCreatureById(id);
             Vivo vivo = (Vivo) creature;
             Equipamento targetEquipment= vivo.getEquipment();
+
+            if(vivo.isPoisoned()){
+                return false;
+            }
             if(vivo.getIdType()==9){ //Zombies are afraid of dogs
                 return false;
             }

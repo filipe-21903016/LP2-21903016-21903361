@@ -19,6 +19,7 @@ public class GameInfo {
     private HashMap<Integer, Creature> creatureHashMap = new HashMap<>();
     private HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
     private ArrayList<Creature> graveyard = new ArrayList<>();
+    private ArrayList<Vivo> poisonedVivos = new ArrayList<>();
 
 
     public void reset(){
@@ -191,6 +192,21 @@ public class GameInfo {
 
 
     public int nextTurn() {
+        ArrayList<Vivo> removed = new ArrayList<>();
+        //removes from creature list
+        for(Vivo vivo: poisonedVivos){
+            vivo.incrementPoisenedTurn();
+            if (vivo.getTurnsPoisoned()>2){
+                removeCreature(vivo);
+                removed.add(vivo);
+            }
+        }
+        //removed from poisoned list
+        for(Vivo v:removed){
+            poisonedVivos.remove(v);
+        }
+
+
         this.currentTeamID = (currentTeamID == idTeamVivos) ? idTeamMortos : idTeamVivos;
         return nrTurno++;
     }
@@ -235,4 +251,7 @@ public class GameInfo {
     }
 
 
+    public void addPoisoned(Vivo vivo) {
+        poisonedVivos.add(vivo);
+    }
 }
