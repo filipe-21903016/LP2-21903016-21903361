@@ -227,4 +227,7 @@ public abstract class Creature {
     public void setDead(){
         dead=true;
     }
+
+    abstract public boolean combat(Creature creature);
+
 }

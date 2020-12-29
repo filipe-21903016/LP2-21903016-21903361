@@ -111,9 +111,13 @@ abstract class Vivo extends Creature {
         return equipment!=null;
     }
 
+    public void destroyEquipment(){
+        equipment=null;
+    }
 
     public boolean combat(Creature creature){
-        if(this.equipment.getIdTipo()!=6 && creature.getIdType()==4){ //Zombie only dies to wooden stake
+        if(this.equipment.getIdTipo()!=6 && creature.getIdType()==4){ //vampires only dies to wooden stake
+            //TODO human dies
             return false;
         }
         if(this.equipment.use()){

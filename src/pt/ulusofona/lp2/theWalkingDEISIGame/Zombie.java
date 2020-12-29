@@ -22,31 +22,42 @@ abstract class Zombie extends Creature {
         }
         if(id>0){
             Creature creature = gameInfo.getCreatureById(id);
-            if(creature.getIdType()==9){ //Zombies are afraid of dogs
+            Vivo vivo = (Vivo) creature;
+            Equipamento targetEquipment= vivo.getEquipment();
+            if(vivo.getIdType()==9){ //Zombies are afraid of dogs
                 return false;
             }
-            if(creature.getTeamId() == gameInfo.getIdTeamVivos()){
-                Vivo vivo = (Vivo) creature;
-                if(!vivo.isEquiped()){
-                    //transformar vivo em zombie
-                    Creature zombie = CreatureFactory.makeCreature(vivo.getId(),
-                            vivo.idType-5, vivo.getNome(),
-                            vivo.getPosX(), vivo.getPosY());
-                    gameInfo.removeCreature(vivo);
-                    gameInfo.addCreature(zombie);
-                    return true;
-                }
-                /*TODO code when human is equipped
-                    possivel erro 05 do dp
-                 */
+            if(idType==4 && targetEquipment.getIdTipo()==5){ //Vampiro nao ataca quem tem cabecas de alho
                 return false;
             }
+            if(!vivo.isEquiped()){
+                //transformar vivo em zombie
+                Creature zombie = CreatureFactory.makeCreature(vivo.getId(), vivo.idType-5, vivo.getNome(),
+                        vivo.getPosX(), vivo.getPosY());
+                gameInfo.removeCreature(vivo);
+                gameInfo.addCreature(zombie);
+                return true;
+            }
+            if(vivo.getEquipment().isOffensive()){
+                return false;
+            }
+            this.combat(vivo);
+            return true;
         }
         posX = xD;
         posY = yD;
         return true;
     }
 
+    @Override
+    public boolean combat(Creature creature) {
+        Vivo target = (Vivo) creature;
+        Equipamento targetEquipment= target.getEquipment();
+        if(targetEquipment.use()){ //humano usa equipamento de defesa
+            return false;
+        }
+        return true;
+    }
 
     void destroyEquiment(){
         this.equipamentos++;

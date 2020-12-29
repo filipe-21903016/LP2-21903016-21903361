@@ -10,4 +10,10 @@ public class CabecaDeAlho extends Equipamento {
     public String getImagePNG(){
         return "garlic.png";
     }
+
+
+    @Override
+    public boolean use() {
+        return false;
+    }
 }

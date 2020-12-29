@@ -18,4 +18,13 @@ public class GarrafaDeLixivia extends Equipamento {
         return "bleach.png";
     }
 
+    @Override
+    public boolean use() {
+        if(uses==0){
+            return false;
+        }else{
+            uses-=1;
+            return true;
+        }
+    }
 }
