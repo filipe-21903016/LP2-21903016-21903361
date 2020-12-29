@@ -171,6 +171,9 @@ abstract class Vivo extends Creature {
         return turnsPoisoned>0;
     }
 
+    public boolean isSafe() {
+        return safe;
+    }
 
     /*
     public boolean canDefend(Zombie zombie){

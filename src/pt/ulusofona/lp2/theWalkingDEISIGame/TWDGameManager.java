@@ -152,27 +152,19 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
-        if(gameInfo.getTurnosSemTransformacao() > gameInfo.getNrMaxTurnos()){
-            return true;
+        if(gameInfo.getTurnosSemTransformacao() >= gameInfo.getNrMaxTurnos()){
+            return false;
         }
-        //iterar criaturas
-        //ver se é vivo
-        //se for vivo e não estiver safe -> retorna false
 
-        /*for (Creature creature : gameInfo.getCreatures()) {
+        for (Creature creature : gameInfo.getCreatures()) {
             if (creature.getTeamId() == gameInfo.getIdTeamVivos()){
                 Vivo vivo = (Vivo) creature;
-                if (!(getCreatures().contains(vivo)) ||
-                        gameInfo.getNrMaxTurnos() >= gameInfo.roundsWithoutTransformation()) {
-                    return true;
+                if (!vivo.isSafe()){
+                    return false;
                 }
             }
-        }*/
-
-
-
-
-        return false;
+        }
+        return true;
     }
 
     public List<String> getAuthors() {
