@@ -8,7 +8,7 @@
 5 : 3 : Sam : 1 : 1
 6 : 1 : Paciente Zero : 4 : 4
 7 : 8 : Mihagi : 0 : 2
-8 : 4 : Dracula : 6 : 5
+8 : 4 : Dracula : 1 : 4
 9 : 1 : Paciente Um : 5 : 4
 10 : 1 : Paciente Dois : 5 : 3
 11 : 1 : Paciente Tres : 6 : 3

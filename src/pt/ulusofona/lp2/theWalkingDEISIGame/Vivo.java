@@ -49,8 +49,7 @@ abstract class Vivo extends Creature {
                     return false;
                 }
                 if (this.equipment.getIdTipo() != 6 && target.getIdType() == 4) { //vampires only dies to wooden stake
-                    gameInfo.removeCreature(this);
-                    return true;
+                    return false;
                 }
                 if (!this.combat(target)) {
                     return false;
