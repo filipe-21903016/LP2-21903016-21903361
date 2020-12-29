@@ -269,4 +269,17 @@ public class GameInfo {
     public void removePoisoned(Vivo vivo){
         poisonedVivos.remove(vivo);
     }
+
+    public int roundsWithoutTransformation(){
+        int result = 0;
+        for (Creature creature : getCreatures()){
+            if (creature.getTeamId() == nextTurn()){
+                result++;
+            }
+            else {
+                result = 0;
+            }
+        }
+        return result;
+    }
 }
