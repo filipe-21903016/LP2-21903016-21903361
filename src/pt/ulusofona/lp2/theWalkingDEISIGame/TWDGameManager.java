@@ -152,8 +152,8 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
-        if(gameInfo.getTurnosSemTransformacao() < gameInfo.getNrMaxTurnos()){
-            return false;
+        if(gameInfo.getTurnosSemTransformacao() >= gameInfo.getNrMaxTurnos()){
+            return true;
         }
 
         for (Creature creature : gameInfo.getCreatures()) {
