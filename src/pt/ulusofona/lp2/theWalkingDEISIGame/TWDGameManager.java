@@ -155,7 +155,7 @@ public class TWDGameManager {
         for (Creature creature : gameInfo.getCreatures()) {
             if (creature.getTeamId() == gameInfo.getIdTeamVivos()){
                 Vivo vivo = (Vivo) creature;
-                if (!(getCreatures().contains(vivo)) || gameInfo.getNrMaxTurnos() == 12) {
+                if (!(getCreatures().contains(vivo)) || gameInfo.getNrMaxTurnos() > 12) {
                     return true;
                 }
             }
