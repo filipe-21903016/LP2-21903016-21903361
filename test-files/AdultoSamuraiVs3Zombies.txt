@@ -1,0 +1,10 @@
+7 7
+10
+4
+1 : 6 : Mihagi : 3 : 3
+2 : 1 : Paciente Zero : 3 : 2
+3 : 1 : Paciente Um : 2 : 2
+4 : 1 : Paciente Dois : 4 : 3
+1
+-2 : 1 : 4 : 2
+0

@@ -268,25 +268,43 @@ public class TestAdultoVivo {
     public void moveDiagonalWithBlockedPath() {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(2, 2, 4, 4);
-        Assert.assertEquals(false, obtained);
+        Assert.assertFalse(obtained);
     }
 
     @Test
     public void moveWithBlockedPathEquipment() {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(2, 4,2, 6);
-        Assert.assertEquals(false, obtained);
+        Assert.assertFalse(obtained);
     }
 
     @Test
     public void moveWithSafeHaven() {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(2, 0, 2, 2);
-        Assert.assertEquals(false, obtained);
+        Assert.assertFalse(obtained);
     }
 
     @Test
-    public void kill(){
+    public void mataZombieComEspada(){
+        gameManager.startGame(fich);
+        gameManager.move(0,0,1,0);//apanha espada
+        gameManager.move(2,0,1,1);
+        gameManager.move(1,0,1,1);//mata zombie
+        Assert.assertEquals(2,gameManager.getElementId(1,1));
+    }
+
+    @Test
+    public void mata3zombies(){
+        gameManager.startGame(new File("test-files/AdultoSamuraiVs3Zombies.txt"));
+        gameManager.move(3,3,4,2);
+        gameManager.move(3,2,3,3);
+        gameManager.move(4,2,3,3);
+        gameManager.move(2,2,3,3);
+        Assert.assertEquals(1,gameManager.getElementId(3,3));
+        gameManager.move(3,3,4,3);
+        Assert.assertEquals(0,gameManager.getElementId(3,3));
+        Assert.assertEquals(1,gameManager.getElementId(4,3));
 
     }
 }
