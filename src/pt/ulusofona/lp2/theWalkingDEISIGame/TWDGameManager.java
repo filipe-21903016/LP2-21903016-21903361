@@ -152,14 +152,14 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
-        /*for (Creature creature : getCreatures()) {
-            if ((!(creature.getIdType() == 5 && creature.getIdType() == 6 && creature.getIdType() == 7
-                && creature.getIdType() == 8 && creature.getIdType() == 9)) ||
-                gameInfo.getNrTurno() == gameInfo.getNrMaxTurnos()) {
-                return true;
+        for (Creature creature : gameInfo.getCreatures()) {
+            if (creature.getTeamId() == gameInfo.getIdTeamVivos()){
+                Vivo vivo = (Vivo) creature;
+                if (!(getCreatures().contains(vivo)) || gameInfo.getNrMaxTurnos() == 12) {
+                    return true;
+                }
             }
-        }        */
-        //TODO fazer codigo
+        }
         return false;
     }
 
