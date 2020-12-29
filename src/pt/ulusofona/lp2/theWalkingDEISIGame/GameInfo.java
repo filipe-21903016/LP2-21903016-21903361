@@ -13,6 +13,7 @@ public class GameInfo {
     private int nrColumns;
     private int currentTeamID;
     private int firstTeamId;
+    private int turnosSemTransformacao=0;
     private ArrayList<Creature> creatures = new ArrayList<>();
     private ArrayList<Equipamento> equipments = new ArrayList<>();
     private ArrayList<SafeHaven> safeHavenDoors = new ArrayList<>();
@@ -28,6 +29,7 @@ public class GameInfo {
         nrColumns=0;
         currentTeamID=0;
         firstTeamId =0;
+        turnosSemTransformacao=0;
         creatures = new ArrayList<>();
         equipments = new ArrayList<>();
         safeHavenDoors = new ArrayList<>();
@@ -51,6 +53,10 @@ public class GameInfo {
 
     public int getNrMaxTurnos() {
         return nrMaxTurnos;
+    }
+
+    public int getTurnosSemTransformacao() {
+        return turnosSemTransformacao;
     }
 
     public HashMap<Integer, Equipamento> getEquipamentoHashMap() {
@@ -210,8 +216,7 @@ public class GameInfo {
         for(Vivo v:removed){
             poisonedVivos.remove(v);
         }
-
-
+        turnosSemTransformacao++;
         this.currentTeamID = (currentTeamID == idTeamVivos) ? idTeamMortos : idTeamVivos;
         return nrTurno++;
     }
@@ -257,7 +262,7 @@ public class GameInfo {
         poisonedVivos.remove(vivo);
     }
 
-    public int roundsWithoutTransformation(){
+    /*public int roundsWithoutTransformation(){
         int result = 0;
         for (Creature creature : getCreatures()){
             for (int i = 1; i <13; i++){
@@ -270,5 +275,9 @@ public class GameInfo {
             }
         }
         return result;
+    }*/
+
+    public void setTurnosSemTransformacao(int turnosSemTransformacao) {
+        this.turnosSemTransformacao = turnosSemTransformacao;
     }
 }

@@ -152,6 +152,13 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
+        if(gameInfo.getTurnosSemTransformacao() > gameInfo.getNrMaxTurnos()){
+            return true;
+        }
+        //iterar criaturas
+        //ver se é vivo
+        //se for vivo e não estiver safe -> retorna false
+
         /*for (Creature creature : gameInfo.getCreatures()) {
             if (creature.getTeamId() == gameInfo.getIdTeamVivos()){
                 Vivo vivo = (Vivo) creature;
@@ -161,6 +168,10 @@ public class TWDGameManager {
                 }
             }
         }*/
+
+
+
+
         return false;
     }
 

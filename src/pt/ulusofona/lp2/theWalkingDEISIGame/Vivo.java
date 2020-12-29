@@ -156,6 +156,7 @@ abstract class Vivo extends Creature {
                 this.getPosX(), this.getPosY());
         gameInfo.removeCreature(this);
         gameInfo.addCreature(zombie);
+        gameInfo.setTurnosSemTransformacao(0);
     }
 
     public void incrementPoisenedTurn(){
