@@ -254,4 +254,8 @@ public class GameInfo {
     public void addPoisoned(Vivo vivo) {
         poisonedVivos.add(vivo);
     }
+
+    public void removePoisoned(Vivo vivo){
+        poisonedVivos.remove(vivo);
+    }
 }

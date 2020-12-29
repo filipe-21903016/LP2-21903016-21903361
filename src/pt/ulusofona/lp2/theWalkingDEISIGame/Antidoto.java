@@ -1,8 +1,8 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 public class Antidoto extends Equipamento {
-    boolean poisoned;
-    int uses = 1 ;
+    boolean used;
+
     public Antidoto(int id, int posX, int posY) {
         super(id, 9, posX, posY);
         super.titulo = "Antídoto";
@@ -14,14 +14,12 @@ public class Antidoto extends Equipamento {
     }
 
     public boolean isEmpty(){
-        return uses==0;
+        return used;
     }
-
-    public boolean isPoisoned() {return poisoned;}
-
+    /*
     @Override
     public boolean use(){
-        if (uses == 0){
+        /*if (uses == 0){
             return false;
         }
         else {
@@ -40,5 +38,15 @@ public class Antidoto extends Equipamento {
         poisoned = false;
         uses = 0;
         return true;
+
+
+    }*/
+    @Override
+    public boolean use() {
+        if(!used){
+            used=true;
+            return true;
+        }
+        return false;
     }
 }

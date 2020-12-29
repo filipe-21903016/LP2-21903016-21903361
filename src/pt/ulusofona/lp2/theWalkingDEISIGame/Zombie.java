@@ -35,7 +35,8 @@ abstract class Zombie extends Creature {
                 return false;
             }
             if(!vivo.isEquiped() || (this.getIdType() != 3 && targetEquipment.getIdTipo() == 4) ||
-                    targetEquipment.getIdTipo() == 5){
+                    targetEquipment.getIdTipo() == 5 || targetEquipment.getIdTipo()==8
+                    || targetEquipment.getIdTipo() == 9){ /*TODO change this*/
                 //transformar vivo em zombie
                 vivo.turn();
                 return true;

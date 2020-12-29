@@ -67,7 +67,11 @@ public class TWDGameManager {
             }
 
             data = lines.get(currentLine).split("");
-            int nrEquipment = Integer.parseInt(data[0]);
+            allLine = new StringBuffer();
+            for(int i = 0;i< data.length; i++){
+                allLine.append(data[i]);
+            }
+            int nrEquipment = Integer.parseInt(allLine.toString());
             currentLine++;
 
             maxLine = currentLine + nrEquipment;
@@ -95,10 +99,9 @@ public class TWDGameManager {
 
             scanner.close();
             getInitialTeam();
-            //System.out.println(gameInfo.getHumans().get(0));
 
             if (getInitialTeam() != getCurrentTeamId()) {
-                return false; //alterei isto segundo piaza//
+                return false;
             }
 
         } catch (FileNotFoundException e) {

@@ -28,6 +28,9 @@ abstract class Vivo extends Creature {
                 gameInfo.addEquipment(dropEquipment());
             }
             Equipamento equipamento = gameInfo.getEquipmentById(id);
+            if(!this.isPoisoned() && equipamento.getIdTipo() ==9){ //TODO change this
+                return false;
+            }
             pickEquipment(equipamento);
             gameInfo.removeEquipment(equipamento);
         }
@@ -40,7 +43,6 @@ abstract class Vivo extends Creature {
             if (equipment == null) {
                 return false;
             }
-
             //caso humano tenha equipamento ofensivo pode se mover e matar o zombie
             if (equipment.isOffensive()) {
                 Creature target = gameInfo.getCreatureById(id);
@@ -83,6 +85,12 @@ abstract class Vivo extends Creature {
                 veneno.use();
                 GameInfo.getInstance().addPoisoned(this);
             }
+        }
+
+        if(equipamento.getIdTipo() == 9){
+            Antidoto antidoto = (Antidoto) equipamento;
+            this.turnsPoisoned =0;
+            GameInfo.getInstance().removePoisoned(this);
         }
 
         this.equipment = equipamento;
