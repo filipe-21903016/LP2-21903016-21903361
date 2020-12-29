@@ -39,9 +39,14 @@ abstract class Vivo extends Creature {
             if(equipment==null){
                 return false;
             }
+
             //caso humano tenha equipamento ofensivo pode se mover e matar o zombie
             if(equipment.isOffensive()){
                 Creature target = gameInfo.getCreatureById(id);
+                if(this.equipment.getIdTipo()!=6 && target.getIdType()==4){ //vampires only dies to wooden stake
+                    gameInfo.removeCreature(this);
+                    return true;
+                }
                 if(!this.combat(target)){
                     return false;
                 }
@@ -50,6 +55,17 @@ abstract class Vivo extends Creature {
         posX = xD;
         posY = yD;
         return true;
+    }
+
+    public boolean combat(Creature creature){
+
+        if(this.equipment.use()){
+            GameInfo gameInfo = GameInfo.getInstance();
+            gameInfo.bury(creature);
+            gameInfo.removeCreature(creature);
+            return true;
+        }
+        return false;
     }
 
     void pickEquipment(Equipamento equipamento) {
@@ -113,20 +129,6 @@ abstract class Vivo extends Creature {
 
     public void destroyEquipment(){
         equipment=null;
-    }
-
-    public boolean combat(Creature creature){
-        if(this.equipment.getIdTipo()!=6 && creature.getIdType()==4){ //vampires only dies to wooden stake
-            //TODO human dies
-            return false;
-        }
-        if(this.equipment.use()){
-            GameInfo gameInfo = GameInfo.getInstance();
-            gameInfo.bury(creature);
-            gameInfo.removeCreature(creature);
-            return true;
-        }
-        return false;
     }
 
 

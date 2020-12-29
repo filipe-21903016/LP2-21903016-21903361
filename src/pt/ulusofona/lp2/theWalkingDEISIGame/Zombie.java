@@ -39,7 +39,9 @@ abstract class Zombie extends Creature {
                 return true;
             }
             if(vivo.getEquipment().isOffensive()){
-                return false;
+                vivo.getEquipment().use();
+                gameInfo.removeCreature(this);
+                return true;
             }
             this.combat(vivo);
             return true;
