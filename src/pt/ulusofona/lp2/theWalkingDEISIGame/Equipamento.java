@@ -91,4 +91,13 @@ public abstract class Equipamento {
         System.out.println(id+":"+titulo+" was used");
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Equipamento equipamento = (Equipamento) obj;
+        if(this.id==equipamento.getId()){
+            return true;
+        }
+        return false;
+    }
 }

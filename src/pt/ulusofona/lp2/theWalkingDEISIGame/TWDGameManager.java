@@ -152,7 +152,7 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
-        for (Creature creature : gameInfo.getCreatures()) {
+        /*for (Creature creature : gameInfo.getCreatures()) {
             if (creature.getTeamId() == gameInfo.getIdTeamVivos()){
                 Vivo vivo = (Vivo) creature;
                 if (!(getCreatures().contains(vivo)) ||
@@ -160,7 +160,7 @@ public class TWDGameManager {
                     return true;
                 }
             }
-        }
+        }*/
         return false;
     }
 

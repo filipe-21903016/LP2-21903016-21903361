@@ -232,17 +232,12 @@ public abstract class Creature {
 
     abstract public boolean combat(Creature creature);
 
-
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        Creature creature = (Creature) obj;
+        if(this.idCriatura==creature.getId()){
             return true;
         }
-        if (o == null || getClass() != o.getClass()){
-            return false;
-        }
-        Creature creature = (Creature) o;
-        return idCriatura == creature.idCriatura;
+        return false;
     }
-
 }

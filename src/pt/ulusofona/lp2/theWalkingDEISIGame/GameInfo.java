@@ -224,7 +224,7 @@ public class GameInfo {
     }
 
     public void removeEquipment(Equipamento equipamento) {
-        int index = 0;
+        /*int index = 0;
         for (Equipamento equipamento1 : equipments) {
             if (equipamento.getId() == equipamento1.getId()) {
                 break;
@@ -232,26 +232,13 @@ public class GameInfo {
             index++;
         }
         //remove from list
-        equipments.remove(index);
+        equipments.remove(index);*/
         //remove from hashmap
         //equipamentoHashMap.remove(equipamento.getId());
+        equipments.remove(equipamento);
     }
 
     public void removeCreature(Creature creature) {
-        /*
-        int index = 0;
-        for (Creature creature1 : creatures) {
-            if (creature.getId() == creature1.getId()) {
-                break;
-            }
-            index++;
-        }
-        //remove from list
-        creatures.remove(index);
-        //remove from hashmap
-
-
-        */
         creatures.remove(creature);
         creatureHashMap.remove(creature.getId());
         graveyard.add(creature);

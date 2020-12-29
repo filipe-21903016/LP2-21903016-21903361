@@ -5,7 +5,6 @@ public class IdosoZombie extends Zombie {
         super(idCriatura,3, nome, posX, posY);
         nomeTipo="Idoso (Zombie)";
     }
-
     public String getImagePNG(){
         return "oldZombie.png";
     }

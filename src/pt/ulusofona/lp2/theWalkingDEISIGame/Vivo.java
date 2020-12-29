@@ -36,7 +36,6 @@ abstract class Vivo extends Creature {
         }
         if (id == 0 && gameInfo.isDoorToSafeHaven(xD, yD)) {
             enterSafeHaven();
-
         }
         if (id > 0) {
             //humano sem equipamento nao se pode mover para cima de zombie
@@ -46,6 +45,9 @@ abstract class Vivo extends Creature {
             //caso humano tenha equipamento ofensivo pode se mover e matar o zombie
             if (equipment.isOffensive()) {
                 Creature target = gameInfo.getCreatureById(id);
+                if(this.idType==5 && target.getIdType()!=0){
+                    return false;
+                }
                 if (this.equipment.getIdTipo() != 6 && target.getIdType() == 4) { //vampires only dies to wooden stake
                     gameInfo.removeCreature(this);
                     return true;
@@ -53,7 +55,9 @@ abstract class Vivo extends Creature {
                 if (!this.combat(target)) {
                     return false;
                 }
-            }
+            }/*else{
+                return false;
+            }*/
         }
         posX = xD;
         posY = yD;
@@ -161,19 +165,6 @@ abstract class Vivo extends Creature {
 
     public int getTurnsPoisoned() {
         return turnsPoisoned;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o){
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()){
-            return false;
-        }
-        Vivo vivo = (Vivo) o;
-        return safe == vivo.safe && turnsPoisoned == vivo.turnsPoisoned && Objects.equals(equipment, vivo.equipment) && Objects.equals(nomeEquipa, vivo.nomeEquipa);
     }
 
     public boolean isPoisoned(){

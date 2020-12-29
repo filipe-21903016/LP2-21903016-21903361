@@ -16,7 +16,12 @@ abstract class Zombie extends Creature {
         }
         int id = gameInfo.getElementId(xD,yD);
         if(id<0){
-            Equipamento equipamento = gameInfo.getEquipmentById(id);
+                Equipamento equipamento = gameInfo.getEquipmentById(id);
+            //vampiro nao move para cabecas de alho
+            // zombies nao podem mover para cima de veneno
+            if(this.idType==4 && equipamento.getIdTipo()==5 || equipamento.getIdTipo()==8){
+                return false;
+            }
             destroyEquiment();
             gameInfo.removeEquipment(equipamento);
         }
@@ -34,14 +39,21 @@ abstract class Zombie extends Creature {
             if(idType==4 && targetEquipment.getIdTipo()==5){ //Vampiro nao ataca quem tem cabecas de alho
                 return false;
             }
-            if(!vivo.isEquiped() || (this.getIdType() != 3 && targetEquipment.getIdTipo() == 4) ||
-                    targetEquipment.getIdTipo() == 5 || targetEquipment.getIdTipo()==8
-                    || targetEquipment.getIdTipo() == 9){ /*TODO change this*/
+            if(!vivo.isEquiped() //TODO THIS IS UGLY,NEEDS TO BE REFINED
+                    || (this.getIdType() != 3 && targetEquipment.getIdTipo() == 4) //revista maria only protects against idosos zombies
+                    || targetEquipment.getIdTipo() == 5 // cabecas de alho so protegem contra ataques de vampiro
+                    || targetEquipment.getIdTipo()==8   // se humano nao esta envenenado entao o frasco de veneno nao o protege
+                    || targetEquipment.getIdTipo() == 9 // o frasco de antidoto nao protege o humano
+            ){
                 //transformar vivo em zombie
                 vivo.turn();
                 return true;
             }
             if(vivo.getEquipment().isOffensive()){
+                if(this.idType!=0){ //mesmo q a crianca tenha equipamento ofensivo este so e eficaz em crianca zombie
+                    vivo.turn();
+                    return true;
+                }
                 vivo.getEquipment().use();
                 gameInfo.removeCreature(this);
                 return true;
