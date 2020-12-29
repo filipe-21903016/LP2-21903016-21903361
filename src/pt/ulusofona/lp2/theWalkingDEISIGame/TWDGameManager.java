@@ -66,6 +66,20 @@ public class TWDGameManager {
                 }
             }
 
+            //save creatures in graveyard
+            gameDetails+= gameInfo.getGraveyard().size() + "\n";
+            for (Creature creature : gameInfo.getGraveyard()) {
+                gameDetails += creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() +
+                        " : " + creature.getPosX() + " : " + creature.getPosY() + "\n";
+            }
+
+            //save creatures in safehaven
+            gameDetails+=SafeHaven.getSurvivors().size() + "\n";
+            for (Vivo vivo : SafeHaven.getSurvivors()) {
+                gameDetails += vivo.getId() + " : " + vivo.getIdType() + " : " + vivo.getNome() +
+                        " : " + vivo.getPosX() + " : " + vivo.getPosY() + "\n";
+            }
+
 
             System.out.println(gameDetails);
             fileWriter.write(gameDetails);

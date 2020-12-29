@@ -97,11 +97,6 @@ public class GameInfo {
         return 0;
     }
 
-    public void bury(Creature creature){
-        graveyard.add(creature);
-        creature.setDead();
-    }
-
     public Equipamento getEquipmentById(int id) {
         return equipamentoHashMap.get(id);
     }
@@ -247,6 +242,7 @@ public class GameInfo {
         creatures.remove(creature);
         creatureHashMap.remove(creature.getId());
         graveyard.add(creature);
+        creature.setDead();
     }
 
     public int getTeamIdByCreatureId(int id){
