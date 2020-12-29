@@ -11,5 +11,4 @@ public class RevistaMaria extends Equipamento {
         return "rolled_magazine.png";
     }
 
-
 }

@@ -43,6 +43,10 @@ abstract class Zombie extends Creature {
                 gameInfo.removeCreature(this);
                 return true;
             }
+            if(this.getIdType() != 3 && targetEquipment.getIdTipo() == 4) {
+                gameInfo.removeCreature(vivo);
+                return true;
+            }
             this.combat(vivo);
             return true;
         }
