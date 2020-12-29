@@ -177,22 +177,5 @@ abstract class Vivo extends Creature {
         return safe;
     }
 
-    /*
-    public boolean canDefend(Zombie zombie){
-        if(zombie.idType != 3 && equipment.getIdTipo()==4){
-            //revista maria apenas defende ataques de zombie idoso
-            return false;
-        }
-        if(equipment.getIdTipo() == 5 && zombie.idType != 4){
-            //cabeca de alho so defende contra vampiros
-            return false;
-        }
-        if(equipment.getIdTipo()==8 && !this.isPoisoned()){
-            return false;
-        }
-        if (equipment.getIdTipo()==9){
-            return false;
-        }
-    }*/
 }
 

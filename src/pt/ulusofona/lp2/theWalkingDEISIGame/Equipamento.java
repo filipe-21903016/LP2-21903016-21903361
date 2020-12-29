@@ -88,7 +88,7 @@ public abstract class Equipamento {
     }
 
     public boolean use(){
-        System.out.println(id+":"+titulo+" was used");
+        //System.out.println(id+":"+titulo+" was used");
         return true;
     }
 

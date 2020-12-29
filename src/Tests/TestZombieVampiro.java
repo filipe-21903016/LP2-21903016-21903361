@@ -12,16 +12,17 @@ public class TestZombieVampiro {
 
     @Test
     public void outOfBounds1() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()){
             boolean obtained = gameManager.move(0,0,-2,0);
             Assert.assertEquals(false,obtained);
         }
     }
 
+
     @Test
     public void outOfBounds2() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(0, 0, 0, -2);
             Assert.assertEquals(false, obtained);
@@ -30,7 +31,7 @@ public class TestZombieVampiro {
 
     @Test
     public void outOfBounds3() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(6, 6, 8, 6);
             Assert.assertEquals(false, obtained);
@@ -39,7 +40,7 @@ public class TestZombieVampiro {
 
     @Test
     public void outOfBounds4() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(6, 6, 8, 6);
             Assert.assertEquals(false, obtained);
@@ -49,7 +50,7 @@ public class TestZombieVampiro {
     @Test
     public void moveRight(){
         //2 Spaces to right
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 5, 3);
             Assert.assertEquals(true, obtained);
@@ -59,7 +60,7 @@ public class TestZombieVampiro {
     @Test
     public void moveLeft(){
         //2 Spaces to left
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 1, 3);
             Assert.assertEquals(true, obtained);
@@ -69,7 +70,7 @@ public class TestZombieVampiro {
     @Test
     public void moveUp(){
         //2 Space to top
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 3, 1);
             Assert.assertEquals(true, obtained);
@@ -79,7 +80,7 @@ public class TestZombieVampiro {
     @Test
     public void moveDown(){
         //2 Space to bottom
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 3, 5);
             Assert.assertEquals(true, obtained);
@@ -88,7 +89,7 @@ public class TestZombieVampiro {
 
     @Test
     public void rightUpDiagonal() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 5, 1);
             Assert.assertEquals(true, obtained);
@@ -97,7 +98,7 @@ public class TestZombieVampiro {
 
     @Test
     public void leftUpDiagonal() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 1, 1);
             Assert.assertEquals(true, obtained);
@@ -106,7 +107,7 @@ public class TestZombieVampiro {
 
     @Test
     public void rightDownDiagonal() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 5, 5);
             Assert.assertEquals(true, obtained);
@@ -115,7 +116,7 @@ public class TestZombieVampiro {
 
     @Test
     public void leftDownDiagonal() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 3, 2);
             Assert.assertEquals(true, obtained);
@@ -124,7 +125,7 @@ public class TestZombieVampiro {
 
     @Test
     public void validMove1() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 5, 1);
             Assert.assertEquals(true, obtained);
@@ -133,7 +134,7 @@ public class TestZombieVampiro {
 
     @Test
     public void validMove2() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 2, 3);
             Assert.assertEquals(true, obtained);
@@ -142,7 +143,7 @@ public class TestZombieVampiro {
 
     @Test
     public void validMove3() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 4, 3);
             Assert.assertEquals(true, obtained);
@@ -151,7 +152,7 @@ public class TestZombieVampiro {
 
     @Test
     public void validMove4() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 3, 4);
             Assert.assertEquals(true, obtained);
@@ -160,7 +161,7 @@ public class TestZombieVampiro {
 
     @Test
     public void validMove5() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 4, 4);
             Assert.assertEquals(true, obtained);
@@ -169,7 +170,7 @@ public class TestZombieVampiro {
 
     @Test
     public void moveByDaylight() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         boolean expected = !gameManager.isDay();
         boolean obtained = gameManager.move(3,3,3,2);
         Assert.assertEquals("Zombie Vampiro não se pode mover durante o dia",expected,obtained);
@@ -177,7 +178,7 @@ public class TestZombieVampiro {
 
     @Test
     public void moveRightWithBlockedPath(){
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(2, 3, 4, 3);
             Assert.assertEquals(false, obtained);
@@ -186,7 +187,7 @@ public class TestZombieVampiro {
 
     @Test
     public void moveLeftWithBlockedPath() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(4, 3, 2, 3);
             Assert.assertEquals(false, obtained);
@@ -195,7 +196,7 @@ public class TestZombieVampiro {
 
     @Test
     public void moveUpWithBlockedPath() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 4, 3, 2);
             Assert.assertEquals(false, obtained);
@@ -204,7 +205,7 @@ public class TestZombieVampiro {
 
     @Test
     public void moveDownWithBlockedPath() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 2, 3, 4);
             Assert.assertEquals(false, obtained);
@@ -213,7 +214,7 @@ public class TestZombieVampiro {
 
     @Test
     public void moveDiagonalWithBlockedPath() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(2, 2, 4, 4);
             Assert.assertEquals(false, obtained);
@@ -222,7 +223,7 @@ public class TestZombieVampiro {
 
     @Test
     public void moveWithBlockedPathEquipment() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(2, 4, 2, 6);
             Assert.assertEquals(false, obtained);
@@ -231,7 +232,7 @@ public class TestZombieVampiro {
 
     @Test
     public void moveWithSafeHaven() {
-        gameManager.loadGame(fich);
+        gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(2, 0, 2, 2);
             Assert.assertEquals(false, obtained);
