@@ -488,8 +488,6 @@ public class TWDGameManager {
         }
     }
 
-
-
     public String[] popCultureExtravaganza() {
         String[] resultado = new String[14];
         resultado[0] = "Resident Evil";

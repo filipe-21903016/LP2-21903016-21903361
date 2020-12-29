@@ -16,31 +16,7 @@ public class Antidoto extends Equipamento {
     public boolean isEmpty(){
         return used;
     }
-    /*
-    @Override
-    public boolean use(){
-        /*if (uses == 0){
-            return false;
-        }
-        else {
-            GameInfo gameInfo = GameInfo.getInstance();
-            for (Creature creature : gameInfo.getCreatures()){
-                if (creature.getTeamId() == gameInfo.getIdTeamVivos()){
-                    Vivo vivo = (Vivo) creature;
-                    if (vivo.isEquiped() && vivo.getEquipment().getId() == this.id){
-                        if (!poisoned){
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-        poisoned = false;
-        uses = 0;
-        return true;
 
-
-    }*/
     @Override
     public boolean use() {
         if(!used){

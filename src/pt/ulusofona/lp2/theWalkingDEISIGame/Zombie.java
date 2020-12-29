@@ -28,6 +28,7 @@ abstract class Zombie extends Creature {
         if(id>0){
             Creature creature = gameInfo.getCreatureById(id);
             Vivo vivo = (Vivo) creature;
+
             Equipamento targetEquipment= vivo.getEquipment();
 
             if(vivo.isPoisoned()){
@@ -36,7 +37,7 @@ abstract class Zombie extends Creature {
             if(vivo.getIdType()==9){ //Zombies are afraid of dogs
                 return false;
             }
-            if(idType==4 && targetEquipment.getIdTipo()==5){ //Vampiro nao ataca quem tem cabecas de alho
+            if(idType==4 && vivo.isEquiped() && targetEquipment.getIdTipo()==5){ //Vampiro nao ataca quem tem cabecas de alho
                 return false;
             }
             if(!vivo.isEquiped() //TODO THIS IS UGLY,NEEDS TO BE REFINED
@@ -49,7 +50,8 @@ abstract class Zombie extends Creature {
                 vivo.turn();
                 return true;
             }
-            if(vivo.getEquipment().isOffensive()){
+
+            if(targetEquipment.isOffensive()){
                 if(this.idType!=0){ //mesmo q a crianca tenha equipamento ofensivo este so e eficaz em crianca zombie
                     vivo.turn();
                     return true;
