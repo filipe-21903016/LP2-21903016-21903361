@@ -273,11 +273,13 @@ public class GameInfo {
     public int roundsWithoutTransformation(){
         int result = 0;
         for (Creature creature : getCreatures()){
-            if (creature.getTeamId() == nextTurn()){
-                result++;
-            }
-            else {
-                result = 0;
+            for (int i = 0; i <13; i++){
+                if (creature.getTeamId() == nextTurn()){
+                    result++;
+                }
+                else {
+                    result = 0;
+                }
             }
         }
         return result;
