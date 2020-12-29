@@ -52,12 +52,16 @@ abstract class Zombie extends Creature {
             }
 
             if(targetEquipment.isOffensive()){
-                if(this.idType!=0){ //mesmo q a crianca tenha equipamento ofensivo este so e eficaz em crianca zombie
+                if(this.idType!=0 && targetEquipment.getIdTipo()==1){ //mesmo q a crianca tenha equipamento ofensivo este so e eficaz em crianca zombie
                     vivo.turn();
                     return true;
                 }
-                vivo.getEquipment().use();
-                gameInfo.removeCreature(this);
+
+                if(vivo.getEquipment().use()){ //TODO possible error
+                    gameInfo.removeCreature(this);
+                }else{
+                    vivo.turn();
+                }
                 return true;
             }
             this.combat(vivo);

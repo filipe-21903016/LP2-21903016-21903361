@@ -45,7 +45,7 @@ abstract class Vivo extends Creature {
             //caso humano tenha equipamento ofensivo pode se mover e matar o zombie
             if (equipment.isOffensive()) {
                 Creature target = gameInfo.getCreatureById(id);
-                if(this.idType==5 && target.getIdType()!=0){
+                if(this.idType==5 && equipment.getIdTipo()==1 && target.getIdType()!=0){
                     return false;
                 }
                 if (this.equipment.getIdTipo() != 6 && target.getIdType() == 4) { //vampires only dies to wooden stake

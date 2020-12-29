@@ -284,4 +284,9 @@ public class TestAdultoVivo {
         boolean obtained = gameManager.move(2, 0, 2, 2);
         Assert.assertEquals(false, obtained);
     }
+
+    @Test
+    public void kill(){
+
+    }
 }
