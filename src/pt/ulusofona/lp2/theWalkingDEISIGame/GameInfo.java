@@ -234,4 +234,5 @@ public class GameInfo {
         return creatureHashMap.get(id).getTeamId();
     }
 
+
 }

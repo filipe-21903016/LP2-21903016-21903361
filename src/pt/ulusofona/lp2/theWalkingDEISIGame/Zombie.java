@@ -30,12 +30,10 @@ abstract class Zombie extends Creature {
             if(idType==4 && targetEquipment.getIdTipo()==5){ //Vampiro nao ataca quem tem cabecas de alho
                 return false;
             }
-            if(!vivo.isEquiped() || (this.getIdType() != 3 && targetEquipment.getIdTipo() == 4)){
+            if(!vivo.isEquiped() || (this.getIdType() != 3 && targetEquipment.getIdTipo() == 4) ||
+                    targetEquipment.getIdTipo() == 5){
                 //transformar vivo em zombie
-                Creature zombie = CreatureFactory.makeCreature(vivo.getId(), vivo.idType-5, vivo.getNome(),
-                        vivo.getPosX(), vivo.getPosY());
-                gameInfo.removeCreature(vivo);
-                gameInfo.addCreature(zombie);
+                vivo.turn();
                 return true;
             }
             if(vivo.getEquipment().isOffensive()){
@@ -55,9 +53,10 @@ abstract class Zombie extends Creature {
     public boolean combat(Creature creature) {
         Vivo target = (Vivo) creature;
         Equipamento targetEquipment= target.getEquipment();
-        if(targetEquipment.use()){ //humano usa equipamento de defesa
+        if(targetEquipment.use()) { //humano usa equipamento de defesa
             return false;
         }
+
         return true;
     }
 
