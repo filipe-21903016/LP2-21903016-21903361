@@ -225,7 +225,7 @@ public class TWDGameManager {
             }
 
 
-            System.out.println(gameDetails);
+            //System.out.println(gameDetails);
             fileWriter.write(gameDetails);
             fileWriter.close();
             return true;
@@ -235,7 +235,6 @@ public class TWDGameManager {
             return false;
         }
     }
-
 
     public boolean startGame(File ficheiroInicial) {
         gameInfo.reset();
