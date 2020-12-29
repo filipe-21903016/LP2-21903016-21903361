@@ -162,6 +162,10 @@ public class GameInfo {
         return creatures;
     }
 
+    public ArrayList<Creature> getGraveyard() {
+        return graveyard;
+    }
+
     //Setters
 
     public void setNrLines(int nrLines) {
@@ -199,6 +203,7 @@ public class GameInfo {
             if (vivo.getTurnsPoisoned()>2){
                 removeCreature(vivo);
                 removed.add(vivo);
+                getGraveyard().add(vivo);
             }
         }
         //removed from poisoned list
