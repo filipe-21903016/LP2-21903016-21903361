@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Function;
 
 /*trying to figure this out*/
 
@@ -405,8 +406,7 @@ public class TWDGameManager {
             results.add("");
             results.add("Ainda pelo bairro:");
             results.add("OS VIVOS");
-            Collections.sort(gameInfo.getCreatures(), Comparator.comparing((Creature creature)
-                    -> creature.getId()));
+            gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
             for (Creature creature : gameInfo.getCreatures()) {
                 if (creature.isVivo()) {
                     Vivo vivo = (Vivo) creature;
@@ -417,26 +417,23 @@ public class TWDGameManager {
             }
             results.add("");
             results.add("OS OUTROS");
-            Collections.sort(gameInfo.getCreatures(), Comparator.comparing((Creature creature)
-                    -> creature.getId()));
+            gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
             for (Creature creature : gameInfo.getCreatures()) {
                 if (!creature.isVivo()) {
                     results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
                 }
             }
-            results.add("Num Safe haven:");
+            results.add("Num safe haven:");
             results.add("");
             results.add("OS VIVOS");
-            Collections.sort(SafeHaven.getSurvivors(), Comparator.comparing((Creature creature)
-                    -> creature.getId()));
+            SafeHaven.getSurvivors().sort(Comparator.comparing((Function<Creature, Integer>) Creature::getId));
             for (Vivo vivo : SafeHaven.getSurvivors()) {
                 results.add(vivo.getId() + " " + vivo.getNome());
             }
             results.add("");
-            results.add("Envenenados / Destruidos");
+            results.add("Envenenados / Destruídos");
             results.add("OS VIVOS");
-            Collections.sort(gameInfo.getCreatures(), Comparator.comparing((Creature creature)
-                    -> creature.getId()));
+            gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
             for (Creature creature : gameInfo.getGraveyard()) {
                 if (creature.isVivo()) {
                     results.add(creature.getId() + " " + creature.getNome());
@@ -444,8 +441,7 @@ public class TWDGameManager {
             }
             results.add("");
             results.add("OS OUTROS");
-            Collections.sort(gameInfo.getCreatures(), Comparator.comparing((Creature creature)
-                    -> creature.getId()));
+            gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
             for (Creature creature : gameInfo.getGraveyard()) {
                 if (!creature.isVivo()) {
                     results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");

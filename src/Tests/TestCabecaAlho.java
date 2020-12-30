@@ -22,4 +22,14 @@ public class TestCabecaAlho {
         int id = gameManager.getElementId(2,2);
         Assert.assertEquals("Id expected to be 1 but was: " + id, 1, id);
     }
+
+    @Test
+    public void DefendeZombieRegular(){
+        gameManager.startGame(fich);
+        Assert.assertTrue(gameManager.move(3, 3, 2, 2));
+        Assert.assertTrue(gameManager.move(1, 1, 2, 2));
+        int id = gameManager.getElementId(2,2);
+        Assert.assertEquals("Id expected to be 1 but was: " + id, 1, id);
+    }
+
 }
