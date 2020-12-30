@@ -205,7 +205,7 @@ public class GameInfo {
         //removes from creature list
         for(Vivo vivo: poisonedVivos){
             vivo.incrementPoisenedTurn();
-            if (vivo.getTurnsPoisoned()>3){
+            if (vivo.getTurnsPoisoned()>=3){
                 removeCreature(vivo);
                 removed.add(vivo);
             }
@@ -227,17 +227,6 @@ public class GameInfo {
     }
 
     public void removeEquipment(Equipamento equipamento) {
-        /*int index = 0;
-        for (Equipamento equipamento1 : equipments) {
-            if (equipamento.getId() == equipamento1.getId()) {
-                break;
-            }
-            index++;
-        }
-        //remove from list
-        equipments.remove(index);*/
-        //remove from hashmap
-        //equipamentoHashMap.remove(equipamento.getId());
         equipments.remove(equipamento);
     }
 
@@ -260,21 +249,6 @@ public class GameInfo {
     public void removePoisoned(Vivo vivo){
         poisonedVivos.remove(vivo);
     }
-
-    /*public int roundsWithoutTransformation(){
-        int result = 0;
-        for (Creature creature : getCreatures()){
-            for (int i = 1; i <13; i++){
-                if (creature.getTeamId() == nextTurn()){
-                    result++;
-                }
-                else {
-                    result = 0;
-                }
-            }
-        }
-        return result;
-    }*/
 
     public void setTurnosSemTransformacao(int turnosSemTransformacao) {
         this.turnosSemTransformacao = turnosSemTransformacao;
