@@ -39,7 +39,7 @@ abstract class Zombie extends Creature {
             Equipamento targetEquipment= vivo.getEquipment();
 
             if(vivo.isPoisoned()){
-                return false;
+                return true;
             }
             if(vivo.getIdType()==9){ //Zombies are afraid of dogs
                 return false;
@@ -74,7 +74,9 @@ abstract class Zombie extends Creature {
                 }
                 return true;
             }
-            this.combat(vivo);
+            if(this.combat(vivo)){
+                vivo.turn();
+            }
             return true;
         }
         posX = xD;
@@ -89,7 +91,6 @@ abstract class Zombie extends Creature {
         if(targetEquipment.use()) { //humano usa equipamento de defesa
             return false;
         }
-
         return true;
     }
 
@@ -113,5 +114,9 @@ abstract class Zombie extends Creature {
         }
         return idCriatura + " | " + nomeTipo + " | " + nomeEquipa + " | " + nome
                 + " " + equipamentos + " @ (" + posX + ", " + posY + ")";
+    }
+
+    public String getNomeEquipa() {
+        return nomeEquipa;
     }
 }

@@ -20,18 +20,15 @@ public class GarrafaDeLixivia extends Equipamento {
 
     @Override
     public boolean use() {
-        uses -=1;
-        if(uses==0){
-            GameInfo gameInfo = GameInfo.getInstance();
-            for(Creature c : gameInfo.getCreatures()){
-                if(c.getTeamId() == gameInfo.getIdTeamVivos()){
-                    Vivo vivo= (Vivo) c;
-                    if(vivo.isEquiped() && vivo.getEquipment().getId()==this.id){
-                        vivo.destroyEquipment();
-                    }
-                }
-            }
+        if(uses>0){
+            uses-=1;
+            return true;
         }
-        return true;
+        //super.defensive=false;
+        return false;
+    }
+
+    public boolean isEmpty(){
+        return uses==0;
     }
 }

@@ -57,9 +57,9 @@ abstract class Vivo extends Creature {
                 if (!this.combat(target)) {
                     return false;
                 }
-            }/*else{
+            }else{
                 return false;
-            }*/
+            }
         }
         posX = xD;
         posY = yD;
@@ -183,5 +183,8 @@ abstract class Vivo extends Creature {
         return safe;
     }
 
+    public String getNomeEquipa() {
+        return nomeEquipa;
+    }
 }
 
