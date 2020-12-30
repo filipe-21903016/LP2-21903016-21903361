@@ -25,7 +25,7 @@ public class TestVeneno {
         Assert.assertEquals("Id expected to be 1 but was: " + id, 0, id);
     }
 
-    @Test
+    /*@Test
     public void ApanhaVenenoSobrevive(){
         gameManager.startGame(fich);
         Assert.assertFalse(gameManager.move(3, 3, 2, 2));
@@ -34,4 +34,14 @@ public class TestVeneno {
         int id = gameManager.getElementId(2,2);
         Assert.assertEquals("Id expected to be 1 but was: " + id, 1, id);
     }
+
+    /*@Test
+    public void ApanhaVenenoDefende(){
+        gameManager.startGame(fich);
+        Assert.assertFalse(gameManager.move(3, 3, 2, 2));
+        Assert.assertFalse(gameManager.move(2, 1, 2, 2));
+
+        int id = gameManager.getElementId(2,2);
+        Assert.assertEquals("Id expected to be 1 but was: " + id, 1, id);
+    }*/
 }
