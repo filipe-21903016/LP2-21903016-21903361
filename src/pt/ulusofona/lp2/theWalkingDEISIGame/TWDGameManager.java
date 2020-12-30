@@ -401,10 +401,9 @@ public class TWDGameManager {
         ArrayList<String> results = new ArrayList<>();
         if (gameIsOver()) {
             results.add("Nr. de turnos terminados:");
-            results.add(gameInfo.getNrTurno() + 1 + "\n");
+            results.add(gameInfo.getNrTurno() + "\n");
             results.add("");
             results.add("Ainda pelo bairro:");
-            results.add("");
             results.add("OS VIVOS");
             Collections.sort(gameInfo.getCreatures(), Comparator.comparing((Creature creature)
                     -> creature.getId()));
@@ -425,7 +424,6 @@ public class TWDGameManager {
                     results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
                 }
             }
-            results.add("");
             results.add("Num Safe haven:");
             results.add("");
             results.add("OS VIVOS");
@@ -436,7 +434,6 @@ public class TWDGameManager {
             }
             results.add("");
             results.add("Envenenados / Destruidos");
-            results.add("");
             results.add("OS VIVOS");
             Collections.sort(gameInfo.getCreatures(), Comparator.comparing((Creature creature)
                     -> creature.getId()));
@@ -454,6 +451,7 @@ public class TWDGameManager {
                     results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
                 }
             }
+            results.add("");
         }
         return results;
     }
