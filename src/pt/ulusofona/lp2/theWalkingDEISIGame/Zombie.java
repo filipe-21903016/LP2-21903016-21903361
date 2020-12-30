@@ -22,6 +22,7 @@ abstract class Zombie extends Creature {
             if(this.idType==4 && equipamento.getIdTipo()==5){
                 return false;
             }
+            //TODO no caso de um zombie nao poder destruir garrafas de veneno vazias alterar
             if(equipamento.getIdTipo()==8){
                 Veneno veneno = (Veneno) equipamento;
                 if(!veneno.isEmpty()){
@@ -59,11 +60,13 @@ abstract class Zombie extends Creature {
             }
 
             if(targetEquipment.isOffensive()){
+                if(targetEquipment.isDefensive()){ //beskar helmet
+                    return true;
+                }
                 if(vivo.getIdType()==5 && targetEquipment.getIdTipo()==1 && this.idType!=0){ //mesmo q a crianca tenha equipamento ofensivo este so e eficaz em crianca zombie
                     vivo.turn();
                     return true;
                 }
-
                 if(vivo.getEquipment().use()){ //TODO possible error
                     gameInfo.removeCreature(this);
                 }else{
