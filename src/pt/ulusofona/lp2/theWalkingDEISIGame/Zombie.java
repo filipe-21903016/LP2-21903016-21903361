@@ -35,7 +35,6 @@ abstract class Zombie extends Creature {
         if(id>0){
             Creature creature = gameInfo.getCreatureById(id);
             Vivo vivo = (Vivo) creature;
-
             Equipamento targetEquipment= vivo.getEquipment();
 
             if(vivo.isPoisoned()){
@@ -44,54 +43,37 @@ abstract class Zombie extends Creature {
             if(vivo.getIdType()==9){ //Zombies are afraid of dogs
                 return false;
             }
+
             if(idType==4 && vivo.isEquiped() && targetEquipment.getIdTipo()==5){ //Vampiro nao ataca quem tem cabecas de alho
                 return false;
             }
-
-            if(!vivo.isEquiped() //TODO THIS IS UGLY,NEEDS TO BE REFINED
-                    || (this.getIdType() != 3 && targetEquipment.getIdTipo() == 4) //revista maria only protects against idosos zombies
-                    || targetEquipment.getIdTipo() == 5 // cabecas de alho so protegem contra ataques de vampiro
-                    || targetEquipment.getIdTipo()==8   // se humano nao esta envenenado entao o frasco de veneno nao o protege
-                    || targetEquipment.getIdTipo() == 9 // o frasco de antidoto nao protege o humano
-            ){
-                //transformar vivo em zombie
-                vivo.turn();
-                return true;
-            }
-
-            if(targetEquipment.isOffensive()){
-                if(targetEquipment.isDefensive()){ //beskar helmet
-                    return true;
-                }
-                if(vivo.getIdType()==5 && targetEquipment.getIdTipo()==1 && this.idType!=0){ //mesmo q a crianca tenha equipamento ofensivo este so e eficaz em crianca zombie
-                    vivo.turn();
-                    return true;
-                }
-                if(vivo.getEquipment().use()){ //TODO possible error
-                    gameInfo.removeCreature(this);
-                }else{
-                    vivo.turn();
-                }
-                return true;
-            }
-            if(this.combat(vivo)){
-                vivo.turn();
-            }
-            return true;
+            this.combat(vivo);
         }
         posX = xD;
         posY = yD;
         return true;
     }
 
-    @Override
-    public boolean combat(Creature creature) {
+    public boolean combat(Creature creature) { //Retorna true se houve transformacao
         Vivo target = (Vivo) creature;
-        Equipamento targetEquipment= target.getEquipment();
-        if(targetEquipment.use()) { //humano usa equipamento de defesa
+        Equipamento targetEquipment = target.getEquipment();
+        if (!target.isEquiped()
+                || !targetEquipment.isDefensive()
+                || targetEquipment.getIdTipo() == 4 && this.idType != 3 //Revista Maria vs Zombie Nao Idoso
+                || target.getIdType() == 5 && targetEquipment.getIdTipo() == 1 && this.idType != 0) { //Crianca com espada vs Zombie Adulto
+            target.turn();
+            return true;
+        }
+        if (targetEquipment.isDefensive() || (targetEquipment.isDefensive() && targetEquipment.isOffensive())) {
+            targetEquipment.use();
             return false;
         }
-        return true;
+        if (targetEquipment.isOffensive()) {
+            targetEquipment.use();
+            GameInfo.getInstance().removeCreature(this);
+            return false;
+        }
+        return false;
     }
 
     void destroyEquiment(){
