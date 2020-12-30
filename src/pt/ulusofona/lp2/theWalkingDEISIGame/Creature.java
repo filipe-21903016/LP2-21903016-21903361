@@ -1,8 +1,9 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
-import java.util.Objects;
 
-public abstract class Creature {
+import java.util.Comparator;
+
+public abstract class Creature{
     protected int idCriatura;
     protected int idType;
     protected String nome;
@@ -12,7 +13,6 @@ public abstract class Creature {
     protected String nomeTipo;
     protected boolean dead;
     protected int equipamentos;
-
 
     public Creature(int idCriatura, int idType, String nome, int posX, int posY) {
         this.idCriatura = idCriatura;
@@ -235,13 +235,12 @@ public abstract class Creature {
     @Override
     public boolean equals(Object obj) {
         Creature creature = (Creature) obj;
-        if(this.idCriatura==creature.getId()){
-            return true;
-        }
-        return false;
+        return this.idCriatura==creature.getId();
     }
 
     public boolean isVivo(){
         return teamId==10;
     }
+
+
 }

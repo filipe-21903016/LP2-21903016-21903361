@@ -5,9 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /*trying to figure this out*/
 
@@ -403,44 +401,57 @@ public class TWDGameManager {
         ArrayList<String> results = new ArrayList<>();
         if (gameIsOver()) {
             results.add("Nr. de turnos terminados:");
-            results.add(gameInfo.getNrTurno()+1 + "");
+            results.add(gameInfo.getNrTurno() + 1 + "\n");
             results.add("");
             results.add("Ainda pelo bairro:");
             results.add("");
             results.add("OS VIVOS");
-            results.add("");
+            Collections.sort(gameInfo.getCreatures(), Comparator.comparing((Creature creature)
+                    -> creature.getId()));
             for (Creature creature : gameInfo.getCreatures()) {
-                if (creature.getIdType() > 4 && creature.getIdType() < 10) {
+                if (creature.isVivo()) {
+                    Vivo vivo = (Vivo) creature;
+                    if(!vivo.isSafe()){
+                        results.add(creature.getId() + " " + creature.getNome());
+                    }
+                }
+            }
+            results.add("");
+            results.add("OS OUTROS");
+            Collections.sort(gameInfo.getCreatures(), Comparator.comparing((Creature creature)
+                    -> creature.getId()));
+            for (Creature creature : gameInfo.getCreatures()) {
+                if (!creature.isVivo()) {
                     results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
                 }
-                results.add("");
-                results.add("OS OUTROS");
-                results.add("");
-                if (creature.getIdType() >= 0 && creature.getIdType() < 5) {
-                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
-                }
-                results.add("");
-                results.add("Num Safe haven:");
-                results.add("");
-                results.add("OS VIVOS");
-                if (isDoorToSafeHaven(creature.getPosX(), creature.getPosY())) {
-                    results.add(creature.getIdType() + " " + creature.getNome());
-                }
+            }
+            results.add("");
+            results.add("Num Safe haven:");
+            results.add("");
+            results.add("OS VIVOS");
+            Collections.sort(SafeHaven.getSurvivors(), Comparator.comparing((Creature creature)
+                    -> creature.getId()));
+            for (Vivo vivo : SafeHaven.getSurvivors()) {
+                results.add(vivo.getId() + " " + vivo.getNome());
             }
             results.add("");
             results.add("Envenenados / Destruidos");
             results.add("");
             results.add("OS VIVOS");
-            for (Creature creature1 : gameInfo.getGraveyard()) {
-                if (creature1.getTeamId() == gameInfo.getIdTeamVivos()) {
-                    results.add(creature1.getId() + " " + creature1.getNome());
+            Collections.sort(gameInfo.getCreatures(), Comparator.comparing((Creature creature)
+                    -> creature.getId()));
+            for (Creature creature : gameInfo.getGraveyard()) {
+                if (creature.isVivo()) {
+                    results.add(creature.getId() + " " + creature.getNome());
                 }
             }
             results.add("");
             results.add("OS OUTROS");
-            for (Creature creature2 : gameInfo.getGraveyard()) {
-                if (creature2.getTeamId() == gameInfo.getIdTeamMortos()) {
-                    results.add(creature2.getId() + " (antigamente conhecido como " + creature2.getNome() + ")");
+            Collections.sort(gameInfo.getCreatures(), Comparator.comparing((Creature creature)
+                    -> creature.getId()));
+            for (Creature creature : gameInfo.getGraveyard()) {
+                if (!creature.isVivo()) {
+                    results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
                 }
             }
         }
