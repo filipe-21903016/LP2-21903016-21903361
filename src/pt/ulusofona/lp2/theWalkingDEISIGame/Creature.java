@@ -230,7 +230,6 @@ public abstract class Creature{
         dead=true;
     }
 
-    abstract public boolean combat(Creature creature);
 
     @Override
     public boolean equals(Object obj) {

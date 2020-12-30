@@ -16,26 +16,25 @@ abstract class Zombie extends Creature {
         }
         int id = gameInfo.getElementId(xD,yD);
         if(id<0){
-                Equipamento equipamento = gameInfo.getEquipmentById(id);
+            Equipamento equipamento = gameInfo.getEquipmentById(id);
             //vampiro nao move para cabecas de alho
             // zombies nao podem mover para cima de veneno
-            if(this.idType==4 && equipamento.getIdTipo()==5){
+            if(this.idType==4 && equipamento.getIdTipo()==5){ //Se é vampiro nao pode destruir alho
                 return false;
             }
-            //TODO no caso de um zombie nao poder destruir garrafas de veneno vazias alterar
+            /*//TODO no caso de um zombie nao poder destruir garrafas de veneno vazias alterar
             if(equipamento.getIdTipo()==8){
                 Veneno veneno = (Veneno) equipamento;
                 if(!veneno.isEmpty()){
                     return false;
                 }
-            }
+            }*/
             destroyEquiment();
             gameInfo.removeEquipment(equipamento);
         }
         if(id>0){
             Creature creature = gameInfo.getCreatureById(id);
             Vivo vivo = (Vivo) creature;
-
             Equipamento targetEquipment= vivo.getEquipment();
 
             if(vivo.isPoisoned()){
@@ -84,8 +83,8 @@ abstract class Zombie extends Creature {
         return true;
     }
 
-    @Override
-    public boolean combat(Creature creature) {
+    //TODO CHANGE THIS FUCNTION
+    private boolean combat(Creature creature) {
         Vivo target = (Vivo) creature;
         Equipamento targetEquipment= target.getEquipment();
         if(targetEquipment.use()) { //humano usa equipamento de defesa
@@ -116,7 +115,4 @@ abstract class Zombie extends Creature {
                 + " " + equipamentos + " @ (" + posX + ", " + posY + ")";
     }
 
-    public String getNomeEquipa() {
-        return nomeEquipa;
-    }
 }

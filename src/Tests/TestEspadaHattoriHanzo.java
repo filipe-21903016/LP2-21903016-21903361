@@ -27,7 +27,9 @@ public class TestEspadaHattoriHanzo {
         Assert.assertTrue(gameManager.move(1, 1, 1, 2));
         Assert.assertFalse(gameManager.move(2, 2, 1, 2));
         int id = gameManager.getElementId(1,2);
-        Assert.assertEquals("Id expected to be 0 but was: " + id, 2, id);
+        Assert.assertEquals("Id expected to be 2 but was: " + id, 2, id);
+        id= gameManager.getElementId(2,2);
+        Assert.assertEquals("Id expected to be 3 but was: " + id,3,id);
     }
 
     @Test
@@ -38,7 +40,7 @@ public class TestEspadaHattoriHanzo {
         Assert.assertTrue(gameManager.move(2, 2, 2, 1));
         Assert.assertTrue(gameManager.move(1, 1, 2, 1));
         int id = gameManager.getElementId(2,1);
-        Assert.assertEquals("Id expected to be 0 but was: " + id, 3, id);
+        Assert.assertEquals("Id expected to be 3 but was: " + id, 3, id);
         id = gameManager.getElementId(1,1);
         Assert.assertEquals(2,id);
     }

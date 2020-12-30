@@ -18,6 +18,7 @@ public class Veneno extends Equipamento {
             used=true;
             return true;
         }
+        super.defensive=false;
         return false;
     }
 
