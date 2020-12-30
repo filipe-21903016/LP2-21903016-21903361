@@ -66,16 +66,6 @@ abstract class Vivo extends Creature {
         return true;
     }
 
-    public boolean combat(Creature creature) {
-
-        if (this.equipment.use()) {
-            GameInfo gameInfo = GameInfo.getInstance();
-            gameInfo.removeCreature(creature);
-            return true;
-        }
-        return false;
-    }
-
     void pickEquipment(Equipamento equipamento) {
         //escudo madeira apanhado por militar
         if (this.idType == 7 && equipamento.getIdTipo() == 0) {
