@@ -94,8 +94,11 @@ abstract class Vivo extends Creature {
 
         if(equipamento.getIdTipo() == 9){
             Antidoto antidoto = (Antidoto) equipamento;
-            this.turnsPoisoned =0;
-            GameInfo.getInstance().removePoisoned(this);
+            if(!antidoto.isEmpty()){
+                antidoto.use();
+                this.turnsPoisoned =0;
+                GameInfo.getInstance().removePoisoned(this);
+            }
         }
 
         this.equipment = equipamento;

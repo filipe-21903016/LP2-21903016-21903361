@@ -25,4 +25,14 @@ public class Veneno extends Equipamento {
         return used;
     }
 
+    @Override
+    String getInfo() {
+        if (used) {
+            return titulo + " | 0";
+        }else{
+            return titulo + " | 1";
+        }
+    }
+
+
 }

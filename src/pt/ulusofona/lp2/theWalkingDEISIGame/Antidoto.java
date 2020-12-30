@@ -25,4 +25,13 @@ public class Antidoto extends Equipamento {
         }
         return false;
     }
+
+    @Override
+    String getInfo() {
+        if (used) {
+            return titulo + " | 0";
+        }else{
+            return titulo + " | 1";
+        }
+    }
 }
