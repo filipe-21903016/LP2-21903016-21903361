@@ -22,24 +22,24 @@ abstract class Vivo extends Creature {
         GameInfo gameInfo = GameInfo.getInstance();
         int id = gameInfo.getElementId(xD, yD);
 
-        if(this.getIdType() == 8 && equipment!=null){
+        if(this.getIdType() == 8 && equipment!=null){ //Se é idoso e tem item dropa antes de se mover
             gameInfo.addEquipment(dropEquipment());
         }
-
+        if (id == 0 && gameInfo.isDoorToSafeHaven(xD, yD)) { //Casa de destino é SafeHaven
+            enterSafeHaven();
+        }
         if (id < 0) { //entao é id de equipamento
             if (equipment != null) {
                 gameInfo.addEquipment(dropEquipment());
             }
             Equipamento equipamento = gameInfo.getEquipmentById(id);
-            if(!this.isPoisoned() && equipamento.getIdTipo() ==9){ //TODO change this
+            if(!this.isPoisoned() && equipamento.getIdTipo() ==9){ //Se humano não esta envenenado nao pode apanhar antidoto
                 return false;
             }
             pickEquipment(equipamento);
             gameInfo.removeEquipment(equipamento);
         }
-        if (id == 0 && gameInfo.isDoorToSafeHaven(xD, yD)) {
-            enterSafeHaven();
-        }
+
         if (id > 0) {
             //humano sem equipamento nao se pode mover para cima de zombie
             if (equipment == null) {
@@ -47,17 +47,11 @@ abstract class Vivo extends Creature {
             }
             //caso humano tenha equipamento ofensivo pode se mover e matar o zombie
             if (equipment.isOffensive()) {
-                Creature target = gameInfo.getCreatureById(id);
-                if(this.idType==5 && equipment.getIdTipo()==1 && target.getIdType()!=0){
+                Zombie target =(Zombie) gameInfo.getCreatureById(id);
+                if(!this.combat(target)){
                     return false;
                 }
-                if (this.equipment.getIdTipo() != 6 && target.getIdType() == 4) { //vampires only dies to wooden stake
-                    return false;
-                }
-                if (!this.combat(target)) {
-                    return false;
-                }
-            }else{
+            }else{ //se equipamento é defensivo humano nao pode atacar
                 return false;
             }
         }
@@ -66,14 +60,18 @@ abstract class Vivo extends Creature {
         return true;
     }
 
-    public boolean combat(Creature creature) {
-
-        if (this.equipment.use()) {
-            GameInfo gameInfo = GameInfo.getInstance();
-            gameInfo.removeCreature(creature);
-            return true;
+    private boolean combat(Zombie zombie){
+        //retorna true se vivo ganha combate
+        //retorna false se zombie ganha
+        if(this.idType==5 && equipment.getIdTipo()==1 && zombie.getIdType()!=0){ //se a crianca tiver uma espada e o zombie nao for crianca nada acontece
+            return false;
         }
-        return false;
+        if (this.equipment.getIdTipo() != 6 && zombie.getIdType() == 4) { //vampires only die to wooden stake
+            return false;
+        }
+        equipment.use();
+        GameInfo.getInstance().removeCreature(zombie); //zombie morre
+        return true;
     }
 
     void pickEquipment(Equipamento equipamento) {
@@ -91,7 +89,6 @@ abstract class Vivo extends Creature {
                 GameInfo.getInstance().addPoisoned(this);
             }
         }
-
         if(equipamento.getIdTipo() == 9){
             Antidoto antidoto = (Antidoto) equipamento;
             if(!antidoto.isEmpty()){
@@ -100,7 +97,6 @@ abstract class Vivo extends Creature {
                 GameInfo.getInstance().removePoisoned(this);
             }
         }
-
         this.equipment = equipamento;
         equipamento.setPicked();
         equipamentos++;
@@ -181,10 +177,6 @@ abstract class Vivo extends Creature {
 
     public boolean isSafe() {
         return safe;
-    }
-
-    public String getNomeEquipa() {
-        return nomeEquipa;
     }
 }
 

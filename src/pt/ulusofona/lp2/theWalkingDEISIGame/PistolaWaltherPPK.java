@@ -23,9 +23,11 @@ public class PistolaWaltherPPK extends Equipamento {
     public boolean use() {
         if(bullets>0){
             bullets-=1;
+            if(bullets==0){
+                this.offensive=false;
+            }
             return true;
         }
-        //this.offensive=false;
         return false;
     }
 }

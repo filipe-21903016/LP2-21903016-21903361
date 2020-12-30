@@ -22,13 +22,11 @@ public class GarrafaDeLixivia extends Equipamento {
     public boolean use() {
         if(uses>0){
             uses-=1;
+            if(uses==0){
+                super.defensive=false;
+            }
             return true;
         }
-        //super.defensive=false;
         return false;
-    }
-
-    public boolean isEmpty(){
-        return uses==0;
     }
 }

@@ -16,26 +16,25 @@ abstract class Zombie extends Creature {
         }
         int id = gameInfo.getElementId(xD,yD);
         if(id<0){
-                Equipamento equipamento = gameInfo.getEquipmentById(id);
+            Equipamento equipamento = gameInfo.getEquipmentById(id);
             //vampiro nao move para cabecas de alho
             // zombies nao podem mover para cima de veneno
-            if(this.idType==4 && equipamento.getIdTipo()==5){
+            if(this.idType==4 && equipamento.getIdTipo()==5){ //Se é vampiro nao pode destruir alho
                 return false;
             }
-            //TODO no caso de um zombie nao poder destruir garrafas de veneno vazias alterar
+            /*//TODO no caso de um zombie nao poder destruir garrafas de veneno vazias alterar
             if(equipamento.getIdTipo()==8){
                 Veneno veneno = (Veneno) equipamento;
                 if(!veneno.isEmpty()){
                     return false;
                 }
-            }
+            }*/
             destroyEquiment();
             gameInfo.removeEquipment(equipamento);
         }
         if(id>0){
             Creature creature = gameInfo.getCreatureById(id);
             Vivo vivo = (Vivo) creature;
-
             Equipamento targetEquipment= vivo.getEquipment();
 
             if(vivo.isPoisoned()){
@@ -44,39 +43,11 @@ abstract class Zombie extends Creature {
             if(vivo.getIdType()==9){ //Zombies are afraid of dogs
                 return false;
             }
+
             if(idType==4 && vivo.isEquiped() && targetEquipment.getIdTipo()==5){ //Vampiro nao ataca quem tem cabecas de alho
                 return false;
             }
-
-            if(!vivo.isEquiped() //TODO THIS IS UGLY,NEEDS TO BE REFINED
-                    || (this.getIdType() != 3 && targetEquipment.getIdTipo() == 4) //revista maria only protects against idosos zombies
-                    || targetEquipment.getIdTipo() == 5 // cabecas de alho so protegem contra ataques de vampiro
-                    || targetEquipment.getIdTipo()==8   // se humano nao esta envenenado entao o frasco de veneno nao o protege
-                    || targetEquipment.getIdTipo() == 9 // o frasco de antidoto nao protege o humano
-            ){
-                //transformar vivo em zombie
-                vivo.turn();
-                return true;
-            }
-
-            if(targetEquipment.isOffensive()){
-                if(targetEquipment.isDefensive()){ //beskar helmet
-                    return true;
-                }
-                if(vivo.getIdType()==5 && targetEquipment.getIdTipo()==1 && this.idType!=0){ //mesmo q a crianca tenha equipamento ofensivo este so e eficaz em crianca zombie
-                    vivo.turn();
-                    return true;
-                }
-                if(vivo.getEquipment().use()){ //TODO possible error
-                    gameInfo.removeCreature(this);
-                }else{
-                    vivo.turn();
-                }
-                return true;
-            }
-            if(this.combat(vivo)){
-                vivo.turn();
-            }
+            this.combat(vivo);
             return true;
         }
         posX = xD;
@@ -84,14 +55,29 @@ abstract class Zombie extends Creature {
         return true;
     }
 
-    @Override
-    public boolean combat(Creature creature) {
+    public boolean combat(Creature creature) { //Retorna true se houve transformacao
         Vivo target = (Vivo) creature;
-        Equipamento targetEquipment= target.getEquipment();
-        if(targetEquipment.use()) { //humano usa equipamento de defesa
+        Equipamento targetEquipment = target.getEquipment();
+        if (!target.isEquiped()
+                || targetEquipment.getIdTipo() == 4 && this.idType != 3 //Revista Maria vs Zombie Nao Idoso
+                || target.getIdType() == 5 && targetEquipment.getIdTipo() == 1 && this.idType != 0) { //Crianca com espada vs Zombie Adulto
+            target.turn();
+            return true;
+        }
+        if (targetEquipment.isDefensive() || (targetEquipment.isDefensive() && targetEquipment.isOffensive())) {
+            targetEquipment.use();
             return false;
         }
-        return true;
+        if (targetEquipment.isOffensive()) {
+            targetEquipment.use();
+            GameInfo.getInstance().removeCreature(this);
+            return false;
+        }
+        if(!targetEquipment.isDefensive()){
+            target.turn();
+            return true;
+        }
+        return false;
     }
 
     void destroyEquiment(){
@@ -116,7 +102,4 @@ abstract class Zombie extends Creature {
                 + " " + equipamentos + " @ (" + posX + ", " + posY + ")";
     }
 
-    public String getNomeEquipa() {
-        return nomeEquipa;
-    }
 }
