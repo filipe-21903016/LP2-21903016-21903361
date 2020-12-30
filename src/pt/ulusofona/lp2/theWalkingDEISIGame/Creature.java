@@ -46,11 +46,6 @@ public abstract class Creature{
         return teamId;
     }
 
-    public void setCoordinates(int x, int y) {
-        this.posX = x;
-        this.posY = y;
-    }
-
     public abstract boolean move(int xO, int yO, int xD, int yD);
 
     public abstract String getImagePNG();
@@ -229,7 +224,6 @@ public abstract class Creature{
     public void setDead(){
         dead=true;
     }
-
 
     @Override
     public boolean equals(Object obj) {

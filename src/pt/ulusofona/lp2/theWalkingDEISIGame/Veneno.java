@@ -16,6 +16,7 @@ public class Veneno extends Equipamento {
     public boolean use() {
         if(!used){
             used=true;
+            super.defensive=false;
             return true;
         }
         super.defensive=false;
