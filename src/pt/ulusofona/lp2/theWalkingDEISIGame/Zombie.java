@@ -83,7 +83,6 @@ abstract class Zombie extends Creature {
         return true;
     }
 
-    //TODO CHANGE THIS FUCNTION
     private boolean combat(Creature creature) {
         Vivo target = (Vivo) creature;
         Equipamento targetEquipment= target.getEquipment();
