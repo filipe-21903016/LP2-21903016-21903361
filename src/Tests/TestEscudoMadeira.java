@@ -27,7 +27,7 @@ public class TestEscudoMadeira {
         Assert.assertTrue(gameManager.move(2, 2, 1, 2));
         Assert.assertTrue(gameManager.move(1, 1, 1, 2));
         int id = gameManager.getElementId(1,2);
-        Assert.assertEquals("Id expected to be 0 but was: " + id, 1, id);
+        Assert.assertEquals("Id expected to be 1 but was: " + id, 1, id);
         Assert.assertEquals(20,gameManager.gameInfo.getTeamIdByCreatureId(id));
     }
 

@@ -48,6 +48,7 @@ abstract class Zombie extends Creature {
                 return false;
             }
             this.combat(vivo);
+            return true;
         }
         posX = xD;
         posY = yD;
@@ -58,7 +59,6 @@ abstract class Zombie extends Creature {
         Vivo target = (Vivo) creature;
         Equipamento targetEquipment = target.getEquipment();
         if (!target.isEquiped()
-                || !targetEquipment.isDefensive()
                 || targetEquipment.getIdTipo() == 4 && this.idType != 3 //Revista Maria vs Zombie Nao Idoso
                 || target.getIdType() == 5 && targetEquipment.getIdTipo() == 1 && this.idType != 0) { //Crianca com espada vs Zombie Adulto
             target.turn();
@@ -72,6 +72,10 @@ abstract class Zombie extends Creature {
             targetEquipment.use();
             GameInfo.getInstance().removeCreature(this);
             return false;
+        }
+        if(!targetEquipment.isDefensive()){
+            target.turn();
+            return true;
         }
         return false;
     }
