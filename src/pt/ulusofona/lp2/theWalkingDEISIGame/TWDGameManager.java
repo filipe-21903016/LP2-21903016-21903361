@@ -402,7 +402,7 @@ public class TWDGameManager {
         ArrayList<String> results = new ArrayList<>();
         if (gameIsOver()) {
             results.add("Nr. de turnos terminados:");
-            results.add(gameInfo.getNrTurno() + "\n");
+            results.add(gameInfo.getNrTurno() + "");
             results.add("");
             results.add("Ainda pelo bairro:");
             results.add("OS VIVOS");
