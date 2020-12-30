@@ -365,7 +365,7 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
-        System.out.println(gameInfo.getTurnosSemTransformacao());
+        //System.out.println(gameInfo.getTurnosSemTransformacao());
         if(gameInfo.getTurnosSemTransformacao() >= gameInfo.getNrMaxTurnos()){
             return true;
         }
