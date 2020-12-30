@@ -25,6 +25,7 @@ public class PistolaWaltherPPK extends Equipamento {
             bullets-=1;
             return true;
         }
+        //this.offensive=false;
         return false;
     }
 }

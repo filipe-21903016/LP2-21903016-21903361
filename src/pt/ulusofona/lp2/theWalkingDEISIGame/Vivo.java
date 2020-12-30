@@ -22,6 +22,9 @@ abstract class Vivo extends Creature {
         GameInfo gameInfo = GameInfo.getInstance();
         int id = gameInfo.getElementId(xD, yD);
 
+        if(this.getIdType() == 8 && equipment!=null){
+            gameInfo.addEquipment(dropEquipment());
+        }
 
         if (id < 0) { //entao é id de equipamento
             if (equipment != null) {

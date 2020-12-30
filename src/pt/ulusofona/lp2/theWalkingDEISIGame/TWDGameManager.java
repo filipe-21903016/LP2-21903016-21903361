@@ -358,6 +358,7 @@ public class TWDGameManager {
             //System.out.println(creature);
             boolean obtained = creature.move(xO, yO, xD, yD);
             if (obtained) {
+                //System.out.println(gameInfo.getNrTurno());
                 gameInfo.nextTurn();
             }
             return obtained;
@@ -366,6 +367,7 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
+        System.out.println(gameInfo.getTurnosSemTransformacao());
         if(gameInfo.getTurnosSemTransformacao() >= gameInfo.getNrMaxTurnos()){
             return true;
         }
@@ -379,6 +381,7 @@ public class TWDGameManager {
             }
         }
         return true;
+
     }
 
     public List<String> getAuthors() {
@@ -400,7 +403,7 @@ public class TWDGameManager {
         ArrayList<String> results = new ArrayList<>();
         if (gameIsOver()) {
             results.add("Nr. de turnos terminados:");
-            results.add(gameInfo.getNrTurno() + "");
+            results.add(gameInfo.getNrTurno()+1 + "");
             results.add("");
             results.add("Ainda pelo bairro:");
             results.add("");
@@ -482,7 +485,11 @@ public class TWDGameManager {
     public int getEquipmentId(int creatureId) {
         try {
             Vivo creature = (Vivo) gameInfo.getCreatureById(creatureId);
-            return creature.getEquipment().getId();
+            if(creature.isEquiped()){
+                return creature.getEquipment().getId();
+            }else{
+                return 0;
+            }
         } catch (NullPointerException | ClassCastException exception) {
             return 0;
         }

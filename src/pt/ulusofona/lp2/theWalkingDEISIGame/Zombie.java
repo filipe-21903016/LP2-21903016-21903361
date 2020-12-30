@@ -40,6 +40,7 @@ abstract class Zombie extends Creature {
             if(idType==4 && vivo.isEquiped() && targetEquipment.getIdTipo()==5){ //Vampiro nao ataca quem tem cabecas de alho
                 return false;
             }
+
             if(!vivo.isEquiped() //TODO THIS IS UGLY,NEEDS TO BE REFINED
                     || (this.getIdType() != 3 && targetEquipment.getIdTipo() == 4) //revista maria only protects against idosos zombies
                     || targetEquipment.getIdTipo() == 5 // cabecas de alho so protegem contra ataques de vampiro
