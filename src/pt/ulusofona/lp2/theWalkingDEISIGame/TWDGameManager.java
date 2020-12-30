@@ -505,7 +505,7 @@ public class TWDGameManager {
         resultado[0] = "Resident Evil";
         resultado[1] = "Evil Dead";
         resultado[2] = "I Am Legend";
-        resultado[3] = "Gremlins";
+        resultado[3] = "Doghouse";
         resultado[4] = "Freaky Stories";
         resultado[5] = "The Return of the Living Dead";
         resultado[6] = "The Mandalorian";
