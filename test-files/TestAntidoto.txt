@@ -3,9 +3,10 @@
 4
 1 : 6 : Mihagi : 3 : 3
 2 : 1 : Paciente Zero : 1 : 1
-3 : 4 : Vampiro Zombie : 2 : 1
+3 : 1 : Mr Zomberino : 1 : 2
 4 : 6 : Yessir : 6 : 6
-1
--1 : 7 : 2 : 2
+2
+-1 : 9 : 2 : 2
+-2 : 8 : 3 : 2
 1
 4 : 4
