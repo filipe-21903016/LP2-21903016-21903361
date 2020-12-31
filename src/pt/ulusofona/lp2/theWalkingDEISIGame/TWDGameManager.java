@@ -17,12 +17,25 @@ public class TWDGameManager {
     public GameInfo gameInfo = GameInfo.getInstance();
 
     public boolean loadGame(File fich) {
+        gameInfo.reset();
         return false;
     }
 
     public boolean saveGame(File fich) {
-        String gameDetails = "";
-        return false;
+        try{
+            FileWriter fileWriter = new FileWriter(fich);
+            ArrayList<String> savedMoves = gameInfo.getSavedMoves();
+            StringBuilder allGame= gameInfo.getIntialGame();
+            allGame.append(savedMoves.size()).append("\n");
+            for(String move:savedMoves){
+                allGame.append(move).append("\n");
+            }
+            fileWriter.write(allGame.toString());
+            fileWriter.close();
+            return true;
+        }catch (IOException exception){
+            return false;
+        }
     }
 
     public boolean startGame(File ficheiroInicial) {
@@ -35,7 +48,7 @@ public class TWDGameManager {
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
             }
-            list2StringBuilder(lines);
+            gameInfo.setIntialGame(list2StringBuilder(lines));
             int currentLine = 0;
 
 
@@ -150,6 +163,7 @@ public class TWDGameManager {
             if (obtained) {
                 //System.out.println(gameInfo.getNrTurno());
                 gameInfo.nextTurn();
+                gameInfo.getSavedMoves().add(xO+" : "+yO+" : "+xD+" : "+yD);
             }
             return obtained;
         }
@@ -321,10 +335,9 @@ public class TWDGameManager {
 
     private StringBuilder list2StringBuilder(ArrayList<String> lines){
         StringBuilder initialGame = new StringBuilder();
-        for(String line: lines){
+        for(String line: lines) {
             initialGame.append(line).append("\n");
         }
-        System.out.println(initialGame.toString()); //TODO REMOVE
         return initialGame;
     }
 
