@@ -95,71 +95,31 @@ public class TWDGameManager {
                 int posY = Integer.parseInt(data[1]);
                 gameInfo.addSafeHaven(new SafeHaven(posX, posY));
             }
+            //Write initial game
+            StringBuilder initialGame=new StringBuilder();
+            for(int i=0;i<maxLine;i++){
+                initialGame.append(lines.get(i)).append("\n");
+            }
+            gameInfo.setIntialGame(initialGame);
 
+            //GET MOVES
             data = lines.get(currentLine).split("");
             allLine = new StringBuffer();
             for (int i = 0; i < data.length; i++) {
                 allLine.append(data[i]);
             }
-            int equiped = Integer.parseInt(allLine.toString());
+            int nrMoves = Integer.parseInt(allLine.toString());
             currentLine++;
-
-            maxLine = currentLine + equiped;
+            maxLine = currentLine + nrMoves;
             for (; currentLine < maxLine; currentLine++) {
                 data = lines.get(currentLine).split(" : ");
-                int idVivo = Integer.parseInt(data[0]);
-                int idEquipment = Integer.parseInt(data[1]);
-                Vivo vivo =(Vivo) gameInfo.getCreatureById(idVivo);
-                Equipamento equipamento = gameInfo.getEquipmentById(idEquipment);
-                gameInfo.removeEquipment(equipamento);
-                vivo.setEquipment(equipamento);
+                int xO = Integer.parseInt(data[0]);
+                int yO = Integer.parseInt(data[1]);
+                int xD = Integer.parseInt(data[2]);
+                int yD = Integer.parseInt(data[3]);
+                move(xO,yO,xD,yD);
             }
-
-            data = lines.get(currentLine).split("");
-            allLine = new StringBuffer();
-            for (int i = 0; i < data.length; i++) {
-                allLine.append(data[i]);
-            }
-            int dead = Integer.parseInt(allLine.toString());
-            currentLine++;
-
-            maxLine = currentLine + dead;
-            for (; currentLine < maxLine; currentLine++) {
-                data = lines.get(currentLine).split(" : ");
-                int idCriatura =Integer.parseInt(data[0]);
-                int idType =Integer.parseInt(data[1]);
-                String name = data[2].trim();
-                int posX= Integer.parseInt(data[3]);
-                int posY= Integer.parseInt(data[4]);
-                Creature creature = CreatureFactory.makeCreature(idCriatura,idType,name,posX,posY);
-                gameInfo.addGraveyard(creature);
-                creature.setDead();
-            }
-
-            data = lines.get(currentLine).split("");
-            allLine = new StringBuffer();
-            for (int i = 0; i < data.length; i++) {
-                allLine.append(data[i]);
-            }
-            int safe = Integer.parseInt(allLine.toString());
-            currentLine++;
-
-            maxLine = currentLine + safe;
-            for (; currentLine < maxLine; currentLine++) {
-                data = lines.get(currentLine).split(" : ");
-                int idCriatura =Integer.parseInt(data[0]);
-                Vivo vivo = (Vivo) gameInfo.getCreatureById(idCriatura);
-                vivo.enterSafeHaven();
-            }
-
-
             scanner.close();
-            getInitialTeam();
-
-            if (getInitialTeam() != getCurrentTeamId()) {
-                return false;
-            }
-
         } catch (FileNotFoundException e) {
             return false;
         }
@@ -167,70 +127,18 @@ public class TWDGameManager {
     }
 
     public boolean saveGame(File fich) {
-        String gameDetails = "";
-        try {
+        try{
             FileWriter fileWriter = new FileWriter(fich);
-            gameDetails += gameInfo.getNrLines() + " " + gameInfo.getNrColumns() + "\n";
-            gameDetails += gameInfo.getCurrentTeamID() + "\n";
-            gameDetails += gameInfo.getCreatures().size() + "\n";
-            for (Creature creature : gameInfo.getCreatures()) {
-                gameDetails += creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() +
-                        " : " + creature.getPosX() + " : " + creature.getPosY() + "\n";
+            ArrayList<String> savedMoves = gameInfo.getSavedMoves();
+            StringBuilder allGame= gameInfo.getIntialGame();
+            allGame.append(savedMoves.size()).append("\n");
+            for(String move:savedMoves){
+                allGame.append(move).append("\n");
             }
-            //adicionar equipamentos dos vivos
-            ArrayList<Equipamento> equipados = new ArrayList<>();
-            for(Creature creature:gameInfo.getCreatures()){
-                if(creature.isVivo()){
-                    Vivo vivo = (Vivo) creature;
-                    if(vivo.isEquiped()){
-                        equipados.add(vivo.getEquipment());
-                    }
-                }
-            }
-            ArrayList<Equipamento> todosEquipamentos = new ArrayList<>();
-            todosEquipamentos.addAll(equipados);
-            todosEquipamentos.addAll(gameInfo.getEquipments());
-
-            gameDetails += todosEquipamentos.size() + "\n";
-            for (Equipamento equipamento : todosEquipamentos) {
-                gameDetails += equipamento.getId() + " : " + equipamento.getIdTipo() + " : " + equipamento.getPosX() + " : " + equipamento.getPosY() + "\n";
-            }
-            gameDetails += gameInfo.getSafeHavens().size() + "\n";
-            for (SafeHaven safeHaven : gameInfo.getSafeHavens()) {
-                gameDetails += safeHaven.getPosX() + " : " + safeHaven.getPosY() + "\n";
-            }
-
-            gameDetails += equipados.size() + "\n";
-            for(Creature creature: gameInfo.getCreatures()){
-                if(creature.isVivo()){
-                    Vivo vivo = (Vivo) creature;
-                    if(vivo.isEquiped()){
-                        gameDetails+= vivo.getId() + " : " + vivo.getEquipment().getId() + "\n";
-                    }
-                }
-            }
-
-            //save creatures in graveyard
-            gameDetails+= gameInfo.getGraveyard().size() + "\n";
-            for (Creature creature : gameInfo.getGraveyard()) {
-                gameDetails += creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() +
-                        " : " + creature.getPosX() + " : " + creature.getPosY() + "\n";
-            }
-
-            //save creatures in safehaven
-            gameDetails+=SafeHaven.getSurvivors().size() + "\n";
-            for (Vivo vivo : SafeHaven.getSurvivors()) {
-                gameDetails += vivo.getId() + "\n";
-            }
-
-
-            //System.out.println(gameDetails);
-            fileWriter.write(gameDetails);
+            fileWriter.write(allGame.toString());
             fileWriter.close();
             return true;
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        }catch (IOException exception){
             return false;
         }
     }
@@ -245,7 +153,9 @@ public class TWDGameManager {
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
             }
+            gameInfo.setIntialGame(list2StringBuilder(lines));
             int currentLine = 0;
+
 
             String[] data;
             //Get nrColumns and nrLines
@@ -341,7 +251,6 @@ public class TWDGameManager {
         return x >= 0 && y >= 0 && y < gameInfo.getNrLines() && x < gameInfo.getNrColumns();
     }
 
-
     public boolean move(int xO, int yO, int xD, int yD) {
         //change valid moves, changes for diferent creatures
         if (!isInsideBounds(xD, yD)) {
@@ -359,6 +268,7 @@ public class TWDGameManager {
             if (obtained) {
                 //System.out.println(gameInfo.getNrTurno());
                 gameInfo.nextTurn();
+                gameInfo.saveMove(xO+" : "+yO+" : "+xD+" : "+yD);
             }
             return obtained;
         }
@@ -528,5 +438,12 @@ public class TWDGameManager {
         return ids;
     }
 
+    private StringBuilder list2StringBuilder(ArrayList<String> lines){
+        StringBuilder initialGame = new StringBuilder();
+        for(String line: lines) {
+            initialGame.append(line).append("\n");
+        }
+        return initialGame;
+    }
 
 }

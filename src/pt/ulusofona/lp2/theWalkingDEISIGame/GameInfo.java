@@ -22,8 +22,24 @@ public class GameInfo {
     private ArrayList<Creature> graveyard = new ArrayList<>();
     private ArrayList<Vivo> poisonedVivos = new ArrayList<>();
 
+    private StringBuilder intialGame;
+    private ArrayList<String> savedMoves;
 
-    public void reset(){
+    public void setIntialGame(StringBuilder intialGame) {
+        this.intialGame = intialGame;
+    }
+    public void saveMove(String move){
+        savedMoves.add(move);
+    }
+    public StringBuilder getIntialGame() {
+        return intialGame;
+    }
+    public ArrayList<String> getSavedMoves() {
+        return savedMoves;
+    }
+
+
+     public void reset(){
         nrTurno=0;
         nrLines=0;
         nrColumns=0;
@@ -38,6 +54,9 @@ public class GameInfo {
         equipamentoHashMap = new HashMap<>();
         graveyard = new ArrayList<>();
         poisonedVivos = new ArrayList<>();
+
+        intialGame= new StringBuilder();
+        savedMoves=new ArrayList<>();
     }
 
 
