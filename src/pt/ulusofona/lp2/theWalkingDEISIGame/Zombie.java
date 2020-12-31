@@ -22,13 +22,9 @@ abstract class Zombie extends Creature {
             if(this.idType==4 && equipamento.getIdTipo()==5){ //Se é vampiro nao pode destruir alho
                 return false;
             }
-            /*//TODO no caso de um zombie nao poder destruir garrafas de veneno vazias alterar
             if(equipamento.getIdTipo()==8){
-                Veneno veneno = (Veneno) equipamento;
-                if(!veneno.isEmpty()){
-                    return false;
-                }
-            }*/
+                return false;
+            }
             destroyEquiment();
             gameInfo.removeEquipment(equipamento);
         }
