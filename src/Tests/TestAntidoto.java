@@ -72,7 +72,4 @@ public class TestAntidoto {
         gameManager.startGame(fich);
         Assert.assertFalse(gameManager.move(3, 3, 2, 2));
     }
-
-
-
 }

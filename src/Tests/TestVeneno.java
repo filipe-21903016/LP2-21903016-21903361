@@ -57,4 +57,10 @@ public class TestVeneno {
         int id = gameManager.getElementId(2, 2);
         Assert.assertEquals("Id expected to be 1 but was: " + id, 0, id);
     }
+
+    @Test
+    public void ZombieApanhaVeneno() {
+        gameManager.startGame(fich);
+        Assert.assertFalse(gameManager.move(2, 1, 2, 2));
+    }
 }
