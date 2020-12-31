@@ -55,7 +55,7 @@ public class TestVeneno {
 
 
         int id = gameManager.getElementId(2, 2);
-        Assert.assertEquals("Id expected to be 1 but was: " + id, 0, id);
+        Assert.assertEquals("Id expected to be 3 but was: " + id, 3, id);
     }
 
     @Test
