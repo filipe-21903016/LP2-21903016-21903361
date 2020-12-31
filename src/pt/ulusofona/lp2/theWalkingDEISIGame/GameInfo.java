@@ -42,7 +42,7 @@ public class GameInfo {
 
 
     public void reset(){
-        nrTurno=0;
+        /*nrTurno=0;
         nrLines=0;
         nrColumns=0;
         currentTeamID=0;
@@ -58,7 +58,8 @@ public class GameInfo {
         poisonedVivos = new ArrayList<>();
 
         intialGame= new StringBuilder();
-        savedMoves=new ArrayList<>();
+        savedMoves=new ArrayList<>();*/
+        instance = new GameInfo();
     }
 
 

@@ -18,7 +18,108 @@ public class TWDGameManager {
 
     public boolean loadGame(File fich) {
         gameInfo.reset();
-        return false;
+        try {
+            Scanner scanner = new Scanner(fich);
+            ArrayList<String> lines = new ArrayList<>();
+
+            //Scans all lines to list
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+            gameInfo.setIntialGame(list2StringBuilder(lines));
+            int currentLine = 0;
+
+
+            String[] data;
+            //Get nrColumns and nrLines
+            data = lines.get(currentLine).split(" ");
+            int nrLines = Integer.parseInt(data[0]);
+            int nrColumns = Integer.parseInt(data[1]);
+            gameInfo.setNrLines(nrLines);
+            gameInfo.setNrColumns(nrColumns);
+            currentLine++;
+
+            //Get Id of starting team
+            data = lines.get(currentLine).split("");
+            int id = Integer.parseInt(data[0] + data[1]);
+            gameInfo.setCurrentTeamID(id);
+            gameInfo.setFirstTeamId(id);
+            currentLine++;
+
+            //Get number of creatures and their properties
+            data = lines.get(currentLine).split("");
+            StringBuffer allLine = new StringBuffer();
+            for (int i = 0; i < data.length; i++) {
+                allLine.append(data[i]);
+            }
+            int nrCreatures = Integer.parseInt(allLine.toString());
+            currentLine++;
+
+            int maxLine = currentLine + nrCreatures;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
+                int idCreature = Integer.parseInt(data[0]);
+                int idType = Integer.parseInt(data[1]);
+                String nomeCriatura = data[2].trim();
+                int posX = Integer.parseInt(data[3]);
+                int posY = Integer.parseInt(data[4]);
+                Creature creature = CreatureFactory.makeCreature(idCreature, idType, nomeCriatura, posX, posY);
+                gameInfo.addCreature(creature);
+            }
+
+            data = lines.get(currentLine).split("");
+            allLine = new StringBuffer();
+            for (int i = 0; i < data.length; i++) {
+                allLine.append(data[i]);
+            }
+            int nrEquipment = Integer.parseInt(allLine.toString());
+            currentLine++;
+
+            maxLine = currentLine + nrEquipment;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
+                int idEquipment = Integer.parseInt(data[0]);
+                int idType = Integer.parseInt(data[1]);
+                int posX = Integer.parseInt(data[2]);
+                int posY = Integer.parseInt(data[3]);
+                Equipamento equipamento = EquipmentFactory.makeEquipment(idEquipment, idType, posX, posY);
+                gameInfo.addEquipment(equipamento);
+            }
+
+            data = lines.get(currentLine).split("");
+            int nrHavens = Integer.parseInt(data[0]);
+            currentLine++;
+
+            maxLine = currentLine + nrHavens;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
+                int posX = Integer.parseInt(data[0]);
+                int posY = Integer.parseInt(data[1]);
+                gameInfo.addSafeHaven(new SafeHaven(posX, posY));
+            }
+
+            //GET MOVES
+            data = lines.get(currentLine).split("");
+            allLine = new StringBuffer();
+            for (int i = 0; i < data.length; i++) {
+                allLine.append(data[i]);
+            }
+            int nrMoves = Integer.parseInt(allLine.toString());
+            currentLine++;
+            maxLine = currentLine + nrMoves;
+            for (; currentLine < maxLine; currentLine++) {
+                data = lines.get(currentLine).split(" : ");
+                int xO = Integer.parseInt(data[0]);
+                int yO = Integer.parseInt(data[1]);
+                int xD = Integer.parseInt(data[2]);
+                int yD = Integer.parseInt(data[3]);
+                move(xO,yO,xD,yD);
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            return false;
+        }
+        return true;
     }
 
     public boolean saveGame(File fich) {
@@ -163,7 +264,7 @@ public class TWDGameManager {
             if (obtained) {
                 //System.out.println(gameInfo.getNrTurno());
                 gameInfo.nextTurn();
-                gameInfo.getSavedMoves().add(xO+" : "+yO+" : "+xD+" : "+yD);
+                gameInfo.saveMove(xO+" : "+yO+" : "+xD+" : "+yD);
             }
             return obtained;
         }
