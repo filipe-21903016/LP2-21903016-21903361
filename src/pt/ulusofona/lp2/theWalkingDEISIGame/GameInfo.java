@@ -225,7 +225,7 @@ public class GameInfo {
         //removes from creature list
         for(Vivo vivo: poisonedVivos){
             vivo.incrementPoisenedTurn();
-            if (vivo.getTurnsPoisoned()>3){
+            if (vivo.getTurnsPoisoned()>=3){
                 removeCreature(vivo);
                 removed.add(vivo);
             }
