@@ -124,7 +124,7 @@ public class TWDGameManager {
                 move(xO,yO,xD,yD);
             }
             scanner.close();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | IndexOutOfBoundsException e) {
             return false;
         }
         return true;
@@ -240,7 +240,7 @@ public class TWDGameManager {
                 return false;
             }
 
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | IndexOutOfBoundsException e) {
             return false;
         }
         return true;
