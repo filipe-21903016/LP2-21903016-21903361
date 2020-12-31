@@ -10,7 +10,7 @@ import java.io.File;
 
 public class TestAntidoto {
     TWDGameManager gameManager = new TWDGameManager();
-    File fich = new File("test-files/TestAntidoto");
+    File fich = new File("test-files/TestAntidoto.txt");
 
 
 }
