@@ -154,10 +154,8 @@ public class GameInfo {
         return humans;
     }*/
     public boolean isDay(){
-        return nrTurno == 0 || nrTurno == 1 ||
-                nrTurno == 4
-                || nrTurno == 5 || nrTurno == 8 ||
-                nrTurno == 9 || nrTurno == 12;
+        double resto = nrTurno %4;
+        return resto==0 || resto ==1;
     }
 
     public ArrayList<Equipamento> getEquipments() {
