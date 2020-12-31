@@ -17,222 +17,12 @@ public class TWDGameManager {
     public GameInfo gameInfo = GameInfo.getInstance();
 
     public boolean loadGame(File fich) {
-        gameInfo.reset();
-        try {
-            Scanner scanner = new Scanner(fich);
-            ArrayList<String> lines = new ArrayList<>();
-
-            //Scans all lines to list
-            while (scanner.hasNextLine()) {
-                lines.add(scanner.nextLine());
-            }
-            int currentLine = 0;
-
-            String[] data;
-            //Get nrColumns and nrLines
-            data = lines.get(currentLine).split(" ");
-            int nrLines = Integer.parseInt(data[0]);
-            int nrColumns = Integer.parseInt(data[1]);
-            gameInfo.setNrLines(nrLines);
-            gameInfo.setNrColumns(nrColumns);
-            currentLine++;
-
-            //Get Id of starting team
-            data = lines.get(currentLine).split("");
-            int id = Integer.parseInt(data[0] + data[1]);
-            gameInfo.setCurrentTeamID(id);
-            gameInfo.setFirstTeamId(id);
-            currentLine++;
-
-            //Get number of creatures and their properties
-            data = lines.get(currentLine).split("");
-            StringBuffer allLine = new StringBuffer();
-            for (int i = 0; i < data.length; i++) {
-                allLine.append(data[i]);
-            }
-            int nrCreatures = Integer.parseInt(allLine.toString());
-            currentLine++;
-
-            int maxLine = currentLine + nrCreatures;
-            for (; currentLine < maxLine; currentLine++) {
-                data = lines.get(currentLine).split(" : ");
-                int idCreature = Integer.parseInt(data[0]);
-                int idType = Integer.parseInt(data[1]);
-                String nomeCriatura = data[2].trim();
-                int posX = Integer.parseInt(data[3]);
-                int posY = Integer.parseInt(data[4]);
-                Creature creature = CreatureFactory.makeCreature(idCreature, idType, nomeCriatura, posX, posY);
-                gameInfo.addCreature(creature);
-            }
-
-            data = lines.get(currentLine).split("");
-            allLine = new StringBuffer();
-            for (int i = 0; i < data.length; i++) {
-                allLine.append(data[i]);
-            }
-            int nrEquipment = Integer.parseInt(allLine.toString());
-            currentLine++;
-
-            maxLine = currentLine + nrEquipment;
-            for (; currentLine < maxLine; currentLine++) {
-                data = lines.get(currentLine).split(" : ");
-                int idEquipment = Integer.parseInt(data[0]);
-                int idType = Integer.parseInt(data[1]);
-                int posX = Integer.parseInt(data[2]);
-                int posY = Integer.parseInt(data[3]);
-                Equipamento equipamento = EquipmentFactory.makeEquipment(idEquipment, idType, posX, posY);
-                gameInfo.addEquipment(equipamento);
-            }
-
-            data = lines.get(currentLine).split("");
-            int nrHavens = Integer.parseInt(data[0]);
-            currentLine++;
-
-            maxLine = currentLine + nrHavens;
-            for (; currentLine < maxLine; currentLine++) {
-                data = lines.get(currentLine).split(" : ");
-                int posX = Integer.parseInt(data[0]);
-                int posY = Integer.parseInt(data[1]);
-                gameInfo.addSafeHaven(new SafeHaven(posX, posY));
-            }
-
-            data = lines.get(currentLine).split("");
-            allLine = new StringBuffer();
-            for (int i = 0; i < data.length; i++) {
-                allLine.append(data[i]);
-            }
-            int equiped = Integer.parseInt(allLine.toString());
-            currentLine++;
-
-            maxLine = currentLine + equiped;
-            for (; currentLine < maxLine; currentLine++) {
-                data = lines.get(currentLine).split(" : ");
-                int idVivo = Integer.parseInt(data[0]);
-                int idEquipment = Integer.parseInt(data[1]);
-                Vivo vivo =(Vivo) gameInfo.getCreatureById(idVivo);
-                Equipamento equipamento = gameInfo.getEquipmentById(idEquipment);
-                gameInfo.removeEquipment(equipamento);
-                vivo.setEquipment(equipamento);
-            }
-
-            data = lines.get(currentLine).split("");
-            allLine = new StringBuffer();
-            for (int i = 0; i < data.length; i++) {
-                allLine.append(data[i]);
-            }
-            int dead = Integer.parseInt(allLine.toString());
-            currentLine++;
-
-            maxLine = currentLine + dead;
-            for (; currentLine < maxLine; currentLine++) {
-                data = lines.get(currentLine).split(" : ");
-                int idCriatura =Integer.parseInt(data[0]);
-                int idType =Integer.parseInt(data[1]);
-                String name = data[2].trim();
-                int posX= Integer.parseInt(data[3]);
-                int posY= Integer.parseInt(data[4]);
-                Creature creature = CreatureFactory.makeCreature(idCriatura,idType,name,posX,posY);
-                gameInfo.addGraveyard(creature);
-                creature.setDead();
-            }
-
-            data = lines.get(currentLine).split("");
-            allLine = new StringBuffer();
-            for (int i = 0; i < data.length; i++) {
-                allLine.append(data[i]);
-            }
-            int safe = Integer.parseInt(allLine.toString());
-            currentLine++;
-
-            maxLine = currentLine + safe;
-            for (; currentLine < maxLine; currentLine++) {
-                data = lines.get(currentLine).split(" : ");
-                int idCriatura =Integer.parseInt(data[0]);
-                Vivo vivo = (Vivo) gameInfo.getCreatureById(idCriatura);
-                vivo.enterSafeHaven();
-            }
-
-
-            scanner.close();
-            getInitialTeam();
-
-            if (getInitialTeam() != getCurrentTeamId()) {
-                return false;
-            }
-
-        } catch (FileNotFoundException e) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
     public boolean saveGame(File fich) {
         String gameDetails = "";
-        try {
-            FileWriter fileWriter = new FileWriter(fich);
-            gameDetails += gameInfo.getNrLines() + " " + gameInfo.getNrColumns() + "\n";
-            gameDetails += gameInfo.getCurrentTeamID() + "\n";
-            gameDetails += gameInfo.getCreatures().size() + "\n";
-            for (Creature creature : gameInfo.getCreatures()) {
-                gameDetails += creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() +
-                        " : " + creature.getPosX() + " : " + creature.getPosY() + "\n";
-            }
-            //adicionar equipamentos dos vivos
-            ArrayList<Equipamento> equipados = new ArrayList<>();
-            for(Creature creature:gameInfo.getCreatures()){
-                if(creature.isVivo()){
-                    Vivo vivo = (Vivo) creature;
-                    if(vivo.isEquiped()){
-                        equipados.add(vivo.getEquipment());
-                    }
-                }
-            }
-            ArrayList<Equipamento> todosEquipamentos = new ArrayList<>();
-            todosEquipamentos.addAll(equipados);
-            todosEquipamentos.addAll(gameInfo.getEquipments());
-
-            gameDetails += todosEquipamentos.size() + "\n";
-            for (Equipamento equipamento : todosEquipamentos) {
-                gameDetails += equipamento.getId() + " : " + equipamento.getIdTipo() + " : " + equipamento.getPosX() + " : " + equipamento.getPosY() + "\n";
-            }
-            gameDetails += gameInfo.getSafeHavens().size() + "\n";
-            for (SafeHaven safeHaven : gameInfo.getSafeHavens()) {
-                gameDetails += safeHaven.getPosX() + " : " + safeHaven.getPosY() + "\n";
-            }
-
-            gameDetails += equipados.size() + "\n";
-            for(Creature creature: gameInfo.getCreatures()){
-                if(creature.isVivo()){
-                    Vivo vivo = (Vivo) creature;
-                    if(vivo.isEquiped()){
-                        gameDetails+= vivo.getId() + " : " + vivo.getEquipment().getId() + "\n";
-                    }
-                }
-            }
-
-            //save creatures in graveyard
-            gameDetails+= gameInfo.getGraveyard().size() + "\n";
-            for (Creature creature : gameInfo.getGraveyard()) {
-                gameDetails += creature.getId() + " : " + creature.getIdType() + " : " + creature.getNome() +
-                        " : " + creature.getPosX() + " : " + creature.getPosY() + "\n";
-            }
-
-            //save creatures in safehaven
-            gameDetails+=SafeHaven.getSurvivors().size() + "\n";
-            for (Vivo vivo : SafeHaven.getSurvivors()) {
-                gameDetails += vivo.getId() + "\n";
-            }
-
-
-            //System.out.println(gameDetails);
-            fileWriter.write(gameDetails);
-            fileWriter.close();
-            return true;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+        return false;
     }
 
     public boolean startGame(File ficheiroInicial) {
@@ -245,7 +35,9 @@ public class TWDGameManager {
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
             }
+            list2StringBuilder(lines);
             int currentLine = 0;
+
 
             String[] data;
             //Get nrColumns and nrLines
@@ -340,7 +132,6 @@ public class TWDGameManager {
     public boolean isInsideBounds(int x, int y) {
         return x >= 0 && y >= 0 && y < gameInfo.getNrLines() && x < gameInfo.getNrColumns();
     }
-
 
     public boolean move(int xO, int yO, int xD, int yD) {
         //change valid moves, changes for diferent creatures
@@ -528,5 +319,13 @@ public class TWDGameManager {
         return ids;
     }
 
+    private StringBuilder list2StringBuilder(ArrayList<String> lines){
+        StringBuilder initialGame = new StringBuilder();
+        for(String line: lines){
+            initialGame.append(line).append("\n");
+        }
+        System.out.println(initialGame.toString()); //TODO REMOVE
+        return initialGame;
+    }
 
 }
