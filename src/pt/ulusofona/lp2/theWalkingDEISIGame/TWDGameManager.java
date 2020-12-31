@@ -26,9 +26,7 @@ public class TWDGameManager {
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
             }
-            gameInfo.setIntialGame(list2StringBuilder(lines));
             int currentLine = 0;
-
 
             String[] data;
             //Get nrColumns and nrLines
@@ -97,6 +95,12 @@ public class TWDGameManager {
                 int posY = Integer.parseInt(data[1]);
                 gameInfo.addSafeHaven(new SafeHaven(posX, posY));
             }
+            //Write initial game
+            StringBuilder initialGame=new StringBuilder();
+            for(int i=0;i<maxLine;i++){
+                initialGame.append(lines.get(i)).append("\n");
+            }
+            gameInfo.setIntialGame(initialGame);
 
             //GET MOVES
             data = lines.get(currentLine).split("");
