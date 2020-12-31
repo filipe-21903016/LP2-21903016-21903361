@@ -85,7 +85,11 @@ public class TWDGameManager {
             }
 
             data = lines.get(currentLine).split("");
-            int nrHavens = Integer.parseInt(data[0]);
+            allLine = new StringBuffer();
+            for (int i = 0; i < data.length; i++) {
+                allLine.append(data[i]);
+            }
+            int nrHavens = Integer.parseInt(allLine.toString());
             currentLine++;
 
             maxLine = currentLine + nrHavens;
@@ -214,7 +218,11 @@ public class TWDGameManager {
             }
 
             data = lines.get(currentLine).split("");
-            int nrHavens = Integer.parseInt(data[0]);
+            allLine = new StringBuffer();
+            for (int i = 0; i < data.length; i++) {
+                allLine.append(data[i]);
+            }
+            int nrHavens = Integer.parseInt(allLine.toString());
             currentLine++;
 
             maxLine = currentLine + nrHavens;
