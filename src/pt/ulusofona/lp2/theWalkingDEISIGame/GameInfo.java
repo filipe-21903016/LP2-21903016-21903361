@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class GameInfo {
     private final int nrMaxTurnos = 12;

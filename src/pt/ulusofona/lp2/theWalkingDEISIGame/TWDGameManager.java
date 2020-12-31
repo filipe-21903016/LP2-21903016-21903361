@@ -129,10 +129,10 @@ public class TWDGameManager {
                 move(xO,yO,xD,yD);
             }
             scanner.close();
+            return true;
         } catch (FileNotFoundException e) {
             return false;
         }
-        return true;
     }
 
     public boolean saveGame(File fich) {
