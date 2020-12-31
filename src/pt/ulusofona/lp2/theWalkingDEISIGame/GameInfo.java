@@ -146,13 +146,6 @@ public class GameInfo {
         return creatureHashMap;
     }
 
-    /* public ArrayList<Zombie> getZombies() {
-        return zombies;
-    }*/
-
-    /* public ArrayList<Vivo> getHumans() {
-        return humans;
-    }*/
     public boolean isDay(){
         double resto = nrTurno %4;
         return resto==0 || resto ==1;
@@ -172,10 +165,6 @@ public class GameInfo {
 
     public int getIdTeamVivos() {
         return idTeamVivos;
-    }
-
-    public int getIdTeamMortos() {
-        return idTeamMortos;
     }
 
     public ArrayList<Creature> getCreatures() {
