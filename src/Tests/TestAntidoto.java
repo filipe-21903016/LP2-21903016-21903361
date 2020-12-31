@@ -30,7 +30,8 @@ public class TestAntidoto {
         Assert.assertTrue(gameManager.move(3, 2, 2, 2));
         Assert.assertTrue(gameManager.move(1, 2, 1, 1));
         Assert.assertTrue(gameManager.move(2, 2, 2, 4));
-        Assert.assertTrue(gameManager.move(3, 1, 3, 2));
+        Assert.assertFalse(gameManager.move(3, 1, 3, 2));
+        Assert.assertTrue(gameManager.move(3, 1, 2, 1));
         Assert.assertTrue(gameManager.move(2, 4, 0, 4));
 
         int id = gameManager.getElementId(0,4);
