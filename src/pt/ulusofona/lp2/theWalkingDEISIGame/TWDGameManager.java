@@ -26,8 +26,13 @@ public class TWDGameManager {
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
             }
-            int currentLine = 0;
 
+            if(!lines.get(0).equals("+SAVED+")){
+                return startGame(fich);
+            }
+            lines.remove(0);
+
+            int currentLine = 0;
             String[] data;
             //Get nrColumns and nrLines
             data = lines.get(currentLine).split(" ");
@@ -134,7 +139,9 @@ public class TWDGameManager {
         try{
             FileWriter fileWriter = new FileWriter(fich);
             ArrayList<String> savedMoves = gameInfo.getSavedMoves();
-            StringBuilder allGame= gameInfo.getIntialGame();
+            StringBuilder allGame= new StringBuilder();
+            allGame.append("+SAVED+").append("\n");
+            allGame.append(gameInfo.getIntialGame().toString());
             allGame.append(savedMoves.size()).append("\n");
             for(String move:savedMoves){
                 allGame.append(move).append("\n");
@@ -284,7 +291,6 @@ public class TWDGameManager {
     }
 
     public boolean gameIsOver() {
-        //System.out.println(gameInfo.getTurnosSemTransformacao());
         if(gameInfo.getTurnosSemTransformacao() >= gameInfo.getNrMaxTurnos()){
             return true;
         }
