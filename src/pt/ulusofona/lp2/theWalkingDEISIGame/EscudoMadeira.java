@@ -29,18 +29,13 @@ public class EscudoMadeira extends Equipamento {
 
     @Override
     public boolean use() {
-        uses-=1;
-        if(uses==0){
-            GameInfo gameInfo = GameInfo.getInstance();
-            for(Creature c : gameInfo.getCreatures()){
-                if(c.getTeamId() == gameInfo.getIdTeamVivos()){
-                    Vivo vivo= (Vivo) c;
-                    if(vivo.isEquiped() && vivo.getEquipment().getId()==this.id){
-                        vivo.destroyEquipment();
-                    }
-                }
+        if(uses>0){
+            uses-=1;
+            if(uses==0){
+                this.defensive=false;
             }
+            return true;
         }
-        return true;
+        return false;
     }
 }
