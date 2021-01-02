@@ -41,7 +41,7 @@ abstract class Zombie extends Creature {
             }
 
             if(idType==4 && vivo.isEquiped() && targetEquipment.getIdTipo()==5){ //Vampiro nao ataca quem tem cabecas de alho
-                return false;
+                return true;
             }
             this.combat(vivo);
             return true;
