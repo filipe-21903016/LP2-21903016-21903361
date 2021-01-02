@@ -156,11 +156,7 @@ abstract class Vivo extends Creature {
 
     public void turn() {
         GameInfo gameInfo = GameInfo.getInstance();
-        Creature zombie = CreatureFactory.makeCreature(this.getId(), this.idType - 5, this.getNome(),
-                this.getPosX(), this.getPosY());
-        gameInfo.removeCreature(this);
-        gameInfo.addCreature(zombie);
-        gameInfo.setTurnosSemTransformacao(0);
+        gameInfo.trasformCreature(this);
     }
 
     public void incrementPoisenedTurn(){

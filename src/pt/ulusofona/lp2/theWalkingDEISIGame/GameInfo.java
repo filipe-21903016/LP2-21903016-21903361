@@ -242,6 +242,16 @@ public class GameInfo {
         creature.setDead();
     }
 
+    public void trasformCreature(Vivo vivo){
+        Creature zombie = CreatureFactory.makeCreature(vivo.getId(), vivo.idType - 5, vivo.getNome(),
+                vivo.getPosX(), vivo.getPosY());
+        creatures.remove(vivo);
+        creatureHashMap.remove(vivo.getId());
+        addCreature(zombie);
+        turnosSemTransformacao=0;
+
+    }
+
     public int getTeamIdByCreatureId(int id){
         return creatureHashMap.get(id).getTeamId();
     }
@@ -253,9 +263,5 @@ public class GameInfo {
 
     public void removePoisoned(Vivo vivo){
         poisonedVivos.remove(vivo);
-    }
-
-    public void setTurnosSemTransformacao(int turnosSemTransformacao) {
-        this.turnosSemTransformacao = turnosSemTransformacao;
     }
 }
