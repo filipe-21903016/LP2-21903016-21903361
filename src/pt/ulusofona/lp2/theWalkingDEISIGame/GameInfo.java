@@ -59,8 +59,6 @@ public class GameInfo {
         intialGame= new StringBuilder();
         savedMoves=new ArrayList<>();
     }
-
-
     private GameInfo() {
     }
 
