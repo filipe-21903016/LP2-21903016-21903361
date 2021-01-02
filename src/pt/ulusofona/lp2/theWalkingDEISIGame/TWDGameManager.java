@@ -366,7 +366,7 @@ public class TWDGameManager {
                 results.add(vivo.getId() + " " + vivo.getNome());
             }
             results.add("");
-            results.add("Envenenados / Destruídos");
+            results.add("Envenenados / Destruidos");
             results.add("");
             results.add("OS VIVOS");
             gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
