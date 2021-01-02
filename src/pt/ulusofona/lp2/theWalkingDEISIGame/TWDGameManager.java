@@ -430,7 +430,7 @@ public class TWDGameManager {
         resultado[1] = "Evil Dead";
         resultado[2] = "I Am Legend";
         resultado[3] = "I Am Legend";
-        resultado[4] = "World War Z";
+        resultado[4] = "Adventure Time";
         resultado[5] = "The Return of the Living Dead";
         resultado[6] = "The Mandalorian";
         resultado[7] = "1996";
