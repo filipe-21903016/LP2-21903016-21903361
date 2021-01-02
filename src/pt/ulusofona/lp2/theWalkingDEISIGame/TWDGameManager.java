@@ -348,6 +348,7 @@ public class TWDGameManager {
                     results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
                 }
             }
+            results.add("");
             results.add("Num safe haven:");
             results.add("");
             results.add("OS VIVOS");
@@ -373,7 +374,6 @@ public class TWDGameManager {
                     results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
                 }
             }
-            results.add("");
         }
         return results;
     }
