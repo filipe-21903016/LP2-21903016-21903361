@@ -285,6 +285,7 @@ public class TWDGameManager {
                 gameInfo.nextTurn();
                 gameInfo.saveMove(xO+" : "+yO+" : "+xD+" : "+yD);
             }
+            return obtained;
         }
         return false;
     }
@@ -382,10 +383,11 @@ public class TWDGameManager {
     }
 
     public List<Creature> getCreatures() {
-        ArrayList<Creature> allCreatures = new ArrayList<>();
+        /*ArrayList<Creature> allCreatures = new ArrayList<>();
         allCreatures.addAll(gameInfo.getCreatures());
         allCreatures.addAll(gameInfo.getGraveyard());
-        return allCreatures;
+        return allCreatures;*/
+        return gameInfo.getCreatures();
     }
 
     public List<SafeHaven> getSafeHaven() {
