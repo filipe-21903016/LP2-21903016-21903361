@@ -448,7 +448,7 @@ public class TWDGameManager {
         resultado[4] = "Dragon Ball";
         resultado[5] = "World War Z";
         resultado[6] = "Mandalorians";
-        resultado[7] = "1996";
+        resultado[7] = "1972";
         resultado[8] = "Kill Bill";
         resultado[9] = "1978";
         resultado[10] = "007";
