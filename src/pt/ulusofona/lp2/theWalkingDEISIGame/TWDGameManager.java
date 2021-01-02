@@ -451,7 +451,7 @@ public class TWDGameManager {
         resultado[7] = "1972";
         resultado[8] = "Kill Bill";
         resultado[9] = "1978";
-        resultado[10] = "Bond, James Bond";
+        resultado[10] = "Bond. James Bond";
         resultado[11] = "The Walking Dead";
         resultado[12] = "Chocho";
         resultado[13] = "Freddie Mercury";
