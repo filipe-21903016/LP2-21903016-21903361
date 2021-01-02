@@ -336,7 +336,7 @@ public class TWDGameManager {
             results.add("Nr. de turnos terminados:");
             results.add(gameInfo.getNrTurno() + "");
             results.add("");
-            results.add("Ainda pelo bairro:");
+            results.add("Ainda pelo bairo:");
             results.add("");
             results.add("OS VIVOS");
             gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
