@@ -285,6 +285,14 @@ public class TWDGameManager {
                 gameInfo.nextTurn();
                 gameInfo.saveMove(xO+" : "+yO+" : "+xD+" : "+yD);
             }
+            //TODO REMOVE
+            for(Creature c:getCreatures()){
+                System.out.println(c);
+            }
+            System.out.println("\n");
+            //________________
+
+
             return obtained;
         }
         return false;
@@ -386,8 +394,8 @@ public class TWDGameManager {
         ArrayList<Creature> allCreatures = new ArrayList<>();
         allCreatures.addAll(gameInfo.getCreatures());
         allCreatures.addAll(gameInfo.getGraveyard());
+        allCreatures.sort(Comparator.comparing(Creature::getId));
         return allCreatures;
-        /*return gameInfo.getCreatures();*/
     }
 
     public List<SafeHaven> getSafeHaven() {
