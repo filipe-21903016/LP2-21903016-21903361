@@ -383,11 +383,11 @@ public class TWDGameManager {
     }
 
     public List<Creature> getCreatures() {
-        /*ArrayList<Creature> allCreatures = new ArrayList<>();
+        ArrayList<Creature> allCreatures = new ArrayList<>();
         allCreatures.addAll(gameInfo.getCreatures());
         allCreatures.addAll(gameInfo.getGraveyard());
-        return allCreatures;*/
-        return gameInfo.getCreatures();
+        return allCreatures;
+        /*return gameInfo.getCreatures();*/
     }
 
     public List<SafeHaven> getSafeHaven() {
