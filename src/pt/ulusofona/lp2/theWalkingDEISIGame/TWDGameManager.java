@@ -329,6 +329,7 @@ public class TWDGameManager {
             results.add(gameInfo.getNrTurno() + "");
             results.add("");
             results.add("Ainda pelo bairro:");
+            results.add("");
             results.add("OS VIVOS");
             gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
             for (Creature creature : gameInfo.getCreatures()) {
@@ -356,6 +357,7 @@ public class TWDGameManager {
             }
             results.add("");
             results.add("Envenenados / Destruídos");
+            results.add("");
             results.add("OS VIVOS");
             gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
             for (Creature creature : gameInfo.getGraveyard()) {
