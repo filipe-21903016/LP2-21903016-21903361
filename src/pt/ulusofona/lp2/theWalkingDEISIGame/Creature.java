@@ -216,7 +216,7 @@ public abstract class Creature{
                 return (xD == xO && yD <= yO + 1 && yD >= yO - 1) /*VERTICAL*/
                         || (yD == yO && xD <= xO + 1 && xD >= xO - 1); /*HORIZONTAL*/
             }
-            // Zombie do Filme
+            // Zombie do Filme (ocean man)
             case 10: {
                 if ((xO == xD && yO == yD) || gameInfo.isDay()){
                     return false;

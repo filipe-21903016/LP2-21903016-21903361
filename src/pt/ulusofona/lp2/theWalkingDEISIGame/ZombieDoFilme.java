@@ -11,7 +11,7 @@ public class ZombieDoFilme extends Zombie{
     }
 }
 
-
+// creature of the black lagoon : https://en.wikipedia.org/wiki/Creature_from_the_Black_Lagoon
 // esta criatura move-se ate 3 casas para a frente, 1 para tras,
 // 1 pa esquerda, e ate 2 para a direita
 // nota: esta personagem tal como o vampiro e contrariamente ao idoso humano só joga de noite
