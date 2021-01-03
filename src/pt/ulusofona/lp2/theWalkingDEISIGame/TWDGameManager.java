@@ -452,7 +452,7 @@ public class TWDGameManager {
         resultado[8] = "Kill Bill";
         resultado[9] = "1978";
         resultado[10] = "Bond. James Bond.";
-        resultado[11] = "Game of Thrones";
+        resultado[11] = "Lost";
         resultado[12] = "Chocho";
         resultado[13] = "Freddie Mercury";
 
