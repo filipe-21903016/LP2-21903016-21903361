@@ -23,6 +23,8 @@ public class CreatureFactory {
                 return new IdosoVivo(idCriatura, nome, posX, posY);
             case 9:
                 return new Cao(idCriatura, nome, posX, posY);
+            case 10:
+                return new ZombieDoFilme(idCriatura,nome,posX,posY);
             default:
                 throw new IllegalArgumentException("Unknown Creature Type Id: " + idType);
         }

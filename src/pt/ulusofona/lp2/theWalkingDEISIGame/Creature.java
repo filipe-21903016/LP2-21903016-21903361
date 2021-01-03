@@ -216,6 +216,14 @@ public abstract class Creature{
                 return (xD == xO && yD <= yO + 1 && yD >= yO - 1) /*VERTICAL*/
                         || (yD == yO && xD <= xO + 1 && xD >= xO - 1); /*HORIZONTAL*/
             }
+            // Zombie do Filme
+            case 10: {
+                if ((xO == xD && yO == yD) || gameInfo.isDay()){
+                    return false;
+                }
+                return (xD == xO && yD >= yO - 3 && yD <= yO + 1) /*VERTICAL*/
+                        || (yD == yO && xD <= xO + 2 && xD >= xO - 1); /*HORIZONTAL*/
+            }
             default:
                 throw new IllegalArgumentException("Unknown Creature Type Id: " + idType);
         }
