@@ -7,7 +7,7 @@ public class ZombieDoFilme extends Zombie{
     }
 
     public String getImagePNG(){
-        return "garlic.png";
+        return "oceanMan.png";
     }
 }
 
