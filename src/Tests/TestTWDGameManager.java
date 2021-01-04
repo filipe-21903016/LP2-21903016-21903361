@@ -1,6 +1,5 @@
 package Tests;
 
-import com.sun.xml.internal.fastinfoset.util.CharArrayArray;
 import org.junit.Assert;
 import org.junit.Test;
 import pt.ulusofona.lp2.theWalkingDEISIGame.*;
