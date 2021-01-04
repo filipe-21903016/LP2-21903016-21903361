@@ -55,7 +55,6 @@ public class TestEscudoMadeira {
         Assert.assertEquals(20,gameManager.gameInfo.getTeamIdByCreatureId(id));
     }
 
-
     @Test
     public void usoMilitar(){
         gameManager.startGame(fich);

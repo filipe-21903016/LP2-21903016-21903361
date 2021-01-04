@@ -236,7 +236,7 @@ public abstract class Creature{
     @Override
     public boolean equals(Object obj) {
         Creature creature = (Creature) obj;
-        return this.idCriatura==creature.getId();
+        return this.idCriatura==creature.getId() && this.nome.equals(creature.nome);
     }
 
     public boolean isVivo(){
