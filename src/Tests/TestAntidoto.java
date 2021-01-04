@@ -11,9 +11,9 @@ public class TestAntidoto {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestAntidoto.txt");
 
-    private String getEquipmentInfo(){
+    private String getEquipmentInfo(int id){
         for(Equipamento e:gameManager.getEquipments()){
-            if(e.getId()== -1){
+            if(e.getId()== id){
                 return e.getInfo();
             }
         }
@@ -23,7 +23,7 @@ public class TestAntidoto {
     @Test
     public void antidotoCheioInfo(){
         gameManager.startGame(fich);
-        Assert.assertEquals("Antídoto | 1",getEquipmentInfo());
+        Assert.assertEquals("Antídoto | 1",getEquipmentInfo(-1));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class TestAntidoto {
         curaEnvenenado();
         Assert.assertTrue(gameManager.move(3, 1, 2, 1));
         Assert.assertTrue(gameManager.move(2, 2, 3, 2));
-        Assert.assertEquals("Antídoto | 0", getEquipmentInfo());
+        Assert.assertEquals("Antídoto | 0", getEquipmentInfo(-1));
     }
 
     @Test

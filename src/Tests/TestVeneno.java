@@ -11,9 +11,9 @@ public class TestVeneno {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestVeneno.txt");
 
-    private String getEquipmentInfo(){
+    private String getEquipmentInfo(int id){
         for(Equipamento e:gameManager.getEquipments()){
-            if(e.getId()== -1){
+            if(e.getId()== id){
                 return e.getInfo();
             }
         }
@@ -23,7 +23,7 @@ public class TestVeneno {
     @Test
     public void venenoCheioInfo(){
         gameManager.startGame(fich);
-        Assert.assertEquals("Veneno | 1",getEquipmentInfo());
+        Assert.assertEquals("Veneno | 1",getEquipmentInfo(-1));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class TestVeneno {
         gameManager.startGame(fich);
         apanhaVenenoSobrevive();
         Assert.assertTrue(gameManager.move(2, 2, 2, 1));
-        Assert.assertEquals("Veneno | 0",getEquipmentInfo());
+        Assert.assertEquals("Veneno | 0",getEquipmentInfo(-1));
 
     }
 

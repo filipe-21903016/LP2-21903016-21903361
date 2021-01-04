@@ -1,0 +1,98 @@
+package Tests;
+
+import com.sun.xml.internal.fastinfoset.util.CharArrayArray;
+import org.junit.Assert;
+import org.junit.Test;
+import pt.ulusofona.lp2.theWalkingDEISIGame.*;
+
+import java.io.File;
+import java.util.ArrayList;
+
+public class TestTWDGameManager {
+    TWDGameManager gameManager = new TWDGameManager();
+    File fich = new File("test-files/testTWD.txt");
+
+    @Test
+    public void testGetCreature(){
+        gameManager.startGame(fich);
+        ArrayList<Creature> expected = new ArrayList<>();
+        Creature numeroUno = CreatureFactory.makeCreature(1,6,"Freddie M.",3,3);
+        Creature numeroDos = CreatureFactory.makeCreature(2,6,"Jackie Chan",3,4);
+        expected.add(numeroUno);
+        expected.add(numeroDos);
+        Assert.assertEquals(expected,gameManager.getCreatures());
+    }
+
+    @Test
+    public void testGetEquipment(){
+        gameManager.startGame(fich);
+        ArrayList<Equipamento> expected = new ArrayList<>();
+        Equipamento numeroUno = EquipmentFactory.makeEquipment(-1,0,4,3);
+        Equipamento numeroDos = EquipmentFactory.makeEquipment(-2,1,2,3);
+        expected.add(numeroUno);
+        expected.add(numeroDos);
+        Assert.assertEquals(expected,gameManager.getEquipments());
+    }
+
+    @Test
+    public void testGetWorldSize(){
+        gameManager.startGame(fich);
+        int[] expected = new int[]{7,7};
+        Assert.assertEquals(2,gameManager.getWorldSize().length);
+        Assert.assertEquals(expected[0],gameManager.getWorldSize()[0]);
+        Assert.assertEquals(expected[1],gameManager.getWorldSize()[1]);
+    }
+
+    @Test
+    public void testGetInitialTeam(){
+        gameManager.startGame(fich);
+        Assert.assertEquals(10,gameManager.getInitialTeam());
+    }
+
+    @Test
+    public void testIsInsideBounds(){
+        gameManager.startGame(fich);
+        Assert.assertFalse(gameManager.isInsideBounds(0,-1));
+        Assert.assertFalse(gameManager.isInsideBounds(-1,0));
+        Assert.assertFalse(gameManager.isInsideBounds(0,7));
+        Assert.assertFalse(gameManager.isInsideBounds(0,7));
+        Assert.assertFalse(gameManager.isInsideBounds(7,0));
+        Assert.assertFalse(gameManager.isInsideBounds(7,0));
+        Assert.assertTrue(gameManager.isInsideBounds(0,0));
+        Assert.assertTrue(gameManager.isInsideBounds(1,1));
+        Assert.assertTrue(gameManager.isInsideBounds(6,6));
+    }
+
+    @Test
+    public void testIsDay(){
+        gameManager.startGame(fich);
+        Assert.assertTrue(gameManager.isDay());
+    }
+
+    @Test
+    public void testGetEquipmentTypeId(){
+        gameManager.startGame(fich);
+        Assert.assertEquals(0,gameManager.getEquipmentTypeId(-1));
+    }
+
+    @Test
+    public void testGetEquipmentTypeId1(){
+        gameManager.startGame(fich);
+        Assert.assertEquals(1,gameManager.getEquipmentTypeId(-2));
+    }
+
+    @Test
+    public void testIsDoorToSafeHaven(){
+        gameManager.startGame(fich);
+        Assert.assertTrue(gameManager.isDoorToSafeHaven(6,6));
+    }
+
+    @Test
+    public void noDoorToSafeHaven(){
+        gameManager.startGame(fich);
+        Assert.assertFalse(gameManager.isDoorToSafeHaven(1,6));
+    }
+
+
+
+}

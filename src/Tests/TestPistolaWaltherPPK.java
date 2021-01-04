@@ -2,6 +2,7 @@ package Tests;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pt.ulusofona.lp2.theWalkingDEISIGame.Equipamento;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
@@ -10,6 +11,30 @@ public class TestPistolaWaltherPPK {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestPistolaPPK.txt");
     File fichHardcore = new File("test-files/TestPistolaHardcore.txt");
+
+    private String getEquipmentInfo(int id){
+        for(Equipamento e:gameManager.getEquipments()){
+            if(e.getId()== id){
+                return e.getInfo();
+            }
+        }
+        return "";
+    }
+
+    @Test
+    public void pistolaCom3balas(){
+        gameManager.startGame(fich);
+        Assert.assertEquals("Pistola Walther PPK | 3",getEquipmentInfo(-1));
+    }
+
+    @Test
+    public void pistolaCom2balas(){
+        gameManager.startGame(fich);
+        Assert.assertTrue(gameManager.move(3,3,2,2));
+        Assert.assertTrue(gameManager.move(1,1,2,2));
+        Assert.assertTrue(gameManager.move(2,2,1,2));
+        Assert.assertEquals("Pistola Walther PPK | 2",getEquipmentInfo(-1));
+    }
 
     @Test
     public void atacarZombieAdulto(){
