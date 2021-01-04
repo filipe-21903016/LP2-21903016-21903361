@@ -11,7 +11,7 @@ public class TestEspadaHattoriHanzo {
     File fich = new File("test-files/TestEspadaHattoriHanzo.txt");
 
     @Test
-    public void AtacarZombieAdulto(){
+    public void atacarZombieAdulto(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1,1 , 2));
@@ -21,7 +21,7 @@ public class TestEspadaHattoriHanzo {
     }
 
     @Test
-    public void CriancaAtacaZombieAdultoComEspada(){
+    public void criancaAtacaZombieAdultoComEspada(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(2, 1, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1, 1, 2));
@@ -33,7 +33,7 @@ public class TestEspadaHattoriHanzo {
     }
 
     @Test
-    public void CriancaAtacaZombieCrianca(){
+    public void criancaAtacaZombieCrianca(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(2, 1, 2, 2));
         Assert.assertTrue(gameManager.move(2, 0, 2, 1));

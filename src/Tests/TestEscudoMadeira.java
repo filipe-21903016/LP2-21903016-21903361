@@ -11,9 +11,9 @@ public class TestEscudoMadeira {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestEscudoMadeira.txt");
 
-    private String getEquipmentInfo(int id){
+    private String getEquipmentInfo(){
         for(Equipamento e:gameManager.getEquipments()){
-            if(e.getId()==id){
+            if(e.getId()== -1){
                 return e.getInfo();
             }
         }
@@ -23,7 +23,7 @@ public class TestEscudoMadeira {
     @Test
     public void escudoUtilInfo(){
         gameManager.startGame(fich);
-        Assert.assertEquals("Escudo de Madeira | 1",getEquipmentInfo(-1));
+        Assert.assertEquals("Escudo de Madeira | 1",getEquipmentInfo());
     }
 
     @Test
@@ -31,7 +31,7 @@ public class TestEscudoMadeira {
         gameManager.startGame(fich);
         defender1Ataque();
         Assert.assertTrue(gameManager.move(2,2,3,2));
-        Assert.assertEquals("Escudo de Madeira | 0",getEquipmentInfo(-1));
+        Assert.assertEquals("Escudo de Madeira | 0",getEquipmentInfo());
     }
 
     @Test

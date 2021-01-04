@@ -1,14 +1,13 @@
 package Tests;
+
 import org.junit.Assert;
-import pt.ulusofona.lp2.theWalkingDEISIGame.GameInfo;
+import org.junit.Test;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
-
-import org.junit.Test;
 import java.io.File;
-import java.util.ArrayList;
 
 public class TestMilitarZombie {
+
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/MilitarZombieTestData.txt");
 
@@ -16,7 +15,7 @@ public class TestMilitarZombie {
     public void outOfBounds1() {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(0,0,-1,0);
-        Assert.assertEquals(false,obtained);
+        Assert.assertFalse(obtained);
     }
 
     @Test
@@ -24,14 +23,14 @@ public class TestMilitarZombie {
         gameManager.startGame(fich);
 
         boolean obtained = gameManager.move(0,0,0,-1);
-        Assert.assertEquals(false,obtained);
+        Assert.assertFalse(obtained);
     }
 
     @Test
     public void outOfBounds3() {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(6,6,7,6);
-        Assert.assertEquals(false,obtained);
+        Assert.assertFalse(obtained);
     }
 
     @Test

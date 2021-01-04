@@ -12,7 +12,7 @@ public class TestPistolaWaltherPPK {
     File fichHardcore = new File("test-files/TestPistolaHardcore.txt");
 
     @Test
-    public void AtacarZombieAdulto(){
+    public void atacarZombieAdulto(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1,1 , 2));
@@ -22,7 +22,7 @@ public class TestPistolaWaltherPPK {
     }
 
     @Test
-    public void AtacarZombieVampiro(){
+    public void atacarZombieVampiro(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1,0 , 0));
@@ -32,7 +32,7 @@ public class TestPistolaWaltherPPK {
     }
 
     @Test
-    public void DisparaEm3zombies(){
+    public void disparaEm3zombies(){
         gameManager.startGame(fichHardcore);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2, 1, 3, 1));
@@ -55,7 +55,7 @@ public class TestPistolaWaltherPPK {
     }
 
     @Test
-    public void DisparaEm4zombies(){
+    public void disparaEm4zombies(){
         gameManager.startGame(fichHardcore);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2, 1, 3, 1));

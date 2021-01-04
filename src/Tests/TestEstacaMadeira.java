@@ -11,7 +11,7 @@ public class TestEstacaMadeira {
     File fich = new File("test-files/TestEstacaMadeira.txt");
 
     @Test
-    public void AtacarZombieAdulto(){
+    public void atacarZombieAdulto(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1,1 , 2));
@@ -21,7 +21,7 @@ public class TestEstacaMadeira {
     }
 
     @Test
-    public void AtacarZombievampiro(){
+    public void atacarZombievampiro(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1,0, 0));
@@ -31,7 +31,7 @@ public class TestEstacaMadeira {
     }
 
     @Test
-    public void DoubleKillVampiroEZombie(){
+    public void doubleKillVampiroEZombie(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1,1, 2));

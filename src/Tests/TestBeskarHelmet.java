@@ -6,8 +6,6 @@ import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
 
-import java.io.File;
-
 public class TestBeskarHelmet {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestBeskarHelmet.txt");
@@ -35,7 +33,7 @@ public class TestBeskarHelmet {
     }
 
     @Test
-    public void DefendeUmAtaqueZombie(){
+    public void defendeUmAtaqueZombie(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2,1,2,2));
@@ -45,7 +43,7 @@ public class TestBeskarHelmet {
     }
 
     @Test
-    public void AtacaZombieUmaVez(){
+    public void atacaZombieUmaVez(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2,1,3,1));
@@ -56,7 +54,7 @@ public class TestBeskarHelmet {
     }
 
     @Test
-    public void DefendeMultiplosAtaques(){
+    public void defendeMultiplosAtaques(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2,1,2,2));
@@ -68,7 +66,7 @@ public class TestBeskarHelmet {
     }
 
     @Test
-    public void AtacaZombieMultiplasVezes(){
+    public void atacaZombieMultiplasVezes(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2,1,3,1));
@@ -82,7 +80,7 @@ public class TestBeskarHelmet {
     }
 
     @Test
-    public void AtacaEDefende(){
+    public void atacaEDefende(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2,1,2,2));

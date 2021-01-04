@@ -7,15 +7,13 @@ import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
 
-import java.io.File;
-
 public class TestAntidoto {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestAntidoto.txt");
 
-    private String getEquipmentInfo(int id){
+    private String getEquipmentInfo(){
         for(Equipamento e:gameManager.getEquipments()){
-            if(e.getId()==id){
+            if(e.getId()== -1){
                 return e.getInfo();
             }
         }
@@ -25,7 +23,7 @@ public class TestAntidoto {
     @Test
     public void antidotoCheioInfo(){
         gameManager.startGame(fich);
-        Assert.assertEquals("Antídoto | 1",getEquipmentInfo(-1));
+        Assert.assertEquals("Antídoto | 1",getEquipmentInfo());
     }
 
     @Test
@@ -34,7 +32,7 @@ public class TestAntidoto {
         curaEnvenenado();
         Assert.assertTrue(gameManager.move(3, 1, 2, 1));
         Assert.assertTrue(gameManager.move(2, 2, 3, 2));
-        Assert.assertEquals("Antídoto | 0", getEquipmentInfo(-1));
+        Assert.assertEquals("Antídoto | 0", getEquipmentInfo());
     }
 
     @Test

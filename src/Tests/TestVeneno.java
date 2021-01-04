@@ -2,7 +2,6 @@ package Tests;
 
 import org.junit.Assert;
 import org.junit.Test;
-import pt.ulusofona.lp2.theWalkingDEISIGame.Creature;
 import pt.ulusofona.lp2.theWalkingDEISIGame.Equipamento;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
@@ -12,9 +11,9 @@ public class TestVeneno {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestVeneno.txt");
 
-    private String getEquipmentInfo(int id){
+    private String getEquipmentInfo(){
         for(Equipamento e:gameManager.getEquipments()){
-            if(e.getId()==id){
+            if(e.getId()== -1){
                 return e.getInfo();
             }
         }
@@ -24,7 +23,7 @@ public class TestVeneno {
     @Test
     public void venenoCheioInfo(){
         gameManager.startGame(fich);
-        Assert.assertEquals("Veneno | 1",getEquipmentInfo(-1));
+        Assert.assertEquals("Veneno | 1",getEquipmentInfo());
     }
 
     @Test
@@ -32,7 +31,7 @@ public class TestVeneno {
         gameManager.startGame(fich);
         apanhaVenenoSobrevive();
         Assert.assertTrue(gameManager.move(2, 2, 2, 1));
-        Assert.assertEquals("Veneno | 0",getEquipmentInfo(-1));
+        Assert.assertEquals("Veneno | 0",getEquipmentInfo());
 
     }
 

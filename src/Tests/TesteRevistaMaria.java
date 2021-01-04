@@ -1,13 +1,10 @@
 package Tests;
+
 import org.junit.Assert;
-import pt.ulusofona.lp2.theWalkingDEISIGame.GameInfo;
+import org.junit.Test;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
-
-import org.junit.Test;
-
 import java.io.File;
-import java.util.ArrayList;
 
 public class TesteRevistaMaria {
     TWDGameManager gameManager = new TWDGameManager();
