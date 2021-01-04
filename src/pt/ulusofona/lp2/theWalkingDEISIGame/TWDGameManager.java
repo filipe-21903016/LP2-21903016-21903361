@@ -286,14 +286,6 @@ public class TWDGameManager {
                 gameInfo.saveMove(xO+" : "+yO+" : "+xD+" : "+yD);
             }
 
-            /*//TODO REMOVE
-            for(Creature c:getCreatures()){
-                System.out.println(c);
-            }
-            System.out.println("\n");
-            //________________*/
-
-
             return obtained;
         }
         return false;

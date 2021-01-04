@@ -75,10 +75,6 @@ public abstract class Equipamento {
         this.picked= false;
     }
 
-    public boolean isPicked() {
-        return picked;
-    }
-
     public boolean isOffensive() {
         return offensive;
     }
