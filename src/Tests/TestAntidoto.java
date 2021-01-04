@@ -2,6 +2,7 @@ package Tests;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pt.ulusofona.lp2.theWalkingDEISIGame.Equipamento;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
@@ -11,6 +12,30 @@ import java.io.File;
 public class TestAntidoto {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestAntidoto.txt");
+
+    private String getEquipmentInfo(int id){
+        for(Equipamento e:gameManager.getEquipments()){
+            if(e.getId()==id){
+                return e.getInfo();
+            }
+        }
+        return "";
+    }
+
+    @Test
+    public void antidotoCheioInfo(){
+        gameManager.startGame(fich);
+        Assert.assertEquals("Antídoto | 1",getEquipmentInfo(-1));
+    }
+
+    @Test
+    public void antidotoVazioInfo(){
+        gameManager.startGame(fich);
+        curaEnvenenado();
+        Assert.assertTrue(gameManager.move(3, 1, 2, 1));
+        Assert.assertTrue(gameManager.move(2, 2, 3, 2));
+        Assert.assertEquals("Antídoto | 0", getEquipmentInfo(-1));
+    }
 
     @Test
     public void curaEnvenenado(){
@@ -39,7 +64,7 @@ public class TestAntidoto {
     }
 
     @Test
-    public void EnvenenadoDefendeCura(){
+    public void envenenadoDefendeCura(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(6, 6, 6, 5));
         Assert.assertTrue(gameManager.move(1, 1,3 , 1));
@@ -51,7 +76,7 @@ public class TestAntidoto {
     }
 
     @Test
-    public void EnvenenadoDefendeCuraEMorre(){
+    public void envenenadoDefendeCuraEMorre(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(6, 6, 6, 5));
         Assert.assertTrue(gameManager.move(1, 1,3 , 1));

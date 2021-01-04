@@ -28,7 +28,7 @@ public class Veneno extends Equipamento {
     }
 
     @Override
-    String getInfo() {
+    public String getInfo() {
         if (used) {
             return titulo + " | 0";
         }else{

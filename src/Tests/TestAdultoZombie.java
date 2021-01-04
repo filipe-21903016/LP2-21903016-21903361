@@ -1,5 +1,6 @@
 package Tests;
 import org.junit.Assert;
+import pt.ulusofona.lp2.theWalkingDEISIGame.Creature;
 import pt.ulusofona.lp2.theWalkingDEISIGame.GameInfo;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
@@ -12,6 +13,33 @@ import java.util.ArrayList;
 public class TestAdultoZombie {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/ZombieTestData.txt");
+
+    private String getToString(int id){
+        for(Creature c:gameManager.getCreatures()){
+            if(c.getId()==1){
+                return c.toString();
+            }
+        }
+        return "";
+    }
+
+    @Test
+    public void adultoZombieToString(){
+        gameManager.startGame(fich);
+        Assert.assertEquals("1 | Adulto (Zombie) | Os Outros | John Cena 0 @ (3, 3)",getToString(1));
+    }
+
+
+    @Test
+    public void adultoZombieMorreuToString(){
+        gameManager.startGame(fich);
+        Assert.assertTrue(gameManager.move(3,3,4,4));
+        Assert.assertTrue(gameManager.move(3,4,3,5));
+        Assert.assertTrue(gameManager.move(4,4,3,5));
+        Assert.assertEquals("1 | Adulto (Zombie) | Os Outros | John Cena 0 @ RIP",getToString(1));
+
+    }
+
 
     @Test
     public void outOfBounds1() {
@@ -127,7 +155,7 @@ public class TestAdultoZombie {
         //two spaces down
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(3,3,3,5);
-        Assert.assertEquals(true,obtained);
+        Assert.assertFalse(obtained);
     }
 
     @Test

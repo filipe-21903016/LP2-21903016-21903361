@@ -10,7 +10,7 @@ public class GarrafaDeLixivia extends Equipamento {
     }
 
     @Override
-    String getInfo() {
+    public String getInfo() {
         return titulo + " | " + uses;
     }
 

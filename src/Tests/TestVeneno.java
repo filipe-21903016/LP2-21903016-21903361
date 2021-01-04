@@ -2,6 +2,8 @@ package Tests;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pt.ulusofona.lp2.theWalkingDEISIGame.Creature;
+import pt.ulusofona.lp2.theWalkingDEISIGame.Equipamento;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
@@ -10,8 +12,32 @@ public class TestVeneno {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestVeneno.txt");
 
+    private String getEquipmentInfo(int id){
+        for(Equipamento e:gameManager.getEquipments()){
+            if(e.getId()==id){
+                return e.getInfo();
+            }
+        }
+        return "";
+    }
+
     @Test
-    public void ApanhaVenenoMorre(){
+    public void venenoCheioInfo(){
+        gameManager.startGame(fich);
+        Assert.assertEquals("Veneno | 1",getEquipmentInfo(-1));
+    }
+
+    @Test
+    public void venenoVazio(){
+        gameManager.startGame(fich);
+        apanhaVenenoSobrevive();
+        Assert.assertTrue(gameManager.move(2, 2, 2, 1));
+        Assert.assertEquals("Veneno | 0",getEquipmentInfo(-1));
+
+    }
+
+    @Test
+    public void apanhaVenenoMorre(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2, 1, 3, 1));
@@ -26,7 +52,7 @@ public class TestVeneno {
     }
 
     @Test
-    public void ApanhaVenenoSobrevive(){
+    public void apanhaVenenoSobrevive(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2, 1, 3, 1));
@@ -36,7 +62,7 @@ public class TestVeneno {
     }
 
     @Test
-    public void ApanhaVenenoDefende(){
+    public void apanhaVenenoDefende(){
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2, 1, 2, 2));
@@ -46,7 +72,7 @@ public class TestVeneno {
     }
 
     @Test
-    public void ApanhaVenenoDefendeEMorre() {
+    public void apanhaVenenoDefendeEMorre() {
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2, 1, 2, 2));
@@ -59,7 +85,7 @@ public class TestVeneno {
     }
 
     @Test
-    public void ZombieApanhaVeneno() {
+    public void aombieApanhaVeneno() {
         gameManager.startGame(fich);
         Assert.assertFalse(gameManager.move(2, 1, 2, 2));
     }

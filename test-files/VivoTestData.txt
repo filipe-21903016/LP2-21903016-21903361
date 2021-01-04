@@ -5,8 +5,9 @@
 2 : 6 : Daniel LaRusso : 0 : 0
 3 : 6 : Johnny Lawrence : 6 : 6
 4 : 1 : Paciente Zero : 2 : 0
-2
+3
 -1 : 0 : 2 : 5
 -2 : 1 : 1 : 0
+-3 : 8 : 3 : 4
 1
 4 : 4

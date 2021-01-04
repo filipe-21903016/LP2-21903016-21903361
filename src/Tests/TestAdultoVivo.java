@@ -1,5 +1,6 @@
 package Tests;
 import org.junit.Assert;
+import pt.ulusofona.lp2.theWalkingDEISIGame.Creature;
 import pt.ulusofona.lp2.theWalkingDEISIGame.GameInfo;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
@@ -10,9 +11,46 @@ import java.io.File;
 import java.util.ArrayList;
 
 
+
+
 public class TestAdultoVivo {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/VivoTestData.txt");
+
+
+    private String getToString(int id){
+        for(Creature c:gameManager.getCreatures()){
+            if(c.getId()==1){
+                return c.toString();
+            }
+        }
+        return "";
+    }
+
+
+    @Test
+    public void adultoVivoToString(){
+        gameManager.startGame(fich);
+        Assert.assertEquals("1 | Adulto (Vivo) | Os Vivos | Mihagi 0 @ (3, 3)",getToString(1));
+    }
+
+    @Test
+    public void adultoVivoTurnedToString(){
+        gameManager.startGame(fich);
+        Assert.assertTrue(gameManager.move(3,3,3,1));
+        Assert.assertTrue(gameManager.move(2,0,3,1));
+        Assert.assertEquals("1 | Adulto (Zombie) | Os Outros | Mihagi 0 @ (3, 1)",getToString(1));
+    }
+
+    @Test
+    public void adultoVivoMorreuToString(){
+        gameManager.startGame(fich);
+        Assert.assertTrue(gameManager.move(3,3,3,4));
+        Assert.assertTrue(gameManager.move(2,0,1,0));
+        Assert.assertTrue(gameManager.move(0,0,1,1));
+        Assert.assertEquals("1 | Adulto (Vivo) | Os Vivos | Mihagi 1 @ RIP",getToString(1));
+    }
+
 
     @Test
     public void outOfBounds1() {
@@ -32,7 +70,7 @@ public class TestAdultoVivo {
     public void outOfBounds3() {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(6,6,7,6);
-        Assert.assertEquals(false,obtained);
+        Assert.assertFalse(obtained);
     }
 
     @Test
@@ -120,7 +158,7 @@ public class TestAdultoVivo {
         //one space down
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(3,3,3,4);
-        Assert.assertEquals(true,obtained);
+        Assert.assertTrue(obtained);
     }
 
     @Test
@@ -128,7 +166,7 @@ public class TestAdultoVivo {
         //two spaces down
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(3,3,3,5);
-        Assert.assertEquals(true,obtained);
+        Assert.assertFalse(obtained);
     }
 
     @Test

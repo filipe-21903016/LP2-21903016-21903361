@@ -27,7 +27,7 @@ public class Antidoto extends Equipamento {
     }
 
     @Override
-    String getInfo() {
+    public String getInfo() {
         if (used) {
             return titulo + " | 0";
         }else{

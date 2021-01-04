@@ -2,6 +2,7 @@ package Tests;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pt.ulusofona.lp2.theWalkingDEISIGame.Equipamento;
 import pt.ulusofona.lp2.theWalkingDEISIGame.EscudoMadeira;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 import java.io.File;
@@ -9,6 +10,29 @@ import java.io.File;
 public class TestEscudoMadeira {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestEscudoMadeira.txt");
+
+    private String getEquipmentInfo(int id){
+        for(Equipamento e:gameManager.getEquipments()){
+            if(e.getId()==id){
+                return e.getInfo();
+            }
+        }
+        return "";
+    }
+
+    @Test
+    public void escudoUtilInfo(){
+        gameManager.startGame(fich);
+        Assert.assertEquals("Escudo de Madeira | 1",getEquipmentInfo(-1));
+    }
+
+    @Test
+    public void escudoPartidoInfo(){
+        gameManager.startGame(fich);
+        defender1Ataque();
+        Assert.assertTrue(gameManager.move(2,2,3,2));
+        Assert.assertEquals("Escudo de Madeira | 0",getEquipmentInfo(-1));
+    }
 
     @Test
     public void defender1Ataque(){

@@ -40,7 +40,7 @@ public abstract class Equipamento {
         return titulo;
     }
 
-    String getInfo() {
+    public String getInfo() {
         return titulo;
     }
 

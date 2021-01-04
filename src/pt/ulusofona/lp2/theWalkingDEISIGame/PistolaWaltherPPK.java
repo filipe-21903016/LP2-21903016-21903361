@@ -11,7 +11,7 @@ public class PistolaWaltherPPK extends Equipamento {
 
 
     @Override
-    String getInfo() {
+    public String getInfo() {
         return titulo + " | " + bullets;
     }
 
