@@ -247,7 +247,7 @@ public class TWDGameManager {
                 return false;
             }
 
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | NullPointerException | NumberFormatException e) {
             return false;
         }
         return true;

@@ -61,7 +61,6 @@ public abstract class Equipamento {
         this.posY = posY;
     }
 
-
     @Override
     public String toString() {
         return titulo;
