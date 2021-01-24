@@ -3,8 +3,10 @@ package Tests;
 import org.junit.Assert;
 import org.junit.Test;
 import pt.ulusofona.lp2.theWalkingDEISIGame.EscudoMadeira;
+import pt.ulusofona.lp2.theWalkingDEISIGame.InvalidTWDInitialFileException;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class TestEspadaHattoriHanzo {
     TWDGameManager gameManager = new TWDGameManager();
@@ -21,7 +23,7 @@ public class TestEspadaHattoriHanzo {
     }
 
     @Test
-    public void criancaAtacaZombieAdultoComEspada(){
+    public void criancaAtacaZombieAdultoComEspada() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(2, 1, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1, 1, 2));
@@ -33,7 +35,7 @@ public class TestEspadaHattoriHanzo {
     }
 
     @Test
-    public void criancaAtacaZombieCrianca(){
+    public void criancaAtacaZombieCrianca()throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(2, 1, 2, 2));
         Assert.assertTrue(gameManager.move(2, 0, 2, 1));

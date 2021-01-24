@@ -3,9 +3,11 @@ package Tests;
 import org.junit.Assert;
 import org.junit.Test;
 import pt.ulusofona.lp2.theWalkingDEISIGame.Creature;
+import pt.ulusofona.lp2.theWalkingDEISIGame.InvalidTWDInitialFileException;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
@@ -284,42 +286,42 @@ public class TestAdultoVivo {
     }
 
     @Test
-    public void moveUpWithBlockedPath() {
+    public void moveUpWithBlockedPath() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(3, 4, 3, 2);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void moveDownWithBlockedPath() {
+    public void moveDownWithBlockedPath() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(3, 2, 3, 4);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void moveDiagonalWithBlockedPath() {
+    public void moveDiagonalWithBlockedPath() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(2, 2, 4, 4);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void moveWithBlockedPathEquipment() {
+    public void moveWithBlockedPathEquipment() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(2, 4,2, 6);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void moveWithSafeHaven() {
+    public void moveWithSafeHaven() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(2, 0, 2, 2);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void mataZombieComEspada(){
+    public void mataZombieComEspada() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         gameManager.move(0,0,1,0);//apanha espada
         gameManager.move(2,0,1,1);
@@ -328,7 +330,7 @@ public class TestAdultoVivo {
     }
 
     @Test
-    public void mata3zombies(){
+    public void mata3zombies() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(new File("test-files/AdultoSamuraiVs3Zombies.txt"));
         gameManager.move(3,3,4,2);
         gameManager.move(3,2,3,3);

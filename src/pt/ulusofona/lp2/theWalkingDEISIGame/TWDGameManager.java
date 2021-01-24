@@ -27,9 +27,9 @@ public class TWDGameManager {
                 lines.add(scanner.nextLine());
             }
 
-            if(!lines.get(0).equals("+SAVED+")){
+            /*if(!lines.get(0).equals("+SAVED+")){
                 return startGame(fich);
-            }
+            }*/
             lines.remove(0);
 
             int currentLine = 0;
@@ -154,7 +154,7 @@ public class TWDGameManager {
         }
     }
 
-    public boolean startGame(File ficheiroInicial) {
+    public void startGame(File ficheiroInicial) throws InvalidTWDInitialFileException,FileNotFoundException {
         gameInfo.reset();
         try {
             Scanner scanner = new Scanner(ficheiroInicial);
@@ -244,13 +244,16 @@ public class TWDGameManager {
             getInitialTeam();
 
             if (getInitialTeam() != getCurrentTeamId()) {
-                return false;
+                throw new InvalidTWDInitialFileException("Equipa que joga e equipa que inicia não são iguais");
+            }
+
+            if (!validNrOfCreatures() || !validCreatureDefinition()){
+                throw new InvalidTWDInitialFileException();
             }
 
         } catch (FileNotFoundException | NullPointerException | NumberFormatException e) {
-            return false;
+            e.getLocalizedMessage();
         }
-        return true;
     }
 
     public int[] getWorldSize() {
@@ -465,6 +468,29 @@ public class TWDGameManager {
             initialGame.append(line).append("\n");
         }
         return initialGame;
+    }
+
+    public boolean validNrOfCreatures(){
+        if (getCreatures().size() >= 2){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validCreatureDefinition(){
+        for (Creature creature : getCreatures()){
+            if (String.valueOf(creature.getId()).equals(" ") || String.valueOf(creature.getTeamId()).equals(" ") ||
+                    creature.getNome().equals(" ") ||
+                    String.valueOf(creature.getPosX()).equals(" ")|| String.valueOf(creature.getPosY()).equals(" ") ) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String getErroneousLine(){
+        //TODO implementar esta funcao
+        return "";
     }
 
 }
