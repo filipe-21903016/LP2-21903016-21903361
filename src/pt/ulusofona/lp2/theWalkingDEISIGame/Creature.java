@@ -243,5 +243,7 @@ public abstract class Creature{
         return teamId==10;
     }
 
-
+    public int getEquipamentos() {
+        return equipamentos;
+    }
 }

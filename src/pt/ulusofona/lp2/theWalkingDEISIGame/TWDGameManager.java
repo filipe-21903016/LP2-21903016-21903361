@@ -519,13 +519,13 @@ public class TWDGameManager {
                 .filter(c -> !c.isVivo())
                 .map(creature -> (Zombie) creature)
                 .forEach(c -> {
-                    destroyedByType[c.getIdType()]++;
+                    destroyedByType[c.getIdType()] += c.getEquipamentos();
                     nrCreatures[c.getIdType()]++;
                 });
 
         List<String> resposta4 = gameInfo.getCreatures().stream()
                                         .filter(c -> !c.isVivo())
-                                        .map(creature -> creature.getIdType())
+                                        .map(Creature::getIdType)
                                         .distinct()
                                         .sorted((n1,n2) -> destroyedByType[n2] - destroyedByType[n1])
                                         .map(n -> nomesCriatura[n]+":"+nrCreatures[n]+":"+destroyedByType[n])
