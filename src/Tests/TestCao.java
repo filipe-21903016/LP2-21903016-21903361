@@ -2,9 +2,11 @@ package Tests;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pt.ulusofona.lp2.theWalkingDEISIGame.InvalidTWDInitialFileException;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 
 public class TestCao {
@@ -12,187 +14,187 @@ public class TestCao {
     File fich = new File("test-files/CaoTestData.txt");
 
     @Test
-    public void outOfBounds1() {
+    public void outOfBounds1() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(0,0,-1,-1);
+        boolean obtained = gameManager.move(0, 0, -1, -1);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void outOfBounds2() {
+    public void outOfBounds2() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(6,6,5,7);
+        boolean obtained = gameManager.move(6, 6, 5, 7);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void outOfBounds3() {
+    public void outOfBounds3() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(6,6,7,7);
+        boolean obtained = gameManager.move(6, 6, 7, 7);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void outOfBounds4() {
+    public void outOfBounds4() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(0,0,1,-1);
+        boolean obtained = gameManager.move(0, 0, 1, -1);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void oneRight(){
+    public void oneRight() throws InvalidTWDInitialFileException, FileNotFoundException {
         //1 Space to right
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,4,3);
+        boolean obtained = gameManager.move(3, 3, 4, 3);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void oneLeft() {
+    public void oneLeft() throws InvalidTWDInitialFileException, FileNotFoundException {
         //1 space left
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,2,3);
+        boolean obtained = gameManager.move(3, 3, 2, 3);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void oneUp() {
+    public void oneUp() throws InvalidTWDInitialFileException, FileNotFoundException {
         //one space up
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,3,2);
+        boolean obtained = gameManager.move(3, 3, 3, 2);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void oneDown() {
+    public void oneDown() throws InvalidTWDInitialFileException, FileNotFoundException {
         //one space down
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,3,4);
+        boolean obtained = gameManager.move(3, 3, 3, 4);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void oneUpRightDiagonal() {
+    public void oneUpRightDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,4,2);
+        boolean obtained = gameManager.move(3, 3, 4, 2);
         Assert.assertTrue(obtained);
     }
 
     @Test
-    public void twoRightUpDiagonal() {
+    public void twoRightUpDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,5,1);
+        boolean obtained = gameManager.move(3, 3, 5, 1);
         Assert.assertTrue(obtained);
     }
 
     @Test
-    public void threeRightUpDiagonal() {
+    public void threeRightUpDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,6,0);
+        boolean obtained = gameManager.move(3, 3, 6, 0);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void oneLeftUpDiagonal() {
+    public void oneLeftUpDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,2,2);
+        boolean obtained = gameManager.move(3, 3, 2, 2);
         Assert.assertTrue(obtained);
     }
 
     @Test
-    public void twoLeftUpDiagonal() {
+    public void twoLeftUpDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,1,1);
+        boolean obtained = gameManager.move(3, 3, 1, 1);
         Assert.assertTrue(obtained);
     }
 
     @Test
-    public void threeLeftUpDiagonal() {
+    public void threeLeftUpDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,0,0);
+        boolean obtained = gameManager.move(3, 3, 0, 0);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void oneDownRightDiagonal() {
+    public void oneDownRightDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         //one space in right up diagonal
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,4,4);
+        boolean obtained = gameManager.move(3, 3, 4, 4);
         Assert.assertTrue(obtained);
     }
 
     @Test
-    public void twoRightDownDiagonal() {
+    public void twoRightDownDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,5,5);
+        boolean obtained = gameManager.move(3, 3, 5, 5);
         Assert.assertTrue(obtained);
     }
 
     @Test
-    public void threeRightDownDiagonal() {
+    public void threeRightDownDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,6,6);
+        boolean obtained = gameManager.move(3, 3, 6, 6);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void oneLeftDownDiagonal() {
+    public void oneLeftDownDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,2,4);
+        boolean obtained = gameManager.move(3, 3, 2, 4);
         Assert.assertTrue(obtained);
     }
 
     @Test
-    public void twoLeftDownDiagonal() {
+    public void twoLeftDownDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,5,1);
+        boolean obtained = gameManager.move(3, 3, 5, 1);
         Assert.assertTrue(obtained);
     }
 
     @Test
-    public void threeLeftDownDiagonal() {
+    public void threeLeftDownDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(3,3,0,6);
+        boolean obtained = gameManager.move(3, 3, 0, 6);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void moveDiagonalWithBlockedPath() {
+    public void moveDiagonalWithBlockedPath() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(2,2,4,4);
+        boolean obtained = gameManager.move(2, 2, 4, 4);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void moveDiagonalWithBlockedPath2() {
+    public void moveDiagonalWithBlockedPath2() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(4, 4, 2, 2);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void moveDiagonalWithBlockedPath3() {
+    public void moveDiagonalWithBlockedPath3() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(4, 2, 2, 4);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void moveDiagonalWithBlockedPath4() {
+    public void moveDiagonalWithBlockedPath4() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(2, 4, 4, 2);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void moveWithBlockedPathEquipment() {
+    public void moveWithBlockedPathEquipment() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
-        boolean obtained = gameManager.move(4, 1,6, 3);
+        boolean obtained = gameManager.move(4, 1, 6, 3);
         Assert.assertFalse(obtained);
     }
 
     @Test
-    public void moveWithSafeHaven() {
+    public void moveWithSafeHaven() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         boolean obtained = gameManager.move(1, 2, 3, 0);
         Assert.assertFalse(obtained);

@@ -3,9 +3,11 @@ package Tests;
 import org.junit.Assert;
 import org.junit.Test;
 import pt.ulusofona.lp2.theWalkingDEISIGame.Equipamento;
+import pt.ulusofona.lp2.theWalkingDEISIGame.InvalidTWDInitialFileException;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class TestAntidoto {
     TWDGameManager gameManager = new TWDGameManager();
@@ -21,13 +23,13 @@ public class TestAntidoto {
     }
 
     @Test
-    public void antidotoCheioInfo(){
+    public void antidotoCheioInfo() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertEquals("Antídoto | 1",getEquipmentInfo(-1));
     }
 
     @Test
-    public void antidotoVazioInfo(){
+    public void antidotoVazioInfo()throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         curaEnvenenado();
         Assert.assertTrue(gameManager.move(3, 1, 2, 1));
@@ -36,7 +38,7 @@ public class TestAntidoto {
     }
 
     @Test
-    public void curaEnvenenado(){
+    public void curaEnvenenado()throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 3, 2));
         Assert.assertTrue(gameManager.move(1, 1,3 , 1));
@@ -46,7 +48,7 @@ public class TestAntidoto {
     }
 
     @Test
-    public void curaEnvenenadoEsperaTresTurnos(){
+    public void curaEnvenenadoEsperaTresTurnos()throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 3, 2));
         Assert.assertTrue(gameManager.move(1, 1,3 , 1));
@@ -62,7 +64,7 @@ public class TestAntidoto {
     }
 
     @Test
-    public void envenenadoDefendeCura(){
+    public void envenenadoDefendeCura()throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(6, 6, 6, 5));
         Assert.assertTrue(gameManager.move(1, 1,3 , 1));
@@ -74,7 +76,7 @@ public class TestAntidoto {
     }
 
     @Test
-    public void envenenadoDefendeCuraEMorre(){
+    public void envenenadoDefendeCuraEMorre()throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(6, 6, 6, 5));
         Assert.assertTrue(gameManager.move(1, 1,3 , 1));
@@ -92,7 +94,7 @@ public class TestAntidoto {
     }
 
     @Test
-    public void apanhaAntidotoPrimeiro(){
+    public void apanhaAntidotoPrimeiro()throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         Assert.assertFalse(gameManager.move(3, 3, 2, 2));
     }

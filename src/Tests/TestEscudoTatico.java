@@ -2,16 +2,18 @@ package Tests;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pt.ulusofona.lp2.theWalkingDEISIGame.InvalidTWDInitialFileException;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class TestEscudoTatico {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestEscudoTatico.txt");
 
     @Test
-    public void defender1Ataque(){
+    public void defender1Ataque() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1, 2, 2));
@@ -20,7 +22,7 @@ public class TestEscudoTatico {
     }
 
     @Test
-    public void defenderMultiplosAtaques(){
+    public void defenderMultiplosAtaques() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1, 2, 2));

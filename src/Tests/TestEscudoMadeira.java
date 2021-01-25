@@ -4,8 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import pt.ulusofona.lp2.theWalkingDEISIGame.Equipamento;
 import pt.ulusofona.lp2.theWalkingDEISIGame.EscudoMadeira;
+import pt.ulusofona.lp2.theWalkingDEISIGame.InvalidTWDInitialFileException;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class TestEscudoMadeira {
     TWDGameManager gameManager = new TWDGameManager();
@@ -21,13 +23,13 @@ public class TestEscudoMadeira {
     }
 
     @Test
-    public void escudoUtilInfo(){
+    public void escudoUtilInfo()throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertEquals("Escudo de Madeira | 1",getEquipmentInfo(-1));
     }
 
     @Test
-    public void escudoPartidoInfo(){
+    public void escudoPartidoInfo()throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         defender1Ataque();
         Assert.assertTrue(gameManager.move(2,2,3,2));
@@ -35,7 +37,7 @@ public class TestEscudoMadeira {
     }
 
     @Test
-    public void defender1Ataque(){
+    public void defender1Ataque()throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1, 2, 2));
@@ -44,7 +46,7 @@ public class TestEscudoMadeira {
     }
 
     @Test
-    public void defender2Ataques(){
+    public void defender2Ataques()throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1, 2, 2));
@@ -56,7 +58,7 @@ public class TestEscudoMadeira {
     }
 
     @Test
-    public void usoMilitar(){
+    public void usoMilitar()throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         gameManager.move(2,1,2,2);
         EscudoMadeira escudoMadeira =(EscudoMadeira) gameManager.gameInfo.getEquipmentById(-1);
@@ -64,7 +66,7 @@ public class TestEscudoMadeira {
     }
 
     @Test
-    public void usoNaoMilitar(){
+    public void usoNaoMilitar()throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         gameManager.move(3,3,2,2);
         EscudoMadeira escudoMadeira =(EscudoMadeira) gameManager.gameInfo.getEquipmentById(-1);

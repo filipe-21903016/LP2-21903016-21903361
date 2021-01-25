@@ -13,7 +13,7 @@ public class TestEspadaHattoriHanzo {
     File fich = new File("test-files/TestEspadaHattoriHanzo.txt");
 
     @Test
-    public void atacarZombieAdulto(){
+    public void atacarZombieAdulto() throws InvalidTWDInitialFileException,FileNotFoundException{
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1,1 , 2));

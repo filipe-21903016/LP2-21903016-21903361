@@ -11,6 +11,10 @@ import java.util.function.Function;
 /*trying to figure this out*/
 
 public class TWDGameManager {
+    ArrayList<String> tempCreature = new ArrayList<>();
+    int nrCreatures;
+
+
     public TWDGameManager() {
     }
 
@@ -190,12 +194,15 @@ public class TWDGameManager {
             for (int i = 0; i < data.length; i++) {
                 allLine.append(data[i]);
             }
-            int nrCreatures = Integer.parseInt(allLine.toString());
+            nrCreatures = Integer.parseInt(allLine.toString());
+
             currentLine++;
 
             int maxLine = currentLine + nrCreatures;
             for (; currentLine < maxLine; currentLine++) {
                 data = lines.get(currentLine).split(" : ");
+                //put data into tempCreature
+                tempCreature.add(lines.get(currentLine));
                 int idCreature = Integer.parseInt(data[0]);
                 int idType = Integer.parseInt(data[1]);
                 String nomeCriatura = data[2].trim();
@@ -203,6 +210,13 @@ public class TWDGameManager {
                 int posY = Integer.parseInt(data[4]);
                 Creature creature = CreatureFactory.makeCreature(idCreature, idType, nomeCriatura, posX, posY);
                 gameInfo.addCreature(creature);
+            }
+            //Todo check creatures
+            if(!validNrOfCreatures()) {
+                throw new InvalidTWDInitialFileException("Invalid number of creatures");
+            }
+            if(!validCreatureDefinition()){
+                throw new InvalidTWDInitialFileException("Invalid Creature Definition");
             }
 
             data = lines.get(currentLine).split("");
@@ -471,17 +485,14 @@ public class TWDGameManager {
     }
 
     public boolean validNrOfCreatures(){
-        if (getCreatures().size() >= 2){
-            return true;
-        }
-        return false;
+        return nrCreatures>=2;
     }
 
     public boolean validCreatureDefinition(){
-        for (Creature creature : getCreatures()){
-            if (String.valueOf(creature.getId()).equals(" ") || String.valueOf(creature.getTeamId()).equals(" ") ||
-                    creature.getNome().equals(" ") ||
-                    String.valueOf(creature.getPosX()).equals(" ")|| String.valueOf(creature.getPosY()).equals(" ") ) {
+        //TODO implementar testes para esta fncao
+        for(String line : tempCreature){
+            String[] data = line.split(" : ");
+            if(data.length != 5){
                 return false;
             }
         }
@@ -489,7 +500,15 @@ public class TWDGameManager {
     }
 
     public String getErroneousLine(){
-        //TODO implementar esta funcao
+        //TODO implementar testes para esta fncao
+        if(!validCreatureDefinition()){
+            for(String line : tempCreature){
+                String[] data = line.split(" : ");
+                if(data.length!=5){
+                    return line;
+                }
+            }
+        }
         return "";
     }
 
