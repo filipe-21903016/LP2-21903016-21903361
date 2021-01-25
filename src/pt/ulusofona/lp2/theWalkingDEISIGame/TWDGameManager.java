@@ -491,7 +491,7 @@ public class TWDGameManager {
                                     .sorted((z1,z2) -> z1.getTurnCount() - z2.getTurnCount())
                                     .limit(3)
                                     .map(zombie -> zombie.getId()+":"+zombie.getNome()+":"+zombie.getTurnCount())
-                                    .collect(toList());
+                                    .collect(Collectors.toList());
         map.put("os3ZombiesMaisTramados",resposta1);
 
         List<String> resposta2 = gameInfo.getCreatures().stream()

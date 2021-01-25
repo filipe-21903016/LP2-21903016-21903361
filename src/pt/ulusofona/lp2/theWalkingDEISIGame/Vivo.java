@@ -180,5 +180,9 @@ abstract class Vivo extends Creature {
     public int getKills() {
         return kills;
     }
+
+    public void incrementKills(){
+        kills++;
+    }
 }
 

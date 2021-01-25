@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 abstract class Zombie extends Creature {
-    int turnCount = 0;
+    int turnCount;
     protected String nomeEquipa = "Os Outros";
 
     public Zombie(int idCriatura, int idType,String nome, int posX, int posY) {
@@ -69,6 +69,7 @@ abstract class Zombie extends Creature {
         if (targetEquipment.isOffensive()) {
             targetEquipment.use();
             GameInfo.getInstance().removeCreature(this);
+            target.incrementKills();
             return false;
         }
         if(!targetEquipment.isDefensive()){
