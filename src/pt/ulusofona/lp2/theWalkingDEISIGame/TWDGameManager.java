@@ -487,9 +487,9 @@ public class TWDGameManager {
         List<String> resposta1 = gameInfo.getCreatures().stream()
                                     .filter(c -> !c.isVivo())
                                     .map(creature -> (Zombie) creature)
+                                    .filter(zombie -> zombie.getTurnCount()>0)
                                     .sorted((z1,z2) -> z1.getTurnCount() - z2.getTurnCount())
                                     .limit(3)
-                                    .filter(zombie -> zombie.getTurnCount()>0)
                                     .map(zombie -> zombie.getId()+":"+zombie.getNome()+":"+zombie.getTurnCount())
                                     .collect(Collectors.toList());
 
@@ -498,12 +498,13 @@ public class TWDGameManager {
         List<String> resposta2 = gameInfo.getCreatures().stream()
                                         .filter(Creature::isVivo)
                                         .map(creature -> (Vivo) creature)
+                                        .filter(vivo -> vivo.getKills()>0)
                                         .sorted((v1,v2) -> v1.getKills() - v2.getKills())
                                         .limit(3)
-                                        .filter(vivo -> vivo.getKills()>0)
                                         .sorted((v1,v2) -> v2.getKills() - v1.getKills())
                                         .map(vivo -> vivo.getId() + ":" + vivo.getNome() + ":" + vivo.getKills())
                                         .collect(Collectors.toList());
+
         map.put("os3VivosMaisDuros",resposta2);
 
         List<String> resposta3 = new ArrayList<>();
@@ -514,6 +515,7 @@ public class TWDGameManager {
 
         List<String> resposta5 = new ArrayList<>();
         map.put("criaturasMaisEquipadas", resposta5);
+
         return map;
     }
 
