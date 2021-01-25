@@ -195,14 +195,20 @@ public class TWDGameManager {
                 allLine.append(data[i]);
             }
             nrCreatures = Integer.parseInt(allLine.toString());
-
+            if(!validNrOfCreatures()) {
+                throw new InvalidTWDInitialFileException("Invalid number of creatures");
+            }
             currentLine++;
-
             int maxLine = currentLine + nrCreatures;
             for (; currentLine < maxLine; currentLine++) {
-                data = lines.get(currentLine).split(" : ");
                 //put data into tempCreature
                 tempCreature.add(lines.get(currentLine));
+            }
+            if(!validCreatureDefinition()){
+                throw new InvalidTWDInitialFileException("Invalid Creature Definition");
+            }
+            for(String line : tempCreature){
+                data = line.split(" : ");
                 int idCreature = Integer.parseInt(data[0]);
                 int idType = Integer.parseInt(data[1]);
                 String nomeCriatura = data[2].trim();
@@ -211,13 +217,8 @@ public class TWDGameManager {
                 Creature creature = CreatureFactory.makeCreature(idCreature, idType, nomeCriatura, posX, posY);
                 gameInfo.addCreature(creature);
             }
-            //Todo check creatures
-            if(!validNrOfCreatures()) {
-                throw new InvalidTWDInitialFileException("Invalid number of creatures");
-            }
-            if(!validCreatureDefinition()){
-                throw new InvalidTWDInitialFileException("Invalid Creature Definition");
-            }
+
+
 
             data = lines.get(currentLine).split("");
             allLine = new StringBuffer();
@@ -261,11 +262,7 @@ public class TWDGameManager {
                 throw new InvalidTWDInitialFileException("Equipa que joga e equipa que inicia não são iguais");
             }
 
-            if (!validNrOfCreatures() || !validCreatureDefinition()){
-                throw new InvalidTWDInitialFileException();
-            }
-
-        } catch (FileNotFoundException | NullPointerException | NumberFormatException e) {
+        } catch (FileNotFoundException |  NumberFormatException e) {
             e.getLocalizedMessage();
         }
     }

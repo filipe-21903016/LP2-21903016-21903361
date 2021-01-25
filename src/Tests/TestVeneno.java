@@ -32,7 +32,7 @@ public class TestVeneno {
     public void venenoVazio() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         apanhaVenenoSobrevive();
-        Assert.assertTrue(gameManager.move(2, 2, 2, 1));
+        Assert.assertTrue(gameManager.move(2, 2, 1, 2));
         Assert.assertEquals("Veneno | 0",getEquipmentInfo(-1));
 
     }
