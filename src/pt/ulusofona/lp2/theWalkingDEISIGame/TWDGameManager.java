@@ -507,7 +507,15 @@ public class TWDGameManager {
 
         map.put("os3VivosMaisDuros",resposta2);
 
-        List<String> resposta3 = new ArrayList<>();
+        List<String> resposta3 = gameInfo.getEquipments().stream()
+                                        .filter(equipamento -> equipamento.getUso() > 0)
+                                        .sorted((e1,e2) -> e1.getUso() - e2.getUso())
+                                        .limit(3)
+                                        .sorted((e1,e2) -> e2.getUso() - e1.getUso())
+                                        .map(equipamento -> equipamento.getIdTipo() + " " + equipamento.getUso())
+                                        .collect(Collectors.toList());
+
+
         map.put("tiposDeEquipamentoMaisUteis",resposta3);
 
         List<String> resposta4 = new ArrayList<>();

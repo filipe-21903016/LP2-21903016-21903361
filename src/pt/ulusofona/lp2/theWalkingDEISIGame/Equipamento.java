@@ -7,6 +7,7 @@ public abstract class Equipamento {
     protected int idTipo;
     protected int posX;
     protected int posY;
+    int uso;
 
     protected boolean picked = false;
     protected boolean offensive;
@@ -83,8 +84,13 @@ public abstract class Equipamento {
     }
 
     public boolean use(){
+        uso++;
         //System.out.println(id+":"+titulo+" was used");
         return true;
+    }
+
+    public int getUso() {
+        return uso;
     }
 
     @Override
