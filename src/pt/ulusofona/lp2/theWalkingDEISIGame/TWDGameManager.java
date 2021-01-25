@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -493,6 +494,14 @@ public class TWDGameManager {
                                     .collect(toList());
         map.put("os3ZombiesMaisTramados",resposta1);
 
+        List<String> resposta2 = gameInfo.getCreatures().stream()
+                                        .filter(Creature::isVivo)
+                                        .map(creature -> (Vivo) creature)
+                                        .sorted((v1,v2) -> v1.getKills() - v2.getKills())
+                                        .limit(3)
+                                        .map(vivo -> vivo.getId() + ":" + vivo.getNome() + ":" + vivo.getKills())
+                                        .collect(Collectors.toList());
+        map.put("os3VivosMaisDuros",resposta2);
 
 
 

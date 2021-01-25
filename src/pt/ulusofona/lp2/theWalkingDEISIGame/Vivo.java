@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.theWalkingDEISIGame;
 import java.util.Objects;
 
 abstract class Vivo extends Creature {
+    int kills;
     protected Equipamento equipment;
     protected String nomeEquipa = "Os Vivos";
     protected boolean safe;
@@ -71,6 +72,7 @@ abstract class Vivo extends Creature {
         }
         equipment.use();
         GameInfo.getInstance().removeCreature(zombie); //zombie morre
+        kills++;
         return true;
     }
 
@@ -173,6 +175,10 @@ abstract class Vivo extends Creature {
 
     public boolean isSafe() {
         return safe;
+    }
+
+    public int getKills() {
+        return kills;
     }
 }
 
