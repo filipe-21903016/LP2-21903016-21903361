@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 
+import static java.util.stream.Collectors.toList;
+
 /*trying to figure this out*/
 
 public class TWDGameManager {
@@ -479,7 +481,23 @@ public class TWDGameManager {
         return initialGame;
     }
 
+    public Map<String, List<String>> getGameStatistics(){
+        HashMap<String, List<String>> map = new HashMap<>();
+        //TODO
+        List<String> resposta1 = gameInfo.getCreatures().stream()
+                                    .filter(c -> !c.isVivo())
+                                    .map(creature -> (Zombie) creature)
+                                    .sorted((z1,z2) -> z1.getTurnCount() - z2.getTurnCount())
+                                    .limit(3)
+                                    .map(zombie -> zombie.getId()+":"+zombie.getNome()+":"+zombie.getTurnCount())
+                                    .collect(toList());
+        map.put("os3ZombiesMaisTramados",resposta1);
 
+
+
+
+        return map;
+    }
 
 
 

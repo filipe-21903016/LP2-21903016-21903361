@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.theWalkingDEISIGame;
 
 abstract class Zombie extends Creature {
+    int turnCount = 0;
     protected String nomeEquipa = "Os Outros";
 
     public Zombie(int idCriatura, int idType,String nome, int posX, int posY) {
@@ -58,6 +59,7 @@ abstract class Zombie extends Creature {
                 || targetEquipment.getIdTipo() == 4 && this.idType != 3 //Revista Maria vs Zombie Nao Idoso
                 || target.getIdType() == 5 && targetEquipment.getIdTipo() == 1 && this.idType != 0) { //Crianca com espada vs Zombie Adulto
             target.turn();
+            turnCount++;
             return true;
         }
         if (targetEquipment.isDefensive() || (targetEquipment.isDefensive() && targetEquipment.isOffensive())) {
@@ -71,6 +73,7 @@ abstract class Zombie extends Creature {
         }
         if(!targetEquipment.isDefensive()){
             target.turn();
+            turnCount++;
             return true;
         }
         return false;
@@ -98,4 +101,7 @@ abstract class Zombie extends Creature {
                 + " " + equipamentos + " @ (" + posX + ", " + posY + ")";
     }
 
+    public int getTurnCount() {
+        return turnCount;
+    }
 }
