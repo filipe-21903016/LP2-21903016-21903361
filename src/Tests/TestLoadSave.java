@@ -2,9 +2,11 @@ package Tests;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pt.ulusofona.lp2.theWalkingDEISIGame.InvalidTWDInitialFileException;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class TestLoadSave {
     TWDGameManager gameManager = new TWDGameManager();
@@ -12,7 +14,7 @@ public class TestLoadSave {
 
 
     @Test
-    public void saveGame(){
+    public void saveGame() throws InvalidTWDInitialFileException, FileNotFoundException  {
         gameManager.startGame(fich);
         File save = new File("test-files/TestNewFile.txt");
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));

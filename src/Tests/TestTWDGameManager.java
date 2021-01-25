@@ -5,6 +5,7 @@ import org.junit.Test;
 import pt.ulusofona.lp2.theWalkingDEISIGame.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class TestTWDGameManager {
@@ -12,7 +13,7 @@ public class TestTWDGameManager {
     File fich = new File("test-files/testTWD.txt");
 
     @Test
-    public void testGetCreature(){
+    public void testGetCreature() throws InvalidTWDInitialFileException, FileNotFoundException  {
         gameManager.startGame(fich);
         ArrayList<Creature> expected = new ArrayList<>();
         Creature numeroUno = CreatureFactory.makeCreature(1,6,"Freddie M.",3,3);
@@ -23,7 +24,7 @@ public class TestTWDGameManager {
     }
 
     @Test
-    public void testGetEquipment(){
+    public void testGetEquipment() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         ArrayList<Equipamento> expected = new ArrayList<>();
         Equipamento numeroUno = EquipmentFactory.makeEquipment(-1,0,4,3);
@@ -34,7 +35,7 @@ public class TestTWDGameManager {
     }
 
     @Test
-    public void testGetWorldSize(){
+    public void testGetWorldSize() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         int[] expected = new int[]{7,7};
         Assert.assertEquals(2,gameManager.getWorldSize().length);
@@ -43,13 +44,13 @@ public class TestTWDGameManager {
     }
 
     @Test
-    public void testGetInitialTeam(){
+    public void testGetInitialTeam() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertEquals(10,gameManager.getInitialTeam());
     }
 
     @Test
-    public void testIsInsideBounds(){
+    public void testIsInsideBounds() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertFalse(gameManager.isInsideBounds(0,-1));
         Assert.assertFalse(gameManager.isInsideBounds(-1,0));
@@ -63,31 +64,31 @@ public class TestTWDGameManager {
     }
 
     @Test
-    public void testIsDay(){
+    public void testIsDay() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.isDay());
     }
 
     @Test
-    public void testGetEquipmentTypeId(){
+    public void testGetEquipmentTypeId() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertEquals(0,gameManager.getEquipmentTypeId(-1));
     }
 
     @Test
-    public void testGetEquipmentTypeId1(){
+    public void testGetEquipmentTypeId1() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertEquals(1,gameManager.getEquipmentTypeId(-2));
     }
 
     @Test
-    public void testIsDoorToSafeHaven(){
+    public void testIsDoorToSafeHaven() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.isDoorToSafeHaven(6,6));
     }
 
     @Test
-    public void noDoorToSafeHaven(){
+    public void noDoorToSafeHaven() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertFalse(gameManager.isDoorToSafeHaven(1,6));
     }

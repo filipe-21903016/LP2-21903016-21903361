@@ -3,16 +3,18 @@ package Tests;
 import org.junit.Assert;
 import org.junit.Test;
 import pt.ulusofona.lp2.theWalkingDEISIGame.Creature;
+import pt.ulusofona.lp2.theWalkingDEISIGame.InvalidTWDInitialFileException;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class TestLixivia {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/TestLixivia.txt");
 
     @Test
-    public void defende3Vezes() {
+    public void defende3Vezes() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3,3,2,2));
         Assert.assertTrue(gameManager.move(1,1,2,2)); //defende
@@ -30,7 +32,7 @@ public class TestLixivia {
     }
 
     @Test
-    public void defende3ETransforma(){
+    public void defende3ETransforma() throws InvalidTWDInitialFileException, FileNotFoundException {
         defende3Vezes();
         Assert.assertTrue(gameManager.move(0,1,1,0));
         Assert.assertTrue(gameManager.move(1,1,1,0));

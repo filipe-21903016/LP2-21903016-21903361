@@ -2,16 +2,18 @@ package Tests;
 import org.junit.Assert;
 import org.junit.Test;
 import pt.ulusofona.lp2.theWalkingDEISIGame.GameInfo;
+import pt.ulusofona.lp2.theWalkingDEISIGame.InvalidTWDInitialFileException;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class TestZombieVampiro {
     TWDGameManager gameManager = new TWDGameManager();
     File fich = new File("test-files/ZombieVampiroTestData.txt");
 
     @Test
-    public void outOfBounds1() {
+    public void outOfBounds1() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()){
             boolean obtained = gameManager.move(0,0,-2,0);
@@ -21,7 +23,7 @@ public class TestZombieVampiro {
 
 
     @Test
-    public void outOfBounds2() {
+    public void outOfBounds2() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(0, 0, 0, -2);
@@ -30,7 +32,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void outOfBounds3() {
+    public void outOfBounds3() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(6, 6, 8, 6);
@@ -39,7 +41,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void outOfBounds4() {
+    public void outOfBounds4() throws InvalidTWDInitialFileException, FileNotFoundException{
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(6, 6, 8, 6);
@@ -48,7 +50,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveRight(){
+    public void moveRight() throws InvalidTWDInitialFileException, FileNotFoundException {
         //2 Spaces to right
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
@@ -58,7 +60,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveLeft(){
+    public void moveLeft() throws InvalidTWDInitialFileException, FileNotFoundException {
         //2 Spaces to left
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
@@ -68,7 +70,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveUp(){
+    public void moveUp() throws InvalidTWDInitialFileException, FileNotFoundException {
         //2 Space to top
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
@@ -78,7 +80,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveDown(){
+    public void moveDown() throws InvalidTWDInitialFileException, FileNotFoundException {
         //2 Space to bottom
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
@@ -88,7 +90,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void rightUpDiagonal() {
+    public void rightUpDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 5, 1);
@@ -97,7 +99,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void leftUpDiagonal() {
+    public void leftUpDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 1, 1);
@@ -106,7 +108,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void rightDownDiagonal() {
+    public void rightDownDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 5, 5);
@@ -115,7 +117,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void leftDownDiagonal() {
+    public void leftDownDiagonal() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 3, 2);
@@ -124,7 +126,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void validMove1() {
+    public void validMove1() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 5, 1);
@@ -133,7 +135,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void validMove2() {
+    public void validMove2() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 2, 3);
@@ -142,7 +144,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void validMove3() {
+    public void validMove3() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 4, 3);
@@ -151,7 +153,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void validMove4() {
+    public void validMove4() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 3, 4);
@@ -160,7 +162,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void validMove5() {
+    public void validMove5() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 3, 4, 4);
@@ -169,7 +171,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveByDaylight() {
+    public void moveByDaylight() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         boolean expected = !gameManager.isDay();
         boolean obtained = gameManager.move(3,3,3,2);
@@ -177,7 +179,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveRightWithBlockedPath(){
+    public void moveRightWithBlockedPath() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(2, 3, 4, 3);
@@ -186,7 +188,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveLeftWithBlockedPath() {
+    public void moveLeftWithBlockedPath() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(4, 3, 2, 3);
@@ -195,7 +197,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveUpWithBlockedPath() {
+    public void moveUpWithBlockedPath() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 4, 3, 2);
@@ -204,7 +206,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveDownWithBlockedPath() {
+    public void moveDownWithBlockedPath() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(3, 2, 3, 4);
@@ -213,7 +215,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveDiagonalWithBlockedPath() {
+    public void moveDiagonalWithBlockedPath() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(2, 2, 4, 4);
@@ -222,7 +224,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveWithBlockedPathEquipment() {
+    public void moveWithBlockedPathEquipment() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(2, 4, 2, 6);
@@ -231,7 +233,7 @@ public class TestZombieVampiro {
     }
 
     @Test
-    public void moveWithSafeHaven() {
+    public void moveWithSafeHaven() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         if (!gameManager.isDay()) {
             boolean obtained = gameManager.move(2, 0, 2, 2);

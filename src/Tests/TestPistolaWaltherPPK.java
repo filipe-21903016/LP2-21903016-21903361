@@ -3,9 +3,11 @@ package Tests;
 import org.junit.Assert;
 import org.junit.Test;
 import pt.ulusofona.lp2.theWalkingDEISIGame.Equipamento;
+import pt.ulusofona.lp2.theWalkingDEISIGame.InvalidTWDInitialFileException;
 import pt.ulusofona.lp2.theWalkingDEISIGame.TWDGameManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class TestPistolaWaltherPPK {
     TWDGameManager gameManager = new TWDGameManager();
@@ -22,13 +24,13 @@ public class TestPistolaWaltherPPK {
     }
 
     @Test
-    public void pistolaCom3balas(){
+    public void pistolaCom3balas() throws InvalidTWDInitialFileException, FileNotFoundException  {
         gameManager.startGame(fich);
         Assert.assertEquals("Pistola Walther PPK | 3",getEquipmentInfo(-1));
     }
 
     @Test
-    public void pistolaCom2balas(){
+    public void pistolaCom2balas() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3,3,2,2));
         Assert.assertTrue(gameManager.move(1,1,2,2));
@@ -37,7 +39,7 @@ public class TestPistolaWaltherPPK {
     }
 
     @Test
-    public void atacarZombieAdulto(){
+    public void atacarZombieAdulto() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1,1 , 2));
@@ -47,7 +49,7 @@ public class TestPistolaWaltherPPK {
     }
 
     @Test
-    public void atacarZombieVampiro(){
+    public void atacarZombieVampiro() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fich);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(1, 1,0 , 0));
@@ -57,7 +59,7 @@ public class TestPistolaWaltherPPK {
     }
 
     @Test
-    public void disparaEm3zombies(){
+    public void disparaEm3zombies() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fichHardcore);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2, 1, 3, 1));
@@ -80,7 +82,7 @@ public class TestPistolaWaltherPPK {
     }
 
     @Test
-    public void disparaEm4zombies(){
+    public void disparaEm4zombies() throws InvalidTWDInitialFileException, FileNotFoundException {
         gameManager.startGame(fichHardcore);
         Assert.assertTrue(gameManager.move(3, 3, 2, 2));
         Assert.assertTrue(gameManager.move(2, 1, 3, 1));
