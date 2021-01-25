@@ -7,7 +7,7 @@ public abstract class Equipamento {
     protected int idTipo;
     protected int posX;
     protected int posY;
-    int uso;
+    int uso=0;
 
     protected boolean picked = false;
     protected boolean offensive;

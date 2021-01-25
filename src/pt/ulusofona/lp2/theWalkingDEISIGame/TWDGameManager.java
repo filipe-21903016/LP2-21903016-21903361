@@ -488,7 +488,7 @@ public class TWDGameManager {
                                     .filter(c -> !c.isVivo())
                                     .map(creature -> (Zombie) creature)
                                     .filter(zombie -> zombie.getTurnCount()>0)
-                                    .sorted((z1,z2) -> z1.getTurnCount() - z2.getTurnCount())
+                                    .sorted((z1,z2) -> z2.getTurnCount() - z1.getTurnCount())
                                     .limit(3)
                                     .map(zombie -> zombie.getId()+":"+zombie.getNome()+":"+zombie.getTurnCount())
                                     .collect(Collectors.toList());
@@ -499,9 +499,8 @@ public class TWDGameManager {
                                         .filter(Creature::isVivo)
                                         .map(creature -> (Vivo) creature)
                                         .filter(vivo -> vivo.getKills()>0)
-                                        .sorted((v1,v2) -> v1.getKills() - v2.getKills())
-                                        .limit(3)
                                         .sorted((v1,v2) -> v2.getKills() - v1.getKills())
+                                        .limit(3)
                                         .map(vivo -> vivo.getId() + ":" + vivo.getNome() + ":" + vivo.getKills())
                                         .collect(Collectors.toList());
 
@@ -510,8 +509,6 @@ public class TWDGameManager {
         List<String> resposta3 = gameInfo.getEquipments().stream()
                                         .filter(equipamento -> equipamento.getUso() > 0)
                                         .sorted((e1,e2) -> e1.getUso() - e2.getUso())
-                                        .limit(3)
-                                        .sorted((e1,e2) -> e2.getUso() - e1.getUso())
                                         .map(equipamento -> equipamento.getIdTipo() + " " + equipamento.getUso())
                                         .collect(Collectors.toList());
 
