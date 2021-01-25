@@ -300,7 +300,6 @@ public class TWDGameManager {
                 gameInfo.nextTurn();
                 gameInfo.saveMove(xO+" : "+yO+" : "+xD+" : "+yD);
             }
-
             return obtained;
         }
         return false;
@@ -490,8 +489,10 @@ public class TWDGameManager {
                                     .map(creature -> (Zombie) creature)
                                     .sorted((z1,z2) -> z1.getTurnCount() - z2.getTurnCount())
                                     .limit(3)
+                                    .filter(zombie -> zombie.getTurnCount()>0)
                                     .map(zombie -> zombie.getId()+":"+zombie.getNome()+":"+zombie.getTurnCount())
                                     .collect(Collectors.toList());
+
         map.put("os3ZombiesMaisTramados",resposta1);
 
         List<String> resposta2 = gameInfo.getCreatures().stream()
@@ -499,12 +500,20 @@ public class TWDGameManager {
                                         .map(creature -> (Vivo) creature)
                                         .sorted((v1,v2) -> v1.getKills() - v2.getKills())
                                         .limit(3)
+                                        .filter(vivo -> vivo.getKills()>0)
+                                        .sorted((v1,v2) -> v2.getKills() - v1.getKills())
                                         .map(vivo -> vivo.getId() + ":" + vivo.getNome() + ":" + vivo.getKills())
                                         .collect(Collectors.toList());
         map.put("os3VivosMaisDuros",resposta2);
 
+        List<String> resposta3 = new ArrayList<>();
+        map.put("tiposDeEquipamentoMaisUteis",resposta3);
 
+        List<String> resposta4 = new ArrayList<>();
+        map.put("tiposDeZombieESeusEquipamentosDestruidos",resposta4);
 
+        List<String> resposta5 = new ArrayList<>();
+        map.put("criaturasMaisEquipadas", resposta5);
         return map;
     }
 
