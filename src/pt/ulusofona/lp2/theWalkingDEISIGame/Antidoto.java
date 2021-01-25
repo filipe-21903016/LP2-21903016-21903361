@@ -19,8 +19,10 @@ public class Antidoto extends Equipamento {
 
     @Override
     public boolean use() {
+
         if(!used){
             used=true;
+            uso++;
             return true;
         }
         return false;

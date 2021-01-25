@@ -492,7 +492,6 @@ public class TWDGameManager {
                                     .limit(3)
                                     .map(zombie -> zombie.getId()+":"+zombie.getNome()+":"+zombie.getTurnCount())
                                     .collect(Collectors.toList());
-
         map.put("os3ZombiesMaisTramados",resposta1);
 
         List<String> resposta2 = gameInfo.getCreatures().stream()
@@ -503,7 +502,6 @@ public class TWDGameManager {
                                         .limit(3)
                                         .map(vivo -> vivo.getId() + ":" + vivo.getNome() + ":" + vivo.getKills())
                                         .collect(Collectors.toList());
-
         map.put("os3VivosMaisDuros",resposta2);
 
         List<String> resposta3 = gameInfo.getEquipments().stream()
@@ -511,11 +509,27 @@ public class TWDGameManager {
                                         .sorted((e1,e2) -> e1.getUso() - e2.getUso())
                                         .map(equipamento -> equipamento.getIdTipo() + " " + equipamento.getUso())
                                         .collect(Collectors.toList());
-
-
         map.put("tiposDeEquipamentoMaisUteis",resposta3);
 
-        List<String> resposta4 = new ArrayList<>();
+        String[] nomesCriatura = new String[]{"Criança", "Adulto", "Militar", "Idoso","Vampiro"};
+        Integer[] destroyedByType = new Integer[]{0,0,0,0,0};
+        Integer[] nrCreatures = new Integer[]{0,0,0,0,0};
+
+        gameInfo.getCreatures().stream()
+                .filter(c -> !c.isVivo())
+                .map(creature -> (Zombie) creature)
+                .forEach(c -> {
+                    destroyedByType[c.getIdType()]++;
+                    nrCreatures[c.getIdType()]++;
+                });
+
+        List<String> resposta4 = gameInfo.getCreatures().stream()
+                                        .filter(c -> !c.isVivo())
+                                        .map(creature -> creature.getIdType())
+                                        .distinct()
+                                        .sorted((n1,n2) -> destroyedByType[n2] - destroyedByType[n1])
+                                        .map(n -> nomesCriatura[n]+":"+nrCreatures[n]+":"+destroyedByType[n])
+                                        .collect(Collectors.toList());
         map.put("tiposDeZombieESeusEquipamentosDestruidos",resposta4);
 
         List<String> resposta5 = new ArrayList<>();

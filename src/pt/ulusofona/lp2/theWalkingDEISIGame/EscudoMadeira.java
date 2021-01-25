@@ -34,6 +34,7 @@ public class EscudoMadeira extends Equipamento {
             if(uses==0){
                 this.defensive=false;
             }
+            uso++;
             return true;
         }
         return false;

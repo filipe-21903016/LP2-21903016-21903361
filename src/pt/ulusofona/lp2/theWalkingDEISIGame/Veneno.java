@@ -17,6 +17,7 @@ public class Veneno extends Equipamento {
         if(!used){
             used=true;
             super.defensive=false;
+            uso++;
             return true;
         }
         super.defensive=false;

@@ -21,11 +21,13 @@ public class PistolaWaltherPPK extends Equipamento {
 
     @Override
     public boolean use() {
+
         if(bullets>0){
             bullets-=1;
             if(bullets==0){
                 this.offensive=false;
             }
+            uso++;
             return true;
         }
         return false;
