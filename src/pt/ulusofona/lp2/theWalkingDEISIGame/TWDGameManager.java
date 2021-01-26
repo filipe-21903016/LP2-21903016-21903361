@@ -527,6 +527,7 @@ public class TWDGameManager {
                 });
 
         List<String> resposta3 = allEquipments.stream()
+                .filter(equipamento -> equipamento.getUso()>0)
                 .map(Equipamento::getIdTipo)
                 .distinct()
                 .sorted((n1,n2) -> nrmVezes[n1] - nrmVezes[n2])
