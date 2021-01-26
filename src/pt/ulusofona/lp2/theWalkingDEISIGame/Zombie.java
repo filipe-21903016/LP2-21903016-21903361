@@ -28,6 +28,7 @@ abstract class Zombie extends Creature {
             }
             destroyEquiment();
             gameInfo.removeEquipment(equipamento);
+            gameInfo.getEquipmentTrash().add(equipamento);
         }
         if(id>0){
             Creature creature = gameInfo.getCreatureById(id);

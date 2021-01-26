@@ -17,6 +17,7 @@ public class GameInfo {
     private int turnosSemTransformacao = 0;
     private ArrayList<Creature> creatures = new ArrayList<>();
     private ArrayList<Equipamento> equipments = new ArrayList<>();
+    private ArrayList<Equipamento> equipmentTrash = new ArrayList<>();
     private ArrayList<SafeHaven> safeHavenDoors = new ArrayList<>();
     private HashMap<Integer, Creature> creatureHashMap = new HashMap<>();
     private HashMap<Integer, Equipamento> equipamentoHashMap = new HashMap<>();
@@ -258,5 +259,9 @@ public class GameInfo {
 
     public void removePoisoned(Vivo vivo) {
         poisonedVivos.remove(vivo);
+    }
+
+    public ArrayList<Equipamento> getEquipmentTrash() {
+        return equipmentTrash;
     }
 }

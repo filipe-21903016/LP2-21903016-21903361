@@ -295,6 +295,12 @@ public class TWDGameManager {
                 gameInfo.nextTurn();
                 gameInfo.saveMove(xO + " : " + yO + " : " + xD + " : " + yD);
             }
+
+            /*//TODO Remove sout
+            getGameStatistics().get("tiposDeEquipamentoMaisUteis").forEach(System.out::println);
+            System.out.println("");*/
+
+
             return obtained;
         }
         return false;
@@ -500,12 +506,27 @@ public class TWDGameManager {
         map.put("os3VivosMaisDuros", resposta2);
 
 
-        Integer[] nrmVezes = new Integer[11];
-        gameInfo.getEquipments().stream()
+
+
+        List<Equipamento> picked = getCreatures().stream()
+                .filter(Creature::isHumano)
+                .map(c->(Vivo) c)
+                .filter(Vivo::isEquiped)
+                .map(Vivo::getEquipment)
+                .collect(Collectors.toList());
+
+        List<Equipamento> allEquipments = new ArrayList<>();
+        allEquipments.addAll(picked);
+        allEquipments.addAll(gameInfo.getEquipments());
+        allEquipments.addAll(gameInfo.getEquipmentTrash());
+
+        int[] nrmVezes = new int[11];
+        allEquipments.stream()
                 .forEach(e -> {
                     nrmVezes[e.getIdTipo()] += e.getUso();
                 });
-        List<String> resposta3 = gameInfo.getEquipments().stream()
+
+        List<String> resposta3 = allEquipments.stream()
                 .map(Equipamento::getIdTipo)
                 .distinct()
                 .sorted((n1,n2) -> nrmVezes[n1] - nrmVezes[n2])
@@ -514,8 +535,8 @@ public class TWDGameManager {
         map.put("tiposDeEquipamentoMaisUteis", resposta3);
 
         String[] nomesCriatura = new String[]{"Criança", "Adulto", "Militar", "Idoso", "Vampiro"};
-        Integer[] destroyedByType = new Integer[5];
-        Integer[] nrCreatures = new Integer[5];
+        int[] destroyedByType = new int[5];
+        int[] nrCreatures = new int[5];
 
         gameInfo.getCreatures().stream()
                 .filter(c -> !c.isHumano())
