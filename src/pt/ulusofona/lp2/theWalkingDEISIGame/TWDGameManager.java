@@ -499,8 +499,14 @@ public class TWDGameManager {
                 .collect(Collectors.toList());
         map.put("os3VivosMaisDuros", resposta2);
 
-        Integer[] idTipos = new Integer[]{0, 1, 2, 3};
+
         Integer[] nrmVezes = new Integer[]{0, 0, 0, 0};
+
+        gameInfo.getEquipments().stream()
+                .forEach(e -> {
+                    nrmVezes[e.getIdTipo()] += e.getUso();
+                });
+
 
 
         List<String> resposta3 = gameInfo.getEquipments().stream()
