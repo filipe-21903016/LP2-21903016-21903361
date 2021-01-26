@@ -520,7 +520,7 @@ public class TWDGameManager {
         allEquipments.addAll(gameInfo.getEquipments());
         allEquipments.addAll(gameInfo.getEquipmentTrash());
 
-        int[] nrmVezes = new int[11];
+        /*int[] nrmVezes = new int[11];
         allEquipments.stream()
                 .forEach(e -> {
                     nrmVezes[e.getIdTipo()] += e.getUso();
@@ -532,7 +532,13 @@ public class TWDGameManager {
                 .distinct()
                 .sorted((n1,n2) -> nrmVezes[n1] - nrmVezes[n2])
                 .map(i -> i + " " + nrmVezes[i])
-                .collect(toList());
+                .collect(toList());*/
+
+        List<String> resposta3 = allEquipments.stream()
+                .filter(e -> e.getUso()>0)
+                .sorted((e1,e2) -> e1.getUso() - e2.getUso())
+                .map(equipamento -> equipamento.getIdTipo() + " " + equipamento.getUso())
+                .collect(Collectors.toList());
         map.put("tiposDeEquipamentoMaisUteis", resposta3);
 
 //-------------------------------------//
