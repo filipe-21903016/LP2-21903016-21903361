@@ -534,6 +534,7 @@ public class TWDGameManager {
         map.put("tiposDeZombieESeusEquipamentosDestruidos",resposta4);
 
         List<String> resposta5 = gameInfo.getCreatures().stream()
+                                        .filter(c->c.getEquipamentos()>0)
                                         .sorted((c1,c2) -> c2.getEquipamentos()-c1.getEquipamentos())
                                         .map(creature -> creature.idCriatura+ ":" +creature.getNome()+ ":" + creature.getEquipamentos())
                                         .limit(5)
