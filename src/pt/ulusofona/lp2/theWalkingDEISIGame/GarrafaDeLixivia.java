@@ -20,12 +20,12 @@ public class GarrafaDeLixivia extends Equipamento {
 
     @Override
     public boolean use() {
-        uso++;
         if(uses>0){
             uses-=1;
             if(uses==0){
                 super.defensive=false;
             }
+            uso++;
             return true;
         }
         return false;

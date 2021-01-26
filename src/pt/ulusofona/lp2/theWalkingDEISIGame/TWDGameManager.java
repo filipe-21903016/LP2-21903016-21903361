@@ -500,25 +500,22 @@ public class TWDGameManager {
         map.put("os3VivosMaisDuros", resposta2);
 
 
-        Integer[] nrmVezes = new Integer[]{0, 0, 0, 0};
-
+        Integer[] nrmVezes = new Integer[11];
         gameInfo.getEquipments().stream()
                 .forEach(e -> {
                     nrmVezes[e.getIdTipo()] += e.getUso();
                 });
-
-
-
         List<String> resposta3 = gameInfo.getEquipments().stream()
-                .filter(equipamento -> equipamento.getUso() > 0)
-                .sorted((e1, e2) -> e1.getUso() - e2.getUso())
-                .map(equipamento -> equipamento.getIdTipo() + " " + equipamento.getUso())
-                .collect(Collectors.toList());
+                .map(Equipamento::getIdTipo)
+                .distinct()
+                .sorted((n1,n2) -> nrmVezes[n1] - nrmVezes[n2])
+                .map(i -> i + " " + nrmVezes[i])
+                .collect(toList());
         map.put("tiposDeEquipamentoMaisUteis", resposta3);
 
         String[] nomesCriatura = new String[]{"Criança", "Adulto", "Militar", "Idoso", "Vampiro"};
-        Integer[] destroyedByType = new Integer[]{0, 0, 0, 0, 0};
-        Integer[] nrCreatures = new Integer[]{0, 0, 0, 0, 0};
+        Integer[] destroyedByType = new Integer[5];
+        Integer[] nrCreatures = new Integer[5];
 
         gameInfo.getCreatures().stream()
                 .filter(c -> !c.isHumano())
