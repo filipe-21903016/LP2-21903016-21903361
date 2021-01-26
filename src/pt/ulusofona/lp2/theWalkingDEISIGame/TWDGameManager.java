@@ -506,8 +506,6 @@ public class TWDGameManager {
         map.put("os3VivosMaisDuros", resposta2);
 
 
-
-
         List<Equipamento> picked = getCreatures().stream()
                 .filter(Creature::isHumano)
                 .map(c->(Vivo) c)
@@ -527,6 +525,7 @@ public class TWDGameManager {
                 });
 
         List<String> resposta3 = allEquipments.stream()
+                .filter(equipamento -> equipamento.getUso()>0)
                 .map(Equipamento::getIdTipo)
                 .distinct()
                 .sorted((n1,n2) -> nrmVezes[n1] - nrmVezes[n2])
