@@ -297,9 +297,8 @@ public class TWDGameManager {
             }
 
             /*//TODO Remove sout
-            getGameStatistics().get("tiposDeEquipamentoMaisUteis").forEach(System.out::println);
+            getGameStatistics().get("criaturasMaisEquipadas").forEach(System.out::println);
             System.out.println("");*/
-
 
             return obtained;
         }
@@ -532,7 +531,7 @@ public class TWDGameManager {
                 .map(Equipamento::getIdTipo)
                 .distinct()
                 .sorted((n1,n2) -> nrmVezes[n1] - nrmVezes[n2])
-                .map(i -> i + " " + nrmVezes[i])
+                .map(i -> i + ":" + nrmVezes[i])
                 .collect(toList());
         map.put("tiposDeEquipamentoMaisUteis", resposta3);
 
@@ -562,28 +561,26 @@ public class TWDGameManager {
 
 //-------------------------------------//
 
-        int size = gameInfo.getCreatures().size();
-        int limit = Math.min(size, 5);
 
-        Stream<Vivo> vivos = gameInfo.getCreatures().stream()
+        List<Vivo> vivos = gameInfo.getCreatures().stream()
                 .filter(Creature::isHumano)
                 .filter(c->!c.isDead())
                 .map(c-> (Vivo) c)
-                .filter(v -> !v.isSafe());
+                .filter(v -> !v.isSafe())
+                .collect(Collectors.toList());
 
-        Stream<Zombie> zombies = gameInfo.getCreatures().stream()
+        List<Zombie> zombies = gameInfo.getCreatures().stream()
                 .filter(c -> !c.isDead())
                 .filter(c -> !c.isHumano())
-                .map(c-> (Zombie) c);
+                .map(c-> (Zombie) c)
+                .collect(Collectors.toList());
 
-        /*List<String> resposta5 = gameInfo.getCreatures().stream()
-                .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
-                .filter(Creature::isDead)
-                .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
-                .limit(limit)
-                .collect(toList());*/
 
-        List<String> resposta5 = Stream.concat(vivos,zombies)
+        long count1 = vivos.size();
+        long count2 = zombies.size();
+        long limit  = Math.min(5,count1+count2);
+
+        List<String> resposta5 = Stream.concat(vivos.stream(),zombies.stream())
                 .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
                 .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
                 .limit(limit)

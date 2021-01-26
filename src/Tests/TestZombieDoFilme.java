@@ -105,8 +105,8 @@ public class TestZombieDoFilme {
     public void threeUp() throws InvalidTWDInitialFileException, FileNotFoundException {
         //three spaces up
         gameManager.startGame(fich);
-            boolean obtained = gameManager.move(3, 3, 3, 0);
-            Assert.assertEquals(true, obtained);
+        boolean obtained = gameManager.move(3, 3, 3, 0);
+        Assert.assertTrue(obtained);
     }
 
     @Test

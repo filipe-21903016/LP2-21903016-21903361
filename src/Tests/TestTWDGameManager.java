@@ -7,6 +7,8 @@ import pt.ulusofona.lp2.theWalkingDEISIGame.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class TestTWDGameManager {
     TWDGameManager gameManager = new TWDGameManager();
@@ -129,6 +131,32 @@ public class TestTWDGameManager {
             Assert.fail();
         }catch (FileNotFoundException e){
             Assert.assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testQuery5(){
+        File fich1 = new File("test-files/testQueries.txt");
+        try{
+            gameManager.startGame(fich1);
+            Map<String, List<String>> startStats = gameManager.getGameStatistics();
+            Assert.assertTrue(startStats.get("criaturasMaisEquipadas").contains("1:Freddie M.:0"));
+            Assert.assertTrue(startStats.get("criaturasMaisEquipadas").contains("2:Paciente Zero:0"));
+            Assert.assertTrue(gameManager.move(3,3,2,3));
+            Assert.assertTrue(gameManager.move(3,4,2,4));
+            Map<String, List<String>> midGameStats = gameManager.getGameStatistics();
+            Assert.assertEquals("1:Freddie M.:1", midGameStats.get("criaturasMaisEquipadas").get(0));
+            Assert.assertEquals("2:Paciente Zero:0", midGameStats.get("criaturasMaisEquipadas").get(1));
+            Assert.assertTrue(gameManager.move(2,3,4,5));
+            Assert.assertTrue(gameManager.move(2,4,3,5));
+            Assert.assertTrue(gameManager.move(4,5,5,5));
+            Assert.assertTrue(gameManager.move(3,5,3,6));
+            Map<String,List<String>> finalGameStats = gameManager.getGameStatistics();
+            Assert.assertEquals("2:Paciente Zero:2", finalGameStats.get("criaturasMaisEquipadas").get(0));
+            Assert.assertEquals("1:Freddie M.:1", finalGameStats.get("criaturasMaisEquipadas").get(1));
+
+        }catch (InvalidTWDInitialFileException | FileNotFoundException e){
+            Assert.fail();
         }
     }
 
