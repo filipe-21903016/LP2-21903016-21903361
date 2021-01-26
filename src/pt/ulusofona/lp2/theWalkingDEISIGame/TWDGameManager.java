@@ -482,7 +482,7 @@ public class TWDGameManager {
     }
 
     public Map<String, List<String>> getGameStatistics(){
-        HashMap<String, List<String>> map = new HashMap<>();
+        Map<String, List<String>> map = new HashMap<>();
         //TODO
         List<String> resposta1 = gameInfo.getCreatures().stream()
                                     .filter(c -> !c.isVivo())
@@ -533,11 +533,15 @@ public class TWDGameManager {
                                         .collect(Collectors.toList());
         map.put("tiposDeZombieESeusEquipamentosDestruidos",resposta4);
 
+
+
+        int size = gameInfo.getCreatures().size();
+        int limit = Math.min(size, 5);
+
         List<String> resposta5 = gameInfo.getCreatures().stream()
-                                        .filter(c->c.getEquipamentos()>0)
                                         .sorted((c1,c2) -> c2.getEquipamentos()-c1.getEquipamentos())
                                         .map(creature -> creature.idCriatura+ ":" +creature.getNome()+ ":" + creature.getEquipamentos())
-                                        .limit(5)
+                                        .limit(limit)
                                         .collect(toList());
         map.put("criaturasMaisEquipadas", resposta5);
 
