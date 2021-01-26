@@ -534,13 +534,10 @@ public class TWDGameManager {
         map.put("tiposDeZombieESeusEquipamentosDestruidos",resposta4);
 
         List<String> resposta5 = gameInfo.getCreatures().stream()
-                                        .sorted((c1,c2) -> c1.getEquipamentos() - c2.getEquipamentos())
-                                        .map(creature -> creature.getId() + " : " + creature.getNome() + " : " +
-                                                creature.getEquipamentos())
+                                        .sorted((c1,c2) -> c2.getEquipamentos()-c1.getEquipamentos())
+                                        .map(creature -> creature.idCriatura+ ":" +creature.getNome()+ ":" + creature.getEquipamentos())
                                         .limit(5)
-                                        .collect(Collectors.toList());
-
-
+                                        .collect(toList());
         map.put("criaturasMaisEquipadas", resposta5);
 
         return map;
