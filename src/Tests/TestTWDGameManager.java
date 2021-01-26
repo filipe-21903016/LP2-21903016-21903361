@@ -93,6 +93,32 @@ public class TestTWDGameManager {
         Assert.assertFalse(gameManager.isDoorToSafeHaven(1,6));
     }
 
+    @Test
+    public void invalidNrCreatures(){
+        File fich1 = new File("test-files/InvalidNumCreatures.txt");
+        try{
+            gameManager.startGame(fich1);
+        }catch(InvalidTWDInitialFileException e){
+            Assert.assertFalse(e.validNrOfCreatures());
+            Assert.assertTrue(e.validCreatureDefinition());
+        }catch (FileNotFoundException fileNotFoundException){
+            fileNotFoundException.getLocalizedMessage();
+        }
+    }
+
+    @Test
+    public void invalidDefinition(){
+        File fich1 = new File("test-files/InvalidDefinition.txt");
+        try{
+            gameManager.startGame(fich1);
+        }catch(InvalidTWDInitialFileException e){
+            Assert.assertTrue(e.validNrOfCreatures());
+            Assert.assertFalse(e.validCreatureDefinition());
+        }catch (FileNotFoundException fileNotFoundException){
+            fileNotFoundException.getLocalizedMessage();
+        }
+    }
+
 
 
 }

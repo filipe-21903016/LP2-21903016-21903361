@@ -6,7 +6,6 @@ public class InvalidTWDInitialFileException extends Exception {
     int nrCreatures;
     ArrayList<String> tempCreature = new ArrayList<>();
 
-
     public InvalidTWDInitialFileException(int nrCreatures, ArrayList<String> creatureData){
         this.tempCreature = creatureData;
         this.nrCreatures = nrCreatures;
