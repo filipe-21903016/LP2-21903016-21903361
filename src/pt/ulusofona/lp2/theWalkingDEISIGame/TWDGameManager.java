@@ -533,6 +533,7 @@ public class TWDGameManager {
 
         List<String> resposta5 = gameInfo.getCreatures().stream()
                 .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
+                .filter(creature -> creature.isDead())
                 .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
                 .limit(limit)
                 .collect(toList());

@@ -48,6 +48,10 @@ public abstract class Creature{
 
     public abstract boolean move(int xO, int yO, int xD, int yD);
 
+    public boolean isDead() {
+        return dead;
+    }
+
     public abstract String getImagePNG();
 
     @Override
