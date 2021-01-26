@@ -527,11 +527,10 @@ public class TWDGameManager {
                 });
 
         List<String> resposta3 = allEquipments.stream()
-                .filter(equipamento -> equipamento.getUso()>0)
                 .map(Equipamento::getIdTipo)
                 .distinct()
                 .sorted((n1,n2) -> nrmVezes[n1] - nrmVezes[n2])
-                .map(i -> i + ":" + nrmVezes[i])
+                .map(i -> i + " " + nrmVezes[i])
                 .collect(toList());
         map.put("tiposDeEquipamentoMaisUteis", resposta3);
 
@@ -587,7 +586,6 @@ public class TWDGameManager {
                 .collect(toList());
 
         map.put("criaturasMaisEquipadas", resposta5);
-
         return map;
     }
 
