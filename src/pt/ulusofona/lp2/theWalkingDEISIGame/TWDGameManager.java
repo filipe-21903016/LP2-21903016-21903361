@@ -196,9 +196,7 @@ public class TWDGameManager {
                 allLine.append(data[i]);
             }
             int nrCreatures = Integer.parseInt(allLine.toString());
-            if(nrCreatures<2) {
-                throw new InvalidTWDInitialFileException(nrCreatures);
-            }
+
             currentLine++;
             int maxLine = currentLine + nrCreatures;
 
@@ -220,8 +218,8 @@ public class TWDGameManager {
                     .map(s -> s.split(" : "))
                     .filter(strings -> strings.length!=5)
                     .count();
-            if(count>0){
-                throw new InvalidTWDInitialFileException(tempCreatures);
+            if(count>0 || nrCreatures<2){
+                throw new InvalidTWDInitialFileException(nrCreatures, tempCreatures);
             }
 
 
