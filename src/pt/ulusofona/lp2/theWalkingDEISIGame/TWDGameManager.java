@@ -551,6 +551,7 @@ public class TWDGameManager {
                 .collect(toList());*/
 
         List<String> resposta5 = Stream.concat(vivos,zombies)
+                .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
                 .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
                 .limit(limit)
                 .collect(toList());
