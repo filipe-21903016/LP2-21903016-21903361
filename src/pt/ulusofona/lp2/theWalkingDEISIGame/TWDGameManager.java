@@ -499,6 +499,10 @@ public class TWDGameManager {
                 .collect(Collectors.toList());
         map.put("os3VivosMaisDuros", resposta2);
 
+        Integer[] idTipos = new Integer[]{0, 1, 2, 3};
+        Integer[] nrmVezes = new Integer[]{0, 0, 0, 0};
+
+
         List<String> resposta3 = gameInfo.getEquipments().stream()
                 .filter(equipamento -> equipamento.getUso() > 0)
                 .sorted((e1, e2) -> e1.getUso() - e2.getUso())
