@@ -495,6 +495,8 @@ public class TWDGameManager {
                 .collect(Collectors.toList());
         map.put("os3ZombiesMaisTramados", resposta1);
 
+//-------------------------------------//
+
         List<String> resposta2 = gameInfo.getCreatures().stream()
                 .filter(Creature::isHumano)
                 .map(creature -> (Vivo) creature)
@@ -505,6 +507,7 @@ public class TWDGameManager {
                 .collect(Collectors.toList());
         map.put("os3VivosMaisDuros", resposta2);
 
+//-------------------------------------//
 
         List<Equipamento> picked = getCreatures().stream()
                 .filter(Creature::isHumano)
@@ -533,6 +536,8 @@ public class TWDGameManager {
                 .collect(toList());
         map.put("tiposDeEquipamentoMaisUteis", resposta3);
 
+//-------------------------------------//
+
         String[] nomesCriatura = new String[]{"Criança", "Adulto", "Militar", "Idoso", "Vampiro"};
         int[] destroyedByType = new int[5];
         int[] nrCreatures = new int[5];
@@ -555,6 +560,7 @@ public class TWDGameManager {
                 .collect(Collectors.toList());
         map.put("tiposDeZombieESeusEquipamentosDestruidos", resposta4);
 
+//-------------------------------------//
 
         int size = gameInfo.getCreatures().size();
         int limit = Math.min(size, 5);
