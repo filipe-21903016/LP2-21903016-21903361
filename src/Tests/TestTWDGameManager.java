@@ -119,6 +119,19 @@ public class TestTWDGameManager {
         }
     }
 
+    @Test
+    public void testFileNotFoundException(){
+        File fich1 = new File("test-files/someNotFoundFile.txt");
+        try{
+            gameManager.startGame(fich1);
+            Assert.fail();
+        }catch(InvalidTWDInitialFileException invalid){
+            Assert.fail();
+        }catch (FileNotFoundException e){
+            Assert.assertTrue(true);
+        }
+    }
+
 
 
 }
