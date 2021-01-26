@@ -533,7 +533,14 @@ public class TWDGameManager {
                                         .collect(Collectors.toList());
         map.put("tiposDeZombieESeusEquipamentosDestruidos",resposta4);
 
-        List<String> resposta5 = new ArrayList<>();
+        List<String> resposta5 = gameInfo.getCreatures().stream()
+                                        .sorted((c1,c2) -> c1.getEquipamentos() - c2.getEquipamentos())
+                                        .map(creature -> creature.getId() + " : " + creature.getNome() + " : " +
+                                                creature.getEquipamentos())
+                                        .limit(5)
+                                        .collect(Collectors.toList());
+
+
         map.put("criaturasMaisEquipadas", resposta5);
 
         return map;
