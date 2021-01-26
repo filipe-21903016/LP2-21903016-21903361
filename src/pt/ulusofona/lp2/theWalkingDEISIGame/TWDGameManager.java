@@ -527,7 +527,8 @@ public class TWDGameManager {
                                         .filter(c -> !c.isVivo())
                                         .map(Creature::getIdType)
                                         .distinct()
-                                        .sorted((n1,n2) -> destroyedByType[n2] - destroyedByType[n1])
+                                        .sorted(Comparator.comparing(n->destroyedByType[(int) n])
+                                                .thenComparing(n->nrCreatures[(int) n]).reversed())
                                         .map(n -> nomesCriatura[n]+":"+nrCreatures[n]+":"+destroyedByType[n])
                                         .collect(Collectors.toList());
         map.put("tiposDeZombieESeusEquipamentosDestruidos",resposta4);
