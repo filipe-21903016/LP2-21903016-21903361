@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -342,7 +343,7 @@ public class TWDGameManager {
             results.add("OS VIVOS");
             gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
             for (Creature creature : gameInfo.getCreatures()) {
-                if (creature.isVivo()) {
+                if (creature.isHumano()) {
                     Vivo vivo = (Vivo) creature;
                     if (!vivo.isSafe()) {
                         results.add(creature.getId() + " " + creature.getNome());
@@ -353,7 +354,7 @@ public class TWDGameManager {
             results.add("OS OUTROS");
             gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
             for (Creature creature : gameInfo.getCreatures()) {
-                if (!creature.isVivo()) {
+                if (!creature.isHumano()) {
                     results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
                 }
             }
@@ -371,7 +372,7 @@ public class TWDGameManager {
             results.add("OS VIVOS");
             gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
             for (Creature creature : gameInfo.getGraveyard()) {
-                if (creature.isVivo()) {
+                if (creature.isHumano()) {
                     results.add(creature.getId() + " " + creature.getNome());
                 }
             }
@@ -379,7 +380,7 @@ public class TWDGameManager {
             results.add("OS OUTROS");
             gameInfo.getCreatures().sort(Comparator.comparing(Creature::getId));
             for (Creature creature : gameInfo.getGraveyard()) {
-                if (!creature.isVivo()) {
+                if (!creature.isHumano()) {
                     results.add(creature.getId() + " (antigamente conhecido como " + creature.getNome() + ")");
                 }
             }
@@ -479,7 +480,7 @@ public class TWDGameManager {
         Map<String, List<String>> map = new HashMap<>();
         //TODO
         List<String> resposta1 = gameInfo.getCreatures().stream()
-                .filter(c -> !c.isVivo())
+                .filter(c -> !c.isHumano())
                 .map(creature -> (Zombie) creature)
                 .filter(zombie -> zombie.getTurnCount() > 0)
                 .sorted((z1, z2) -> z2.getTurnCount() - z1.getTurnCount())
@@ -489,7 +490,7 @@ public class TWDGameManager {
         map.put("os3ZombiesMaisTramados", resposta1);
 
         List<String> resposta2 = gameInfo.getCreatures().stream()
-                .filter(Creature::isVivo)
+                .filter(Creature::isHumano)
                 .map(creature -> (Vivo) creature)
                 .filter(vivo -> vivo.getKills() > 0)
                 .sorted((v1, v2) -> v2.getKills() - v1.getKills())
@@ -510,7 +511,7 @@ public class TWDGameManager {
         Integer[] nrCreatures = new Integer[]{0, 0, 0, 0, 0};
 
         gameInfo.getCreatures().stream()
-                .filter(c -> !c.isVivo())
+                .filter(c -> !c.isHumano())
                 .map(creature -> (Zombie) creature)
                 .forEach(c -> {
                     destroyedByType[c.getIdType()] += c.getEquipamentos();
@@ -518,7 +519,7 @@ public class TWDGameManager {
                 });
 
         List<String> resposta4 = gameInfo.getCreatures().stream()
-                .filter(c -> !c.isVivo())
+                .filter(c -> !c.isHumano())
                 .map(Creature::getIdType)
                 .distinct()
                 .sorted(Comparator.comparing(n -> destroyedByType[(int) n])
@@ -531,12 +532,29 @@ public class TWDGameManager {
         int size = gameInfo.getCreatures().size();
         int limit = Math.min(size, 5);
 
-        List<String> resposta5 = gameInfo.getCreatures().stream()
+        Stream<Vivo> vivos = gameInfo.getCreatures().stream()
+                .filter(Creature::isHumano)
+                .filter(c->!c.isDead())
+                .map(c-> (Vivo) c)
+                .filter(v -> !v.isSafe());
+
+        Stream<Zombie> zombies = gameInfo.getCreatures().stream()
+                .filter(c -> !c.isDead())
+                .filter(c -> !c.isHumano())
+                .map(c-> (Zombie) c);
+
+        /*List<String> resposta5 = gameInfo.getCreatures().stream()
                 .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
-                .filter(creature -> creature.isDead())
+                .filter(Creature::isDead)
+                .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
+                .limit(limit)
+                .collect(toList());*/
+
+        List<String> resposta5 = Stream.concat(vivos,zombies)
                 .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
                 .limit(limit)
                 .collect(toList());
+
         map.put("criaturasMaisEquipadas", resposta5);
 
         return map;

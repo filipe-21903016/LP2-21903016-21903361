@@ -243,7 +243,7 @@ public abstract class Creature{
         return this.idCriatura==creature.getId() && this.nome.equals(creature.nome);
     }
 
-    public boolean isVivo(){
+    public boolean isHumano(){
         return teamId==10;
     }
 
