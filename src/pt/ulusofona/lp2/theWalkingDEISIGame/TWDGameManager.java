@@ -531,12 +531,6 @@ public class TWDGameManager {
                 .map(i -> i + " " + nrmVezes[i])
                 .collect(toList());
 
-        /*List<String> resposta3 = allEquipments.stream()
-                .filter(e -> e.getUso()>0)
-                .sorted((e1,e2) -> e1.getUso() - e2.getUso())
-                .map(equipamento -> equipamento.getIdTipo() + " " + equipamento.getUso())
-                .collect(Collectors.toList());*/
-
         map.put("tiposDeEquipamentoMaisUteis", resposta3);
 
 //-------------------------------------//
@@ -581,28 +575,26 @@ public class TWDGameManager {
                 .collect(Collectors.toList());
 
 
-        long count1 = vivos.size();
-        long count2 = zombies.size();
-        long limit  = Math.min(5,count1+count2);
+        long count = Stream.concat(vivos.stream(), zombies.stream())
+                .filter(c->c.getEquipamentos()>0)
+                .count();
+        long limit;
+        if(count<5){
+            limit=count;
+        }else{
+            limit=5;
+        }
 
-        //if(limit > 5) {
-            List<String> resposta5 = Stream.concat(vivos.stream(), zombies.stream())
-                    .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
-                    .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
-                    .limit(limit)
-                    .collect(toList());
+        List<String> resposta5 = Stream.concat(vivos.stream(), zombies.stream())
+                .filter(c->c.getEquipamentos()>0)
+                .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
+                .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
+                .limit(limit)
+                .collect(toList());
 
-            map.put("criaturasMaisEquipadas", resposta5);
-        //}
+        map.put("criaturasMaisEquipadas", resposta5);
 
-        /*else {
-            List<String> resposta5 = Stream.concat(vivos.stream(), zombies.stream())
-                    .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
-                    .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
-                    .collect(toList());
 
-            map.put("criaturasMaisEquipadas", resposta5);
-        }*/
         return map;
     }
 
