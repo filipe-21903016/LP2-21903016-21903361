@@ -576,18 +576,11 @@ public class TWDGameManager {
 
 
         long count = Stream.concat(vivos.stream(), zombies.stream())
-                .filter(c->c.getEquipamentos()>0)
                 .count();
-        long limit;
-        if(count<5){
-            limit=count;
-        }else{
-            limit=5;
-        }
+        long limit = Math.min(count,5);
 
         List<String> resposta5 = Stream.concat(vivos.stream(), zombies.stream())
-                .filter(c->c.getEquipamentos()>0)
-                .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
+                .sorted(Comparator.comparing(Creature::getEquipamentos).reversed().thenComparing(Creature::getId))
                 .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
                 .limit(limit)
                 .collect(toList());
