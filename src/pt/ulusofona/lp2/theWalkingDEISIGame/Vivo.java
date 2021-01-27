@@ -115,9 +115,6 @@ abstract class Vivo extends Creature {
 
     public void enterSafeHaven() {
         this.safe = true;
-        if(isEquiped()){
-            GameInfo.getInstance().getEquipmentTrash().add(dropEquipment());
-        }
         SafeHaven.addSurvivor(this);
     }
 
@@ -161,9 +158,6 @@ abstract class Vivo extends Creature {
 
     public void turn() {
         GameInfo gameInfo = GameInfo.getInstance();
-        if(isEquiped()){
-            gameInfo.getEquipmentTrash().add(dropEquipment());
-        }
         gameInfo.trasformCreature(this);
     }
 

@@ -440,7 +440,7 @@ public class TWDGameManager {
             } else {
                 return 0;
             }
-        } catch (NullPointerException | ClassCastException exception) {
+        } catch (ClassCastException exception) {
             return 0;
         }
     }
@@ -544,8 +544,8 @@ public class TWDGameManager {
 
 //-------------------------------------//
 
-        String[] nomesCriatura = new String[]{"Criança (Zombie)", "Adulto (Zombie)"
-                , "Militar (Zombie)", "Idoso (Zombie)", "Vampiro"};
+        String[] nomesCriatura = new String[]{"Criança", "Adulto"
+                , "Militar", "Idoso", "Vampiro"};
         int[] destroyedByType = new int[5];
         int[] nrCreatures = new int[5];
 
