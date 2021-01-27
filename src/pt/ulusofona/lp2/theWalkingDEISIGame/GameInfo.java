@@ -264,4 +264,8 @@ public class GameInfo {
     public ArrayList<Equipamento> getEquipmentTrash() {
         return equipmentTrash;
     }
+
+    public HashMap<Integer, Equipamento> getEquipamentoHashMap() {
+        return equipamentoHashMap;
+    }
 }
