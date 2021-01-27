@@ -298,8 +298,7 @@ public class TWDGameManager {
 
             /*//TODO Remove sout
             getGameStatistics().get("tiposDeEquipamentoMaisUteis").forEach(System.out::println);
-            System.out.println("");
-*/
+            System.out.println("");*/
             return obtained;
         }
         return false;

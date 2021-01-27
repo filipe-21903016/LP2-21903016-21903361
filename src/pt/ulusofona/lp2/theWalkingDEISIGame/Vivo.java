@@ -158,6 +158,7 @@ abstract class Vivo extends Creature {
 
     public void turn() {
         GameInfo gameInfo = GameInfo.getInstance();
+        gameInfo.getEquipmentTrash().add(this.equipment);
         gameInfo.trasformCreature(this);
     }
 
