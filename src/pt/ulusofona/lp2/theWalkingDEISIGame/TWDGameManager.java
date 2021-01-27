@@ -414,13 +414,7 @@ public class TWDGameManager {
     }
 
     public int getEquipmentTypeId(int equipmentId) {
-        try {
-            return gameInfo.getEquipmentById(equipmentId).getIdTipo();
-        } catch (NullPointerException nullPointerException) {
-            //System.out.print("Null pointer exception:" + equipmentId);
-            return -1;
-        }
-
+        return gameInfo.getEquipmentById(equipmentId).getIdTipo();
     }
 
     public String getEquipmentInfo(int equipmentId) {
