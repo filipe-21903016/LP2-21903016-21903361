@@ -585,13 +585,24 @@ public class TWDGameManager {
         long count2 = zombies.size();
         long limit  = Math.min(5,count1+count2);
 
-        List<String> resposta5 = Stream.concat(vivos.stream(),zombies.stream())
-                .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
-                .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
-                .limit(limit)
-                .collect(toList());
+        //if(limit > 5) {
+            List<String> resposta5 = Stream.concat(vivos.stream(), zombies.stream())
+                    .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
+                    .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
+                    .limit(limit)
+                    .collect(toList());
 
-        map.put("criaturasMaisEquipadas", resposta5);
+            map.put("criaturasMaisEquipadas", resposta5);
+        //}
+
+        /*else {
+            List<String> resposta5 = Stream.concat(vivos.stream(), zombies.stream())
+                    .sorted((c1, c2) -> c2.getEquipamentos() - c1.getEquipamentos())
+                    .map(creature -> creature.idCriatura + ":" + creature.getNome() + ":" + creature.getEquipamentos())
+                    .collect(toList());
+
+            map.put("criaturasMaisEquipadas", resposta5);
+        }*/
         return map;
     }
 
