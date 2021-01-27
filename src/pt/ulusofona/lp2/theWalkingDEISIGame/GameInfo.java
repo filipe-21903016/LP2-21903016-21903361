@@ -57,6 +57,8 @@ public class GameInfo {
         equipamentoHashMap = new HashMap<>();
         graveyard = new ArrayList<>();
         poisonedVivos = new ArrayList<>();
+        equipamentoHashMap = new HashMap<>();
+        equipmentTrash = new ArrayList<>();
 
         intialGame = new StringBuilder();
         savedMoves = new ArrayList<>();

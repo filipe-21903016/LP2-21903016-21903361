@@ -187,8 +187,9 @@ public class TestTWDGameManager {
             Assert.assertEquals("1:Freddie M.:2",query2.get(0));
             //Testing third query
             List<String> query3 = finalStats.get("tiposDeEquipamentoMaisUteis");
-            Assert.assertEquals(1, query3.size());
-            Assert.assertEquals("1 3",query3.get(0));
+            Assert.assertEquals(2, query3.size());
+            Assert.assertEquals("0 1",query3.get(0));
+            Assert.assertEquals("1 3",query3.get(1));
             //Testing fourth query
             List<String> query4 = finalStats.get("tiposDeZombieESeusEquipamentosDestruidos");
             Assert.assertEquals(1, query4.size());

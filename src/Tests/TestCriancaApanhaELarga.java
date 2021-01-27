@@ -20,11 +20,14 @@ public class TestCriancaApanhaELarga {
             gameManager.startGame(fich);
         }catch(InvalidTWDInitialFileException | FileNotFoundException e){
             e.getLocalizedMessage();
+            Assert.fail();
         }
 
         Map<String, List<String>> startStats = gameManager.getGameStatistics();
 
         List<String> criancasMaisEquipadas = startStats.get("criaturasMaisEquipadas");
         Assert.assertEquals(2,criancasMaisEquipadas.size());
+
+
     }
 }
