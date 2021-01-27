@@ -514,13 +514,13 @@ public class TWDGameManager {
         allEquipments.addAll(gameInfo.getEquipments());
         allEquipments.addAll(gameInfo.getEquipmentTrash());
 
-        int[] nrmVezes = new int[11];
+        /*int[] nrmVezes = new int[11];
         allEquipments.stream()
                 .forEach(e -> {
                     nrmVezes[e.getIdTipo()] += e.getUso();
                 });
 
-        /*List<String> resposta3 = allEquipments.stream()
+        List<String> resposta3 = allEquipments.stream()
                 .filter(equipamento -> equipamento.getUso()>0)
                 .map(Equipamento::getIdTipo)
                 .distinct()
