@@ -520,19 +520,19 @@ public class TWDGameManager {
                     nrmVezes[e.getIdTipo()] += e.getUso();
                 });
 
-        List<String> resposta3 = allEquipments.stream()
+        /*List<String> resposta3 = allEquipments.stream()
                 .filter(equipamento -> equipamento.getUso()>0)
                 .map(Equipamento::getIdTipo)
                 .distinct()
                 .sorted((n1,n2) -> nrmVezes[n1] - nrmVezes[n2])
                 .map(i -> i + " " + nrmVezes[i])
-                .collect(toList());
+                .collect(toList());*/
 
-        /*List<String> resposta3 = allEquipments.stream()
+        List<String> resposta3 = allEquipments.stream()
                 .filter(e -> e.getUso()>0)
                 .sorted((e1,e2) -> e1.getUso() - e2.getUso())
                 .map(equipamento -> equipamento.getIdTipo() + " " + equipamento.getUso())
-                .collect(Collectors.toList());*/
+                .collect(Collectors.toList());
 
         map.put("tiposDeEquipamentoMaisUteis", resposta3);
 
