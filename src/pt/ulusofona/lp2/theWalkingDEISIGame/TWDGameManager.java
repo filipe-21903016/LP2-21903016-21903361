@@ -296,10 +296,10 @@ public class TWDGameManager {
                 gameInfo.saveMove(xO + " : " + yO + " : " + xD + " : " + yD);
             }
 
-            //TODO Remove sout
+            /*//TODO Remove sout
             getGameStatistics().get("tiposDeEquipamentoMaisUteis").forEach(System.out::println);
             System.out.println("");
-
+*/
             return obtained;
         }
         return false;
@@ -483,7 +483,7 @@ public class TWDGameManager {
 
     public Map<String, List<String>> getGameStatistics() {
         Map<String, List<String>> map = new HashMap<>();
-        //TODO
+
         List<String> resposta1 = gameInfo.getCreatures().stream()
                 .filter(c -> !c.isHumano())
                 .map(creature -> (Zombie) creature)
@@ -544,7 +544,8 @@ public class TWDGameManager {
 
 //-------------------------------------//
 
-        String[] nomesCriatura = new String[]{"Criança", "Adulto", "Militar", "Idoso", "Vampiro"};
+        String[] nomesCriatura = new String[]{"Criança (Zombie)", "Adulto (Zombie)"
+                , "Militar (Zombie)", "Idoso (Zombie)", "Vampiro"};
         int[] destroyedByType = new int[5];
         int[] nrCreatures = new int[5];
 

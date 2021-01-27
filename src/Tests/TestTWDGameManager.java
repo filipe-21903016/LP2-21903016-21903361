@@ -159,6 +159,52 @@ public class TestTWDGameManager {
             Assert.fail();
         }
     }
+    @Test
+    public void testMultipleQueries(){
+        File fich1 = new File("test-files/testQueries1.txt");
+        try{
+            gameManager.startGame(fich1);
+            Assert.assertTrue(gameManager.move(3,3,2,3)); //humano apanha espada
+            Assert.assertTrue(gameManager.move(3,2,2,3)); //humano mata zombie com espada
+            Assert.assertTrue(gameManager.move(5,4,4,4)); //humano2 apanha espada2
+            Assert.assertTrue(gameManager.move(4,3,4,4)); //humano2 mata zombie2 com espada
+            Assert.assertTrue(gameManager.move(4,4,3,5)); //humano2 apanha escudo madeira
+            Assert.assertTrue(gameManager.move(3,4,3,5)); //humano2 defende ataque com escudo
+            Assert.assertTrue(gameManager.move(3,5,4,6));
+            Assert.assertTrue(gameManager.move(3,4,4,5));
+            Assert.assertTrue(gameManager.move(2,3,2,1)); //humano mata zombie3
+            Assert.assertTrue(gameManager.move(4,5,4,6)); //zombie transforma humano2
+            Assert.assertTrue(gameManager.move(2,1,1,0)); //humano entra em safe haven
+
+            Map<String, List<String>> finalStats = gameManager.getGameStatistics();
+            //Testing first query
+            List<String> query1 = finalStats.get("os3ZombiesMaisTramados");
+            Assert.assertTrue(query1.contains("2:Paciente Zero:1"));
+            Assert.assertEquals(1, query1.size());
+            //Testing second query
+            List<String> query2 = finalStats.get("os3VivosMaisDuros");
+            Assert.assertEquals(1, query2.size());
+            Assert.assertEquals("1:Freddie M.:2",query2.get(0));
+            //Testing third query
+            List<String> query3 = finalStats.get("tiposDeEquipamentoMaisUteis");
+            Assert.assertEquals(2, query3.size());
+            Assert.assertEquals("0 1", query3.get(0));
+            Assert.assertEquals("1 3",query3.get(1));
+            //Testing fourth query
+            List<String> query4 = finalStats.get("tiposDeZombieESeusEquipamentosDestruidos");
+            Assert.assertEquals(1, query4.size());
+            Assert.assertEquals("Adulto (Zombie):3:0",query4.get(0));
+            //Testing fifth query
+            List<String> query5 = finalStats.get("criaturasMaisEquipadas");
+            Assert.assertEquals(3, query5.size());
+            Assert.assertTrue(query5.contains("6:Paciente Tres:0"));
+            Assert.assertTrue(query5.contains("2:Paciente Zero:0"));
+            Assert.assertTrue(query5.contains("3:Alice:0"));
+
+        }catch (InvalidTWDInitialFileException | FileNotFoundException e){
+            Assert.fail();
+        }
+    }
 
 
 
